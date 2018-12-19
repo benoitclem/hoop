@@ -73,6 +73,10 @@
 		EB8F04E221CAE678003757EC /* HoopRangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D721CAE678003757EC /* HoopRangeCell.xib */; };
 		EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04D821CAE678003757EC /* HoopLabelCell.swift */; };
 		EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04E421CAE684003757EC /* RangeSlider.swift */; };
+		EB8F04E721CAEB71003757EC /* loginVideoBackground.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */; };
+		EB8F04EA21CAEE0A003757EC /* VideoCutter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04E821CAEE0A003757EC /* VideoCutter.swift */; };
+		EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04E921CAEE0A003757EC /* VideoSplashViewController.swift */; };
+		EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +176,10 @@
 		EB8F04D721CAE678003757EC /* HoopRangeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopRangeCell.xib; path = FormCells/HoopRangeCell.xib; sourceTree = "<group>"; };
 		EB8F04D821CAE678003757EC /* HoopLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoopLabelCell.swift; path = FormCells/HoopLabelCell.swift; sourceTree = "<group>"; };
 		EB8F04E421CAE684003757EC /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RangeSlider.swift; path = CustomControls/RangeSlider.swift; sourceTree = "<group>"; };
+		EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = loginVideoBackground.mp4; sourceTree = "<group>"; };
+		EB8F04E821CAEE0A003757EC /* VideoCutter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoCutter.swift; path = Utils/VideoCutter.swift; sourceTree = "<group>"; };
+		EB8F04E921CAEE0A003757EC /* VideoSplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = VideoSplashViewController.swift; path = Utils/VideoSplashViewController.swift; sourceTree = "<group>"; };
+		EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+colors.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +247,7 @@
 				EB28B61B21C3B45000CFF1EF /* UIColor+random.swift */,
 				EB28B62121C3B88B00CFF1EF /* DateFormatter+shortcuts.swift */,
 				EB8F048021CAC2B4003757EC /* String+localization.swift */,
+				EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -274,6 +283,7 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */,
 				EB8F04CD21CAE664003757EC /* FormCells */,
 				EB8F04CC21CAE656003757EC /* CustomControls */,
 				EB8F048521CAC620003757EC /* Fonts */,
@@ -351,6 +361,8 @@
 		EB8F04C521CAE5CA003757EC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F04E821CAEE0A003757EC /* VideoCutter.swift */,
+				EB8F04E921CAEE0A003757EC /* VideoSplashViewController.swift */,
 				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
 			);
 			name = Utils;
@@ -472,6 +484,7 @@
 				EB8F049C21CAC62E003757EC /* Campton-Book.ttf in Resources */,
 				EB8F04AC21CAC62E003757EC /* Campton-Bold.ttf in Resources */,
 				EB28B5FD21C3B2AA00CFF1EF /* LaunchScreen.storyboard in Resources */,
+				EB8F04E721CAEB71003757EC /* loginVideoBackground.mp4 in Resources */,
 				EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */,
 				EB8F04DE21CAE678003757EC /* HoopTextViewCell.xib in Resources */,
 				EB8F04A121CAC62E003757EC /* Campton-LightItalic.ttf in Resources */,
@@ -526,6 +539,7 @@
 				EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
 				EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */,
+				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
 				EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */,
 				EB28B62021C3B4B600CFF1EF /* hoop.swift in Sources */,
@@ -533,8 +547,10 @@
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
+				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
+				EB8F04EA21CAEE0A003757EC /* VideoCutter.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,
 				EB28B61A21C3B43300CFF1EF /* CGFloat+random.swift in Sources */,
 				EB28B62221C3B88B00CFF1EF /* DateFormatter+shortcuts.swift in Sources */,
