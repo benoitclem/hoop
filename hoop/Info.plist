@@ -24,15 +24,15 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -40,6 +40,30 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Campton-Black.ttf</string>
+		<string>Campton-BlackItalic.ttf</string>
+		<string>Campton-Bold.ttf</string>
+		<string>Campton-BoldItalic.ttf</string>
+		<string>Campton-Book.ttf</string>
+		<string>Campton-BookItalic.ttf</string>
+		<string>Campton-ExtraBold.ttf</string>
+		<string>Campton-ExtraBoldItalic.ttf</string>
+		<string>Campton-ExtraLight.ttf</string>
+		<string>Campton-ExtraLightItalic.ttf</string>
+		<string>Campton-Light.ttf</string>
+		<string>Campton-LightItalic.ttf</string>
+		<string>Campton-Medium.ttf</string>
+		<string>Campton-MediumItalic.ttf</string>
+		<string>Campton-SemiBold.ttf</string>
+		<string>Campton-SemiBoldItalic.ttf</string>
+		<string>Campton-Thin.ttf</string>
+		<string>Campton-ThinItalic.ttf</string>
+		<string>KittenSlantTrial.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
 	</array>
 </dict>
 </plist>

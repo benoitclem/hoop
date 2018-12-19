@@ -21,6 +21,38 @@
 		EB28B63321C3BFD100CFF1EF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB28B63221C3BFD100CFF1EF /* XCTest.framework */; };
 		EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63421C3F27F00CFF1EF /* conversation.swift */; };
 		EB28B63921C3F57200CFF1EF /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63821C3F57200CFF1EF /* message.swift */; };
+		EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046221CAB630003757EC /* SwiftRouter.swift */; };
+		EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046421CAB6F3003757EC /* LoginViewController.swift */; };
+		EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */; };
+		EB8F046921CAB799003757EC /* ParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046821CAB799003757EC /* ParameterViewController.swift */; };
+		EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */; };
+		EB8F046D21CAB81C003757EC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046C21CAB81C003757EC /* MapViewController.swift */; };
+		EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */; };
+		EB8F047121CAB956003757EC /* FaqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F047021CAB956003757EC /* FaqViewController.swift */; };
+		EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F047221CAB9C9003757EC /* WebViewController.swift */; };
+		EB8F047C21CAC1E0003757EC /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB8F047E21CAC1E0003757EC /* Localizable.strings */; };
+		EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F048021CAC2B4003757EC /* String+localization.swift */; };
+		EB8F049B21CAC62E003757EC /* Campton-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048621CAC62D003757EC /* Campton-ThinItalic.ttf */; };
+		EB8F049C21CAC62E003757EC /* Campton-Book.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048721CAC62D003757EC /* Campton-Book.ttf */; };
+		EB8F049D21CAC62E003757EC /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048821CAC62D003757EC /* Montserrat-Regular.ttf */; };
+		EB8F049E21CAC62E003757EC /* Campton-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048921CAC62D003757EC /* Campton-Light.ttf */; };
+		EB8F049F21CAC62E003757EC /* Campton-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048A21CAC62D003757EC /* Campton-ExtraLight.ttf */; };
+		EB8F04A021CAC62E003757EC /* Campton-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048B21CAC62D003757EC /* Campton-BoldItalic.ttf */; };
+		EB8F04A121CAC62E003757EC /* Campton-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048C21CAC62D003757EC /* Campton-LightItalic.ttf */; };
+		EB8F04A221CAC62E003757EC /* Campton-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048D21CAC62D003757EC /* Campton-SemiBoldItalic.ttf */; };
+		EB8F04A321CAC62E003757EC /* Campton-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048E21CAC62D003757EC /* Campton-ExtraBold.ttf */; };
+		EB8F04A421CAC62E003757EC /* Campton-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F048F21CAC62D003757EC /* Campton-ExtraLightItalic.ttf */; };
+		EB8F04A521CAC62E003757EC /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049021CAC62D003757EC /* Montserrat-Bold.ttf */; };
+		EB8F04A621CAC62E003757EC /* KittenSlantTrial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049121CAC62D003757EC /* KittenSlantTrial.ttf */; };
+		EB8F04A721CAC62E003757EC /* Campton-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049221CAC62D003757EC /* Campton-Medium.ttf */; };
+		EB8F04A821CAC62E003757EC /* Campton-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049321CAC62E003757EC /* Campton-MediumItalic.ttf */; };
+		EB8F04A921CAC62E003757EC /* Campton-BookItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049421CAC62E003757EC /* Campton-BookItalic.ttf */; };
+		EB8F04AA21CAC62E003757EC /* Campton-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049521CAC62E003757EC /* Campton-SemiBold.ttf */; };
+		EB8F04AB21CAC62E003757EC /* Campton-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049621CAC62E003757EC /* Campton-BlackItalic.ttf */; };
+		EB8F04AC21CAC62E003757EC /* Campton-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049721CAC62E003757EC /* Campton-Bold.ttf */; };
+		EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049821CAC62E003757EC /* Campton-Thin.ttf */; };
+		EB8F04AE21CAC62E003757EC /* Campton-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049921CAC62E003757EC /* Campton-ExtraBoldItalic.ttf */; };
+		EB8F04AF21CAC62E003757EC /* Campton-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049A21CAC62E003757EC /* Campton-Black.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +84,41 @@
 		EB28B63221C3BFD100CFF1EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EB28B63421C3F27F00CFF1EF /* conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = conversation.swift; path = Models/conversation.swift; sourceTree = "<group>"; };
 		EB28B63821C3F57200CFF1EF /* message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = message.swift; path = Models/message.swift; sourceTree = "<group>"; };
+		EB8F046221CAB630003757EC /* SwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRouter.swift; path = Routing/SwiftRouter.swift; sourceTree = "<group>"; };
+		EB8F046421CAB6F3003757EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTunnelViewController.swift; sourceTree = "<group>"; };
+		EB8F046821CAB799003757EC /* ParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterViewController.swift; sourceTree = "<group>"; };
+		EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		EB8F046C21CAB81C003757EC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		EB8F047021CAB956003757EC /* FaqViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaqViewController.swift; sourceTree = "<group>"; };
+		EB8F047221CAB9C9003757EC /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
+		EB8F047621CABD0D003757EC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		EB8F047721CABD0D003757EC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		EB8F047F21CAC1E3003757EC /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EB8F048021CAC2B4003757EC /* String+localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localization.swift"; sourceTree = "<group>"; };
+		EB8F048321CAC350003757EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		EB8F048621CAC62D003757EC /* Campton-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ThinItalic.ttf"; path = "Fonts/Campton-ThinItalic.ttf"; sourceTree = "<group>"; };
+		EB8F048721CAC62D003757EC /* Campton-Book.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Book.ttf"; path = "Fonts/Campton-Book.ttf"; sourceTree = "<group>"; };
+		EB8F048821CAC62D003757EC /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		EB8F048921CAC62D003757EC /* Campton-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Light.ttf"; path = "Fonts/Campton-Light.ttf"; sourceTree = "<group>"; };
+		EB8F048A21CAC62D003757EC /* Campton-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ExtraLight.ttf"; path = "Fonts/Campton-ExtraLight.ttf"; sourceTree = "<group>"; };
+		EB8F048B21CAC62D003757EC /* Campton-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-BoldItalic.ttf"; path = "Fonts/Campton-BoldItalic.ttf"; sourceTree = "<group>"; };
+		EB8F048C21CAC62D003757EC /* Campton-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-LightItalic.ttf"; path = "Fonts/Campton-LightItalic.ttf"; sourceTree = "<group>"; };
+		EB8F048D21CAC62D003757EC /* Campton-SemiBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-SemiBoldItalic.ttf"; path = "Fonts/Campton-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		EB8F048E21CAC62D003757EC /* Campton-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ExtraBold.ttf"; path = "Fonts/Campton-ExtraBold.ttf"; sourceTree = "<group>"; };
+		EB8F048F21CAC62D003757EC /* Campton-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ExtraLightItalic.ttf"; path = "Fonts/Campton-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
+		EB8F049021CAC62D003757EC /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		EB8F049121CAC62D003757EC /* KittenSlantTrial.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = KittenSlantTrial.ttf; path = Fonts/KittenSlantTrial.ttf; sourceTree = "<group>"; };
+		EB8F049221CAC62D003757EC /* Campton-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Medium.ttf"; path = "Fonts/Campton-Medium.ttf"; sourceTree = "<group>"; };
+		EB8F049321CAC62E003757EC /* Campton-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-MediumItalic.ttf"; path = "Fonts/Campton-MediumItalic.ttf"; sourceTree = "<group>"; };
+		EB8F049421CAC62E003757EC /* Campton-BookItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-BookItalic.ttf"; path = "Fonts/Campton-BookItalic.ttf"; sourceTree = "<group>"; };
+		EB8F049521CAC62E003757EC /* Campton-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-SemiBold.ttf"; path = "Fonts/Campton-SemiBold.ttf"; sourceTree = "<group>"; };
+		EB8F049621CAC62E003757EC /* Campton-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-BlackItalic.ttf"; path = "Fonts/Campton-BlackItalic.ttf"; sourceTree = "<group>"; };
+		EB8F049721CAC62E003757EC /* Campton-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Bold.ttf"; path = "Fonts/Campton-Bold.ttf"; sourceTree = "<group>"; };
+		EB8F049821CAC62E003757EC /* Campton-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Thin.ttf"; path = "Fonts/Campton-Thin.ttf"; sourceTree = "<group>"; };
+		EB8F049921CAC62E003757EC /* Campton-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ExtraBoldItalic.ttf"; path = "Fonts/Campton-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		EB8F049A21CAC62E003757EC /* Campton-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Black.ttf"; path = "Fonts/Campton-Black.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +146,6 @@
 				EB28B5F121C3B2A900CFF1EF /* hoop */,
 				EB28B62821C3BDB400CFF1EF /* hoopTests */,
 				EB28B5F021C3B2A900CFF1EF /* Products */,
-				EB28B63121C3BFD000CFF1EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -95,6 +161,8 @@
 		EB28B5F121C3B2A900CFF1EF /* hoop */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F046121CAB625003757EC /* Routing */,
+				EB28B63121C3BFD000CFF1EF /* Frameworks */,
 				EB28B61621C3B38E00CFF1EF /* UI */,
 				EB28B61521C3B37500CFF1EF /* ViewControllers */,
 				EB28B61321C3B36900CFF1EF /* Models */,
@@ -112,6 +180,7 @@
 				EB28B61921C3B43300CFF1EF /* CGFloat+random.swift */,
 				EB28B61B21C3B45000CFF1EF /* UIColor+random.swift */,
 				EB28B62121C3B88B00CFF1EF /* DateFormatter+shortcuts.swift */,
+				EB8F048021CAC2B4003757EC /* String+localization.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -131,6 +200,14 @@
 			isa = PBXGroup;
 			children = (
 				EB28B5F421C3B2A900CFF1EF /* ViewController.swift */,
+				EB8F046421CAB6F3003757EC /* LoginViewController.swift */,
+				EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */,
+				EB8F046821CAB799003757EC /* ParameterViewController.swift */,
+				EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */,
+				EB8F046C21CAB81C003757EC /* MapViewController.swift */,
+				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
+				EB8F047021CAB956003757EC /* FaqViewController.swift */,
+				EB8F047221CAB9C9003757EC /* WebViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -138,8 +215,10 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F048521CAC620003757EC /* Fonts */,
 				EB28B5F621C3B2A900CFF1EF /* Main.storyboard */,
 				EB28B5FB21C3B2AA00CFF1EF /* LaunchScreen.storyboard */,
+				EB8F047E21CAC1E0003757EC /* Localizable.strings */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -159,6 +238,43 @@
 				EB28B63221C3BFD100CFF1EF /* XCTest.framework */,
 			);
 			name = Frameworks;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		EB8F046121CAB625003757EC /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				EB8F046221CAB630003757EC /* SwiftRouter.swift */,
+			);
+			name = Routing;
+			sourceTree = "<group>";
+		};
+		EB8F048521CAC620003757EC /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EB8F049A21CAC62E003757EC /* Campton-Black.ttf */,
+				EB8F049621CAC62E003757EC /* Campton-BlackItalic.ttf */,
+				EB8F049721CAC62E003757EC /* Campton-Bold.ttf */,
+				EB8F048B21CAC62D003757EC /* Campton-BoldItalic.ttf */,
+				EB8F048721CAC62D003757EC /* Campton-Book.ttf */,
+				EB8F049421CAC62E003757EC /* Campton-BookItalic.ttf */,
+				EB8F048E21CAC62D003757EC /* Campton-ExtraBold.ttf */,
+				EB8F049921CAC62E003757EC /* Campton-ExtraBoldItalic.ttf */,
+				EB8F048A21CAC62D003757EC /* Campton-ExtraLight.ttf */,
+				EB8F048F21CAC62D003757EC /* Campton-ExtraLightItalic.ttf */,
+				EB8F048921CAC62D003757EC /* Campton-Light.ttf */,
+				EB8F048C21CAC62D003757EC /* Campton-LightItalic.ttf */,
+				EB8F049221CAC62D003757EC /* Campton-Medium.ttf */,
+				EB8F049321CAC62E003757EC /* Campton-MediumItalic.ttf */,
+				EB8F049521CAC62E003757EC /* Campton-SemiBold.ttf */,
+				EB8F048D21CAC62D003757EC /* Campton-SemiBoldItalic.ttf */,
+				EB8F049821CAC62E003757EC /* Campton-Thin.ttf */,
+				EB8F048621CAC62D003757EC /* Campton-ThinItalic.ttf */,
+				EB8F049121CAC62D003757EC /* KittenSlantTrial.ttf */,
+				EB8F049021CAC62D003757EC /* Montserrat-Bold.ttf */,
+				EB8F048821CAC62D003757EC /* Montserrat-Regular.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,6 +341,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = EB28B5E621C3B2A900CFF1EF;
 			productRefGroup = EB28B5F021C3B2A900CFF1EF /* Products */;
@@ -242,8 +359,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB8F04A321CAC62E003757EC /* Campton-ExtraBold.ttf in Resources */,
+				EB8F04AE21CAC62E003757EC /* Campton-ExtraBoldItalic.ttf in Resources */,
+				EB8F049C21CAC62E003757EC /* Campton-Book.ttf in Resources */,
+				EB8F04AC21CAC62E003757EC /* Campton-Bold.ttf in Resources */,
 				EB28B5FD21C3B2AA00CFF1EF /* LaunchScreen.storyboard in Resources */,
+				EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */,
+				EB8F04A121CAC62E003757EC /* Campton-LightItalic.ttf in Resources */,
+				EB8F049F21CAC62E003757EC /* Campton-ExtraLight.ttf in Resources */,
+				EB8F04A521CAC62E003757EC /* Montserrat-Bold.ttf in Resources */,
+				EB8F049D21CAC62E003757EC /* Montserrat-Regular.ttf in Resources */,
+				EB8F04A021CAC62E003757EC /* Campton-BoldItalic.ttf in Resources */,
+				EB8F04A421CAC62E003757EC /* Campton-ExtraLightItalic.ttf in Resources */,
+				EB8F04A221CAC62E003757EC /* Campton-SemiBoldItalic.ttf in Resources */,
+				EB8F04AA21CAC62E003757EC /* Campton-SemiBold.ttf in Resources */,
+				EB8F047C21CAC1E0003757EC /* Localizable.strings in Resources */,
+				EB8F04AB21CAC62E003757EC /* Campton-BlackItalic.ttf in Resources */,
+				EB8F049E21CAC62E003757EC /* Campton-Light.ttf in Resources */,
+				EB8F04A921CAC62E003757EC /* Campton-BookItalic.ttf in Resources */,
+				EB8F049B21CAC62E003757EC /* Campton-ThinItalic.ttf in Resources */,
+				EB8F04A721CAC62E003757EC /* Campton-Medium.ttf in Resources */,
+				EB8F04A821CAC62E003757EC /* Campton-MediumItalic.ttf in Resources */,
+				EB8F04A621CAC62E003757EC /* KittenSlantTrial.ttf in Resources */,
 				EB28B5FA21C3B2AA00CFF1EF /* Assets.xcassets in Resources */,
+				EB8F04AF21CAC62E003757EC /* Campton-Black.ttf in Resources */,
 				EB28B5F821C3B2A900CFF1EF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,14 +402,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */,
+				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
+				EB8F046921CAB799003757EC /* ParameterViewController.swift in Sources */,
+				EB8F047121CAB956003757EC /* FaqViewController.swift in Sources */,
 				EB28B61C21C3B45000CFF1EF /* UIColor+random.swift in Sources */,
+				EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */,
+				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
 				EB28B5F521C3B2A900CFF1EF /* ViewController.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
 				EB28B62021C3B4B600CFF1EF /* hoop.swift in Sources */,
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
+				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
+				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
+				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,
 				EB28B61A21C3B43300CFF1EF /* CGFloat+random.swift in Sources */,
 				EB28B62221C3B88B00CFF1EF /* DateFormatter+shortcuts.swift in Sources */,
+				EB8F046D21CAB81C003757EC /* MapViewController.swift in Sources */,
+				EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +446,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB28B5F721C3B2A900CFF1EF /* Base */,
+				EB8F047621CABD0D003757EC /* fr */,
+				EB8F048321CAC350003757EC /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -305,8 +456,17 @@
 			isa = PBXVariantGroup;
 			children = (
 				EB28B5FC21C3B2AA00CFF1EF /* Base */,
+				EB8F047721CABD0D003757EC /* fr */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		EB8F047E21CAC1E0003757EC /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB8F047F21CAC1E3003757EC /* fr */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -316,6 +476,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -377,6 +538,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

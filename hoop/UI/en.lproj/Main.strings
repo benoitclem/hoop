@@ -1,0 +1,45 @@
+
+/* Class = "UIButton"; normalTitle = "avec ton numéro de telephone"; ObjectID = "5fv-Rf-f93"; */
+"5fv-Rf-f93.normalTitle" = "with your phone number";
+
+/* Class = "UILabel"; text = "Parameters"; ObjectID = "79e-uz-bqJ"; */
+"79e-uz-bqJ.text" = "Parameters";
+
+/* Class = "UILabel"; text = "Conversation"; ObjectID = "BvV-jl-wkU"; */
+"BvV-jl-wkU.text" = "Conversation";
+
+/* Class = "UILabel"; text = "ne ne publierons jamais sur ton compte"; ObjectID = "Cgh-n1-Z7r"; */
+"Cgh-n1-Z7r.text" = "we do not publish on your account";
+
+/* Class = "UILabel"; text = "les belles rencontres courent les rues"; ObjectID = "M23-Ef-ucP"; */
+"M23-Ef-ucP.text" = "les belles rencontres courent les rues";
+
+/* Class = "UILabel"; text = "Tunnel"; ObjectID = "QgV-gJ-ipu"; */
+"QgV-gJ-ipu.text" = "Tunnel";
+
+/* Class = "UILabel"; text = "Tutorial"; ObjectID = "RYf-XL-Xcq"; */
+"RYf-XL-Xcq.text" = "Tutorial";
+
+/* Class = "UILabel"; text = "Web"; ObjectID = "RaB-bG-BuC"; */
+"RaB-bG-BuC.text" = "Web";
+
+/* Class = "UILabel"; text = "qui ne sera JAMAIS visible sur l'app"; ObjectID = "SNz-Cy-tdA"; */
+"SNz-Cy-tdA.text" = "which will NEVER be visible on the app";
+
+/* Class = "UILabel"; text = "Map"; ObjectID = "WpH-on-UnC"; */
+"WpH-on-UnC.text" = "Map";
+
+/* Class = "UILabel"; text = "FAQ"; ObjectID = "bGY-m1-KuU"; */
+"bGY-m1-KuU.text" = "FAQ";
+
+/* Class = "UILabel"; text = "Hoop"; ObjectID = "e8n-W2-ZFF"; */
+"e8n-W2-ZFF.text" = "Hoop";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "m7J-6Y-aIA"; */
+"m7J-6Y-aIA.text" = "CGU + CONF";
+
+/* Class = "UILabel"; text = "Connecte-toi"; ObjectID = "pwA-ne-H73"; */
+"pwA-ne-H73.text" = "Login";
+
+/* Class = "UIButton"; normalTitle = "avec facebook"; ObjectID = "wjB-hC-GZA"; */
+"wjB-hC-GZA.normalTitle" = "with facebook";

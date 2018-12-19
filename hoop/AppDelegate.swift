@@ -13,9 +13,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        window = UIWindow(frame: UIScreen.main.bounds)
+        setupRouting()
+        showLogin()
+        window?.makeKeyAndVisible()
         return true
     }
 
@@ -40,7 +43,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+    func showLogin() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        window?.rootViewController = mapController!
+    }
 
+//    func showMap() {
+//        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
+//        window?.rootViewController = mapController!
+//    }
 
 }
 
+extension AppDelegate {
+    func setupRouting() {
+        let router = Router.shared
+//        router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
+    }
+}
