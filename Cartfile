@@ -1,0 +1,4 @@
+github "HeroTransitions/Hero"
+github "zekunyan/TTGTagCollectionView"
+github "xmartlabs/Eureka" ~> 4.3
+github "ruslanskorb/RSKPlaceholderTextView"

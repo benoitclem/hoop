@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B5F221C3B2A900CFF1EF /* AppDelegate.swift */; };
-		EB28B5F521C3B2A900CFF1EF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B5F421C3B2A900CFF1EF /* ViewController.swift */; };
 		EB28B5F821C3B2A900CFF1EF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB28B5F621C3B2A900CFF1EF /* Main.storyboard */; };
 		EB28B5FA21C3B2AA00CFF1EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */; };
 		EB28B5FD21C3B2AA00CFF1EF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB28B5FB21C3B2AA00CFF1EF /* LaunchScreen.storyboard */; };
@@ -24,7 +23,7 @@
 		EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046221CAB630003757EC /* SwiftRouter.swift */; };
 		EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046421CAB6F3003757EC /* LoginViewController.swift */; };
 		EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */; };
-		EB8F046921CAB799003757EC /* ParameterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046821CAB799003757EC /* ParameterViewController.swift */; };
+		EB8F046921CAB799003757EC /* ParametersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046821CAB799003757EC /* ParametersViewController.swift */; };
 		EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */; };
 		EB8F046D21CAB81C003757EC /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046C21CAB81C003757EC /* MapViewController.swift */; };
 		EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */; };
@@ -53,6 +52,27 @@
 		EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049821CAC62E003757EC /* Campton-Thin.ttf */; };
 		EB8F04AE21CAC62E003757EC /* Campton-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049921CAC62E003757EC /* Campton-ExtraBoldItalic.ttf */; };
 		EB8F04AF21CAC62E003757EC /* Campton-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049A21CAC62E003757EC /* Campton-Black.ttf */; };
+		EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */; };
+		EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04B421CAE330003757EC /* ChatViewController.swift */; };
+		EB8F04B921CAE385003757EC /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B621CAE385003757EC /* Eureka.framework */; };
+		EB8F04BA21CAE385003757EC /* RSKPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */; };
+		EB8F04BD21CAE399003757EC /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B621CAE385003757EC /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F04BE21CAE399003757EC /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B821CAE385003757EC /* Hero.framework */; };
+		EB8F04BF21CAE399003757EC /* Hero.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B821CAE385003757EC /* Hero.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F04C121CAE399003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04C621CAE5D6003757EC /* UIGradientView.swift */; };
+		EB8F04D921CAE678003757EC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04CE21CAE677003757EC /* ImageCollectionViewCell.swift */; };
+		EB8F04DA21CAE678003757EC /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04CF21CAE677003757EC /* CollectionViewCell.xib */; };
+		EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04D021CAE677003757EC /* HoopSwitchCell.swift */; };
+		EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04D121CAE678003757EC /* HoopRangeCell.swift */; };
+		EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04D221CAE678003757EC /* HoopTextViewCell.swift */; };
+		EB8F04DE21CAE678003757EC /* HoopTextViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D321CAE678003757EC /* HoopTextViewCell.xib */; };
+		EB8F04DF21CAE678003757EC /* HoopSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D421CAE678003757EC /* HoopSwitchCell.xib */; };
+		EB8F04E021CAE678003757EC /* PickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D521CAE678003757EC /* PickerCell.xib */; };
+		EB8F04E121CAE678003757EC /* HoopLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D621CAE678003757EC /* HoopLabelCell.xib */; };
+		EB8F04E221CAE678003757EC /* HoopRangeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04D721CAE678003757EC /* HoopRangeCell.xib */; };
+		EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04D821CAE678003757EC /* HoopLabelCell.swift */; };
+		EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04E421CAE684003757EC /* RangeSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,10 +85,25 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EB8F04C221CAE399003757EC /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EB8F04BF21CAE399003757EC /* Hero.framework in Embed Frameworks */,
+				EB8F04BD21CAE399003757EC /* Eureka.framework in Embed Frameworks */,
+				EB8F04C121CAE399003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		EB28B5EF21C3B2A900CFF1EF /* hoop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hoop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB28B5F221C3B2A900CFF1EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EB28B5F421C3B2A900CFF1EF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		EB28B5F721C3B2A900CFF1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EB28B5FC21C3B2AA00CFF1EF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,7 +122,7 @@
 		EB8F046221CAB630003757EC /* SwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRouter.swift; path = Routing/SwiftRouter.swift; sourceTree = "<group>"; };
 		EB8F046421CAB6F3003757EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTunnelViewController.swift; sourceTree = "<group>"; };
-		EB8F046821CAB799003757EC /* ParameterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParameterViewController.swift; sourceTree = "<group>"; };
+		EB8F046821CAB799003757EC /* ParametersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametersViewController.swift; sourceTree = "<group>"; };
 		EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		EB8F046C21CAB81C003757EC /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -119,6 +154,24 @@
 		EB8F049821CAC62E003757EC /* Campton-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Thin.ttf"; path = "Fonts/Campton-Thin.ttf"; sourceTree = "<group>"; };
 		EB8F049921CAC62E003757EC /* Campton-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-ExtraBoldItalic.ttf"; path = "Fonts/Campton-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		EB8F049A21CAC62E003757EC /* Campton-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Black.ttf"; path = "Fonts/Campton-Black.ttf"; sourceTree = "<group>"; };
+		EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		EB8F04B421CAE330003757EC /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		EB8F04B621CAE385003757EC /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = hoop/Frameworks/Eureka.framework; sourceTree = "<group>"; };
+		EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RSKPlaceholderTextView.framework; path = hoop/Frameworks/RSKPlaceholderTextView.framework; sourceTree = "<group>"; };
+		EB8F04B821CAE385003757EC /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = hoop/Frameworks/Hero.framework; sourceTree = "<group>"; };
+		EB8F04C621CAE5D6003757EC /* UIGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIGradientView.swift; path = Utils/UIGradientView.swift; sourceTree = "<group>"; };
+		EB8F04CE21CAE677003757EC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = FormCells/ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		EB8F04CF21CAE677003757EC /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewCell.xib; path = FormCells/CollectionViewCell.xib; sourceTree = "<group>"; };
+		EB8F04D021CAE677003757EC /* HoopSwitchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoopSwitchCell.swift; path = FormCells/HoopSwitchCell.swift; sourceTree = "<group>"; };
+		EB8F04D121CAE678003757EC /* HoopRangeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoopRangeCell.swift; path = FormCells/HoopRangeCell.swift; sourceTree = "<group>"; };
+		EB8F04D221CAE678003757EC /* HoopTextViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoopTextViewCell.swift; path = FormCells/HoopTextViewCell.swift; sourceTree = "<group>"; };
+		EB8F04D321CAE678003757EC /* HoopTextViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopTextViewCell.xib; path = FormCells/HoopTextViewCell.xib; sourceTree = "<group>"; };
+		EB8F04D421CAE678003757EC /* HoopSwitchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopSwitchCell.xib; path = FormCells/HoopSwitchCell.xib; sourceTree = "<group>"; };
+		EB8F04D521CAE678003757EC /* PickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PickerCell.xib; path = FormCells/PickerCell.xib; sourceTree = "<group>"; };
+		EB8F04D621CAE678003757EC /* HoopLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopLabelCell.xib; path = FormCells/HoopLabelCell.xib; sourceTree = "<group>"; };
+		EB8F04D721CAE678003757EC /* HoopRangeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopRangeCell.xib; path = FormCells/HoopRangeCell.xib; sourceTree = "<group>"; };
+		EB8F04D821CAE678003757EC /* HoopLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HoopLabelCell.swift; path = FormCells/HoopLabelCell.swift; sourceTree = "<group>"; };
+		EB8F04E421CAE684003757EC /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RangeSlider.swift; path = CustomControls/RangeSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +179,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB8F04BE21CAE399003757EC /* Hero.framework in Frameworks */,
+				EB8F04BA21CAE385003757EC /* RSKPlaceholderTextView.framework in Frameworks */,
+				EB8F04B921CAE385003757EC /* Eureka.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -146,6 +202,7 @@
 				EB28B5F121C3B2A900CFF1EF /* hoop */,
 				EB28B62821C3BDB400CFF1EF /* hoopTests */,
 				EB28B5F021C3B2A900CFF1EF /* Products */,
+				EB8F04C321CAE3B0003757EC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -161,6 +218,7 @@
 		EB28B5F121C3B2A900CFF1EF /* hoop */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F04C521CAE5CA003757EC /* Utils */,
 				EB8F046121CAB625003757EC /* Routing */,
 				EB28B63121C3BFD000CFF1EF /* Frameworks */,
 				EB28B61621C3B38E00CFF1EF /* UI */,
@@ -199,15 +257,16 @@
 		EB28B61521C3B37500CFF1EF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EB28B5F421C3B2A900CFF1EF /* ViewController.swift */,
+				EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */,
 				EB8F046421CAB6F3003757EC /* LoginViewController.swift */,
 				EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */,
-				EB8F046821CAB799003757EC /* ParameterViewController.swift */,
+				EB8F046821CAB799003757EC /* ParametersViewController.swift */,
 				EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */,
 				EB8F046C21CAB81C003757EC /* MapViewController.swift */,
 				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
 				EB8F047021CAB956003757EC /* FaqViewController.swift */,
 				EB8F047221CAB9C9003757EC /* WebViewController.swift */,
+				EB8F04B421CAE330003757EC /* ChatViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -215,6 +274,8 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F04CD21CAE664003757EC /* FormCells */,
+				EB8F04CC21CAE656003757EC /* CustomControls */,
 				EB8F048521CAC620003757EC /* Fonts */,
 				EB28B5F621C3B2A900CFF1EF /* Main.storyboard */,
 				EB28B5FB21C3B2AA00CFF1EF /* LaunchScreen.storyboard */,
@@ -235,6 +296,9 @@
 		EB28B63121C3BFD000CFF1EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F04B621CAE385003757EC /* Eureka.framework */,
+				EB8F04B821CAE385003757EC /* Hero.framework */,
+				EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */,
 				EB28B63221C3BFD100CFF1EF /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -277,6 +341,47 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
+		EB8F04C321CAE3B0003757EC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EB8F04C521CAE5CA003757EC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		EB8F04CC21CAE656003757EC /* CustomControls */ = {
+			isa = PBXGroup;
+			children = (
+				EB8F04E421CAE684003757EC /* RangeSlider.swift */,
+			);
+			name = CustomControls;
+			sourceTree = "<group>";
+		};
+		EB8F04CD21CAE664003757EC /* FormCells */ = {
+			isa = PBXGroup;
+			children = (
+				EB8F04CF21CAE677003757EC /* CollectionViewCell.xib */,
+				EB8F04D821CAE678003757EC /* HoopLabelCell.swift */,
+				EB8F04D621CAE678003757EC /* HoopLabelCell.xib */,
+				EB8F04D121CAE678003757EC /* HoopRangeCell.swift */,
+				EB8F04D721CAE678003757EC /* HoopRangeCell.xib */,
+				EB8F04D021CAE677003757EC /* HoopSwitchCell.swift */,
+				EB8F04D421CAE678003757EC /* HoopSwitchCell.xib */,
+				EB8F04D221CAE678003757EC /* HoopTextViewCell.swift */,
+				EB8F04D321CAE678003757EC /* HoopTextViewCell.xib */,
+				EB8F04CE21CAE677003757EC /* ImageCollectionViewCell.swift */,
+				EB8F04D521CAE678003757EC /* PickerCell.xib */,
+			);
+			name = FormCells;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -287,6 +392,7 @@
 				EB28B5EB21C3B2A900CFF1EF /* Sources */,
 				EB28B5EC21C3B2A900CFF1EF /* Frameworks */,
 				EB28B5ED21C3B2A900CFF1EF /* Resources */,
+				EB8F04C221CAE399003757EC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -361,10 +467,13 @@
 			files = (
 				EB8F04A321CAC62E003757EC /* Campton-ExtraBold.ttf in Resources */,
 				EB8F04AE21CAC62E003757EC /* Campton-ExtraBoldItalic.ttf in Resources */,
+				EB8F04E121CAE678003757EC /* HoopLabelCell.xib in Resources */,
+				EB8F04E221CAE678003757EC /* HoopRangeCell.xib in Resources */,
 				EB8F049C21CAC62E003757EC /* Campton-Book.ttf in Resources */,
 				EB8F04AC21CAC62E003757EC /* Campton-Bold.ttf in Resources */,
 				EB28B5FD21C3B2AA00CFF1EF /* LaunchScreen.storyboard in Resources */,
 				EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */,
+				EB8F04DE21CAE678003757EC /* HoopTextViewCell.xib in Resources */,
 				EB8F04A121CAC62E003757EC /* Campton-LightItalic.ttf in Resources */,
 				EB8F049F21CAC62E003757EC /* Campton-ExtraLight.ttf in Resources */,
 				EB8F04A521CAC62E003757EC /* Montserrat-Bold.ttf in Resources */,
@@ -377,6 +486,8 @@
 				EB8F04AB21CAC62E003757EC /* Campton-BlackItalic.ttf in Resources */,
 				EB8F049E21CAC62E003757EC /* Campton-Light.ttf in Resources */,
 				EB8F04A921CAC62E003757EC /* Campton-BookItalic.ttf in Resources */,
+				EB8F04DF21CAE678003757EC /* HoopSwitchCell.xib in Resources */,
+				EB8F04DA21CAE678003757EC /* CollectionViewCell.xib in Resources */,
 				EB8F049B21CAC62E003757EC /* Campton-ThinItalic.ttf in Resources */,
 				EB8F04A721CAC62E003757EC /* Campton-Medium.ttf in Resources */,
 				EB8F04A821CAC62E003757EC /* Campton-MediumItalic.ttf in Resources */,
@@ -384,6 +495,7 @@
 				EB28B5FA21C3B2AA00CFF1EF /* Assets.xcassets in Resources */,
 				EB8F04AF21CAC62E003757EC /* Campton-Black.ttf in Resources */,
 				EB28B5F821C3B2A900CFF1EF /* Main.storyboard in Resources */,
+				EB8F04E021CAE678003757EC /* PickerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,18 +514,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */,
+				EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */,
+				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
-				EB8F046921CAB799003757EC /* ParameterViewController.swift in Sources */,
+				EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */,
+				EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */,
+				EB8F046921CAB799003757EC /* ParametersViewController.swift in Sources */,
 				EB8F047121CAB956003757EC /* FaqViewController.swift in Sources */,
 				EB28B61C21C3B45000CFF1EF /* UIColor+random.swift in Sources */,
 				EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */,
+				EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
-				EB28B5F521C3B2A900CFF1EF /* ViewController.swift in Sources */,
+				EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
+				EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */,
 				EB28B62021C3B4B600CFF1EF /* hoop.swift in Sources */,
+				EB8F04D921CAE678003757EC /* ImageCollectionViewCell.swift in Sources */,
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
+				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,
 				EB28B61A21C3B43300CFF1EF /* CGFloat+random.swift in Sources */,
@@ -596,6 +716,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y34EC8Z3RS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hoop/Frameworks",
+				);
 				INFOPLIST_FILE = hoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -614,6 +738,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Y34EC8Z3RS;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/hoop/Frameworks",
+				);
 				INFOPLIST_FILE = hoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

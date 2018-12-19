@@ -59,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func setupRouting() {
         let router = Router.shared
-//        router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
+        router.map("/tutorial", controllerClass: TutorialViewController.self)
+        router.map("/infotunnel", controllerClass: InfoTunnelViewController.self)
+        router.map("/map", controllerClass: MapViewController.self)
+        router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
+        router.map("/conversation", controllerClass: ConversationViewController.self)
+        router.map("/chat/:profileId", controllerClass: ChatViewController.self)
     }
 }
