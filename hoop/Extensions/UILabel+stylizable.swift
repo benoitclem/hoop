@@ -20,7 +20,7 @@ extension UILabel {
         let start = text.string.distance(from: text.string.startIndex, to: range.lowerBound)
         let length = text.string.distance(from: range.lowerBound, to: range.upperBound)
         let underlinedBoldedAttributes: [NSAttributedString.Key: Any] = [
-            .font : UIFont(name: "Campton-Medium", size: 12)!,
+            .font : UIFont.MainFontMedium(ofSize: 12.0),
             .foregroundColor : fgColor,
             .underlineStyle : underlineStyle != nil ? underlineStyle!.rawValue : 0
         ]

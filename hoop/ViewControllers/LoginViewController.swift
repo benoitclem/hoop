@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Futures
 
 
 class LoginViewController: VideoSplashViewController {
@@ -68,6 +68,24 @@ class LoginViewController: VideoSplashViewController {
         let connectionPromise = FacebookHandler.connect(with: fbPermissions, from: self)
         
         connectionPromise.whenRejected(on: .main) { error in
+
+        }
+        
+        connectionPromise.whenFulfilled(on: .main) { result in
+            //PopupProvider.showDoneNote()
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
+                self.present(vc as! UIViewController, animated: true)
+            }
+        }
+        
+        connectionPromise.then(on: DispatchQueue.main) { info -> Future<Bool> in
+            print("salut")
+            print("info")
+            return Future<Bool>()
+        }
+        
+        connectionPromise.thenIfRejected(on: DispatchQueue.main) { error -> Future<Bool> in
+            print("salut")
             var message = ""
             switch (error as NSError).code {
             case FacebookHandler.FB_ERROR_BASE:
@@ -79,16 +97,9 @@ class LoginViewController: VideoSplashViewController {
             default:
                 message = "Unknow error occured"
             }
-            me
+            PopupProvider.showDoneNote()
+            return Future<Bool>()
         }
-        
-        connectionPromise.whenFulfilled(on: .main) { result in
-        }
-            
-        if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
-            self.present(vc as! UIViewController, animated: true)
-        }
-        
     }
     
     @IBAction func doAccountKitLogin(_ sender: Any) {
@@ -126,6 +137,6 @@ class LoginViewController: VideoSplashViewController {
 //                }
 //            }
 //        })
-    }
+//    }
     
 }

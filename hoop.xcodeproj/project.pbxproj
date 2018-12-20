@@ -89,6 +89,12 @@
 		EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050A21CBBEBE003757EC /* Hero.framework */; };
 		EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050A21CBBEBE003757EC /* Hero.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F052221CBBEC8003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F052421CBDEF8003757EC /* PopupProvider.swift */; };
+		EB8F052A21CBDF91003757EC /* QuickLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F052721CBDF87003757EC /* QuickLayout.framework */; };
+		EB8F052B21CBDF91003757EC /* QuickLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F052721CBDF87003757EC /* QuickLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F052C21CBDF91003757EC /* SwiftEntryKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F052621CBDF87003757EC /* SwiftEntryKit.framework */; };
+		EB8F052D21CBDF91003757EC /* SwiftEntryKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F052621CBDF87003757EC /* SwiftEntryKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F052F21CBE122003757EC /* UIFont+main.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F052E21CBE122003757EC /* UIFont+main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,9 +118,11 @@
 				EB8F052221CBBEC8003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */,
 				EB8F051E21CBBEC8003757EC /* Futures.framework in Embed Frameworks */,
 				EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */,
+				EB8F052B21CBDF91003757EC /* QuickLayout.framework in Embed Frameworks */,
 				EB8F051A21CBBEC8003757EC /* FBSDKCoreKit.framework in Embed Frameworks */,
 				EB8F051C21CBBEC8003757EC /* FBSDKLoginKit.framework in Embed Frameworks */,
 				EB8F051821CBBEC8003757EC /* Eureka.framework in Embed Frameworks */,
+				EB8F052D21CBDF91003757EC /* SwiftEntryKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -205,6 +213,10 @@
 		EB8F050B21CBBEBE003757EC /* Futures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Futures.framework; path = hoop/Frameworks/Futures.framework; sourceTree = "<group>"; };
 		EB8F050C21CBBEBF003757EC /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = hoop/Frameworks/Eureka.framework; sourceTree = "<group>"; };
 		EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RSKPlaceholderTextView.framework; path = hoop/Frameworks/RSKPlaceholderTextView.framework; sourceTree = "<group>"; };
+		EB8F052421CBDEF8003757EC /* PopupProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupProvider.swift; sourceTree = "<group>"; };
+		EB8F052621CBDF87003757EC /* SwiftEntryKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftEntryKit.framework; path = Carthage/Build/iOS/SwiftEntryKit.framework; sourceTree = "<group>"; };
+		EB8F052721CBDF87003757EC /* QuickLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLayout.framework; path = Carthage/Build/iOS/QuickLayout.framework; sourceTree = "<group>"; };
+		EB8F052E21CBE122003757EC /* UIFont+main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+main.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -216,7 +228,9 @@
 				EB8F051421CBBEBF003757EC /* RSKPlaceholderTextView.framework in Frameworks */,
 				EB8F051221CBBEBF003757EC /* Futures.framework in Frameworks */,
 				EB8F051921CBBEC8003757EC /* FBSDKCoreKit.framework in Frameworks */,
+				EB8F052A21CBDF91003757EC /* QuickLayout.framework in Frameworks */,
 				EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */,
+				EB8F052C21CBDF91003757EC /* SwiftEntryKit.framework in Frameworks */,
 				EB8F051B21CBBEC8003757EC /* FBSDKLoginKit.framework in Frameworks */,
 				EB8F051521CBBEC7003757EC /* Bolts.framework in Frameworks */,
 			);
@@ -279,6 +293,7 @@
 				EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */,
 				EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */,
 				EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */,
+				EB8F052E21CBE122003757EC /* UIFont+main.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -337,6 +352,8 @@
 		EB28B63121C3BFD000CFF1EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB8F052721CBDF87003757EC /* QuickLayout.framework */,
+				EB8F052621CBDF87003757EC /* SwiftEntryKit.framework */,
 				EB8F050821CBBEBE003757EC /* Bolts.framework */,
 				EB8F050C21CBBEBF003757EC /* Eureka.framework */,
 				EB8F050921CBBEBE003757EC /* FBSDKCoreKit.framework */,
@@ -401,6 +418,7 @@
 				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
 				EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */,
 				EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */,
+				EB8F052421CBDEF8003757EC /* PopupProvider.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -567,6 +585,7 @@
 				EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */,
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
+				EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */,
 				EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */,
 				EB8F050221CBB7FB003757EC /* AccountKitHandler.swift in Sources */,
 				EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */,
@@ -583,6 +602,7 @@
 				EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */,
 				EB28B62021C3B4B600CFF1EF /* hoop.swift in Sources */,
 				EB8F04D921CAE678003757EC /* ImageCollectionViewCell.swift in Sources */,
+				EB8F052F21CBE122003757EC /* UIFont+main.swift in Sources */,
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
@@ -777,13 +797,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoop/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = hoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-Objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ohmyhoop.hoop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -800,13 +821,14 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/hoop/Frameworks",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = hoop/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				OTHER_LDFLAGS = "-Objc";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ohmyhoop.hoop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

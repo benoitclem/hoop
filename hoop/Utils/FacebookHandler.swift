@@ -14,6 +14,7 @@ import Futures
 
 class FacebookHandler: NSObject {
     
+    static let FB_ERROR_UNKNOWN: Int = 0
     static let FB_ERROR_BASE:Int = -1
     static let FB_ERROR_CANCELED:Int = -2
     static let FB_ERROR_PERMISSION_DENIED:Int = -3
@@ -30,20 +31,28 @@ class FacebookHandler: NSObject {
         
         let login = FBSDKLoginManager.init()
         login.logIn(withReadPermissions: permission, from: viewController, handler: { result, error in
-            if let e = error {
-                login.logOut()
-                let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_BASE, userInfo: ["desc":e.localizedDescription])
-                promise.reject(hoopError)
-            } else if((result?.isCancelled)!) {
-                login.logOut()
-                let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_CANCELED, userInfo: ["desc":"user have canceled procedure"])
-                promise.reject(hoopError)
-            } else if(!FacebookHandler.allPermissionGranted()){
-                login.logOut()
-                let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_PERMISSION_DENIED, userInfo: ["desc":"user declined important permissions"])
-                promise.reject(hoopError)
+            if error != nil {
+                if let e = error {
+                    login.logOut()
+                    let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_BASE, userInfo: ["desc":e.localizedDescription])
+                    promise.reject(hoopError)
+                } else {
+                    login.logOut()
+                    let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_UNKNOWN, userInfo: ["desc":"not known error"])
+                    promise.reject(hoopError)
+                }
             } else {
-                promise.fulfill(true)
+                if((result?.isCancelled)!) {
+                    login.logOut()
+                    let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_CANCELED, userInfo: ["desc":"user have canceled procedure"])
+                    promise.reject(hoopError)
+                } else if(!FacebookHandler.allPermissionGranted()){
+                    login.logOut()
+                    let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_PERMISSION_DENIED, userInfo: ["desc":"user declined important permissions"])
+                    promise.reject(hoopError)
+                } else {
+                    promise.fulfill(true)
+                }
             }
         })
         

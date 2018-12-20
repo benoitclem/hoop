@@ -3,3 +3,4 @@ github "zekunyan/TTGTagCollectionView"
 github "xmartlabs/Eureka" ~> 4.3
 github "ruslanskorb/RSKPlaceholderTextView"
 github "formbound/Futures"
+github "huri000/SwiftEntryKit" == 0.8.6

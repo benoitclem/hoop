@@ -175,6 +175,11 @@
                                 <state key="normal" title="avec ton numéro de telephone">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="doAccountKitLogin:" destination="QBd-Nw-s5v" eventType="touchUpInside" id="NfV-KH-Sx4"/>
                                 </connections>
@@ -233,6 +238,11 @@
                                 <state key="normal" title="avec facebook">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="doFacebookLogin:" destination="QBd-Nw-s5v" eventType="touchUpInside" id="949-GQ-OeY"/>
                                 </connections>
