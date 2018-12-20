@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,11 +15,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // App Setup
         setupRouting()
+        setupFacebook(with: application, and:launchOptions)
+        setupAccountKit()
+        
+        // First VC Selection
+        window = UIWindow(frame: UIScreen.main.bounds)
         showLogin()
         window?.makeKeyAndVisible()
+        
+        // Alay respond true
         return true
     }
 
@@ -44,16 +52,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func showLogin() {
-        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
-        window?.rootViewController = mapController!
-    }
-
-//    func showMap() {
-//        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
-//        window?.rootViewController = mapController!
-//    }
-
 }
 
 extension AppDelegate {
@@ -65,5 +63,41 @@ extension AppDelegate {
         router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
         router.map("/conversation", controllerClass: ConversationViewController.self)
         router.map("/chat/:profileId", controllerClass: ChatViewController.self)
+    }
+    
+    func setupFacebook(with application: UIApplication,and launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        // Facebook Init Stuffs
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+    }
+    
+    func setupAccountKit() {
+        // AccountKit Init Stuffs
+    }
+}
+
+extension AppDelegate{
+    func showLogin() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        window?.rootViewController = mapController!
+    }
+    
+    func showTunnel() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoTunnelViewController") as? InfoTunnelViewController
+        window?.rootViewController = mapController!
+    }
+    
+    func showParameters() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController
+        window?.rootViewController = mapController!
+    }
+    
+    func showTutorial() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController
+        window?.rootViewController = mapController!
+    }
+    
+    func showMap() {
+        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
+        window?.rootViewController = mapController!
     }
 }

@@ -54,12 +54,6 @@
 		EB8F04AF21CAC62E003757EC /* Campton-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EB8F049A21CAC62E003757EC /* Campton-Black.ttf */; };
 		EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */; };
 		EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04B421CAE330003757EC /* ChatViewController.swift */; };
-		EB8F04B921CAE385003757EC /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B621CAE385003757EC /* Eureka.framework */; };
-		EB8F04BA21CAE385003757EC /* RSKPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */; };
-		EB8F04BD21CAE399003757EC /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B621CAE385003757EC /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EB8F04BE21CAE399003757EC /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B821CAE385003757EC /* Hero.framework */; };
-		EB8F04BF21CAE399003757EC /* Hero.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B821CAE385003757EC /* Hero.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EB8F04C121CAE399003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04C621CAE5D6003757EC /* UIGradientView.swift */; };
 		EB8F04D921CAE678003757EC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04CE21CAE677003757EC /* ImageCollectionViewCell.swift */; };
 		EB8F04DA21CAE678003757EC /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB8F04CF21CAE677003757EC /* CollectionViewCell.xib */; };
@@ -79,6 +73,22 @@
 		EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */; };
 		EB8F04F021CBA55A003757EC /* UILabel+stylizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */; };
 		EB8F04F221CBA603003757EC /* UITapGestureRecognizer+tapInText.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */; };
+		EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */; };
+		EB8F050221CBB7FB003757EC /* AccountKitHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */; };
+		EB8F051221CBBEBF003757EC /* Futures.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050B21CBBEBE003757EC /* Futures.framework */; };
+		EB8F051421CBBEBF003757EC /* RSKPlaceholderTextView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */; };
+		EB8F051521CBBEC7003757EC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050821CBBEBE003757EC /* Bolts.framework */; };
+		EB8F051621CBBEC7003757EC /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050821CBBEBE003757EC /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F051721CBBEC7003757EC /* Eureka.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050C21CBBEBF003757EC /* Eureka.framework */; };
+		EB8F051821CBBEC8003757EC /* Eureka.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050C21CBBEBF003757EC /* Eureka.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F051921CBBEC8003757EC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050921CBBEBE003757EC /* FBSDKCoreKit.framework */; };
+		EB8F051A21CBBEC8003757EC /* FBSDKCoreKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050921CBBEBE003757EC /* FBSDKCoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F051B21CBBEC8003757EC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050721CBBEBE003757EC /* FBSDKLoginKit.framework */; };
+		EB8F051C21CBBEC8003757EC /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050721CBBEBE003757EC /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F051E21CBBEC8003757EC /* Futures.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050B21CBBEBE003757EC /* Futures.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050A21CBBEBE003757EC /* Hero.framework */; };
+		EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050A21CBBEBE003757EC /* Hero.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB8F052221CBBEC8003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,15 +102,19 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		EB8F04C221CAE399003757EC /* Embed Frameworks */ = {
+		EB8F052321CBBEC8003757EC /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				EB8F04BF21CAE399003757EC /* Hero.framework in Embed Frameworks */,
-				EB8F04BD21CAE399003757EC /* Eureka.framework in Embed Frameworks */,
-				EB8F04C121CAE399003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */,
+				EB8F051621CBBEC7003757EC /* Bolts.framework in Embed Frameworks */,
+				EB8F052221CBBEC8003757EC /* RSKPlaceholderTextView.framework in Embed Frameworks */,
+				EB8F051E21CBBEC8003757EC /* Futures.framework in Embed Frameworks */,
+				EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */,
+				EB8F051A21CBBEC8003757EC /* FBSDKCoreKit.framework in Embed Frameworks */,
+				EB8F051C21CBBEC8003757EC /* FBSDKLoginKit.framework in Embed Frameworks */,
+				EB8F051821CBBEC8003757EC /* Eureka.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -162,9 +176,6 @@
 		EB8F049A21CAC62E003757EC /* Campton-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Campton-Black.ttf"; path = "Fonts/Campton-Black.ttf"; sourceTree = "<group>"; };
 		EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		EB8F04B421CAE330003757EC /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		EB8F04B621CAE385003757EC /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = hoop/Frameworks/Eureka.framework; sourceTree = "<group>"; };
-		EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RSKPlaceholderTextView.framework; path = hoop/Frameworks/RSKPlaceholderTextView.framework; sourceTree = "<group>"; };
-		EB8F04B821CAE385003757EC /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = hoop/Frameworks/Hero.framework; sourceTree = "<group>"; };
 		EB8F04C621CAE5D6003757EC /* UIGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIGradientView.swift; path = Utils/UIGradientView.swift; sourceTree = "<group>"; };
 		EB8F04CE21CAE677003757EC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImageCollectionViewCell.swift; path = FormCells/ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		EB8F04CF21CAE677003757EC /* CollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CollectionViewCell.xib; path = FormCells/CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -185,6 +196,15 @@
 		EB8F04EE21CBA2B5003757EC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+stylizable.swift"; sourceTree = "<group>"; };
 		EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITapGestureRecognizer+tapInText.swift"; sourceTree = "<group>"; };
+		EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FacebookHandler.swift; path = Utils/FacebookHandler.swift; sourceTree = "<group>"; };
+		EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AccountKitHandler.swift; path = Utils/AccountKitHandler.swift; sourceTree = "<group>"; };
+		EB8F050721CBBEBE003757EC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = hoop/Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		EB8F050821CBBEBE003757EC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = hoop/Frameworks/Bolts.framework; sourceTree = "<group>"; };
+		EB8F050921CBBEBE003757EC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = hoop/Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		EB8F050A21CBBEBE003757EC /* Hero.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Hero.framework; path = hoop/Frameworks/Hero.framework; sourceTree = "<group>"; };
+		EB8F050B21CBBEBE003757EC /* Futures.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Futures.framework; path = hoop/Frameworks/Futures.framework; sourceTree = "<group>"; };
+		EB8F050C21CBBEBF003757EC /* Eureka.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Eureka.framework; path = hoop/Frameworks/Eureka.framework; sourceTree = "<group>"; };
+		EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RSKPlaceholderTextView.framework; path = hoop/Frameworks/RSKPlaceholderTextView.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,9 +212,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB8F04BE21CAE399003757EC /* Hero.framework in Frameworks */,
-				EB8F04BA21CAE385003757EC /* RSKPlaceholderTextView.framework in Frameworks */,
-				EB8F04B921CAE385003757EC /* Eureka.framework in Frameworks */,
+				EB8F051721CBBEC7003757EC /* Eureka.framework in Frameworks */,
+				EB8F051421CBBEBF003757EC /* RSKPlaceholderTextView.framework in Frameworks */,
+				EB8F051221CBBEBF003757EC /* Futures.framework in Frameworks */,
+				EB8F051921CBBEC8003757EC /* FBSDKCoreKit.framework in Frameworks */,
+				EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */,
+				EB8F051B21CBBEC8003757EC /* FBSDKLoginKit.framework in Frameworks */,
+				EB8F051521CBBEC7003757EC /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,15 +297,15 @@
 		EB28B61521C3B37500CFF1EF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */,
 				EB8F046421CAB6F3003757EC /* LoginViewController.swift */,
 				EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */,
-				EB8F046821CAB799003757EC /* ParametersViewController.swift */,
 				EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */,
-				EB8F046C21CAB81C003757EC /* MapViewController.swift */,
-				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
+				EB8F046821CAB799003757EC /* ParametersViewController.swift */,
 				EB8F047021CAB956003757EC /* FaqViewController.swift */,
 				EB8F047221CAB9C9003757EC /* WebViewController.swift */,
+				EB8F046C21CAB81C003757EC /* MapViewController.swift */,
+				EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */,
+				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
 				EB8F04B421CAE330003757EC /* ChatViewController.swift */,
 			);
 			path = ViewControllers;
@@ -313,9 +337,13 @@
 		EB28B63121C3BFD000CFF1EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EB8F04B621CAE385003757EC /* Eureka.framework */,
-				EB8F04B821CAE385003757EC /* Hero.framework */,
-				EB8F04B721CAE385003757EC /* RSKPlaceholderTextView.framework */,
+				EB8F050821CBBEBE003757EC /* Bolts.framework */,
+				EB8F050C21CBBEBF003757EC /* Eureka.framework */,
+				EB8F050921CBBEBE003757EC /* FBSDKCoreKit.framework */,
+				EB8F050721CBBEBE003757EC /* FBSDKLoginKit.framework */,
+				EB8F050B21CBBEBE003757EC /* Futures.framework */,
+				EB8F050A21CBBEBE003757EC /* Hero.framework */,
+				EB8F050D21CBBEBF003757EC /* RSKPlaceholderTextView.framework */,
 				EB28B63221C3BFD100CFF1EF /* XCTest.framework */,
 			);
 			name = Frameworks;
@@ -371,6 +399,8 @@
 				EB8F04E821CAEE0A003757EC /* VideoCutter.swift */,
 				EB8F04E921CAEE0A003757EC /* VideoSplashViewController.swift */,
 				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
+				EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */,
+				EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -411,7 +441,7 @@
 				EB28B5EB21C3B2A900CFF1EF /* Sources */,
 				EB28B5EC21C3B2A900CFF1EF /* Frameworks */,
 				EB28B5ED21C3B2A900CFF1EF /* Resources */,
-				EB8F04C221CAE399003757EC /* Embed Frameworks */,
+				EB8F052321CBBEC8003757EC /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -538,6 +568,7 @@
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
 				EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */,
+				EB8F050221CBB7FB003757EC /* AccountKitHandler.swift in Sources */,
 				EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */,
 				EB8F046921CAB799003757EC /* ParametersViewController.swift in Sources */,
 				EB8F04F221CBA603003757EC /* UITapGestureRecognizer+tapInText.swift in Sources */,
@@ -558,6 +589,7 @@
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
+				EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */,
 				EB8F04EA21CAEE0A003757EC /* VideoCutter.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,
 				EB8F04F021CBA55A003757EC /* UILabel+stylizable.swift in Sources */,
@@ -751,6 +783,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ohmyhoop.hoop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -773,6 +806,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "-Objc";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ohmyhoop.hoop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;

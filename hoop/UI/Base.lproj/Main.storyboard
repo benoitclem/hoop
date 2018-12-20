@@ -175,6 +175,9 @@
                                 <state key="normal" title="avec ton numéro de telephone">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="doAccountKitLogin:" destination="QBd-Nw-s5v" eventType="touchUpInside" id="NfV-KH-Sx4"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8n-W2-ZFF">
                                 <rect key="frame" x="111" y="97" width="192" height="101"/>

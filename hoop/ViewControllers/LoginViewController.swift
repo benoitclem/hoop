@@ -65,8 +65,67 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
+        let connectionPromise = FacebookHandler.connect(with: fbPermissions, from: self)
+        
+        connectionPromise.whenRejected(on: .main) { error in
+            var message = ""
+            switch (error as NSError).code {
+            case FacebookHandler.FB_ERROR_BASE:
+                message = "Error occured"
+            case FacebookHandler.FB_ERROR_CANCELED:
+                message = "User canceled"
+            case FacebookHandler.FB_ERROR_PERMISSION_DENIED:
+                message = "Permission denied"
+            default:
+                message = "Unknow error occured"
+            }
+            me
+        }
+        
+        connectionPromise.whenFulfilled(on: .main) { result in
+        }
+            
         if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
             self.present(vc as! UIViewController, animated: true)
         }
+        
     }
+    
+    @IBAction func doAccountKitLogin(_ sender: Any) {
+        
+    }
+    
+//    @IBAction func loginButtonClicked() {
+//        let login = FBSDKLoginManager.init()
+//        login.logIn(withReadPermissions: self.permissions, from: self, handler: { result, error in
+//            if error != nil {
+//                self.showError(with: "Erreur", and: "Un problème est survenu durant le login, peux-tu verifier ta connection internet et recommencer l'operation")
+//            } else if((result?.isCancelled)!) {
+//                self.stopAnimating()
+//                login.logOut()
+//                // self.showError(with: "Permissions", and: "Il nous est necessaire de connaitre quelques informations pour que tu puisses poursuivre l'aventure hoop. On recommence?")
+//
+//            } else {
+//                self.startAnimating()
+//                // Look if user gave us the use of all permissions
+//                if(FacebookHandler.allPermissionGranted()) {
+//                    // Do the sync
+//                    let _ = FacebookHandler.synchronizeFacebookBaseParameters(completionHandler: {_ in
+//                        let infos = FacebookHandler.getFacebookInfos()
+//                        // Gather all needed information for the hoop signup,
+//                        self.hoopSignIn(with: infos)
+//                    }, errorHandler: {_ in
+//                        self.stopAnimating()
+//                        login.logOut()
+//                        self.showError(with: "Erreur", and: "Un problème est survenu durant le login, peux-tu verifier ta connection internet et recommencer l'operation")
+//                    })
+//                } else {
+//                    self.stopAnimating()
+//                    FBSDKLoginManager().logOut()
+//                    self.showError(with: "Permissions", and: "Il nous est necessaire de connaitre quelques informations pour que tu puisses poursuivre l'aventure hoop. On recommence?")
+//                }
+//            }
+//        })
+    }
+    
 }
