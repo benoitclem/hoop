@@ -8,9 +8,6 @@
 
 import UIKit
 
-let HoopRedColor = UIColor.init(red: 0xb3/255, green: 0x1e/255, blue: 0x12/255, alpha: 1.0)
-let HoopGreenColor = UIColor.init(red: 18/255, green: 179/255, blue: 87/255, alpha: 1.0)
-
 extension UIColor {
     
     convenience init(red: Int, green: Int, blue: Int) {

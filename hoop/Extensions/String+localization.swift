@@ -6,6 +6,7 @@
 //  Copyright © 2018 hoop. All rights reserved.
 //
 
+import UIKit
 import Foundation
 
 extension String {

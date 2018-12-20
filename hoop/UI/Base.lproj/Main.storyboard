@@ -165,7 +165,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fv-Rf-f93">
-                                <rect key="frame" x="16" y="792" width="382" height="40"/>
+                                <rect key="frame" x="16" y="789.5" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="oxK-Tv-6JW"/>
@@ -196,31 +196,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecte-toi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwA-ne-H73">
-                                <rect key="frame" x="16" y="680" width="382" height="20"/>
+                                <rect key="frame" x="16" y="669" width="382" height="23.5"/>
                                 <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-6Y-aIA">
-                                <rect key="frame" x="16" y="708" width="382" height="14"/>
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-6Y-aIA">
+                                <rect key="frame" x="16" y="700.5" width="382" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="qui ne sera JAMAIS visible sur l'app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNz-Cy-tdA">
-                                <rect key="frame" x="16" y="832" width="382" height="14"/>
+                                <rect key="frame" x="16" y="829.5" width="382" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ne ne publierons jamais sur ton compte" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgh-n1-Z7r">
-                                <rect key="frame" x="16" y="770" width="382" height="14"/>
+                                <rect key="frame" x="16" y="765" width="382" height="16.5"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-hC-GZA">
-                                <rect key="frame" x="16" y="730" width="382" height="40"/>
+                                <rect key="frame" x="16" y="725" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MTc-wt-xSz"/>
@@ -264,6 +264,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ybY-Z9-NLa"/>
                     </view>
+                    <connections>
+                        <outlet property="legalLabel" destination="m7J-6Y-aIA" id="CEZ-5B-aPL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yg6-MX-iBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
