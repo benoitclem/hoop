@@ -8,7 +8,9 @@
 
 import UIKit
 import Futures
-
+import FacebookCore
+import FacebookLogin
+import SwiftyJSON
 
 class LoginViewController: VideoSplashViewController {
     
@@ -17,8 +19,13 @@ class LoginViewController: VideoSplashViewController {
     let videoURL = NSURL.fileURL(withPath: Bundle.main.path(forResource: "loginVideoBackground", ofType: "mp4")!)
     let cguURL = URL(string: "http://www.ohmyhoop.com/cgu")
     let privacyURL = URL(string: "http://www.ohmyhoop.com/privacypolicy")
-    let fbPermissions = ["public_profile", "email", "user_gender", "user_birthday", "user_photos", "user_likes"]
-
+    let fbPermissions:[ReadPermission] = [.publicProfile,
+                                          .email,
+                                          .userGender,
+                                          .userBirthday,
+                                          .userPhotos,
+                                          .userLikes]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupVideoBackground()
@@ -65,27 +72,16 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
-        let connectionPromise = FacebookHandler.connect(with: fbPermissions, from: self)
-        
-        connectionPromise.whenRejected(on: .main) { error in
-
-        }
-        
-        connectionPromise.whenFulfilled(on: .main) { result in
+        let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
+                
+        loginPromise.whenFulfilled(on: .main) { result in
             //PopupProvider.showDoneNote()
             if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
                 self.present(vc as! UIViewController, animated: true)
             }
         }
         
-        connectionPromise.then(on: DispatchQueue.main) { info -> Future<Bool> in
-            print("salut")
-            print("info")
-            return Future<Bool>()
-        }
-        
-        connectionPromise.thenIfRejected(on: DispatchQueue.main) { error -> Future<Bool> in
-            print("salut")
+        loginPromise.whenRejected(on: DispatchQueue.main)  { error in
             var message = ""
             switch (error as NSError).code {
             case FacebookHandler.FB_ERROR_BASE:
@@ -97,9 +93,25 @@ class LoginViewController: VideoSplashViewController {
             default:
                 message = "Unknow error occured"
             }
-            PopupProvider.showDoneNote()
-            return Future<Bool>()
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
+                print("action")
+            }
         }
+        
+        let profilPromise = loginPromise.then(on: DispatchQueue.main) { info -> Future<fbme> in
+            return FacebookHandler.getMyProfile()
+        }
+        
+        profilPromise.whenFulfilled(on: DispatchQueue.main) { profile  in
+            print(profile)
+        }
+        
+        profilPromise.whenRejected(on: DispatchQueue.main) { error  in
+            print(error)
+        }
+        
+        
+
     }
     
     @IBAction func doAccountKitLogin(_ sender: Any) {

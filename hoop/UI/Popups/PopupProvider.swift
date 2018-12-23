@@ -105,8 +105,26 @@ class PopupProvider {
         
     }
     
-    func showInformPopup() {
+    static func showInformPopup(with image:UIImage,_ titleText: String,_ descriptionText: String,_ buttonText:String,_ buttonAction:@escaping (()->())) {
+        var attributes: EKAttributes
         
+        // Fill the attribute structure
+        attributes = .bottomFloat
+        attributes.hapticFeedbackType = .success
+        attributes.displayDuration = .infinity
+        attributes.popBehavior = .animated(animation: .translation)
+        attributes.entryBackground = .color(color: .red)
+        attributes.statusBar = .light
+        
+        let image = EKProperty.ImageContent(image: image)
+        let title = EKProperty.LabelContent(text: titleText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let description = EKProperty.LabelContent(text: descriptionText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let buttonContent = EKProperty.LabelContent(text: buttonText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let button = EKProperty.ButtonContent(label: buttonContent, backgroundColor: .blue, highlightedBackgroundColor: .gray)
+        let popupMessage = EKPopUpMessage(themeImage: EKPopUpMessage.ThemeImage.init(image: image), title: title, description: description, button: button, action: buttonAction)
+        let contentView = EKPopUpMessageView(with: popupMessage)
+        
+        SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
     static func showMessageToast() {

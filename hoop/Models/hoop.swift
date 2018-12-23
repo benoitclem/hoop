@@ -47,3 +47,13 @@ class hoop: Decodable {
     }
 
 }
+
+extension hoop {
+    static func == (lhs :hoop, rhs :hoop) -> Bool {
+        if let lhs_id = lhs.id, let rhs_id = rhs.id {
+            return lhs_id == rhs_id
+        } else {
+            return false
+        }
+    }
+}

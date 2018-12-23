@@ -4,3 +4,7 @@ github "xmartlabs/Eureka" ~> 4.3
 github "ruslanskorb/RSKPlaceholderTextView"
 github "formbound/Futures"
 github "huri000/SwiftEntryKit" == 0.8.6
+github "Alamofire/Alamofire"
+github "Alamofire/AlamofireImage"
+github "SwiftyJSON/SwiftyJSON"
+github "facebook/facebook-sdk-swift"

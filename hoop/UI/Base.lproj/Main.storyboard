@@ -322,7 +322,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wjd-2r-Imj">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="462"/>
                             </mapView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rVf-Zs-COc" userLabel="HoopBackground" customClass="UIGradientView" customModule="uxTests" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="462" width="414" height="434"/>
@@ -442,7 +442,7 @@
                             <constraint firstItem="rVf-Zs-COc" firstAttribute="width" secondItem="W85-nB-Y8z" secondAttribute="width" id="8LH-dL-fAj"/>
                             <constraint firstItem="W85-nB-Y8z" firstAttribute="bottom" secondItem="YnX-sE-0Xe" secondAttribute="bottom" id="Ats-CS-VX3"/>
                             <constraint firstItem="YnX-sE-0Xe" firstAttribute="bottom" secondItem="qax-5V-KOE" secondAttribute="bottom" constant="40" id="DDc-J1-2iC"/>
-                            <constraint firstItem="wjd-2r-Imj" firstAttribute="bottom" secondItem="YnX-sE-0Xe" secondAttribute="bottom" id="Q5G-dD-Q3l"/>
+                            <constraint firstItem="rVf-Zs-COc" firstAttribute="top" secondItem="wjd-2r-Imj" secondAttribute="bottom" id="P4j-iO-6Rn"/>
                             <constraint firstItem="rVf-Zs-COc" firstAttribute="top" secondItem="YnX-sE-0Xe" secondAttribute="bottom" constant="-400" id="TZn-4N-RXI"/>
                             <constraint firstItem="wjd-2r-Imj" firstAttribute="trailing" secondItem="YnX-sE-0Xe" secondAttribute="trailing" id="VAT-7d-2DG"/>
                             <constraint firstItem="W85-nB-Y8z" firstAttribute="leading" secondItem="YnX-sE-0Xe" secondAttribute="leading" id="Xys-0T-AE5"/>
@@ -458,13 +458,13 @@
                     <connections>
                         <outlet property="etHoopButton" destination="qax-5V-KOE" id="IKe-We-Nv4"/>
                         <outlet property="hoopBackground" destination="rVf-Zs-COc" id="gN5-93-agE"/>
-                        <outlet property="map" destination="wjd-2r-Imj" id="foY-nM-xUq"/>
+                        <outlet property="mapView" destination="wjd-2r-Imj" id="Ykv-Ek-Hlx"/>
                         <outlet property="profiles" destination="W85-nB-Y8z" id="WYB-MD-Geb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XnR-C1-Yf7" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2493" y="27"/>
+            <point key="canvasLocation" x="2492.753623188406" y="26.785714285714285"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="wDw-68-WbZ">
