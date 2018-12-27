@@ -72,16 +72,20 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
-        let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
-                
-        loginPromise.whenFulfilled(on: .main) { result in
-            //PopupProvider.showDoneNote()
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
-                self.present(vc as! UIViewController, animated: true)
-            }
+        if let _ = AccessToken.current {
+            FacebookHandler.getMyProfile()
         }
         
-        loginPromise.whenRejected(on: DispatchQueue.main)  { error in
+        let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
+                
+//        loginPromise.whenFulfilled { result in
+//            //PopupProvider.showDoneNote()
+//            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
+//                self.present(vc as! UIViewController, animated: true)
+//            }
+//        }
+        
+        loginPromise.whenRejected  { error in
             var message = ""
             switch (error as NSError).code {
             case FacebookHandler.FB_ERROR_BASE:
@@ -98,18 +102,21 @@ class LoginViewController: VideoSplashViewController {
             }
         }
         
-        let profilPromise = loginPromise.then(on: DispatchQueue.main) { info -> Future<fbme> in
+        let profilPromise = loginPromise.then { info -> Future<fbme> in
             return FacebookHandler.getMyProfile()
         }
         
-        profilPromise.whenFulfilled(on: DispatchQueue.main) { profile  in
+        profilPromise.whenFulfilled { profile  in
             print(profile)
         }
         
-        profilPromise.whenRejected(on: DispatchQueue.main) { error  in
+        profilPromise.whenRejected { error  in
             print(error)
         }
         
+        profilPromise.then { fbProfile -> Future<profile?> in
+            HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
+        }
         
 
     }

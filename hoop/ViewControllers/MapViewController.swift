@@ -118,7 +118,12 @@ extension MapViewController: CLLocationManagerDelegate {
         
         self.locationManager.startUpdatingLocation()
     }
-    
+
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        print(locations.last ?? "no location")
+    }
+
+    /*
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // Save location, if location not valid return immediately
@@ -309,7 +314,7 @@ extension MapViewController: CLLocationManagerDelegate {
             self.present(alertController, animated: true)
         }
     }
-
+    */
 }
 
 extension MapViewController: MKMapViewDelegate {

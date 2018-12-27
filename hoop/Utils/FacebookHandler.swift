@@ -33,21 +33,20 @@ class FacebookHandler: NSObject {
 //            promise.reject(error)
 //        }
         
-        let login = LoginManager.init()
-        login.logOut()
-        login.logIn(readPermissions: permission, viewController: viewController) { loginResult in
+        let loginManager = LoginManager.init()
+        loginManager.logIn(readPermissions: permission, viewController: viewController) { loginResult in
             switch loginResult {
             case .failed(let error):
-                login.logOut()
+                loginManager.logOut()
                 let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_BASE, userInfo: ["desc":error.localizedDescription])
                 promise.reject(hoopError)
             case .cancelled:
-                login.logOut()
+                loginManager.logOut()
                 let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_CANCELED, userInfo: ["desc":"user have canceled procedure"])
                 promise.reject(hoopError)
             case .success(let _, let declinedPermissions, let _):
                 if !declinedPermissions.isEmpty {
-                    login.logOut()
+                    loginManager.logOut()
                     let hoopError = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_PERMISSION_DENIED, userInfo: ["desc":"user declined important permissions"])
                     promise.reject(hoopError)
                 } else {
@@ -313,7 +312,8 @@ extension FacebookHandler {
             }
             
             var graphPath = "/me"
-            var parameters: [String : Any]? = ["fields": "id, email, first_name, birthday, albums{type}, picture.width(800).height(800)"]
+            //var parameters: [String : Any]? = ["fields": "id, email, first_name, birthday, albums{type}, picture.width(800).height(800)"]
+            var parameters: [String : Any]? = ["fields": "id,first_name,name"]
             var accessToken = AccessToken.current
             var httpMethod: GraphRequestHTTPMethod = .GET
             var apiVersion: GraphAPIVersion = .defaultVersion
@@ -323,6 +323,7 @@ extension FacebookHandler {
         
         let connection = GraphRequestConnection()
         connection.add(MyProfileRequest()) { response, result in
+            print(result)
             switch result {
             case .success(let response):
                 print("Custom Graph Request Succeeded: \(response)")

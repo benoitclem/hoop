@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FBSDKLoginKit
+import FacebookCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Alay respond true
         return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        return SDKApplicationDelegate.shared.application(app, open: url, options: options)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -67,7 +71,6 @@ extension AppDelegate {
     
     func setupFacebook(with application: UIApplication,and launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         // Facebook Init Stuffs
-        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func setupAccountKit() {

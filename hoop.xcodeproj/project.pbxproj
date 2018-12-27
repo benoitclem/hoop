@@ -20,6 +20,9 @@
 		EB28B63321C3BFD100CFF1EF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB28B63221C3BFD100CFF1EF /* XCTest.framework */; };
 		EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63421C3F27F00CFF1EF /* conversation.swift */; };
 		EB28B63921C3F57200CFF1EF /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63821C3F57200CFF1EF /* message.swift */; };
+		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
+		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
+		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
 		EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046221CAB630003757EC /* SwiftRouter.swift */; };
 		EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046421CAB6F3003757EC /* LoginViewController.swift */; };
 		EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */; };
@@ -97,7 +100,6 @@
 		EB8F054521CD2F30003757EC /* QuickLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054321CD2F2A003757EC /* QuickLayout.framework */; };
 		EB8F054621CD2F30003757EC /* QuickLayout.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054321CD2F2A003757EC /* QuickLayout.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F054821CD31C2003757EC /* AlamofireWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F054721CD31C2003757EC /* AlamofireWrapper.swift */; };
-		EB8F054A21CD455F003757EC /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F054921CD455F003757EC /* fbme.swift */; };
 		EB8F055121CD529E003757EC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054B21CD5279003757EC /* Bolts.framework */; };
 		EB8F055221CD529E003757EC /* Bolts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054B21CD5279003757EC /* Bolts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F055321CD529E003757EC /* FacebookCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054D21CD5279003757EC /* FacebookCore.framework */; };
@@ -166,6 +168,9 @@
 		EB28B63221C3BFD100CFF1EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EB28B63421C3F27F00CFF1EF /* conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = conversation.swift; path = Models/conversation.swift; sourceTree = "<group>"; };
 		EB28B63821C3F57200CFF1EF /* message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = message.swift; path = Models/message.swift; sourceTree = "<group>"; };
+		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
+		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
+		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
 		EB8F046221CAB630003757EC /* SwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRouter.swift; path = Routing/SwiftRouter.swift; sourceTree = "<group>"; };
 		EB8F046421CAB6F3003757EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTunnelViewController.swift; sourceTree = "<group>"; };
@@ -238,7 +243,6 @@
 		EB8F053721CD2EE5003757EC /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = hoop/Frameworks/AlamofireImage.framework; sourceTree = "<group>"; };
 		EB8F054321CD2F2A003757EC /* QuickLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLayout.framework; path = hoop/Frameworks/QuickLayout.framework; sourceTree = "<group>"; };
 		EB8F054721CD31C2003757EC /* AlamofireWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireWrapper.swift; sourceTree = "<group>"; };
-		EB8F054921CD455F003757EC /* fbme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fbme.swift; sourceTree = "<group>"; };
 		EB8F054B21CD5279003757EC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = hoop/Frameworks/Bolts.framework; sourceTree = "<group>"; };
 		EB8F054C21CD5279003757EC /* FacebookLogin.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookLogin.framework; path = hoop/Frameworks/FacebookLogin.framework; sourceTree = "<group>"; };
 		EB8F054D21CD5279003757EC /* FacebookCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookCore.framework; path = hoop/Frameworks/FacebookCore.framework; sourceTree = "<group>"; };
@@ -328,6 +332,7 @@
 				EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */,
 				EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */,
 				EB8F052E21CBE122003757EC /* UIFont+main.swift */,
+				EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -335,11 +340,12 @@
 		EB28B61321C3B36900CFF1EF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				EB77870E21D4DF92002CBA02 /* fbme.swift */,
+				EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */,
 				EB28B63821C3F57200CFF1EF /* message.swift */,
 				EB28B61E21C3B4B600CFF1EF /* hoop.swift */,
 				EB28B61D21C3B4B600CFF1EF /* profile.swift */,
 				EB28B63421C3F27F00CFF1EF /* conversation.swift */,
-				EB8F054921CD455F003757EC /* fbme.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -653,19 +659,21 @@
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
 				EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */,
 				EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */,
+				EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */,
 				EB8F050221CBB7FB003757EC /* AccountKitHandler.swift in Sources */,
 				EB8F04B321CAE2E6003757EC /* ProfileViewController.swift in Sources */,
 				EB8F046921CAB799003757EC /* ParametersViewController.swift in Sources */,
 				EB8F04F221CBA603003757EC /* UITapGestureRecognizer+tapInText.swift in Sources */,
-				EB8F054A21CD455F003757EC /* fbme.swift in Sources */,
 				EB8F047121CAB956003757EC /* FaqViewController.swift in Sources */,
 				EB28B61C21C3B45000CFF1EF /* UIColor+random.swift in Sources */,
 				EB8F054821CD31C2003757EC /* AlamofireWrapper.swift in Sources */,
 				EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */,
 				EB8F053421CD2A3E003757EC /* HoopNetworkApi.swift in Sources */,
 				EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */,
+				EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
 				EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */,
+				EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */,
 				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
 				EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */,
