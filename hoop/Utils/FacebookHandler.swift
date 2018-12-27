@@ -27,13 +27,6 @@ class FacebookHandler: NSObject {
     static func connect(with permission:[ReadPermission],from viewController: UIViewController) -> Future<Bool> {
         let promise = Promise<Bool>()
 
-//        DispatchQueue.global().async {
-//            promise.fulfill(someString)
-//
-//            // If error
-//            promise.reject(error)
-//        }
-        
         let loginManager = LoginManager.init()
         loginManager.logIn(readPermissions: permission, viewController: viewController) { loginResult in
             switch loginResult {
@@ -99,43 +92,7 @@ class FacebookHandler: NSObject {
         return parametersFields.joined(separator: ",")
     }
     
-    // Some of user info are mandatory, but entering here,
-    // we have ensured that user gave us the permission of use
-    static func getFacebookInfos() -> [String:String] {
-        var infos = [String:String]()
-        let userDefaults = UserDefaults.standard
-        // Get user data that we have
-        // This is a public info so use it without caution
-        infos["fb_id"] = userDefaults.object(forKey: "id") as? String
-        // This is a public info so use it without caution
-        infos["token_fb"] = AccessToken.current?.authenticationToken
-        // This is a public info so use it without caution
-        infos["nickname"] = userDefaults.object(forKey: "first_name") as? String
-        // Mail Is not a public info so wrap them for sake of security
-        if let mail = userDefaults.object(forKey: "email") {
-            infos["email"] = mail as? String
-        }
-        // This is a public info so use it without further caution
-        if let g = userDefaults.object(forKey: "gender") {
-            let gString = g as! String
-            if (gString == "male") {
-                infos["gender_id"] = "1"
-            } else if (gString == "female") {
-                infos["gender_id"] = "2"
-            }
-        }
-        // Birthday Is not a public info so wrap them for sake of security
-        if let b = userDefaults.object(forKey: "birthday") {
-            let bString = b as! String
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = TimeZone.init(secondsFromGMT: 0)
-            dateFormatter.dateFormat = "MM/dd/yyyy"
-            let date = dateFormatter.date(from:bString)!
-            dateFormatter.dateFormat = "yyyy-MM-dd"
-            infos["birthday"] = dateFormatter.string(from:date)
-        }
-        return infos
-    }
+
 //
 //    static func synchronizeFacebookBaseParameters(completionHandler:@escaping (_ message: String)->Void, errorHandler: @escaping(_ message: String)->Void) -> Bool {
 //        let userDefaults = UserDefaults.standard
@@ -314,7 +271,6 @@ extension FacebookHandler {
                             if let data = string.data(using: .utf8) {
                                 let decoder = JSONDecoder()
                                 me = try! decoder.decode(fbme.self, from: data)
-                                print(me)
                             }
                         }
                     }
@@ -332,7 +288,6 @@ extension FacebookHandler {
         
         let connection = GraphRequestConnection()
         connection.add(MyProfileRequest()) { response, result in
-            print(result)
             switch result {
             case .success(let response):
                 print("Custom Graph Request Succeeded: \(response)")

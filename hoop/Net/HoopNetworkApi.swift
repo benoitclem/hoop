@@ -21,7 +21,8 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_APP_ERROR: Int = -3
     static let API_ERROR_NETWORK_ERROR: Int = -4
     static let API_ERROR_MALFORMED_JSON: Int = -5
-    static let API_ERROR_NO_DATA: Int = -6
+    static let API_ERROR_DECODER_FAILED: Int = -6
+    static let API_ERROR_NO_DATA: Int = -7
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -41,8 +42,8 @@ class HoopNetworkApi: AlamofireWrapper {
         self.deviceToken = tokenString
     }
     
-    private func request(with method: String,and arguments: [String:String]) -> Future<hoopApiResponse> {
-        let promise = Promise<hoopApiResponse>()
+    private func request<T>(with method: String,and arguments: [String:String]) -> Future<hoopApiResponse<T>> {
+        let promise = Promise<hoopApiResponse<T>>()
         if(self.baseUrl !=  nil) {
             let fullUrl = "https://\(self.baseUrl!)/api/\(method)?\(self.urlEncode(arguments))"
             //print(fullUrl)
@@ -54,7 +55,7 @@ class HoopNetworkApi: AlamofireWrapper {
                  print(response.result)   // result of response serialization
                  */
                 let decoder = JSONDecoder()
-                let result: Result<hoopApiResponse> = decoder.decodeResponse(from: response)
+                let result: Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
                 print(result)
             }
         } else {
@@ -91,9 +92,8 @@ class HoopNetworkApi: AlamofireWrapper {
 //        return promise.future
 //    }
     
-    
-    private func post(with methodName: String, and arguments: [String:Any?], andProgress progressHandler: ((_ result: Double) -> Void)? ) -> Future<JSON> {
-        let promise = Promise<JSON>()
+    private func post<T>(with methodName: String, and arguments: [String:Any], andProgress progressHandler: ((_ result: Double) -> Void)? ) -> Future<hoopApiResponse<T>> {
+        let promise = Promise<hoopApiResponse<T>>()
         if(self.baseUrl !=  nil) {
             // Build request
             let fullUrl = "https://\(self.baseUrl!)/api/\(methodName)"
@@ -114,31 +114,34 @@ class HoopNetworkApi: AlamofireWrapper {
                             }
                         }
                     }
-                },
+            },
                 to:fullUrl,
                 method:.post,
                 headers:["Content-Type": "application/x-www-form-urlencoded"],
                 encodingCompletion: { encodingResult in
                     switch encodingResult {
                     case .success(let upload, _, _):
-                        upload.responseJSON { response in
-                            if(response.result.value != nil) {
-                                let jsonData = JSON(response.result.value!)
-                                guard let code = jsonData["code"].string, let message = jsonData["message"].string  else {
-                                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_APP_ERROR, userInfo: ["desc":"malformed response"])
-                                    promise.reject(error)
-                                    return
-                                }
-                                if code == "ko" {
-                                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_APP_ERROR, userInfo: ["desc":message])
-                                    promise.reject(error)
-                                } else {
-                                    if jsonData["data"].exists() {
-                                        promise.fulfill(jsonData["data"])
+                        upload.responseData { response in
+                            if let _ = response.result.value {
+                                let decoder = JSONDecoder()
+                                let result: Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
+                                switch result {
+                                case .success(let data):
+                                    if let code = data.code {
+                                        if code == "ko" {
+                                            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_APP_ERROR, userInfo: ["desc": data.message ?? "unknown"])
+                                            promise.reject(error)
+                                        } else {
+                                            promise.fulfill(data)
+                                        }
                                     } else {
-                                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_APP_ERROR, userInfo: ["desc":"malformed response missing data"])
+                                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_DECODER_FAILED, userInfo: ["desc":response.error ?? "unknown"])
                                         promise.reject(error)
                                     }
+                                   
+                                case .failure(let error):
+                                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MALFORMED_JSON, userInfo: ["desc": error.localizedDescription ?? "unknown"])
+                                    promise.reject(error)
                                 }
                             } else {
                                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NETWORK_ERROR, userInfo: ["desc":response.error ?? "unknown"])
@@ -161,20 +164,25 @@ class HoopNetworkApi: AlamofireWrapper {
         }
         return promise.future
     }
-
+    
 }
-
 
 extension HoopNetworkApi {
     
-    func signUp(with facebookData: fbme) -> Future<profile?> {
+    func signUp(with facebookData: fbme) -> Future<profile> {
         //print("registering new user")
         // Serialize the facebook data
         //jsonData?["data"]["token"].rawString(),jsonData?["data"]["sharing_code"].rawString()
-        let promise = self.post(with: "signUpClient", and: facebookData.signUpData, andProgress: nil)
-        return promise.then { data -> Future<profile?> in
-            let promise =  Promise<profile?>()
-            promise.fulfill(nil)
+        print(facebookData.signUpData)
+        let promise: Future<hoopApiResponse<profile>> = self.post(with: "signUpClient", and: facebookData.signUpData, andProgress: nil)
+        return promise.then { response -> Future<profile> in
+            let promise =  Promise<profile>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
             return promise.future
         }
     }
@@ -184,7 +192,7 @@ extension HoopNetworkApi {
             return nil
         }
         
-        let promise = self.request(with: "getLovestopInfoByLatLong",and: ["token":token,"lat":String(location.coordinate.latitude),"long":String(location.coordinate.longitude), "margin":"0.02"])
+        let promise: Future<hoopApiResponse<[hoop]>> = self.request(with: "getLovestopInfoByLatLong",and: ["token":token,"lat":String(location.coordinate.latitude),"long":String(location.coordinate.longitude), "margin":"0.02"])
         return promise.then { data -> Future<[hoop]> in
             let promise =  Promise<[hoop]>()
             let hoopArray = [hoop]()

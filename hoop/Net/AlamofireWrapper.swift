@@ -16,7 +16,7 @@ class AlamofireWrapper {
     init(with plistKey:String){
         // Look into plist for the configuration
         let netApiConfig = Bundle.main.object(forInfoDictionaryKey: plistKey)
-        assert(netApiConfig == nil)
+        assert(netApiConfig != nil)
         let configArray = netApiConfig as! [String:String]
         self.baseUrl = configArray["baseUrl"]
     }

@@ -9,6 +9,7 @@
 import UIKit
 
 class profile: Decodable {
+    // Common profile
     var id: Int?
     var name: String?
     var dob: Date?
@@ -20,6 +21,9 @@ class profile: Decodable {
     var activeInHoop: Int?
     var hoopLastConnection: Date?
     var commonLikes: [String]?
+    // Use for me profile
+    var token: String?
+    var sharing_code: String?
     
     enum CodingKeys : String, CodingKey {
         case id
@@ -36,24 +40,36 @@ class profile: Decodable {
         case activeInHoop = "active_in_hoop"
         case hoopLastConnection = "timestamp_lastconnection"
         case commonLikes = "common_likes"
+        case token
+        case sharing_code
     }
     
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try values.decode(Int.self, forKey: .id)
-        name = try values.decode(String.self, forKey: .name)
-        let dobstring = try values.decode(String.self, forKey: .dob)
-        let dobformatter = DateFormatter.yyyyMMdd
-        if let date = dobformatter.date(from: dobstring) {
-            dob = date
-        } else {
-            throw DecodingError.dataCorruptedError(forKey: .dob,
-                                                   in: values,
-                                                   debugDescription: "Date string does not match format expected by formatter.")
+        if values.contains(.id){
+            id = try values.decode(Int.self, forKey: .id)
         }
-        description = try values.decode(String.self, forKey: .description)
-        thumb = try values.decode(URL.self, forKey: .thumb)
+        if values.contains(.name){
+            name = try values.decode(String.self, forKey: .name)
+        }
+        if values.contains(.dob){
+            let dobstring = try values.decode(String.self, forKey: .dob)
+            let dobformatter = DateFormatter.yyyyMMdd
+            if let date = dobformatter.date(from: dobstring) {
+                dob = date
+            } else {
+                throw DecodingError.dataCorruptedError(forKey: .dob,
+                                                       in: values,
+                                                       debugDescription: "Date string does not match format expected by formatter.")
+            }
+        }
+        if values.contains(.description){
+            description = try values.decode(String.self, forKey: .description)
+        }
+        if values.contains(.thumb){
+            thumb = try values.decode(URL.self, forKey: .thumb)
+        }
         if let pic1 = try? values.decode(URL.self, forKey: .picture1) {
             pictures.append(pic1)
         }
@@ -69,19 +85,32 @@ class profile: Decodable {
         if let pic5 = try? values.decode(URL.self, forKey: .picture5) {
             pictures.append(pic5)
         }
-        sexualOrientation = try values.decode(Int.self, forKey: .sexualOrientation)
-        activeInHoop = try values.decode(Int.self, forKey: .activeInHoop)
-        
-        let hoopLastConnectionString = try values.decode(String.self, forKey: .hoopLastConnection)
-        let lcformatter = DateFormatter.yyyyMMddHHmmss
-        if let date = lcformatter.date(from: hoopLastConnectionString) {
-            hoopLastConnection = date
-        } else {
-            throw DecodingError.dataCorruptedError(forKey: .hoopLastConnection,
-                                                   in: values,
-                                                   debugDescription: "Date string does not match format expected by formatter.")
+        if values.contains(.sexualOrientation){
+            sexualOrientation = try values.decode(Int.self, forKey: .sexualOrientation)
         }
-        commonLikes = try values.decode([String].self, forKey: .commonLikes)
+        if values.contains(.activeInHoop){
+            activeInHoop = try values.decode(Int.self, forKey: .activeInHoop)
+        }
+        if values.contains(.hoopLastConnection){
+            let hoopLastConnectionString = try values.decode(String.self, forKey: .hoopLastConnection)
+            let lcformatter = DateFormatter.yyyyMMddHHmmss
+            if let date = lcformatter.date(from: hoopLastConnectionString) {
+                hoopLastConnection = date
+            } else {
+                throw DecodingError.dataCorruptedError(forKey: .hoopLastConnection,
+                                                       in: values,
+                                                       debugDescription: "Date string does not match format expected by formatter.")
+            }
+        }
+        if values.contains(.commonLikes){
+            commonLikes = try values.decode([String].self, forKey: .commonLikes)
+        }
+        if values.contains(.token){
+            token = try values.decode(String.self, forKey: .token)
+        }
+        if values.contains(.sharing_code){
+            sharing_code = try values.decode(String.self, forKey: .sharing_code)
+        }
     }
-
+    
 }

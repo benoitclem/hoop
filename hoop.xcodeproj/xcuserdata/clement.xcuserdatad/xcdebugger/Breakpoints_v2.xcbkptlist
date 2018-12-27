@@ -26,13 +26,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/LoginViewController.swift"
-            timestampString = "567623987.747406"
+            timestampString = "567642791.418215"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "doFacebookLogin(_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #6 (Swift.Error) -&gt; () in hoop.LoginViewController.doFacebookLogin(Any) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/LoginViewController.swift"
+                  timestampString = "567642791.573535"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "28">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in closure #6 (Swift.Error) -&gt; () in hoop.LoginViewController.doFacebookLogin(Any) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/LoginViewController.swift"
+                  timestampString = "567642791.575421"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,13 +73,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "hoop/Utils/FacebookHandler.swift"
-            timestampString = "567627084.947446"
+            filePath = "hoop/Net/HoopNetworkApi.swift"
+            timestampString = "567642791.418658"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
-            landmarkName = "getMyProfile()"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "signUp(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,29 +89,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "hoop/Utils/FacebookHandler.swift"
-            timestampString = "567627084.947868"
+            filePath = "hoop/Net/HoopNetworkApi.swift"
+            timestampString = "567642791.419119"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
-            landmarkName = "getMyProfile()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "hoop/Utils/FacebookHandler.swift"
-            timestampString = "567627084.948149"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "317"
-            endingLineNumber = "317"
-            landmarkName = "init(rawResponse:)"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
+            landmarkName = "post(with:and:andProgress:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

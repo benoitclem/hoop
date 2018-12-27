@@ -36,7 +36,7 @@ class fbme: Decodable {
     var first_name: String?
     var birthday: Date?
     var albums: Albums?
-    var picture: Picture
+    var picture: Picture?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -51,21 +51,35 @@ class fbme: Decodable {
     required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         
-        id = try values.decode(String.self, forKey: .id)
-        gender = try values.decode(String.self, forKey: .gender)
-        email = try values.decode(String.self, forKey: .email)
-        first_name = try values.decode(String.self, forKey: .first_name)
-        let dobstring = try values.decode(String.self, forKey: .birthday)
-        let dobformatter = DateFormatter.ddMMyyyy
-        if let date = dobformatter.date(from: dobstring) {
-            birthday = date
-        } else {
-            throw DecodingError.dataCorruptedError(forKey: .birthday,
-                                                   in: values,
-                                                   debugDescription: "Date string does not match format expected by formatter.")
+        if values.contains(.id){
+            id = try values.decode(String.self, forKey: .id)
         }
-        albums = try values.decode(Albums.self, forKey: .albums)
-        picture = try values.decode(Picture.self, forKey: .picture)
+        if values.contains(.gender){
+            gender = try values.decode(String.self, forKey: .gender)
+        }
+        if values.contains(.email){
+            email = try values.decode(String.self, forKey: .email)
+        }
+        if values.contains(.first_name){
+            first_name = try values.decode(String.self, forKey: .first_name)
+        }
+        if values.contains(.birthday){
+            let dobstring = try values.decode(String.self, forKey: .birthday)
+            let dobformatter = DateFormatter.ddMMyyyy
+            if let date = dobformatter.date(from: dobstring) {
+                birthday = date
+            } else {
+                throw DecodingError.dataCorruptedError(forKey: .birthday,
+                                                       in: values,
+                                                       debugDescription: "Date string does not match format expected by formatter.")
+            }
+        }
+        if values.contains(.albums){
+            albums = try values.decode(Albums.self, forKey: .albums)
+        }
+        if values.contains(.picture){
+            picture = try values.decode(Picture.self, forKey: .picture)
+        }
     }
     
     var signUpData:[String: Any] {

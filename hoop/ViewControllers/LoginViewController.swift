@@ -72,9 +72,9 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
-        if let _ = AccessToken.current {
-            FacebookHandler.getMyProfile()
-        }
+//        if let _ = AccessToken.current {
+//            FacebookHandler.getMyProfile()
+//        }
         
         let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
                 
@@ -85,7 +85,7 @@ class LoginViewController: VideoSplashViewController {
 //            }
 //        }
         
-        loginPromise.whenRejected  { error in
+        loginPromise.whenRejected(on: .main)  { error in
             var message = ""
             switch (error as NSError).code {
             case FacebookHandler.FB_ERROR_BASE:
@@ -106,18 +106,28 @@ class LoginViewController: VideoSplashViewController {
             return FacebookHandler.getMyProfile()
         }
         
-        profilPromise.whenFulfilled { profile  in
+        profilPromise.whenRejected(on: .main) { error  in
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
+                print("action")
+            }
+        }
+        
+        let signupPromise = profilPromise.then { fbProfile -> Future<profile> in
+            return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
+        }
+        
+        signupPromise.whenFulfilled(on: .main){ profile in
             print(profile)
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
+                self.present(vc as! UIViewController, animated: true)
+            }
         }
         
-        profilPromise.whenRejected { error  in
-            print(error)
+        signupPromise.whenRejected(on: .main){ error in
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
+                print("action")
+            }
         }
-        
-        profilPromise.then { fbProfile -> Future<profile?> in
-            HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
-        }
-        
 
     }
     
