@@ -167,5 +167,104 @@ class hoopTests: XCTestCase {
         XCTAssertEqual(m.content, "salut gros", "message.content could not be decoded")
         XCTAssertEqual(m.timestamp, "1100", "message.timestamp could not be decoded")
     }
+    
+//    func testFbmeFromDictionnary() {
+//        let dict = ["id":"10210527622539416","first_name":"Clément","gender":"male"]
+//        let decoder = Dictionary()
+//    }
+    
+    func testFbMeFromJson() {
+        let json = """
+        {
+            "id": "10210527622539416",
+            "name": "Clément Benoit",
+            "first_name": "Clément",
+            "gender": "male",
+            "email": "benoit.clem@gmail.com",
+            "birthday": "02/26/1987",
+            "albums": {
+                "data": [
+                {
+                "type": "profile",
+                "id": "1477745516219"
+                },
+                {
+                "type": "app",
+                "id": "4384223216345"
+                },
+                {
+                "type": "wall",
+                "id": "10214095579936121"
+                },
+                {
+                "type": "mobile",
+                "id": "1177759136747"
+                },
+                {
+                "type": "app",
+                "id": "4674628556297"
+                },
+                {
+                "type": "cover",
+                "id": "10200723881372014"
+                },
+                {
+                "type": "normal",
+                "id": "3257033357303"
+                },
+                {
+                "type": "normal",
+                "id": "4785598010464"
+                },
+                {
+                "type": "normal",
+                "id": "4762801680570"
+                },
+                {
+                "type": "normal",
+                "id": "2093851118474"
+                },
+                {
+                "type": "normal",
+                "id": "1629413147815"
+                },
+                {
+                "type": "normal",
+                "id": "1628151516275"
+                },
+                {
+                "type": "normal",
+                "id": "1327772766994"
+                },
+                {
+                "type": "normal",
+                "id": "1296716030595"
+                },
+                {
+                "type": "normal",
+                "id": "1159864249386"
+                }
+                ],
+                "paging": {
+                    "cursors": {
+                        "before": "MTQ3Nzc0NTUxNjIxOQZDZD",
+                        "after": "MTE1OTg2NDI0OTM4NgZDZD"
+                    }
+                }
+            },
+            "picture": {
+                "data": {
+                    "height": 960,
+                    "is_silhouette": false,
+                    "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=10210527622539416&height=800&width=800&ext=1548520710&hash=AeTE07Oyb7_BPSoy",
+                    "width": 960
+                }
+            }
+        }
+        """
+        let data = Data(json.utf8)
+        let decoder = JSONDecoder()
+        let _ = try! decoder.decode(fbme.self, from: data)
+    }
 
 }

@@ -9,24 +9,24 @@
 import Foundation
 import FacebookCore
 
-class albumEntry: Decodable {
+class AlbumEntry: Decodable {
     var type: String?
     var id: String?
 }
 
-class albums: Decodable {
-    var data: [albumEntry]
+class Albums: Decodable {
+    var data: [AlbumEntry]
 }
 
-class pictureEntry: Decodable {
+class PictureEntry: Decodable {
     var height: Int?
     var width: Int?
     var is_silhouette: Bool?
     var url: URL?
 }
 
-class picture: Decodable {
-    var data : [pictureEntry]
+class Picture: Decodable {
+    var data : PictureEntry
 }
 
 class fbme: Decodable {
@@ -35,8 +35,38 @@ class fbme: Decodable {
     var email: String?
     var first_name: String?
     var birthday: Date?
-    var albums: albums?
-    var picture: picture
+    var albums: Albums?
+    var picture: Picture
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case gender
+        case email
+        case first_name
+        case birthday
+        case albums
+        case picture
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        id = try values.decode(String.self, forKey: .id)
+        gender = try values.decode(String.self, forKey: .gender)
+        email = try values.decode(String.self, forKey: .email)
+        first_name = try values.decode(String.self, forKey: .first_name)
+        let dobstring = try values.decode(String.self, forKey: .birthday)
+        let dobformatter = DateFormatter.ddMMyyyy
+        if let date = dobformatter.date(from: dobstring) {
+            birthday = date
+        } else {
+            throw DecodingError.dataCorruptedError(forKey: .birthday,
+                                                   in: values,
+                                                   debugDescription: "Date string does not match format expected by formatter.")
+        }
+        albums = try values.decode(Albums.self, forKey: .albums)
+        picture = try values.decode(Picture.self, forKey: .picture)
+    }
     
     var signUpData:[String: Any] {
         get {

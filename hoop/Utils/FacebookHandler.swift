@@ -11,7 +11,8 @@ import Foundation
 import FacebookCore
 import FacebookLogin
 import Futures
-//import SwiftyJSON
+import MoreCodable
+import SwiftyJSON
 
 class FacebookHandler: NSObject {
     
@@ -306,14 +307,22 @@ extension FacebookHandler {
             struct Response: GraphResponseProtocol {
                 var me: fbme?
                 init(rawResponse: Any?) {
-                    // Decode JSON from rawResponse into other properties here.
-                    me = try! JSONDecoder().decode(fbme.self, from: rawResponse as! Data)
+                    if let dictData = rawResponse as! [String:Any]? {
+                        // A small leap to JSON form back to Decodable
+                        let jsonData = JSON(dictData)
+                        if let string = jsonData.rawString() {
+                            if let data = string.data(using: .utf8) {
+                                let decoder = JSONDecoder()
+                                me = try! decoder.decode(fbme.self, from: data)
+                                print(me)
+                            }
+                        }
+                    }
                 }
             }
             
             var graphPath = "/me"
-            //var parameters: [String : Any]? = ["fields": "id, email, first_name, birthday, albums{type}, picture.width(800).height(800)"]
-            var parameters: [String : Any]? = ["fields": "id,first_name,name"]
+            var parameters: [String : Any]? = ["fields": "id, email, gender, first_name, birthday, albums{type}, picture.width(800).height(800)"]
             var accessToken = AccessToken.current
             var httpMethod: GraphRequestHTTPMethod = .GET
             var apiVersion: GraphAPIVersion = .defaultVersion

@@ -23,6 +23,9 @@
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
+		EB77871621D53BBF002CBA02 /* MoreCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
+		EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB77871821D53F75002CBA02 /* MoreCodable.framework in Resources */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
 		EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046221CAB630003757EC /* SwiftRouter.swift */; };
 		EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046421CAB6F3003757EC /* LoginViewController.swift */; };
 		EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */; };
@@ -136,6 +139,7 @@
 				EB8F054621CD2F30003757EC /* QuickLayout.framework in Embed Frameworks */,
 				EB8F055E21CD6461003757EC /* FBSDKLoginKit.framework in Embed Frameworks */,
 				EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */,
+				EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */,
 				EB8F055221CD529E003757EC /* Bolts.framework in Embed Frameworks */,
 				EB8F054021CD2F04003757EC /* AlamofireImage.framework in Embed Frameworks */,
 				EB8F054221CD2F04003757EC /* SwiftyJSON.framework in Embed Frameworks */,
@@ -171,6 +175,7 @@
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
+		EB77871421D53BA8002CBA02 /* MoreCodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoreCodable.framework; path = hoop/Frameworks/MoreCodable.framework; sourceTree = "<group>"; };
 		EB8F046221CAB630003757EC /* SwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRouter.swift; path = Routing/SwiftRouter.swift; sourceTree = "<group>"; };
 		EB8F046421CAB6F3003757EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTunnelViewController.swift; sourceTree = "<group>"; };
@@ -269,6 +274,7 @@
 				EB8F055A21CD645B003757EC /* FBSDKCoreKit.framework in Frameworks */,
 				EB8F055521CD529E003757EC /* FacebookLogin.framework in Frameworks */,
 				EB8F055D21CD6461003757EC /* FBSDKLoginKit.framework in Frameworks */,
+				EB77871621D53BBF002CBA02 /* MoreCodable.framework in Frameworks */,
 				EB8F053F21CD2F04003757EC /* AlamofireImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -395,6 +401,7 @@
 		EB28B63121C3BFD000CFF1EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB77871421D53BA8002CBA02 /* MoreCodable.framework */,
 				EB8F055821CD645B003757EC /* FBSDKCoreKit.framework */,
 				EB8F055721CD645B003757EC /* FBSDKLoginKit.framework */,
 				EB8F054B21CD5279003757EC /* Bolts.framework */,
@@ -643,6 +650,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB77871821D53F75002CBA02 /* MoreCodable.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
