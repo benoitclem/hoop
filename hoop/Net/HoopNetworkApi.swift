@@ -140,7 +140,7 @@ class HoopNetworkApi: AlamofireWrapper {
                                     }
                                    
                                 case .failure(let error):
-                                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MALFORMED_JSON, userInfo: ["desc": error.localizedDescription ?? "unknown"])
+                                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MALFORMED_JSON, userInfo: ["desc": error.localizedDescription ])
                                     promise.reject(error)
                                 }
                             } else {

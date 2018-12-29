@@ -72,18 +72,8 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doFacebookLogin(_ sender: Any) {
-//        if let _ = AccessToken.current {
-//            FacebookHandler.getMyProfile()
-//        }
         
         let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
-                
-//        loginPromise.whenFulfilled { result in
-//            //PopupProvider.showDoneNote()
-//            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
-//                self.present(vc as! UIViewController, animated: true)
-//            }
-//        }
         
         loginPromise.whenRejected(on: .main)  { error in
             var message = ""
@@ -97,7 +87,7 @@ class LoginViewController: VideoSplashViewController {
             default:
                 message = "Unknow error occured"
             }
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "erreur", message, "button") {
                 print("action")
             }
         }
