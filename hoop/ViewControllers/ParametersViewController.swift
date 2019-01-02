@@ -38,6 +38,7 @@ class ParametersViewController: FormViewController {
         
         self.tableView.backgroundColor = .hoopTableGrayColor
         
+        // [SECTION] Pictures photo
         form +++ Section("Mes photos")
             <<< ImageCollectionViewRow() { row in
                 row.tag = "images"
@@ -46,25 +47,85 @@ class ParametersViewController: FormViewController {
                 row.value?.append(UIImage(named: "sophie")!)
                 row.value?.append(UIImage(named: "sophie")!)
             }
-            +++ Section("Informations")
-            <<< HoopLabelRow() { row in
-                row.title = "clément"
+        
+        
+        // [SECTION] Prénom Age
+        me?.name = nil // Testing stuff
+        me?.dob = nil  // Testing stuff
+        
+        var nameRowEditable: HoopTextViewRow? = nil
+        var nameRow: HoopLabelRow? = nil
+        if let name = me?.name {
+            nameRow = HoopLabelRow() { row in
+                row.title = name
             }
-            <<< HoopLabelRow() { row in
-                var style = HoopLabelRowStyle()
-                style.bgColor = UIColor.green
-                style.txtColor = UIColor.white
-                row.labelText = "31"
-                row.value = "salut"
-                row.labelStyle = style
+        } else {
+            nameRowEditable = HoopTextViewRow() { row in
+                row.tag = "name"
+                row.value = ""
+                row.placeholder = "nom"
             }
-            +++ Section("À propos de moi")
+        }
+        
+        var dobRowEditable: DateRow? = nil
+        var ageRow: HoopLabelRow? = nil
+        if let age = me?.age {
+            ageRow = HoopLabelRow() { row in
+                row.title = String(age)
+            }
+        } else {
+            dobRowEditable = DateRow() { row in
+                row.title = "Date de naissance"
+                row.value = Date(timeIntervalSinceReferenceDate: 0)
+            }
+        }
+        
+        form +++ Section("Informations")
+            <<< (nameRow ?? nameRowEditable!)
+            <<< (ageRow ?? dobRowEditable!)
+            <<< EmailRow() { row in
+                    row.tag = "email"
+                    row.hidden = Condition.function([], { form in
+                            return self.me?.email != nil
+                        })
+                    row.title = "email"
+                }
+
+        // [SECTION] A propos de moi
+        form +++ Section("À propos de moi")
             <<< HoopTextViewRow() { row in
                 row.tag = "description"
                 row.value = ""
                 row.placeholder = "write something here"
             }
-            +++ Section("Je souhaite rencontrer")
+        
+        form +++ Section("Vous êtes")
+            <<< HoopSwitchRow() { row in
+                row.tag = "switchFemme"
+                row.labelText = "Femme"
+                row.value = false
+            }
+            <<< HoopSwitchRow() { row in
+                row.tag = "switchFemme"
+                row.labelText = "Femme"
+                row.value = true
+            }.onChange { _ in
+                print("something happened")
+            }
+        
+//        form +++ SelectableSection<ListCheckRow<String>>("Vous êtes", selectionType: .singleSelection(enableDeselection: false))
+//
+//        let continents = ["homme", "femme"]
+//        for option in continents {
+//            form.last! <<< ListCheckRow<String>(option){ listRow in
+//                listRow.title = option
+//                listRow.selectableValue = option
+//                listRow.value = nil
+//            }
+//        }
+        
+        // [SECTION] Je souhaite rencontrer
+        form +++ Section("Je souhaite rencontrer")
             <<< SwitchRow() { row in
                 row.tag = "switchHomme"
                 row.title = "Homme"
@@ -79,27 +140,21 @@ class ParametersViewController: FormViewController {
                 row.labelText = "Tranche d'age"
                 row.value = Range(min: 18,low: 18,upp: 55,max: 55)
             }
-            <<< PhoneRow(){
-                $0.title = "Phone Row"
-                $0.placeholder = "And numbers here"
-            }
-            +++ Section("Section2")
-            <<< DateRow(){
-                $0.title = "Date Row"
-                $0.value = Date(timeIntervalSinceReferenceDate: 0)
-            }
-            <<< HoopLabelRow() { row in
-                var style = HoopLabelRowStyle()
-                style.bgColor = UIColor.green
-                style.txtColor = UIColor.white
-                style.txtAlignement = NSTextAlignment.center
-                row.labelText = "salut"
-                row.labelStyle = style
-                }.onCellSelection { cell, row in
-                    //row.title = "action 1"
-                    print(self.form.values())
+            
+        if (firstTimer) {
+            form +++ Section()
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    style.bgColor = .hoopGreenColor
+                    style.txtColor = UIColor.white
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelText = "partager"
+                    row.labelStyle = style
+                    }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(self.form.values())
+                    }
         }
-        
     }
     
     @objc func leftTarget( sender: UIBarButtonItem) {
