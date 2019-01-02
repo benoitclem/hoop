@@ -118,6 +118,7 @@
 		EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */; };
 		EBAEF3AE21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */; };
 		EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */; };
+		EBAEF3B721DD2C260024CDF9 /* UINavigationController+replaceRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -262,6 +263,7 @@
 		EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+age.swift"; sourceTree = "<group>"; };
 		EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+customNavigationBar.swift"; sourceTree = "<group>"; };
 		EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+actionClosure.swift"; sourceTree = "<group>"; };
+		EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+replaceRoot.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -350,6 +352,7 @@
 				EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */,
 				EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */,
 				EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */,
+				EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
 				EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */,
+				EBAEF3B721DD2C260024CDF9 /* UINavigationController+replaceRoot.swift in Sources */,
 				EB8F04E521CAE684003757EC /* RangeSlider.swift in Sources */,
 				EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */,
 				EB8F050221CBB7FB003757EC /* AccountKitHandler.swift in Sources */,

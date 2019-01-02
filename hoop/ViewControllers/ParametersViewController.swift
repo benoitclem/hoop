@@ -13,13 +13,10 @@ class ParametersViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addNavigationBar("parameters", leftTitle: "back", rightTitle: "terminer", leftClosure: {
-            print("do L something")
-        }, rightClosure: {
-            print("do R something")
-        })
-        self.tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
-        // Color of the background table
+        self.title = "parameters"
+        self.navigationItem.hidesBackButton = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(ParametersViewController.done(sender:)))
+        
         self.tableView.backgroundColor = UIColor.white
         form +++ Section("Mes photos")
             <<< ImageCollectionViewRow() { row in
@@ -85,6 +82,13 @@ class ParametersViewController: FormViewController {
         
     }
     
+    @objc func done( sender: UIBarButtonItem) {
+        print("done")
+        if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+            self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
+        }
+    }
+    
     // Nice and fast way to customize the header view
     func tableView(_: UITableView, willDisplayHeaderView view: UIView, forSection: Int) {
         
@@ -93,9 +97,7 @@ class ParametersViewController: FormViewController {
             view.textLabel?.font = UIFont.MainFontMedium(ofSize: 15.0)
         }
     }
-    
-    @IBAction func getFormInfos(_ sender: Any) {
-    }
+
 }
 
 

@@ -142,8 +142,8 @@ extension AppDelegate{
     }
     
     func showLogin() {
-        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
-        window?.rootViewController = mapController!
+        let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
+        showInNavigationViewController(loginController!)
     }
     
 //    func showTunnel() {
@@ -152,17 +152,24 @@ extension AppDelegate{
 //    }
     
     func showParameters() {
-        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController
-        window?.rootViewController = mapController!
+        let paramsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController
+        showInNavigationViewController(paramsController!)
     }
     
     func showTutorial() {
-        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController
-        window?.rootViewController = mapController!
+        let tutoController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController
+        showInNavigationViewController(tutoController!)
     }
     
     func showMap() {
         let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
-        window?.rootViewController = mapController!
+        showInNavigationViewController(mapController!)
+        //window?.rootViewController = mapController!
+    }
+    
+    func showInNavigationViewController(_ vc: UIViewController) {
+        let navigationController = UINavigationController(rootViewController: vc)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
     }
 }
