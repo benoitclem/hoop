@@ -11,13 +11,33 @@ import Eureka
 
 class ParametersViewController: FormViewController {
     
+    let me: profile? = Defaults().get(for: .me)
+    var firstTimer: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "parameters"
-        self.navigationItem.hidesBackButton = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(ParametersViewController.done(sender:)))
         
-        self.tableView.backgroundColor = UIColor.white
+        if let reached_map = me?.reached_map {
+            firstTimer = !reached_map
+        }
+        
+        let vcTitle = "parameter_vc_title".localized()
+        var leftTitle: String? = "back".localized()
+        var leftSelector: Selector? = #selector(ParametersViewController.leftTarget(sender:))
+        let rightTitle = "done".localized()
+        let rightSelector = #selector(ParametersViewController.rightTarget(sender:))
+        
+        if (firstTimer) {
+            leftTitle = nil
+            leftSelector = nil
+        }
+        
+        self.setupHoopNavigationBar(vcTitle,
+                                    leftTitle: leftTitle, leftSelector: leftSelector,
+                                    rightTitle: rightTitle, rightSelector: rightSelector)
+        
+        self.tableView.backgroundColor = .hoopTableGrayColor
+        
         form +++ Section("Mes photos")
             <<< ImageCollectionViewRow() { row in
                 row.tag = "images"
@@ -82,7 +102,14 @@ class ParametersViewController: FormViewController {
         
     }
     
-    @objc func done( sender: UIBarButtonItem) {
+    @objc func leftTarget( sender: UIBarButtonItem) {
+        print("cancel")
+        if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+            self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
+        }
+    }
+    
+    @objc func rightTarget( sender: UIBarButtonItem) {
         print("done")
         if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
             self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)

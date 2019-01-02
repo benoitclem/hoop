@@ -23,4 +23,5 @@ extension UIColor {
     
     static let hoopRedColor = UIColor(netHex:0xb31e12)
     static let hoopGreenColor = UIColor(netHex:0x12b357)
+    static let hoopTableGrayColor = UIColor(netHex:0xf2f2f2)
 }

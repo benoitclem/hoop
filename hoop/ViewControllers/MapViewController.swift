@@ -48,6 +48,7 @@ class MapViewController: UIViewController {
     }
     
     func setup() {
+        setupUserInterface()
         setupLocation()
         setupMapKit()
     }
@@ -99,6 +100,10 @@ extension MapViewController: UICollectionViewDelegateFlowLayout {
 
 extension MapViewController: CLLocationManagerDelegate {
 
+    func setupUserInterface() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     func setupLocation() {
         // Tell locationManager that we receive the location updates
         self.locationManager.delegate = self
