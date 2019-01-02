@@ -106,9 +106,10 @@ class LoginViewController: VideoSplashViewController {
             return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
         }
         
-        signupPromise.whenFulfilled(on: .main){ profile in
-            print(profile)
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") {
+        signupPromise.whenFulfilled(on: .main){ me in
+            print(me)
+            me.save()
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
                 self.present(vc as! UIViewController, animated: true)
             }
         }

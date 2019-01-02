@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ImageCollectionViewCell" customModule="formTests">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ImageCollectionViewCell" customModule="hoop">
             <rect key="frame" x="0.0" y="0.0" width="375" height="443"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -61,7 +61,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <connections>
-                <outlet property="displayCollectionView" destination="wxQ-a6-EB3" id="Eiy-jo-QN9"/>
+                <outlet property="displayCollectionView" destination="wxQ-a6-EB3" id="zhy-LC-ey3"/>
                 <outlet property="displayPageControl" destination="I8v-f7-td6" id="SD4-Rm-5Ka"/>
                 <outlet property="pickerCollectionView" destination="qfn-A2-MRf" id="w3z-Sc-vU9"/>
             </connections>

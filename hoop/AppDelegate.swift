@@ -13,6 +13,15 @@ import FacebookCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var me: profile? = nil
+    
+    enum ScreenToShow: String {
+        case login = "login"
+//        case tunnel
+        case parameters = "parameters"
+        case tutorial = "tutorial"
+        case map = "map"
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -21,9 +30,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupFacebook(with: application, and:launchOptions)
         setupAccountKit()
         
+        // Data persistence management
+        setupData()
+        
         // First VC Selection
         window = UIWindow(frame: UIScreen.main.bounds)
-        showLogin()
+        showFirstViewController(selectFirstViewController())
         window?.makeKeyAndVisible()
         
         // Alay respond true
@@ -58,11 +70,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+// Setups
+
 extension AppDelegate {
+    
+    func setupData() {
+        let defaults = Defaults()
+        if let retrievedMe = defaults.get(for: .me) {
+            me = retrievedMe
+        }
+    }
+    
     func setupRouting() {
         let router = Router.shared
         router.map("/tutorial", controllerClass: TutorialViewController.self)
-        router.map("/infotunnel", controllerClass: InfoTunnelViewController.self)
+//        router.map("/infotunnel", controllerClass: InfoTunnelViewController.self)
+        router.map("/parameters", controllerClass: ParametersViewController.self)
         router.map("/map", controllerClass: MapViewController.self)
         router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
         router.map("/conversation", controllerClass: ConversationViewController.self)
@@ -78,16 +101,55 @@ extension AppDelegate {
     }
 }
 
+extension AppDelegate {
+    func selectFirstViewController() -> ScreenToShow{
+        if let me = me {
+            if let _ = me.token {
+                if let _ = me.reached_map {
+                    return .map
+                } else if let _ = me.saw_tutorial {
+                    return .parameters
+                } else {
+                    return .tutorial
+                }
+            } else {
+                return .login
+            }
+        } else {
+            return .login
+        }
+    }
+}
+
+// routing calls
+
 extension AppDelegate{
+    
+    func showFirstViewController(_ toShow:ScreenToShow) {
+        #if DEBUG
+        print("Going to -> \(toShow.rawValue)")
+        #endif
+        switch toShow {
+        case .login:
+            showLogin()
+        case .tutorial:
+            showTutorial()
+        case .parameters:
+            showParameters()
+        default:
+            showLogin()
+        }
+    }
+    
     func showLogin() {
         let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
         window?.rootViewController = mapController!
     }
     
-    func showTunnel() {
-        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoTunnelViewController") as? InfoTunnelViewController
-        window?.rootViewController = mapController!
-    }
+//    func showTunnel() {
+//        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoTunnelViewController") as? InfoTunnelViewController
+//        window?.rootViewController = mapController!
+//    }
     
     func showParameters() {
         let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController

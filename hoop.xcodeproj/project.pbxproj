@@ -114,6 +114,10 @@
 		EB8F055D21CD6461003757EC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F055721CD645B003757EC /* FBSDKLoginKit.framework */; };
 		EB8F055E21CD6461003757EC /* FBSDKLoginKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F055721CD645B003757EC /* FBSDKLoginKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB9B5C1C21CFD2A4000C8008 /* CirclesOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB9B5C1B21CFD2A4000C8008 /* CirclesOverlay.swift */; };
+		EBAEF3AA21DCD1EE0024CDF9 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3A921DCD1EE0024CDF9 /* Defaults.swift */; };
+		EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */; };
+		EBAEF3AE21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */; };
+		EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -254,6 +258,10 @@
 		EB8F055721CD645B003757EC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKLoginKit.framework; path = hoop/Frameworks/FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EB8F055821CD645B003757EC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = hoop/Frameworks/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		EB9B5C1B21CFD2A4000C8008 /* CirclesOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CirclesOverlay.swift; sourceTree = "<group>"; };
+		EBAEF3A921DCD1EE0024CDF9 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+age.swift"; sourceTree = "<group>"; };
+		EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+customNavigationBar.swift"; sourceTree = "<group>"; };
+		EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+actionClosure.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +347,9 @@
 				EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */,
 				EB8F052E21CBE122003757EC /* UIFont+main.swift */,
 				EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */,
+				EBAEF3AB21DCE88A0024CDF9 /* Date+age.swift */,
+				EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */,
+				EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -476,6 +487,7 @@
 		EB8F04C521CAE5CA003757EC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				EBAEF3A921DCD1EE0024CDF9 /* Defaults.swift */,
 				EB8F04E821CAEE0A003757EC /* VideoCutter.swift */,
 				EB8F04E921CAEE0A003757EC /* VideoSplashViewController.swift */,
 				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
@@ -686,6 +698,8 @@
 				EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
 				EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */,
+				EBAEF3AA21DCD1EE0024CDF9 /* Defaults.swift in Sources */,
+				EBAEF3AE21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift in Sources */,
 				EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */,
 				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
@@ -695,11 +709,13 @@
 				EB8F04D921CAE678003757EC /* ImageCollectionViewCell.swift in Sources */,
 				EB8F052F21CBE122003757EC /* UIFont+main.swift in Sources */,
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
+				EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
+				EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */,
 				EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */,
 				EB8F04EA21CAEE0A003757EC /* VideoCutter.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,

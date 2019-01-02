@@ -8,23 +8,27 @@
 
 import UIKit
 
-class TutorialViewController: UIViewController {
+class TutorialViewController: UIViewController, UINavigationBarDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        // addNavigationBar()
+        
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func skipAction(_ sender: Any) {
+        // Update tutorial sawn flag
+        let defaults = Defaults()
+        if let retrievedMe = defaults.get(for: .me) {
+            let me = retrievedMe
+            me.saw_tutorial = true
+            defaults.set(me, for: .me)
+        }
+        if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
+            self.present(vc as! UIViewController, animated: true)
+        }
     }
-    */
-
+    
 }

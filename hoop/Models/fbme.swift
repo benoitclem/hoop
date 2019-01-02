@@ -38,6 +38,32 @@ class fbme: Decodable {
     var albums: Albums?
     var picture: Picture?
     
+    var age: Int? {
+        get {
+            if let bday = birthday {
+                return bday.age()
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    var gender_id: Int? {
+        get {
+            if let gender = gender {
+                if gender == "male" {
+                    return 1
+                } else if gender == "female" {
+                    return 2
+                } else {
+                    return nil
+                }
+            } else {
+                return nil
+            }
+        }
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case gender

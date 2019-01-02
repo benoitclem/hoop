@@ -13,6 +13,12 @@ class ParametersViewController: FormViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNavigationBar("parameters", leftTitle: "back", rightTitle: "terminer", leftClosure: {
+            print("do L something")
+        }, rightClosure: {
+            print("do R something")
+        })
+        self.tableView.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
         // Color of the background table
         self.tableView.backgroundColor = UIColor.white
         form +++ Section("Mes photos")
@@ -84,7 +90,7 @@ class ParametersViewController: FormViewController {
         
         if let view = view as? UITableViewHeaderFooterView {
             view.textLabel?.textColor = .red
-            view.textLabel?.font = UIFont(name: "Heletica", size: 15.0)
+            view.textLabel?.font = UIFont.MainFontMedium(ofSize: 15.0)
         }
     }
     

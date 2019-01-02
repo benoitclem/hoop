@@ -23,6 +23,7 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_MALFORMED_JSON: Int = -5
     static let API_ERROR_DECODER_FAILED: Int = -6
     static let API_ERROR_NO_DATA: Int = -7
+    static let API_ERROR_MISSING_DATA: Int = 8
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -65,33 +66,6 @@ class HoopNetworkApi: AlamofireWrapper {
         return promise.future
     }
     
-//    private func request(with method: String,and arguments: [String:String]) -> Future<JSON> {
-//        let promise = Promise<JSON>()
-//        if(self.baseUrl !=  nil) {
-//            let fullUrl = "https://\(self.baseUrl!)/api/\(method)?\(self.urlEncode(arguments))"
-//            //print(fullUrl)
-//            Alamofire.request(fullUrl).responseJSON { response in
-//                /*
-//                 print(response.request)  // original URL request
-//                 print(response.response) // HTTP URL response
-//                 print(response.data)     // server data
-//                 print(response.result)   // result of response serialization
-//                 */
-//                if((response.result.value) != nil) {
-//                    let jsonData = JSON(response.result.value!)
-//                    promise.fulfill(jsonData)
-//                } else {
-//                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_UNKNOWN, userInfo: ["desc":response.response ?? "unknown"])
-//                    promise.reject(error)
-//                }
-//            }
-//        } else {
-//            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_URL_NOT_DEFINED, userInfo: ["desc":"base url not defined, please set hoopNetworkConfig/baseUrl key in plist file"])
-//            promise.reject(error)
-//        }
-//        return promise.future
-//    }
-    
     private func post<T>(with methodName: String, and arguments: [String:Any], andProgress progressHandler: ((_ result: Double) -> Void)? ) -> Future<hoopApiResponse<T>> {
         let promise = Promise<hoopApiResponse<T>>()
         if(self.baseUrl !=  nil) {
@@ -101,17 +75,15 @@ class HoopNetworkApi: AlamofireWrapper {
             Alamofire.upload(
                 multipartFormData: { multipartFormData in
                     for (key,arg) in arguments {
-                        if(arg != nil) {
-                            // Add image
-                            if (arg is Data) {
-                                multipartFormData.append(arg as! Data, withName: key, fileName: key + ".png", mimeType: "image/png")
-                            } else if (arg is String) {
-                                let str = arg as! String
-                                multipartFormData.append(str.data(using:String.Encoding.utf8)!, withName: key)
-                            } else {
-                                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_DATA_NOT_HANDLED, userInfo: ["desc":"Data type not handled"])
-                                promise.reject(error)
-                            }
+                        // Add image
+                        if (arg is Data) {
+                            multipartFormData.append(arg as! Data, withName: key, fileName: key + ".png", mimeType: "image/png")
+                        } else if (arg is String) {
+                            let str = arg as! String
+                            multipartFormData.append(str.data(using:String.Encoding.utf8)!, withName: key)
+                        } else {
+                            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_DATA_NOT_HANDLED, userInfo: ["desc":"Data type not handled"])
+                            promise.reject(error)
                         }
                     }
             },
@@ -170,15 +142,24 @@ class HoopNetworkApi: AlamofireWrapper {
 extension HoopNetworkApi {
     
     func signUp(with facebookData: fbme) -> Future<profile> {
-        //print("registering new user")
-        // Serialize the facebook data
-        //jsonData?["data"]["token"].rawString(),jsonData?["data"]["sharing_code"].rawString()
-        print(facebookData.signUpData)
         let promise: Future<hoopApiResponse<profile>> = self.post(with: "signUpClient", and: facebookData.signUpData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
-            if let data = response.data {
-                promise.fulfill(data)
+            if var data = response.data {
+                // if everything goes right transfer fbme infos to profile infos
+                // TODO: maybe the fbme should be recorded somewhere if
+                // all datas are not copied to profile
+                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email {
+                    data.name = name
+                    data.dob = dob
+                    data.gender = gender
+                    data.email = email
+                    // Here the other stuffs
+                    promise.fulfill(data)
+                } else {
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
+                    promise.reject(error)
+                }
             } else {
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
                 promise.reject(error)

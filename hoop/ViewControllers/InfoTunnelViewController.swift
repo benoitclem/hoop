@@ -7,24 +7,37 @@
 //
 
 import UIKit
+import Eureka
 
-class InfoTunnelViewController: UIViewController {
+class InfoTunnelViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Do re
+        // Color of the background table
+        self.tableView.backgroundColor = UIColor.white
+        form +++ Section("Nom")
+            <<< HoopTextViewRow() { row in
+                row.tag = "nom"
+                row.value = ""
+                row.placeholder = "nom"
+            }
+            +++ Section("Age")
+            <<< DateRow(){
+                $0.title = "Date Row"
+                $0.value = Date(timeIntervalSinceReferenceDate: 0)
+            }
+            +++ Section("Je suis")
+            <<< HoopSwitchRow() { row in
+                row.tag = "switchFemme"
+                row.labelText = "Un homme / une femme"
+                row.value = true
+            }
+            +++ Section("Email")
+            <<< HoopTextViewRow() { row in
+                row.tag = "email"
+                row.value = ""
+                row.placeholder = "email"
+            }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
