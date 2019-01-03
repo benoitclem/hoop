@@ -37,6 +37,7 @@ class ParametersViewController: FormViewController {
                                     rightTitle: rightTitle, rightSelector: rightSelector)
         
         self.tableView.backgroundColor = .hoopTableGrayColor
+        self.tableView.separatorStyle = .none
         
         // [SECTION] Pictures photo
         form +++ Section("Mes photos")
@@ -50,55 +51,6 @@ class ParametersViewController: FormViewController {
         
         
         // [SECTION] Prénom Age
-//        me?.name = nil // Testing stuff
-//        me?.dob = nil  // Testing stuff
-//        me?.gender = nil
-        
-//        var nameRowEditable: HoopTextViewRow? = nil
-//        var nameRow: HoopLabelRow? = nil
-//        if let name = me?.name {
-//            nameRow = HoopLabelRow() { row in
-//                row.title = name
-//            }
-//        } else {
-//            nameRowEditable = HoopTextViewRow() { row in
-//                row.tag = "name"
-//                row.value = ""
-//                row.placeholder = "nom"
-//            }
-//        }
-//
-//        var dobRowEditable: HoopDateRow? = nil
-//        var ageRow: HoopLabelRow? = nil
-//        if let age = me?.age {
-//            ageRow = HoopLabelRow() { row in
-//                row.title = String(age)
-//            }
-//        } else {
-//            dobRowEditable = HoopDateRow() { row in
-//                row.labelText = "Date de naissance"
-//                row.dateFormatter = DateFormatter.ddMMMyyyy
-//                let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
-//                row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
-//            }
-//        }
-//        form +++ Section("test")
-//            <<< HoopSwitchRow() { row in
-//                row.labelText = "test"
-//                row.tag = "test"
-//            }.onChange { row in
-//                    print("something happened")
-//                if(row.value!) {
-//                    self.me?.name = nil // Testing stuff
-//                    self.me?.dob = nil  // Testing stuff
-//                    self.me?.gender = nil
-//                } else {
-//                    self.me?.name = "Clément" // Testing stuff
-//                    self.me?.dob = Date()  // Testing stuff
-//                    self.me?.gender = 1
-//                }
-//            }
-        
         form +++ Section("Informations")
             <<< HoopLabelRow() { row in
                 row.hidden = Condition.function([], { _ in
@@ -151,32 +103,22 @@ class ParametersViewController: FormViewController {
                 row.placeholder = "write something here"
             }
         
+        // [SECTION] Je suis
         if let gender = self.me?.gender{
             form +++ SelectableSection<HoopListCheckRow>("Je suis", selectionType: .singleSelection(enableDeselection: false))
                 <<< HoopListCheckRow() { row in
-                    row.tag = "switchHomme"
+                    row.tag = "iAmMale"
                     row.labelText = "Homme"
                     row.selectableValue = false
                     row.value = nil
                 }
                 <<< HoopListCheckRow() { row in
-                    row.tag = "switchFemme"
+                    row.tag = "iAmFemale"
                     row.labelText = "Femme"
                     row.selectableValue = false
                     row.value = nil
                 }
         }
-        
-//        form +++ SelectableSection<ListCheckRow<String>>("Vous êtes", selectionType: .singleSelection(enableDeselection: false))
-//
-//        let continents = ["homme", "femme"]
-//        for option in continents {
-//            form.last! <<< ListCheckRow<String>(option){ listRow in
-//                listRow.title = option
-//                listRow.selectableValue = option
-//                listRow.value = nil
-//            }
-//        }
         
         // [SECTION] Je souhaite rencontrer
         form +++ Section("Je souhaite rencontrer")
@@ -208,6 +150,74 @@ class ParametersViewController: FormViewController {
                         //row.title = "action 1"
                         print(self.form.values())
                     }
+            form +++ Section()
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    row.labelText = "besoin d'aide?"
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelStyle = style
+                }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                }
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    row.labelText = "tutorial"
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelStyle = style
+                }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                        
+                }
+            form +++ Section("mention légales")
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    style.accessoryType = .disclosureIndicator
+                    row.labelText = "politique de confidentialité"
+                    row.labelStyle = style
+                    }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                }
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    style.accessoryType = .disclosureIndicator
+                    row.labelText = "condition générales"
+                    row.labelStyle = style
+                    }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                }
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    style.accessoryType = .disclosureIndicator
+                    row.labelText = "licences"
+                    row.labelStyle = style
+                }.onCellSelection { cell, row in
+                    //row.title = "action 1"
+                    print(row.labelText)
+                }
+            form +++ Section("quitter")
+                <<< HoopLabelRow() { row in
+                    var style = HoopLabelRowStyle()
+                    row.labelText = "se déconnecter"
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelStyle = style
+                }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                }
+                <<< HoopLabelRow() { row in
+                    
+                    var style = HoopLabelRowStyle()
+                    row.labelText = "supprimer son compte"
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelStyle = style
+                }.onCellSelection { cell, row in
+                        //row.title = "action 1"
+                        print(row.labelText)
+                }
         }
     }
     

@@ -39,9 +39,18 @@ public class HoopLabelCell: Cell<String>, CellType {
         if let style = (row as! HoopLabelRow).labelStyle {
             rowTitle.textAlignment = style.txtAlignement ?? .left
             rowTitle.textColor = style.txtColor
-            self.backgroundColor = style.bgColor
+            self.backgroundColor = style.bgColor ?? .white
+            self.accessoryType = style.accessoryType ?? .none
+        } else {
+            self.backgroundColor = .white
         }
+
         
+    }
+    
+    public override func didSelect() {
+        row.deselect()
+        row.updateCell()
     }
 }
 
@@ -49,6 +58,7 @@ public struct HoopLabelRowStyle {
     var bgColor: UIColor?
     var txtColor: UIColor?
     var txtAlignement: NSTextAlignment?
+    var accessoryType: UITableViewCell.AccessoryType?
 }
 
 public final class HoopLabelRow: Row<HoopLabelCell>, RowType {
