@@ -50,8 +50,9 @@ class ParametersViewController: FormViewController {
         
         
         // [SECTION] Prénom Age
-        me?.name = nil // Testing stuff
-        me?.dob = nil  // Testing stuff
+//        me?.name = nil // Testing stuff
+//        me?.dob = nil  // Testing stuff
+//        me?.gender = nil
         
         var nameRowEditable: HoopTextViewRow? = nil
         var nameRow: HoopLabelRow? = nil
@@ -67,16 +68,18 @@ class ParametersViewController: FormViewController {
             }
         }
         
-        var dobRowEditable: DateRow? = nil
+        var dobRowEditable: HoopDateRow? = nil
         var ageRow: HoopLabelRow? = nil
         if let age = me?.age {
             ageRow = HoopLabelRow() { row in
                 row.title = String(age)
             }
         } else {
-            dobRowEditable = DateRow() { row in
-                row.title = "Date de naissance"
-                row.value = Date(timeIntervalSinceReferenceDate: 0)
+            dobRowEditable = HoopDateRow() { row in
+                row.labelText = "Date de naissance"
+                row.dateFormatter = DateFormatter.ddMMMyyyy
+                let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
+                row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
             }
         }
         
@@ -85,7 +88,7 @@ class ParametersViewController: FormViewController {
             <<< (ageRow ?? dobRowEditable!)
             <<< EmailRow() { row in
                     row.tag = "email"
-                    row.hidden = Condition.function([], { form in
+                    row.hidden = Condition.function([], { _ in
                             return self.me?.email != nil
                         })
                     row.title = "email"
@@ -99,7 +102,11 @@ class ParametersViewController: FormViewController {
                 row.placeholder = "write something here"
             }
         
-        form +++ Section("Vous êtes")
+        form +++ Section("Vous êtes") { section in
+                section.hidden = Condition.function([], { _ in
+                    return self.me?.gender != nil
+                })
+            }
             <<< HoopSwitchRow() { row in
                 row.tag = "switchFemme"
                 row.labelText = "Femme"
