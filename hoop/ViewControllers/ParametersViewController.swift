@@ -54,38 +54,87 @@ class ParametersViewController: FormViewController {
 //        me?.dob = nil  // Testing stuff
 //        me?.gender = nil
         
-        var nameRowEditable: HoopTextViewRow? = nil
-        var nameRow: HoopLabelRow? = nil
-        if let name = me?.name {
-            nameRow = HoopLabelRow() { row in
-                row.title = name
+//        var nameRowEditable: HoopTextViewRow? = nil
+//        var nameRow: HoopLabelRow? = nil
+//        if let name = me?.name {
+//            nameRow = HoopLabelRow() { row in
+//                row.title = name
+//            }
+//        } else {
+//            nameRowEditable = HoopTextViewRow() { row in
+//                row.tag = "name"
+//                row.value = ""
+//                row.placeholder = "nom"
+//            }
+//        }
+//
+//        var dobRowEditable: HoopDateRow? = nil
+//        var ageRow: HoopLabelRow? = nil
+//        if let age = me?.age {
+//            ageRow = HoopLabelRow() { row in
+//                row.title = String(age)
+//            }
+//        } else {
+//            dobRowEditable = HoopDateRow() { row in
+//                row.labelText = "Date de naissance"
+//                row.dateFormatter = DateFormatter.ddMMMyyyy
+//                let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
+//                row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
+//            }
+//        }
+//        form +++ Section("test")
+//            <<< HoopSwitchRow() { row in
+//                row.labelText = "test"
+//                row.tag = "test"
+//            }.onChange { row in
+//                    print("something happened")
+//                if(row.value!) {
+//                    self.me?.name = nil // Testing stuff
+//                    self.me?.dob = nil  // Testing stuff
+//                    self.me?.gender = nil
+//                } else {
+//                    self.me?.name = "Clément" // Testing stuff
+//                    self.me?.dob = Date()  // Testing stuff
+//                    self.me?.gender = 1
+//                }
+//            }
+        
+        form +++ Section("Informations")
+            <<< HoopLabelRow() { row in
+                row.hidden = Condition.function([], { _ in
+                    return self.me?.name != nil
+                })
+                if let name = self.me?.name {
+                    row.title = name
+                }
             }
-        } else {
-            nameRowEditable = HoopTextViewRow() { row in
+            <<< HoopTextViewRow() { row in
+                row.hidden = Condition.function([], { _ in
+                    return self.me?.name == nil
+                })
                 row.tag = "name"
                 row.value = ""
                 row.placeholder = "nom"
             }
-        }
-        
-        var dobRowEditable: HoopDateRow? = nil
-        var ageRow: HoopLabelRow? = nil
-        if let age = me?.age {
-            ageRow = HoopLabelRow() { row in
-                row.title = String(age)
+            <<< HoopLabelRow() { row in
+                row.hidden = Condition.function([], { _ in
+                    return self.me?.age != nil
+                })
+                if let age = self.me?.age {
+                    row.title = String(age)
+                }
             }
-        } else {
-            dobRowEditable = HoopDateRow() { row in
+            <<< HoopDateRow() { row in
+                row.hidden = Condition.function([], { _ in
+                    return self.me?.age == nil
+                })
                 row.labelText = "Date de naissance"
                 row.dateFormatter = DateFormatter.ddMMMyyyy
                 let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
                 row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
             }
-        }
-        
-        form +++ Section("Informations")
-            <<< (nameRow ?? nameRowEditable!)
-            <<< (ageRow ?? dobRowEditable!)
+            //<<< (nameRow ?? nameRowEditable!)
+            //<<< (ageRow ?? dobRowEditable!)
             <<< EmailRow() { row in
                     row.tag = "email"
                     row.hidden = Condition.function([], { _ in
@@ -102,23 +151,21 @@ class ParametersViewController: FormViewController {
                 row.placeholder = "write something here"
             }
         
-        form +++ Section("Vous êtes") { section in
-                section.hidden = Condition.function([], { _ in
-                    return self.me?.gender != nil
-                })
-            }
-            <<< HoopSwitchRow() { row in
-                row.tag = "switchFemme"
-                row.labelText = "Femme"
-                row.value = false
-            }
-            <<< HoopSwitchRow() { row in
-                row.tag = "switchFemme"
-                row.labelText = "Femme"
-                row.value = true
-            }.onChange { _ in
-                print("something happened")
-            }
+        if let gender = self.me?.gender{
+            form +++ SelectableSection<HoopListCheckRow>("Je suis", selectionType: .singleSelection(enableDeselection: false))
+                <<< HoopListCheckRow() { row in
+                    row.tag = "switchHomme"
+                    row.labelText = "Homme"
+                    row.selectableValue = false
+                    row.value = nil
+                }
+                <<< HoopListCheckRow() { row in
+                    row.tag = "switchFemme"
+                    row.labelText = "Femme"
+                    row.selectableValue = false
+                    row.value = nil
+                }
+        }
         
 //        form +++ SelectableSection<ListCheckRow<String>>("Vous êtes", selectionType: .singleSelection(enableDeselection: false))
 //
@@ -182,8 +229,9 @@ class ParametersViewController: FormViewController {
     func tableView(_: UITableView, willDisplayHeaderView view: UIView, forSection: Int) {
         
         if let view = view as? UITableViewHeaderFooterView {
-            view.textLabel?.textColor = .red
-            view.textLabel?.font = UIFont.MainFontMedium(ofSize: 15.0)
+            view.textLabel?.textColor = .hoopRedColor
+            view.textLabel?.font = .MainFontMedium(ofSize: 15.0)
+            view.textLabel?.text = view.textLabel?.text?.lowercased()
         }
     }
 
