@@ -184,11 +184,12 @@ extension HoopNetworkApi {
                 // if everything goes right transfer fbme infos to profile infos
                 // TODO: maybe the fbme should be recorded somewhere if
                 // all datas are not copied to profile
-                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email {
+                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email, let fb_profile_id = facebookData.albums {
                     data.name = name
                     data.dob = dob
                     data.gender = gender
                     data.email = email
+                    data.fb_profile_id = facebookData.albums?.data.first(where: { $0.type == "profile"})?.id
                     // Here the other stuffs
                     promise.fulfill(data)
                 } else {

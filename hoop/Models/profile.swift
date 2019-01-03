@@ -26,6 +26,7 @@ class profile: Decodable, Encodable {
     var hoopLastConnection: Date?
     var commonLikes: [String]?
     // Use for me profile
+    var fb_profile_id: String?
     var token: String?
     var sharing_code: String?
     var reached_map: Bool?
@@ -61,6 +62,7 @@ class profile: Decodable, Encodable {
         case activeInHoop = "active_in_hoop"
         case hoopLastConnection = "timestamp_lastconnection"
         case commonLikes = "common_likes"
+        case fb_profile_id
         case token
         case sharing_code
         case reached_map
@@ -139,6 +141,9 @@ class profile: Decodable, Encodable {
         if container.contains(.commonLikes){
             commonLikes = try? container.decode([String].self, forKey: .commonLikes)
         }
+        if container.contains(.fb_profile_id){
+            fb_profile_id = try? container.decode(String.self, forKey: .fb_profile_id)
+        }
         if container.contains(.token){
             token = try? container.decode(String.self, forKey: .token)
         }
@@ -167,6 +172,7 @@ class profile: Decodable, Encodable {
         try container.encode(activeInHoop, forKey: .activeInHoop)
         try container.encode(hoopLastConnection, forKey: .hoopLastConnection)
         try container.encode(commonLikes, forKey: .commonLikes)
+        try container.encode(fb_profile_id, forKey: .fb_profile_id)
         try container.encode(token, forKey: .token)
         try container.encode(sharing_code, forKey: .sharing_code)
         try container.encode(reached_map, forKey: .reached_map)

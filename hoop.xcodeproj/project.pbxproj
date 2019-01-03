@@ -30,6 +30,7 @@
 		EB862C7E21DE075C0051E3A7 /* HoopListCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */; };
 		EB862C8221DE1C7D0051E3A7 /* faqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */; };
 		EB862C8421DE40420051E3A7 /* condition.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8321DE40420051E3A7 /* condition.swift */; };
+		EB862C8621DE5F130051E3A7 /* fbPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8521DE5F130051E3A7 /* fbPictures.swift */; };
 		EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046221CAB630003757EC /* SwiftRouter.swift */; };
 		EB8F046521CAB6F3003757EC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046421CAB6F3003757EC /* LoginViewController.swift */; };
 		EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */; };
@@ -191,6 +192,7 @@
 		EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HoopListCheckCell.xib; path = FormCells/HoopListCheckCell.xib; sourceTree = "<group>"; };
 		EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = faqEntry.swift; path = Models/faqEntry.swift; sourceTree = "<group>"; };
 		EB862C8321DE40420051E3A7 /* condition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = condition.swift; path = Models/condition.swift; sourceTree = "<group>"; };
+		EB862C8521DE5F130051E3A7 /* fbPictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = fbPictures.swift; path = Models/fbPictures.swift; sourceTree = "<group>"; };
 		EB8F046221CAB630003757EC /* SwiftRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftRouter.swift; path = Routing/SwiftRouter.swift; sourceTree = "<group>"; };
 		EB8F046421CAB6F3003757EC /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTunnelViewController.swift; sourceTree = "<group>"; };
@@ -380,6 +382,7 @@
 				EB28B61D21C3B4B600CFF1EF /* profile.swift */,
 				EB28B63421C3F27F00CFF1EF /* conversation.swift */,
 				EB862C8321DE40420051E3A7 /* condition.swift */,
+				EB862C8521DE5F130051E3A7 /* fbPictures.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -703,6 +706,7 @@
 			files = (
 				EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */,
 				EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */,
+				EB862C8621DE5F130051E3A7 /* fbPictures.swift in Sources */,
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
 				EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */,

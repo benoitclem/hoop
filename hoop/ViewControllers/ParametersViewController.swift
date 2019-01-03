@@ -47,6 +47,9 @@ class ParametersViewController: FormViewController {
                 row.value?.append(UIImage(named: "sophie")!)
                 row.value?.append(UIImage(named: "sophie")!)
                 row.value?.append(UIImage(named: "sophie")!)
+            }.onChange { row in
+                print("got changes")
+                print(row.value)
             }
         
         // [SECTION] Prénom Age

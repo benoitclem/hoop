@@ -18,17 +18,6 @@ class Albums: Decodable {
     var data: [AlbumEntry]
 }
 
-class PictureEntry: Decodable {
-    var height: Int?
-    var width: Int?
-    var is_silhouette: Bool?
-    var url: URL?
-}
-
-class Picture: Decodable {
-    var data : PictureEntry
-}
-
 class fbme: Decodable {
     var id: String?
     var gender: String?
@@ -36,7 +25,6 @@ class fbme: Decodable {
     var first_name: String?
     var birthday: Date?
     var albums: Albums?
-    var picture: Picture?
     
     var age: Int? {
         get {
@@ -102,9 +90,6 @@ class fbme: Decodable {
         }
         if values.contains(.albums){
             albums = try values.decode(Albums.self, forKey: .albums)
-        }
-        if values.contains(.picture){
-            picture = try values.decode(Picture.self, forKey: .picture)
         }
     }
     

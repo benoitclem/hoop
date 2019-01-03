@@ -306,4 +306,71 @@ extension FacebookHandler {
         
         return profilePromise.future
     }
+    
+    static func getMyProfilePictures(fromAlbum albumId:String) -> Future<[URL]> {
+        struct MyProfilePictureRequest: GraphRequestProtocol {
+            
+            var graphPath: String
+            var parameters: [String : Any]? = ["fields": "images"]
+            var accessToken = AccessToken.current
+            var httpMethod: GraphRequestHTTPMethod = .GET
+            var apiVersion: GraphAPIVersion = .defaultVersion
+            
+            struct Response: GraphResponseProtocol {
+                var pictureAlbum: PicturesAlbum?
+                init(rawResponse: Any?) {
+                    if let dictData = rawResponse as! [String:Any]? {
+                        // A small leap to JSON form back to Decodable
+                        let jsonData = JSON(dictData)
+                        if let string = jsonData.rawString() {
+                            if let data = string.data(using: .utf8) {
+                                let decoder = JSONDecoder()
+                                pictureAlbum = try! decoder.decode(PicturesAlbum.self, from: data)
+                                if let pA = pictureAlbum {
+                                    print(pA)
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+            init(_ albumId: String) {
+                self.graphPath = "/\(albumId)/photos"
+            }
+            
+        }
+    
+        let profilePromise = Promise<[URL]>()
+        
+        let connection = GraphRequestConnection()
+        connection.add(MyProfilePictureRequest(albumId)) { response, result in
+        switch result {
+            case .success(let response):
+                print("Custom Graph Request Succeeded: \(response)")
+                if let pictureAlbum = response.pictureAlbum {
+                    var albumImageUrl = [URL]()
+                    for (index,album) in pictureAlbum.data.enumerated() {
+                        if let bigImageUrl = album.images.first?.url {
+                            albumImageUrl.append(bigImageUrl)
+                        }
+                        if index == 4 {
+                            break
+                        }
+                    }
+                    profilePromise.fulfill(albumImageUrl)
+                } else {
+                    let error = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_DECODING_ME, userInfo: ["desc":"could not decode fb profile"])
+                    profilePromise.reject(error)
+                }
+            case .failed(let error):
+                let error = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_GRAPH_API, userInfo: ["desc":error.localizedDescription])
+                profilePromise.reject(error)
+            }
+        }
+        connection.start()
+    
+        return profilePromise.future
+    }
 }
+    

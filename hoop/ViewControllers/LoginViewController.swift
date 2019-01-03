@@ -106,19 +106,27 @@ class LoginViewController: VideoSplashViewController {
             return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
         }
         
-        signupPromise.whenFulfilled(on: .main){ me in
+        let picturePromise = signupPromise.then { me -> Future<[URL]> in
             if let token = me.token {
                 HoopNetworkApi.appToken = token
             }
             me.save()
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
-                self.present(vc as! UIViewController, animated: true)
+            if let fb_profile_alb_id = me.fb_profile_id {
+                return FacebookHandler.getMyProfilePictures(fromAlbum: fb_profile_alb_id)
+            } else {
+                return Promise<[URL]>().future
             }
         }
         
         signupPromise.whenRejected(on: .main){ error in
             PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
                 print("action")
+            }
+        }
+        
+        picturePromise.whenFulfilled(on: .main) { urls in
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+                self.present(vc as! UIViewController, animated: true)
             }
         }
 
