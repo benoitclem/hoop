@@ -107,7 +107,9 @@ class LoginViewController: VideoSplashViewController {
         }
         
         signupPromise.whenFulfilled(on: .main){ me in
-            print(me)
+            if let token = me.token {
+                HoopNetworkApi.appToken = token
+            }
             me.save()
             if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
                 self.present(vc as! UIViewController, animated: true)

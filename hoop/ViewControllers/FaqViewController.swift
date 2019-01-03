@@ -7,24 +7,56 @@
 //
 
 import UIKit
+import Eureka
 
-class FaqViewController: UIViewController {
+class FaqViewController: FormViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.setupToolbar()
 
-        // Do any additional setup after loading the view.
+        self.tableView.backgroundColor = .hoopTableGrayColor
+        self.tableView.separatorStyle = .none
+        
+
+        let promise = HoopNetworkApi.sharedInstance.getFaq()
+        promise?.whenFulfilled(on: .main){ (faqEntries) in
+            for entry in faqEntries {
+                self.form +++ Section(entry.name ?? "")
+                    <<< HoopTextViewRow() { row in
+                        row.content = entry.content ?? ""
+                }
+            
+            }
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func setupToolbar() {
+        let vcTitle = "faq_vc_title".localized()
+        var leftTitle: String? = "back".localized()
+        var leftSelector: Selector? = #selector(FaqViewController.leftTarget(sender:))
+        let rightTitle: String? = nil
+        let rightSelector: Selector? = nil
+        
+        self.setupHoopNavigationBar(vcTitle,
+                                    leftTitle: leftTitle, leftSelector: leftSelector,
+                                    rightTitle: rightTitle, rightSelector: rightSelector)
     }
-    */
+    
+    @objc func leftTarget( sender: UIBarButtonItem) {
+        print("cancel")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    // Nice and fast way to customize the header view
+    func tableView(_: UITableView, willDisplayHeaderView view: UIView, forSection: Int) {
+        
+        if let view = view as? UITableViewHeaderFooterView {
+            view.textLabel?.textColor = .hoopRedColor
+            view.textLabel?.font = .MainFontMedium(ofSize: 15.0)
+            view.textLabel?.text = view.textLabel?.text?.lowercased()
+        }
+    }
 
 }

@@ -17,6 +17,7 @@ public class HoopTextViewCell: Cell<String>, CellType, UITextViewDelegate {
     public override func setup() {
         super.setup()
         height = { UITableView.automaticDimension }
+        rowTextView.text = (row as! HoopTextViewRow).content
         rowTextView.placeholder = (row as! HoopTextViewRow).placeholder as NSString?
         rowTextView.delegate = self
     }
@@ -40,6 +41,7 @@ public class HoopTextViewCell: Cell<String>, CellType, UITextViewDelegate {
 
 public final class HoopTextViewRow: Row<HoopTextViewCell>, RowType {
     
+    public var content: String?
     public var placeholder: String?
     
     required public init(tag: String?) {

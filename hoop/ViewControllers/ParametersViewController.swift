@@ -49,7 +49,6 @@ class ParametersViewController: FormViewController {
                 row.value?.append(UIImage(named: "sophie")!)
             }
         
-        
         // [SECTION] Prénom Age
         form +++ Section("Informations")
             <<< HoopLabelRow() { row in
@@ -65,7 +64,7 @@ class ParametersViewController: FormViewController {
                     return self.me?.name == nil
                 })
                 row.tag = "name"
-                row.value = ""
+                row.content = ""
                 row.placeholder = "nom"
             }
             <<< HoopLabelRow() { row in
@@ -85,8 +84,6 @@ class ParametersViewController: FormViewController {
                 let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
                 row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
             }
-            //<<< (nameRow ?? nameRowEditable!)
-            //<<< (ageRow ?? dobRowEditable!)
             <<< EmailRow() { row in
                     row.tag = "email"
                     row.hidden = Condition.function([], { _ in
@@ -121,7 +118,7 @@ class ParametersViewController: FormViewController {
         }
         
         // [SECTION] Je souhaite rencontrer
-        form +++ Section("Je souhaite rencontrer")
+        form +++ Section("Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer,")
             <<< SwitchRow() { row in
                 row.tag = "switchHomme"
                 row.title = "Homme"
@@ -157,8 +154,9 @@ class ParametersViewController: FormViewController {
                     style.txtAlignement = NSTextAlignment.center
                     row.labelStyle = style
                 }.onCellSelection { cell, row in
-                        //row.title = "action 1"
-                        print(row.labelText)
+                    if let vc = try? Router.shared.matchControllerFromStoryboard("/faq", storyboardName: "Main") {
+                        self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+                    }
                 }
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()
@@ -166,7 +164,6 @@ class ParametersViewController: FormViewController {
                     style.txtAlignement = NSTextAlignment.center
                     row.labelStyle = style
                 }.onCellSelection { cell, row in
-                        //row.title = "action 1"
                         print(row.labelText)
                         
                 }
@@ -179,6 +176,9 @@ class ParametersViewController: FormViewController {
                     }.onCellSelection { cell, row in
                         //row.title = "action 1"
                         print(row.labelText)
+                        if let vc = try? Router.shared.matchControllerFromStoryboard("/web/Confidentialite", storyboardName: "Main") {
+                            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+                        }
                 }
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()
@@ -188,6 +188,9 @@ class ParametersViewController: FormViewController {
                     }.onCellSelection { cell, row in
                         //row.title = "action 1"
                         print(row.labelText)
+                        if let vc = try? Router.shared.matchControllerFromStoryboard("/web/CGU", storyboardName: "Main") {
+                            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+                        }
                 }
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()
@@ -197,6 +200,9 @@ class ParametersViewController: FormViewController {
                 }.onCellSelection { cell, row in
                     //row.title = "action 1"
                     print(row.labelText)
+                    if let vc = try? Router.shared.matchControllerFromStoryboard("/web/Licences", storyboardName: "Main") {
+                        self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+                    }
                 }
             form +++ Section("quitter")
                 <<< HoopLabelRow() { row in

@@ -112,58 +112,46 @@
             <point key="canvasLocation" x="3327" y="27"/>
         </scene>
         <!--Faq View Controller-->
-        <scene sceneID="CHi-gd-8qr">
+        <scene sceneID="4Sd-oA-YRD">
             <objects>
-                <viewController id="id8-eU-Gok" customClass="FaqViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="HrJ-sq-Lze">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAQ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bGY-m1-KuU">
-                                <rect key="frame" x="191" y="437.5" width="32" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="bGY-m1-KuU" firstAttribute="centerY" secondItem="HrJ-sq-Lze" secondAttribute="centerY" id="BFT-fl-k0K"/>
-                            <constraint firstItem="bGY-m1-KuU" firstAttribute="centerX" secondItem="HrJ-sq-Lze" secondAttribute="centerX" id="orh-VQ-1nd"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="0nv-Zq-5Yr"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rUT-G5-l3j" sceneMemberID="firstResponder"/>
+                <tableViewController storyboardIdentifier="FaqViewController" id="5Ea-Q4-BiR" customClass="FaqViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7I5-Fr-xBL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="-643"/>
+            <point key="canvasLocation" x="1645" y="-642"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="QGH-wd-VH9">
             <objects>
-                <viewController id="wgN-N2-aD1" customClass="WebViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WebViewController" id="wgN-N2-aD1" customClass="WebViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l5d-Tc-uEk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Web" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RaB-bG-BuC">
-                                <rect key="frame" x="189.5" y="437.5" width="35" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zEf-30-lG5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="RaB-bG-BuC" firstAttribute="centerX" secondItem="l5d-Tc-uEk" secondAttribute="centerX" id="TXg-W0-Jsc"/>
-                            <constraint firstItem="RaB-bG-BuC" firstAttribute="centerY" secondItem="l5d-Tc-uEk" secondAttribute="centerY" id="sbo-ot-BWb"/>
+                            <constraint firstItem="zEf-30-lG5" firstAttribute="trailing" secondItem="DB8-xb-e1y" secondAttribute="trailing" id="3dC-UQ-u9d"/>
+                            <constraint firstItem="zEf-30-lG5" firstAttribute="leading" secondItem="DB8-xb-e1y" secondAttribute="leading" id="Sel-mo-L04"/>
+                            <constraint firstItem="zEf-30-lG5" firstAttribute="top" secondItem="DB8-xb-e1y" secondAttribute="top" id="Vd1-ab-4sH"/>
+                            <constraint firstItem="zEf-30-lG5" firstAttribute="bottom" secondItem="DB8-xb-e1y" secondAttribute="bottom" id="fyH-wp-Shz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="DB8-xb-e1y"/>
                     </view>
+                    <connections>
+                        <outlet property="webview" destination="zEf-30-lG5" id="M4B-LA-BoO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B9f-4L-AgD" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1646" y="719"/>
+            <point key="canvasLocation" x="1644.9275362318842" y="718.52678571428567"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="h4g-AN-35R">

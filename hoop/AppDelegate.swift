@@ -78,14 +78,18 @@ extension AppDelegate {
         let defaults = Defaults()
         if let retrievedMe = defaults.get(for: .me) {
             me = retrievedMe
+            if let token = retrievedMe.token {
+                HoopNetworkApi.appToken = token
+            }
         }
     }
     
     func setupRouting() {
         let router = Router.shared
         router.map("/tutorial", controllerClass: TutorialViewController.self)
-//        router.map("/infotunnel", controllerClass: InfoTunnelViewController.self)
         router.map("/parameters", controllerClass: ParametersViewController.self)
+        router.map("/faq", controllerClass: FaqViewController.self)
+        router.map("/web/:target", controllerClass: WebViewController.self)
         router.map("/map", controllerClass: MapViewController.self)
         router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
         router.map("/conversation", controllerClass: ConversationViewController.self)
@@ -141,15 +145,16 @@ extension AppDelegate{
         }
     }
     
+    func showInNavigationViewController(_ vc: UIViewController) {
+        let navigationController = UINavigationController(rootViewController: vc)
+        window?.rootViewController = navigationController
+        window?.makeKeyAndVisible()
+    }
+    
     func showLogin() {
         let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
         showInNavigationViewController(loginController!)
     }
-    
-//    func showTunnel() {
-//        let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InfoTunnelViewController") as? InfoTunnelViewController
-//        window?.rootViewController = mapController!
-//    }
     
     func showParameters() {
         let paramsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController
@@ -167,9 +172,4 @@ extension AppDelegate{
         //window?.rootViewController = mapController!
     }
     
-    func showInNavigationViewController(_ vc: UIViewController) {
-        let navigationController = UINavigationController(rootViewController: vc)
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
-    }
 }

@@ -30,10 +30,9 @@ class HoopNetworkApi: AlamofireWrapper {
     
     // Store connection infos
     static var lastLocation: CLLocation!
-    var appToken: String?
+    static var appToken: String?
     var deviceToken: String?
     
-
     private init(){
         print("init hoopNetApi")
         super.init(with: "hoopNetworkConfig")
@@ -43,21 +42,37 @@ class HoopNetworkApi: AlamofireWrapper {
         self.deviceToken = tokenString
     }
     
-    private func request<T>(with method: String,and arguments: [String:String]) -> Future<hoopApiResponse<T>> {
+    private func request<T>(_ method: String,and arguments: [String:String]) -> Future<hoopApiResponse<T>> {
+        // Insert token if exists
+        var mutableArguments = arguments
+        if let token = HoopNetworkApi.appToken {
+            mutableArguments["token"] = token
+        }
+        // Do the request now
         let promise = Promise<hoopApiResponse<T>>()
         if(self.baseUrl !=  nil) {
-            let fullUrl = "https://\(self.baseUrl!)/api/\(method)?\(self.urlEncode(arguments))"
-            //print(fullUrl)
+            let fullUrl = "https://\(self.baseUrl!)/api/\(method)?\(self.urlEncode(mutableArguments))"
             Alamofire.request(fullUrl).responseData { response in
-                /*
-                 print(response.request)  // original URL request
-                 print(response.response) // HTTP URL response
-                 print(response.data)     // server data
-                 print(response.result)   // result of response serialization
-                 */
                 let decoder = JSONDecoder()
                 let result: Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
-                print(result)
+                switch result {
+                case .success(let data):
+                    if let code = data.code {
+                        if code == "ko" {
+                            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_APP_ERROR, userInfo: ["desc": data.message ?? "unknown"])
+                            promise.reject(error)
+                        } else {
+                            promise.fulfill(data)
+                        }
+                    } else {
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_DECODER_FAILED, userInfo: ["desc":response.error ?? "unknown"])
+                        promise.reject(error)
+                    }
+                    
+                case .failure(let error):
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MALFORMED_JSON, userInfo: ["desc": error.localizedDescription ])
+                    promise.reject(error)
+                }
             }
         } else {
             let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_URL_NOT_DEFINED, userInfo: ["desc":"base url not defined, please set hoopNetworkConfig/baseUrl key in plist file"])
@@ -66,15 +81,35 @@ class HoopNetworkApi: AlamofireWrapper {
         return promise.future
     }
     
-    private func post<T>(with methodName: String, and arguments: [String:Any], andProgress progressHandler: ((_ result: Double) -> Void)? ) -> Future<hoopApiResponse<T>> {
+    func HoopRequest<T: Decodable>(_ method: String, and arguments: [String:String]) -> Future<T> {
+        let promise: Future<hoopApiResponse<T>> = self.request(method, and: arguments)
+        return promise.then { response -> Future<T> in
+            let promise = Promise<T>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    private func post<T>(_ methodName: String, and arguments: [String:Any], andProgress progressHandler: ((_ result: Double) -> Void)? ) -> Future<hoopApiResponse<T>> {
         let promise = Promise<hoopApiResponse<T>>()
+        // Insert token if exists
+        var mutableArguments = arguments
+        if let token = HoopNetworkApi.appToken {
+            mutableArguments["token"] = token
+        }
+        // Do the request now
         if(self.baseUrl !=  nil) {
             // Build request
             let fullUrl = "https://\(self.baseUrl!)/api/\(methodName)"
             // Do the request
             Alamofire.upload(
                 multipartFormData: { multipartFormData in
-                    for (key,arg) in arguments {
+                    for (key,arg) in mutableArguments {
                         // Add image
                         if (arg is Data) {
                             multipartFormData.append(arg as! Data, withName: key, fileName: key + ".png", mimeType: "image/png")
@@ -142,10 +177,10 @@ class HoopNetworkApi: AlamofireWrapper {
 extension HoopNetworkApi {
     
     func signUp(with facebookData: fbme) -> Future<profile> {
-        let promise: Future<hoopApiResponse<profile>> = self.post(with: "signUpClient", and: facebookData.signUpData, andProgress: nil)
+        let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: facebookData.signUpData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
-            if var data = response.data {
+            if let data = response.data {
                 // if everything goes right transfer fbme infos to profile infos
                 // TODO: maybe the fbme should be recorded somewhere if
                 // all datas are not copied to profile
@@ -160,6 +195,35 @@ extension HoopNetworkApi {
                     let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
                     promise.reject(error)
                 }
+            }
+            return promise.future
+        }
+    }
+    
+    func getHoops(by location: CLLocation) -> Future<[hoop]>? {
+        let arguments = ["lat":String(location.coordinate.latitude),
+                         "long":String(location.coordinate.longitude),
+                         "margin":"0.02"]
+        let promise: Future<hoopApiResponse<[hoop]>> = self.request("getLovestopInfoByLatLong", and: arguments)
+        return promise.then { data -> Future<[hoop]> in
+            let promise =  Promise<[hoop]>()
+            let hoopArray = [hoop]()
+            promise.fulfill(hoopArray)
+            return promise.future
+        }
+    }
+    
+    // This should be working but not
+    func getFaq2() -> Future<[faqEntry]> {
+        return HoopRequest("getFaq", and: [:])
+    }
+ 
+    func getFaq() -> Future<[faqEntry]>? {
+        let promise: Future<hoopApiResponse<[faqEntry]>> = self.request("getFaq", and: [:])
+        return promise.then { response -> Future<[faqEntry]> in
+            let promise = Promise<[faqEntry]>()
+            if let data = response.data {
+                promise.fulfill(data)
             } else {
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
                 promise.reject(error)
@@ -168,19 +232,20 @@ extension HoopNetworkApi {
         }
     }
     
-    func getHoops(by location: CLLocation) -> Future<[hoop]>? {
-        guard let token = self.appToken else {
-            return nil
-        }
-        
-        let promise: Future<hoopApiResponse<[hoop]>> = self.request(with: "getLovestopInfoByLatLong",and: ["token":token,"lat":String(location.coordinate.latitude),"long":String(location.coordinate.longitude), "margin":"0.02"])
-        return promise.then { data -> Future<[hoop]> in
-            let promise =  Promise<[hoop]>()
-            let hoopArray = [hoop]()
-            promise.fulfill(hoopArray)
+    func getConditions() -> Future<[condition]>? {
+        let promise: Future<hoopApiResponse<[condition]>> = self.request("getTermsAndConditions", and: [:])
+        return promise.then { response -> Future<[condition]> in
+            let promise = Promise<[condition]>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
             return promise.future
         }
     }
+    
     /*
     func getLoveStopInIds(by location: CLLocationCoordinate2D) -> Future<[Int]> {
         guard let token = self.appToken else {
