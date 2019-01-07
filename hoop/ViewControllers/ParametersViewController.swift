@@ -44,9 +44,11 @@ class ParametersViewController: FormViewController {
             <<< ImageCollectionViewRow() { row in
                 row.tag = "images"
                 row.value = [UIImage]()
-                row.value?.append(UIImage(named: "sophie")!)
-                row.value?.append(UIImage(named: "sophie")!)
-                row.value?.append(UIImage(named: "sophie")!)
+                if let images = self.me?.pictures_images {
+                    for image in images {
+                        row.value?.append(image)
+                    }
+                }
             }.onChange { row in
                 print("got changes")
                 print(row.value)

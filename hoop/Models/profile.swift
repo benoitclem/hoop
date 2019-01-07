@@ -20,7 +20,7 @@ class profile: Decodable, Encodable {
     var gender: Int?
     var description: String?
     var thumb: URL?
-    var pictures = [URL]()
+    var pictures_urls = [URL]()
     var pictures_images = [UIImage]()
     var sexualOrientation: Int?
     var activeInHoop: Int?
@@ -53,7 +53,7 @@ class profile: Decodable, Encodable {
         case description
         case email
         case thumb = "profile_picture_thumb"
-        case pictures
+        case pictures_urls
         case pictures_images
         case picture1 = "profile_picture"
         case picture2
@@ -107,26 +107,26 @@ class profile: Decodable, Encodable {
         if container.contains(.thumb){
             thumb = try? container.decode(URL.self, forKey: .thumb)
         }
-        if let pics = try? container.decode([URL].self, forKey: .pictures) {
-            pictures += pics 
-        }
         if let pics_img = try? container.decode([UIImage].self, forKey: .pictures_images) {
             pictures_images += pics_img
         }
+        if let pics = try? container.decode([URL].self, forKey: .pictures_urls) {
+            pictures_urls += pics
+        }
         if let pic1 = try? container.decode(URL.self, forKey: .picture1) {
-            pictures.append(pic1)
+            pictures_urls.append(pic1)
         }
         if let pic2 = try? container.decode(URL.self, forKey: .picture2) {
-            pictures.append(pic2)
+            pictures_urls.append(pic2)
         }
         if let pic3 = try? container.decode(URL.self, forKey: .picture3) {
-            pictures.append(pic3)
+            pictures_urls.append(pic3)
         }
         if let pic4 = try? container.decode(URL.self, forKey: .picture4) {
-            pictures.append(pic4)
+            pictures_urls.append(pic4)
         }
         if let pic5 = try? container.decode(URL.self, forKey: .picture5) {
-            pictures.append(pic5)
+            pictures_urls.append(pic5)
         }
         if container.contains(.sexualOrientation){
             sexualOrientation = try? container.decode(Int.self, forKey: .sexualOrientation)
@@ -175,7 +175,7 @@ class profile: Decodable, Encodable {
         try container.encode(gender, forKey: .gender)
         try container.encode(description, forKey: .description)
         try container.encode(thumb, forKey: .thumb)
-        try container.encode(pictures, forKey: .pictures)
+        try container.encode(pictures_urls, forKey: .pictures_urls)
         try container.encode(pictures_images, forKey: .pictures_images)
         try container.encode(sexualOrientation, forKey: .sexualOrientation)
         try container.encode(activeInHoop, forKey: .activeInHoop)

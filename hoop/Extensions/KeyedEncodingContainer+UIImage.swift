@@ -34,8 +34,8 @@ extension KeyedEncodingContainer {
     mutating func encode(_ values: [UIImage],
                          forKey key: KeyedEncodingContainer.Key,
                          quality: ImageEncodingQuality = .png) throws {
+        var imagesData = [Data]()
         for value in values {
-            var imagesData = [Data]()
             if quality == .png {
                 if let data = value.pngData() {
                     imagesData.append(data)
@@ -45,11 +45,9 @@ extension KeyedEncodingContainer {
                     imagesData.append(data)
                 }
             }
-            try encode(imagesData, forKey: key)
         }
+        try encode(imagesData, forKey: key)
     }
-
-    
 }
 
 extension KeyedDecodingContainer {

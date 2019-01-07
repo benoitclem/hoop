@@ -365,6 +365,9 @@ extension FacebookHandler {
                             break
                         }
                     }
+                    if let me = AppDelegate.me {
+                        me.pictures_urls = albumImageUrl
+                    }
                     profilePromise.fulfill(albumImageUrl)
                 } else {
                     let error = NSError(domain: "com.ohmyhoop.hoop", code: FB_ERROR_DECODING_ME, userInfo: ["desc":"could not decode fb profile"])
