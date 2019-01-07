@@ -13,7 +13,7 @@ import FacebookCore
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var me: profile? = nil
+    static var me: profile? = nil
     
     enum ScreenToShow: String {
         case login = "login"
@@ -77,7 +77,7 @@ extension AppDelegate {
     func setupData() {
         let defaults = Defaults()
         if let retrievedMe = defaults.get(for: .me) {
-            me = retrievedMe
+            AppDelegate.me = retrievedMe
             if let token = retrievedMe.token {
                 HoopNetworkApi.appToken = token
             }
@@ -107,7 +107,7 @@ extension AppDelegate {
 
 extension AppDelegate {
     func selectFirstViewController() -> ScreenToShow{
-        if let me = me {
+        if let me = AppDelegate.me {
             if let _ = me.token {
                 if let _ = me.reached_map {
                     return .map

@@ -11,6 +11,7 @@ import Futures
 import UIKit
 import CoreLocation
 import Alamofire
+import AlamofireImage
 import SwiftyJSON
 
 class HoopNetworkApi: AlamofireWrapper {
@@ -23,7 +24,9 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_MALFORMED_JSON: Int = -5
     static let API_ERROR_DECODER_FAILED: Int = -6
     static let API_ERROR_NO_DATA: Int = -7
-    static let API_ERROR_MISSING_DATA: Int = 8
+    static let API_ERROR_MISSING_DATA: Int = -8
+    static let API_ERROR_MISSING_URL: Int = -9
+    static let API_ERROR_NO_PROFILE: Int = -10
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -172,6 +175,44 @@ class HoopNetworkApi: AlamofireWrapper {
         return promise.future
     }
     
+    func getImage(fromUrl url: URL) -> Future<UIImage> {
+        let imagePromise = Promise<UIImage>()
+        Alamofire.request(url.absoluteString).responseImage { response in
+            switch(response.result) {
+            case .success(let image):
+                imagePromise.fulfill(image)
+            case .failure(let error):
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":error.localizedDescription])
+                imagePromise.reject(error)
+            }
+        }
+        return imagePromise.future
+    }
+
+    func getImages(fromUrls urls: [URL]) -> Future<[UIImage]> {
+        var mutatingUrl = urls
+        let imagesPromises = Promise<[UIImage]>()
+        var images = [UIImage]()
+        // The urls array must contain one URL
+        if let firstUrl = mutatingUrl.first {
+            mutatingUrl.removeFirst()
+            var imageFuture = self.getImage(fromUrl: firstUrl)
+            for url in mutatingUrl {
+                imageFuture = imageFuture.then { image -> Future<Image> in
+                    images.append(image)
+                    return self.getImage(fromUrl: url)
+                }
+            }
+            imageFuture.whenFulfilled { image in
+                images.append(image)
+                imagesPromises.fulfill(images)
+            }
+        } else {
+            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_URL, userInfo: ["desc":"no url array provided"])
+            imagesPromises.reject(error)
+        }
+        return imagesPromises.future
+    }
 }
 
 extension HoopNetworkApi {
@@ -180,18 +221,25 @@ extension HoopNetworkApi {
         let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: facebookData.signUpData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
-            if let data = response.data {
+            if let me = response.data {
                 // if everything goes right transfer fbme infos to profile infos
                 // TODO: maybe the fbme should be recorded somewhere if
                 // all datas are not copied to profile
-                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email, let fb_profile_id = facebookData.albums {
-                    data.name = name
-                    data.dob = dob
-                    data.gender = gender
-                    data.email = email
-                    data.fb_profile_id = facebookData.albums?.data.first(where: { $0.type == "profile"})?.id
-                    // Here the other stuffs
-                    promise.fulfill(data)
+                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email, let fb_profile_album = facebookData.albums {
+                    me.name = name
+                    me.dob = dob
+                    me.gender = gender
+                    me.email = email
+                    me.fb_profile_alb_id = fb_profile_album.data.first(where: { $0.type == "profile"})?.id
+                    
+                    // Save the token and the me data
+                    if let token = me.token {
+                        HoopNetworkApi.appToken = token
+                    }
+                    AppDelegate.me = me
+                    me.save()
+                    
+                    promise.fulfill(me)
                 } else {
                     let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
                     promise.reject(error)
@@ -241,6 +289,22 @@ extension HoopNetworkApi {
                 promise.fulfill(data)
             } else {
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    // Proxy function that only save images
+    func getProfilePictures(fromUrls url: [URL]) -> Future<Bool> {
+        return self.getImages(fromUrls: url).then { images -> Future<Bool> in
+            let promise = Promise<Bool>()
+            if let me = AppDelegate.me {
+                me.pictures_images = images
+                me.save()
+                promise.fulfill(true)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_PROFILE, userInfo: ["desc":"could not get profile in app delegate"])
                 promise.reject(error)
             }
             return promise.future

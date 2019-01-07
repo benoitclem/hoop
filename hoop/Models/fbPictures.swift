@@ -12,8 +12,7 @@ import FacebookCore
 class Picture: Decodable {
     var height: Int?
     var width: Int?
-    var is_silhouette: Bool?
-    var url: URL?
+    var source: URL?
 }
 
 class Pictures: Decodable {

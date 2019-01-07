@@ -21,12 +21,13 @@ class profile: Decodable, Encodable {
     var description: String?
     var thumb: URL?
     var pictures = [URL]()
+    var pictures_images = [UIImage]()
     var sexualOrientation: Int?
     var activeInHoop: Int?
     var hoopLastConnection: Date?
     var commonLikes: [String]?
     // Use for me profile
-    var fb_profile_id: String?
+    var fb_profile_alb_id: String?
     var token: String?
     var sharing_code: String?
     var reached_map: Bool?
@@ -53,6 +54,7 @@ class profile: Decodable, Encodable {
         case email
         case thumb = "profile_picture_thumb"
         case pictures
+        case pictures_images
         case picture1 = "profile_picture"
         case picture2
         case picture3
@@ -62,7 +64,7 @@ class profile: Decodable, Encodable {
         case activeInHoop = "active_in_hoop"
         case hoopLastConnection = "timestamp_lastconnection"
         case commonLikes = "common_likes"
-        case fb_profile_id
+        case fb_profile_alb_id
         case token
         case sharing_code
         case reached_map
@@ -105,6 +107,12 @@ class profile: Decodable, Encodable {
         if container.contains(.thumb){
             thumb = try? container.decode(URL.self, forKey: .thumb)
         }
+        if let pics = try? container.decode([URL].self, forKey: .pictures) {
+            pictures += pics 
+        }
+        if let pics_img = try? container.decode([UIImage].self, forKey: .pictures_images) {
+            pictures_images += pics_img
+        }
         if let pic1 = try? container.decode(URL.self, forKey: .picture1) {
             pictures.append(pic1)
         }
@@ -141,8 +149,8 @@ class profile: Decodable, Encodable {
         if container.contains(.commonLikes){
             commonLikes = try? container.decode([String].self, forKey: .commonLikes)
         }
-        if container.contains(.fb_profile_id){
-            fb_profile_id = try? container.decode(String.self, forKey: .fb_profile_id)
+        if container.contains(.fb_profile_alb_id){
+            fb_profile_alb_id = try? container.decode(String.self, forKey: .fb_profile_alb_id)
         }
         if container.contains(.token){
             token = try? container.decode(String.self, forKey: .token)
@@ -168,11 +176,12 @@ class profile: Decodable, Encodable {
         try container.encode(description, forKey: .description)
         try container.encode(thumb, forKey: .thumb)
         try container.encode(pictures, forKey: .pictures)
+        try container.encode(pictures_images, forKey: .pictures_images)
         try container.encode(sexualOrientation, forKey: .sexualOrientation)
         try container.encode(activeInHoop, forKey: .activeInHoop)
         try container.encode(hoopLastConnection, forKey: .hoopLastConnection)
         try container.encode(commonLikes, forKey: .commonLikes)
-        try container.encode(fb_profile_id, forKey: .fb_profile_id)
+        try container.encode(fb_profile_alb_id, forKey: .fb_profile_alb_id)
         try container.encode(token, forKey: .token)
         try container.encode(sharing_code, forKey: .sharing_code)
         try container.encode(reached_map, forKey: .reached_map)

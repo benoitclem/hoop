@@ -28,9 +28,14 @@ class LoginViewController: VideoSplashViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUserInterface()
         setupVideoBackground()
         setupLegals()
         // Do any additional setup after loading the view.
+    }
+    
+    func setupUserInterface() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     func setupVideoBackground() {
@@ -73,9 +78,23 @@ class LoginViewController: VideoSplashViewController {
     
     @IBAction func doFacebookLogin(_ sender: Any) {
         
-        let loginPromise = FacebookHandler.connect(with: fbPermissions, from: self)
+        let future = FacebookHandler.connect(with: fbPermissions, from: self).then { info -> Future<fbme> in
+            return FacebookHandler.getMyProfile()
+        }.then { fbProfile -> Future<profile> in
+            return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
+        }.then { me -> Future<[URL]> in
+            return FacebookHandler.getMyProfilePictures(fromAlbum: me.fb_profile_alb_id)
+        }.then { urls -> Future<Bool> in
+            return  HoopNetworkApi.sharedInstance.getProfilePictures(fromUrls: urls)
+        }
         
-        loginPromise.whenRejected(on: .main)  { error in
+        future.whenFulfilled(on: .main) { done in
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+                self.present(vc as! UIViewController, animated: true)
+            }
+        }
+        
+        future.whenRejected(on: .main) { error in
             var message = ""
             switch (error as NSError).code {
             case FacebookHandler.FB_ERROR_BASE:
@@ -89,44 +108,6 @@ class LoginViewController: VideoSplashViewController {
             }
             PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "erreur", message, "button") {
                 print("action")
-            }
-        }
-        
-        let profilPromise = loginPromise.then { info -> Future<fbme> in
-            return FacebookHandler.getMyProfile()
-        }
-        
-        profilPromise.whenRejected(on: .main) { error  in
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
-                print("action")
-            }
-        }
-        
-        let signupPromise = profilPromise.then { fbProfile -> Future<profile> in
-            return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
-        }
-        
-        let picturePromise = signupPromise.then { me -> Future<[URL]> in
-            if let token = me.token {
-                HoopNetworkApi.appToken = token
-            }
-            me.save()
-            if let fb_profile_alb_id = me.fb_profile_id {
-                return FacebookHandler.getMyProfilePictures(fromAlbum: fb_profile_alb_id)
-            } else {
-                return Promise<[URL]>().future
-            }
-        }
-        
-        signupPromise.whenRejected(on: .main){ error in
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "titre", "description", "button") {
-                print("action")
-            }
-        }
-        
-        picturePromise.whenFulfilled(on: .main) { urls in
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
-                self.present(vc as! UIViewController, animated: true)
             }
         }
 

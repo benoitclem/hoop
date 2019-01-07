@@ -126,6 +126,7 @@
 		EBAEF3B721DD2C260024CDF9 /* UINavigationController+replaceRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */; };
 		EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAEF3B821DDE7D60024CDF9 /* HoopDateCell.swift */; };
 		EBAEF3BD21DDE8190024CDF9 /* HoopDateCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EBAEF3BC21DDE8190024CDF9 /* HoopDateCell.xib */; };
+		EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -278,6 +279,7 @@
 		EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+replaceRoot.swift"; sourceTree = "<group>"; };
 		EBAEF3B821DDE7D60024CDF9 /* HoopDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoopDateCell.swift; path = FormCells/HoopDateCell.swift; sourceTree = "<group>"; };
 		EBAEF3BC21DDE8190024CDF9 /* HoopDateCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HoopDateCell.xib; path = FormCells/HoopDateCell.xib; sourceTree = "<group>"; };
+		EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KeyedEncodingContainer+UIImage.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -367,6 +369,7 @@
 				EBAEF3AD21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift */,
 				EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */,
 				EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */,
+				EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -743,6 +746,7 @@
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
+				EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,

@@ -23,6 +23,7 @@ class FacebookHandler: NSObject {
 
     static let FB_ERROR_GRAPH_API: Int = -4
     static let FB_ERROR_DECODING_ME: Int = -5
+    static let FB_ERROR_MISSING_ALBUM_ID: Int = -6
     
     static func connect(with permission:[ReadPermission],from viewController: UIViewController) -> Future<Bool> {
         let promise = Promise<Bool>()
@@ -307,7 +308,7 @@ extension FacebookHandler {
         return profilePromise.future
     }
     
-    static func getMyProfilePictures(fromAlbum albumId:String) -> Future<[URL]> {
+    static func getMyProfilePictures(fromAlbum albumId:String?) -> Future<[URL]> {
         struct MyProfilePictureRequest: GraphRequestProtocol {
             
             var graphPath: String
@@ -343,15 +344,21 @@ extension FacebookHandler {
     
         let profilePromise = Promise<[URL]>()
         
+        guard let albId = albumId else {
+            let error = NSError(domain: "HoopNetworkApiError", code: FacebookHandler.FB_ERROR_MISSING_ALBUM_ID, userInfo: ["desc":"albumId is missing"])
+            profilePromise.reject(error)
+            return profilePromise.future
+        }
+        
         let connection = GraphRequestConnection()
-        connection.add(MyProfilePictureRequest(albumId)) { response, result in
+        connection.add(MyProfilePictureRequest(albId)) { response, result in
         switch result {
             case .success(let response):
                 print("Custom Graph Request Succeeded: \(response)")
                 if let pictureAlbum = response.pictureAlbum {
                     var albumImageUrl = [URL]()
                     for (index,album) in pictureAlbum.data.enumerated() {
-                        if let bigImageUrl = album.images.first?.url {
+                        if let bigImageUrl = album.images.first?.source {
                             albumImageUrl.append(bigImageUrl)
                         }
                         if index == 4 {
