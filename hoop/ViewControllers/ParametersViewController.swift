@@ -11,6 +11,19 @@ import Eureka
 
 class ParametersViewController: FormViewController {
     
+    static let TAG_IMAGES = "me_images"
+    static let TAG_NAME = "me_name"
+    static let TAG_NAME_EDIT = "me_name_edit"
+    static let TAG_AGE = "me_age"
+    static let TAG_AGE_EDIT = "me_age_edit"
+    static let TAG_EMAIL_EDIT = "me_email_edit"
+    static let TAG_DESCRIPTION = "me_description"
+    static let TAG_I_AM_MALE = "me_iAmMale"
+    static let TAG_I_AM_FEMALE = "me_iAmFemale"
+    static let TAG_I_WANT_MALE = "me_iWantMale"
+    static let TAG_I_WANT_FEMALE = "me_iWantFemale"
+    static let TAG_I_WANT_AGERANGE = "me_iWantAgeRange"
+    
     let me: profile? = Defaults().get(for: .me)
     var firstTimer: Bool = true
     
@@ -42,7 +55,7 @@ class ParametersViewController: FormViewController {
         // [SECTION] Pictures photo
         form +++ Section("Mes photos")
             <<< ImageCollectionViewRow() { row in
-                row.tag = "images"
+                row.tag = ParametersViewController.TAG_IMAGES
                 row.value = [UIImage]()
                 if let images = self.me?.pictures_images {
                     for image in images {
@@ -57,6 +70,7 @@ class ParametersViewController: FormViewController {
         // [SECTION] Prénom Age
         form +++ Section("Informations")
             <<< HoopLabelRow() { row in
+                row.tag = ParametersViewController.TAG_NAME
                 row.hidden = Condition.function([], { _ in
                     return self.me?.name != nil
                 })
@@ -65,14 +79,15 @@ class ParametersViewController: FormViewController {
                 }
             }
             <<< HoopTextViewRow() { row in
+                row.tag = ParametersViewController.TAG_NAME_EDIT
                 row.hidden = Condition.function([], { _ in
                     return self.me?.name == nil
                 })
-                row.tag = "name"
                 row.content = ""
                 row.placeholder = "nom"
             }
             <<< HoopLabelRow() { row in
+                row.tag = ParametersViewController.TAG_AGE
                 row.hidden = Condition.function([], { _ in
                     return self.me?.age != nil
                 })
@@ -81,6 +96,7 @@ class ParametersViewController: FormViewController {
                 }
             }
             <<< HoopDateRow() { row in
+                row.tag = ParametersViewController.TAG_AGE_EDIT
                 row.hidden = Condition.function([], { _ in
                     return self.me?.age == nil
                 })
@@ -90,7 +106,7 @@ class ParametersViewController: FormViewController {
                 row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
             }
             <<< EmailRow() { row in
-                    row.tag = "email"
+                    row.tag = ParametersViewController.TAG_EMAIL_EDIT
                     row.hidden = Condition.function([], { _ in
                             return self.me?.email != nil
                         })
@@ -100,7 +116,7 @@ class ParametersViewController: FormViewController {
         // [SECTION] A propos de moi
         form +++ Section("À propos de moi")
             <<< HoopTextViewRow() { row in
-                row.tag = "description"
+                row.tag = ParametersViewController.TAG_DESCRIPTION
                 row.value = ""
                 row.placeholder = "write something here"
             }
@@ -109,13 +125,13 @@ class ParametersViewController: FormViewController {
         if let gender = self.me?.gender{
             form +++ SelectableSection<HoopListCheckRow>("Je suis", selectionType: .singleSelection(enableDeselection: false))
                 <<< HoopListCheckRow() { row in
-                    row.tag = "iAmMale"
+                    row.tag = ParametersViewController.TAG_I_AM_MALE
                     row.labelText = "Homme"
                     row.selectableValue = false
                     row.value = nil
                 }
                 <<< HoopListCheckRow() { row in
-                    row.tag = "iAmFemale"
+                    row.tag = ParametersViewController.TAG_I_AM_FEMALE
                     row.labelText = "Femme"
                     row.selectableValue = false
                     row.value = nil
@@ -125,16 +141,16 @@ class ParametersViewController: FormViewController {
         // [SECTION] Je souhaite rencontrer
         form +++ Section("Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer,")
             <<< SwitchRow() { row in
-                row.tag = "switchHomme"
+                row.tag = ParametersViewController.TAG_I_WANT_MALE
                 row.title = "Homme"
             }
             <<< HoopSwitchRow() { row in
-                row.tag = "switchFemme"
+                row.tag = ParametersViewController.TAG_I_WANT_FEMALE
                 row.labelText = "Femme"
                 row.value = true
             }
             <<< HoopRangeRow() { row in
-                row.tag = "ageRange"
+                row.tag = ParametersViewController.TAG_I_WANT_AGERANGE
                 row.labelText = "Tranche d'age"
                 row.value = Range(min: 18,low: 18,upp: 55,max: 55)
             }
@@ -241,9 +257,47 @@ class ParametersViewController: FormViewController {
     
     @objc func rightTarget( sender: UIBarButtonItem) {
         print("done")
+        let formValues = form.values()
+        print(formValues)
+        if let images = formValues[ParametersViewController.TAG_IMAGES] {
+            if (images as! [UIImage]).count == 0 {
+                PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "il faut une image minimum", "ok", {print("action")})
+                return
+            }
+        }
+        
+        let name = formValues[ParametersViewController.TAG_NAME]
+        let name_edit = formValues[ParametersViewController.TAG_NAME_EDIT]
+        if (name == nil) && (name_edit == nil) {
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre nom", "ok", {print("action")})
+            return
+        }
+        
+        let age = formValues[ParametersViewController.TAG_AGE]
+        let age_edit = formValues[ParametersViewController.TAG_AGE_EDIT]
+        if (age == nil) && (age_edit == nil) {
+            //
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre age", "ok", {print("action")})
+            return
+        }
+        
+        guard let email = formValues[ParametersViewController.TAG_EMAIL_EDIT] else {
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre email", "ok", {print("action")})
+            return
+        }
+        
+        let iAmMale = formValues[ParametersViewController.TAG_I_AM_MALE]
+        let iAmFemale = formValues[ParametersViewController.TAG_I_AM_FEMALE]
+        if (iAmMale == nil) && (iAmFemale == nil) {
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre sexe", "ok", {print("action")})
+            return
+        }
+        
+
+        /*
         if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
             self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
-        }
+        }*/
     }
     
     // Nice and fast way to customize the header view
@@ -255,6 +309,7 @@ class ParametersViewController: FormViewController {
             view.textLabel?.text = view.textLabel?.text?.lowercased()
         }
     }
+
 
 }
 

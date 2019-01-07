@@ -109,7 +109,7 @@ class PopupProvider {
         var attributes: EKAttributes
         
         // Fill the attribute structure
-        attributes = .bottomFloat
+        attributes = .centerFloat
         attributes.hapticFeedbackType = .success
         attributes.displayDuration = .infinity
         attributes.popBehavior = .animated(animation: .translation)
@@ -117,7 +117,7 @@ class PopupProvider {
         attributes.statusBar = .light
         
         let image = EKProperty.ImageContent(image: image)
-        let title = EKProperty.LabelContent(text: titleText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let title = EKProperty.LabelContent(text: titleText, style: .init(font: UIFont.MainFontLight(ofSize: 15.0), color: .white, alignment: .center))
         let description = EKProperty.LabelContent(text: descriptionText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
         let buttonContent = EKProperty.LabelContent(text: buttonText, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
         let button = EKProperty.ButtonContent(label: buttonContent, backgroundColor: .blue, highlightedBackgroundColor: .gray)

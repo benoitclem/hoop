@@ -6,11 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/Net/HoopNetworkApi.swift"
-            timestampString = "568568719.159405"
+            timestampString = "568574095.5801049"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "302"
@@ -22,11 +22,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/Net/HoopNetworkApi.swift"
-            timestampString = "568568719.1597281"
+            timestampString = "568574095.580613"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "239"
@@ -38,17 +38,145 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/ViewControllers/ParametersViewController.swift"
+            timestampString = "568575050.008203"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "264"
+            endingLineNumber = "264"
+            landmarkName = "rightTarget(sender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568575050.188634"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "996">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568575050.190942"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "264"
+                  endingLineNumber = "264"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/ViewControllers/ParametersViewController.swift"
+            timestampString = "568575050.008858"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "272"
+            endingLineNumber = "272"
+            landmarkName = "rightTarget(sender:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568575050.3191119"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "272"
+                  endingLineNumber = "272"
+                  offsetFromSymbolStart = "1932">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568575050.321467"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "272"
+                  endingLineNumber = "272"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "hoop/AppDelegate.swift"
-            timestampString = "568568719.15979"
+            filePath = "hoop/ViewControllers/ParametersViewController.swift"
+            timestampString = "568575050.009329"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "setupData()"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "rightTarget(sender:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568574180.01844"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "3672">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; () in hoop.ParametersViewController.rightTarget(sender: __C.UIBarButtonItem) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "568574180.020424"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "280"
+                  endingLineNumber = "280"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

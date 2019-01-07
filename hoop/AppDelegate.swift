@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     enum ScreenToShow: String {
         case login = "login"
-//        case tunnel
         case parameters = "parameters"
         case tutorial = "tutorial"
         case map = "map"
