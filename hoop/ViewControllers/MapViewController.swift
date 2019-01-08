@@ -159,7 +159,7 @@ extension MapViewController: CLLocationManagerDelegate {
 //    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
 //        print(locations.last ?? "no location")
 //    }
-    func checkUpdateType(_ currentLocation: CLLocation) -> (Bool,Bool) {
+    func checkUpdateType(_ currentLocation: CLLocation) -> (network: Bool,content: Bool) {
         var doHoopNetWorkUpdate = false
         var doHoopContentUpdate = false
         if let nOptlastlocation = lastLocation {
@@ -199,8 +199,11 @@ extension MapViewController: CLLocationManagerDelegate {
                     locationDidUpdateBackground(with: currentLocation.coordinate)
                 } else {
                     let results = checkUpdateType(currentLocation)
-                    locationDidUpdateForegroundNet(with: currentLocation.coordinate)
-                    locationDidUpdateForegroundNoNet(with: currentLocation.coordinate)
+                    if(results.network) {
+                        locationDidUpdateForegroundNet(with: currentLocation.coordinate)
+                    } else if(results.content) {
+                        locationDidUpdateForegroundNoNet(with: currentLocation.coordinate)
+                    }
                 }
                 // Tell server where we are
                 
