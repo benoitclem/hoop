@@ -22,3 +22,19 @@ import UIKit
         (layer as! CAGradientLayer).endPoint = CGPoint (x: 1, y: 0.25)
     }
 }
+
+@IBDesignable class UITopBottomGradientView: UIView {
+    @IBInspectable var firstColor: UIColor = UIColor.white
+    @IBInspectable var secondColor: UIColor = UIColor.black
+    
+    override class var layerClass: AnyClass {
+        return CAGradientLayer.self
+    }
+    
+    override func layoutSubviews() {
+        (layer as! CAGradientLayer).colors = [firstColor.cgColor, secondColor.cgColor]
+        (layer as! CAGradientLayer).startPoint = CGPoint(x: 0, y: 0.0)
+        (layer as! CAGradientLayer).endPoint = CGPoint (x: 0, y: 1)
+    }
+}
+

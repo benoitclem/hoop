@@ -20,6 +20,8 @@
 		EB28B63321C3BFD100CFF1EF /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB28B63221C3BFD100CFF1EF /* XCTest.framework */; };
 		EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63421C3F27F00CFF1EF /* conversation.swift */; };
 		EB28B63921C3F57200CFF1EF /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63821C3F57200CFF1EF /* message.swift */; };
+		EB31DFCA21E4FDAC005D0530 /* hoopIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFC921E4FDAC005D0530 /* hoopIn.swift */; };
+		EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFCD21E51201005D0530 /* Timestamp.swift */; };
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
@@ -185,6 +187,8 @@
 		EB28B63221C3BFD100CFF1EF /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		EB28B63421C3F27F00CFF1EF /* conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = conversation.swift; path = Models/conversation.swift; sourceTree = "<group>"; };
 		EB28B63821C3F57200CFF1EF /* message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = message.swift; path = Models/message.swift; sourceTree = "<group>"; };
+		EB31DFC921E4FDAC005D0530 /* hoopIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopIn.swift; path = Models/hoopIn.swift; sourceTree = "<group>"; };
+		EB31DFCD21E51201005D0530 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Timestamp.swift; path = Utils/Timestamp.swift; sourceTree = "<group>"; };
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
@@ -347,7 +351,6 @@
 				EB28B61321C3B36900CFF1EF /* Models */,
 				EB28B61221C3B32900CFF1EF /* Extensions */,
 				EB28B5F221C3B2A900CFF1EF /* AppDelegate.swift */,
-				EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */,
 				EB28B5FE21C3B2AA00CFF1EF /* Info.plist */,
 			);
 			path = hoop;
@@ -378,14 +381,15 @@
 			isa = PBXGroup;
 			children = (
 				EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */,
-				EB77870E21D4DF92002CBA02 /* fbme.swift */,
-				EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */,
 				EB28B63821C3F57200CFF1EF /* message.swift */,
-				EB28B61E21C3B4B600CFF1EF /* hoop.swift */,
 				EB28B61D21C3B4B600CFF1EF /* profile.swift */,
 				EB28B63421C3F27F00CFF1EF /* conversation.swift */,
 				EB862C8321DE40420051E3A7 /* condition.swift */,
+				EB77870E21D4DF92002CBA02 /* fbme.swift */,
 				EB862C8521DE5F130051E3A7 /* fbPictures.swift */,
+				EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */,
+				EB28B61E21C3B4B600CFF1EF /* hoop.swift */,
+				EB31DFC921E4FDAC005D0530 /* hoopIn.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -410,6 +414,7 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */,
 				EB76A82621CFFF1A00CC358D /* Popups */,
 				EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */,
 				EB9B5C1A21CFD273000C8008 /* Map */,
@@ -516,6 +521,7 @@
 				EB8F04C621CAE5D6003757EC /* UIGradientView.swift */,
 				EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */,
 				EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */,
+				EB31DFCD21E51201005D0530 /* Timestamp.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -743,6 +749,7 @@
 				EB8F052F21CBE122003757EC /* UIFont+main.swift in Sources */,
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */,
+				EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */,
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
@@ -753,6 +760,7 @@
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
 				EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */,
 				EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */,
+				EB31DFCA21E4FDAC005D0530 /* hoopIn.swift in Sources */,
 				EB8F04EA21CAEE0A003757EC /* VideoCutter.swift in Sources */,
 				EB28B61F21C3B4B600CFF1EF /* profile.swift in Sources */,
 				EB8F04F021CBA55A003757EC /* UILabel+stylizable.swift in Sources */,

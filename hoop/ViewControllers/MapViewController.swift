@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import CoreLocation
 import Hero
+import Futures
 
 class MapViewController: UIViewController {
     
@@ -17,10 +18,22 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var profiles: UICollectionView!
     @IBOutlet weak var etHoopButton: UIButton!
+    @IBOutlet weak var hoopNameLabel: UILabel!
+    
+    var returnFromBackground: Bool = false
     
     var locationManager: CLLocationManager = CLLocationManager()
     
+    var currentLocation: CLLocation!
+    var lastLocation: CLLocation?
+    
+    var currentHoopNetwork: [hoop] = [hoop]()
+    var lastHoopNetworkTimestamp: TimeInterval = Timestamp - 6000
+    
+    var currentHoopIds: [Int] = [Int]()
     var currentHoops: [hoop] = [hoop]()
+    var lastHoopsTimestamp: TimeInterval = Timestamp - 6000
+    
     var currentHoopsAreaOverlay: CirclesOverlay? = nil
     
     var currentSelectedHoop: hoop? = nil
@@ -41,6 +54,25 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         checkup() // Some controls on
         setup() // Configure delegates and initialize some internal states
+        etHoopButton.setTitle("Bonjour", for: .normal)
+        hoopNameLabel.text = "Autour du marché Saint-Germain"
+    }
+    
+    func viewDidEnterForeground(notification: Notification) {
+        
+        returnFromBackground = true
+        mapView.showsUserLocation = true
+        
+        self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+    }
+    
+    func viewDidEnterBackground(notification: Notification) {
+        
+        self.mapView.showsUserLocation = false
+
+        self.locationManager.distanceFilter = MapViewController.LOW_DISTANCE_FILTER
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
     
     func checkup() {
@@ -75,13 +107,13 @@ extension MapViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileThumbIdent", for: indexPath)
         let profilName = cell.viewWithTag(1) as! UILabel
         let profilImage = cell.viewWithTag(2) as! UIImageView
-        let profilCartouche = cell.viewWithTag(3)!
+        //let profilCartouche = cell.viewWithTag(3)!
         
         // Here try the localization stuffs
         profilName.text = "\(profilePictures[indexPath.row]) 27"
         profilImage.image = UIImage(imageLiteralResourceName: profilePictures[indexPath.row])
         profilImage.hero.id = profilePictures[indexPath.row]
-        profilCartouche.hero.id = "\(profilePictures[indexPath.row])cartouche"
+        //profilCartouche.hero.id = "\(profilePictures[indexPath.row])cartouche"
         
         return cell
     }
@@ -90,11 +122,11 @@ extension MapViewController: UICollectionViewDataSource {
 extension MapViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width-64, height: collectionView.frame.size.height-32)
+        return CGSize(width: collectionView.frame.size.width-64, height: collectionView.frame.size.height-16)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 16.0, left: 32.0, bottom: 16.0, right: 32.0)
+        return UIEdgeInsets(top: 0, left: 32.0, bottom: 16.0, right: 32.0)
     }
 }
 
@@ -124,18 +156,32 @@ extension MapViewController: CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
     }
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        print(locations.last ?? "no location")
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//        print(locations.last ?? "no location")
+//    }
+    func checkUpdateType(_ currentLocation: CLLocation) -> (Bool,Bool) {
+        var doHoopNetWorkUpdate = false
+        var doHoopContentUpdate = false
+        if let nOptlastlocation = lastLocation {
+            print("Reasons for hoop update - ", nOptlastlocation.distance(from: currentLocation), (Timestamp - lastHoopNetworkTimestamp), (Timestamp - lastHoopsTimestamp), returnFromBackground)
+            doHoopNetWorkUpdate = (((nOptlastlocation.distance(from: currentLocation) > 400.0) && ((Timestamp - self.lastHoopNetworkTimestamp) > 5000)) || returnFromBackground )
+            doHoopContentUpdate = (((Timestamp - self.lastHoopsTimestamp) > 5000) || returnFromBackground)
+        } else {
+            print("Reasons for hoop update - no location")
+            doHoopNetWorkUpdate = true
+        }
+        return (doHoopNetWorkUpdate, doHoopContentUpdate)
     }
 
-    /*
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         
         // Save location, if location not valid return immediately
-        guard let currentLocation = locations.last else {
+        guard let location = locations.last else {
             return
         }
-
+        
+        currentLocation = location
+        
         // Check speed is valid (>-1) && not gps drift (>1kmh) && nor to high (<20kmh)
         let currentSpeed = currentLocation.speed
         
@@ -148,8 +194,17 @@ extension MapViewController: CLLocationManagerDelegate {
             if(currentLocation.horizontalAccuracy < 250) {
                 // retrieve the running state of app
                 let state = UIApplication.shared.applicationState
+                
+                if (state != .background) {
+                    locationDidUpdateBackground(with: currentLocation.coordinate)
+                } else {
+                    let results = checkUpdateType(currentLocation)
+                    locationDidUpdateForegroundNet(with: currentLocation.coordinate)
+                    locationDidUpdateForegroundNoNet(with: currentLocation.coordinate)
+                }
                 // Tell server where we are
-                self.setHoopsIn(forUserCoordinate: currentLocation)
+                
+                
             }
         }
         
@@ -169,8 +224,7 @@ extension MapViewController: CLLocationManagerDelegate {
         // When accuracy il not goot, basically do nothing
         if(currentLocation.horizontalAccuracy < 250) {
             //if (currentSpeed < (20/3.6)){
-            self.hideSpeedTooHighLabel(withAnimation: true)
-            
+
             let state = UIApplication.shared.applicationState
             // Tell server where are we
             self.setHoopsIn(forUserCoordinate: currentLocation)
@@ -218,30 +272,12 @@ extension MapViewController: CLLocationManagerDelegate {
                 }
             }
             
-            // set distance filter acdording to current speed?
-            if(currentSpeed >= 0) {
-                if(currentSpeed > (10/3.6)) {
-                    //print("set distance filter to 400, and accuracy to hundreds")
-                    self.locationManager.distanceFilter = 200
-                    self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                } else {
-                    //print("set distance filter to 100, and accuracy to hundreds")
-                    self.locationManager.distanceFilter = 40
-                    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-                }
-            }
-            /*} else {
-             self.SpeedToHighLabel.text = "Vitesse trop élevée"
-             //self.hideNoLocationPanelButton(withAnimation: true)
-             self.removeAnnotations()
-             self.removeCurrentHoopArea()
-             self.showSpeedTooHighLabel(withAnimation: true)
-             }*/
         }
         
         //print(self.hm)
     }
     
+    /*
     // Need to be disabled when passing in background mode
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         //print(newHeading)
@@ -262,6 +298,7 @@ extension MapViewController: CLLocationManagerDelegate {
             self.userLocationAnnotationView.layer.transform = t2
         }
     }
+ 
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         //print("locationManager failed")
@@ -330,6 +367,14 @@ extension MapViewController: MKMapViewDelegate {
         self.mapView.showsBuildings = false
         self.mapView.showsUserLocation = true
         self.mapView.delegate = self
+        // Here We define the real content view of the map
+        self.mapView.layoutMargins = UIEdgeInsets(top: 50, left: 0.0, bottom: 400.0, right: 0.0)
+        
+//        let annotation = MKPointAnnotation()
+//        annotation.coordinate = CLLocationCoordinate2D(latitude: 48.866667, longitude: 2.333333)
+//        self.mapView.addAnnotation(annotation)
+//        self.mapFocus(at: CLLocationCoordinate2D(latitude: 48.866667, longitude: 2.333333), withAnimation: true)
+
     }
     
     // Focus stuffs
@@ -410,5 +455,44 @@ extension MapViewController: MKMapViewDelegate {
         addCurrentSelectedHoop()
     }
     
+}
 
+// The calls to net stack
+extension MapViewController {
+    func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
+        HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
+    }
+    
+    func locationDidUpdateForegroundNet(with coordinate:CLLocationCoordinate2D) {
+        let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
+        
+        promise.then { ids -> Future<[hoop]> in
+            self.currentHoopIds = ids
+            return HoopNetworkApi.sharedInstance.getHoopInfo(byLatLong: coordinate)
+        }.then { hoops -> Future<[String:[profile]]> in
+            self.currentHoopNetwork = hoops
+            return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
+        }.whenFulfilled { content in
+                
+        }
+        
+        promise.whenRejected { error in
+            
+        }
+    }
+    
+    func locationDidUpdateForegroundNoNet(with coordinate:CLLocationCoordinate2D) {
+        let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
+        
+        promise.then { ids -> Future<[String:[profile]]> in
+                self.currentHoopIds = ids
+                return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
+        }.whenFulfilled { content in
+                
+        }
+        
+        promise.whenRejected { error in
+            
+        }
+    }
 }

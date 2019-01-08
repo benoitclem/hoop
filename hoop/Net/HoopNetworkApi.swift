@@ -32,7 +32,6 @@ class HoopNetworkApi: AlamofireWrapper {
     static let sharedInstance = HoopNetworkApi()
     
     // Store connection infos
-    static var lastLocation: CLLocation!
     static var appToken: String?
     var deviceToken: String?
     
@@ -249,19 +248,6 @@ extension HoopNetworkApi {
         }
     }
     
-    func getHoops(by location: CLLocation) -> Future<[hoop]>? {
-        let arguments = ["lat":String(location.coordinate.latitude),
-                         "long":String(location.coordinate.longitude),
-                         "margin":"0.02"]
-        let promise: Future<hoopApiResponse<[hoop]>> = self.request("getLovestopInfoByLatLong", and: arguments)
-        return promise.then { data -> Future<[hoop]> in
-            let promise =  Promise<[hoop]>()
-            let hoopArray = [hoop]()
-            promise.fulfill(hoopArray)
-            return promise.future
-        }
-    }
-    
     // This should be working but not
     func getFaq2() -> Future<[faqEntry]> {
         return HoopRequest("getFaq", and: [:])
@@ -311,6 +297,7 @@ extension HoopNetworkApi {
         }
     }
     
+    
     /*
     func getLoveStopInIds(by location: CLLocationCoordinate2D) -> Future<[Int]> {
         guard let token = self.appToken else {
@@ -339,4 +326,48 @@ extension HoopNetworkApi {
 
 }
 
-
+extension HoopNetworkApi {
+    
+    func getHoopIn(byLatLong coordinates:CLLocationCoordinate2D) -> Future<[Int]> {
+        let promise: Future<hoopApiResponse<hoopIn>> = self.request("getLovestopIn", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude)])
+        return promise.then { response -> Future<[Int]> in
+            let promise = Promise<[Int]>()
+            if let data = response.data {
+                promise.fulfill(data.hoop_ids ?? [Int]())
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    func getHoopInfo(byLatLong coordinates:CLLocationCoordinate2D) -> Future<[hoop]> {
+        let promise: Future<hoopApiResponse<[hoop]>> = self.request("getLovestopInfoByLatLong", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude), "margin":"0.02"])
+        return promise.then { response -> Future<[hoop]> in
+            let promise = Promise<[hoop]>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    func getHoopContent(withIds ids:[Int]) -> Future<[String:[profile]]> {
+        let strIds = ids.map { String($0) }.joined(separator: ",")
+        let promise: Future<hoopApiResponse<[String:[profile]]>> = self.request("getLovestopContent", and: ["lovestop_id":strIds])
+        return  promise.then { response -> Future<[String:[profile]]> in
+            let promise = Promise<[String:[profile]]>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+}
