@@ -27,6 +27,7 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_MISSING_DATA: Int = -8
     static let API_ERROR_MISSING_URL: Int = -9
     static let API_ERROR_NO_PROFILE: Int = -10
+    static let API_ERROR_NO_IDS: Int = -11
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -332,10 +333,10 @@ extension HoopNetworkApi {
         let promise: Future<hoopApiResponse<hoopIn>> = self.request("getLovestopIn", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude)])
         return promise.then { response -> Future<[Int]> in
             let promise = Promise<[Int]>()
-            if let data = response.data {
-                promise.fulfill(data.hoop_ids ?? [Int]())
+            if let ids = response.data?.hoop_ids {
+                promise.fulfill(ids)
             } else {
-                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_IDS, userInfo: ["desc":"no ids found"])
                 promise.reject(error)
             }
             return promise.future

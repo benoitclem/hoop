@@ -91,6 +91,12 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
 	<key>hoopNetworkConfig</key>
 	<dict>
 		<key>baseUrl</key>

@@ -51,7 +51,7 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
-    static func showErrorNote() {
+    static func showErrorNote(_ text: String) {
         var attributes: EKAttributes
         
         // Fill the attribute structure
@@ -63,7 +63,6 @@ class PopupProvider {
         attributes.statusBar = .light
         
         // Fill up the Note message View
-        let text = "Echec de l'envoi"
         let style = EKProperty.LabelStyle(font:  UIFont.MainFontLight(ofSize: 12.0), color: .white, alignment: .center)
         let labelContent = EKProperty.LabelContent(text: text, style: style)
         
@@ -71,38 +70,73 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
-//    static func showFormPopup() {
-//        var attributes: EKAttributes
-//
-//        attributes = .float
-//        attributes.windowLevel = .normal
-//        attributes.position = .center
-//        attributes.displayDuration = .infinity
-//
-//        attributes.entranceAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .bottom,  spring: .init(damping: 1, initialVelocity: 0)))
-//        attributes.exitAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .top, spring: .init(damping: 1, initialVelocity: 0)))
-//        attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0))))
-//
-//        attributes.entryInteraction = .absorbTouches
-//        attributes.screenInteraction = .dismiss
-//
-//        attributes.entryBackground = .color(color: .white)
-//        attributes.screenBackground = .color(color: .gray)
-//
-//        attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
-//        attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))
-//        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
-//        attributes.statusBar = .light
-//
-//        let contentView = MessagePopupView(recipient: "Sophie 27", thumbString: "sophie", sendClosure: {
-//            self.doProcessing((Any).self)
-//        }, cancelClosure: nil)
-//        SwiftEntryKit.display(entry: contentView, using: attributes, presentInsideKeyWindow: true)
-//
-//    }
+    static func showEtHoopPopup(recipient:String, thumbString:String, sendClosure: (()->())?, cancelClosure: (()->())? ) {
+        var attributes: EKAttributes
+
+        attributes = .float
+        attributes.windowLevel = .normal
+        attributes.position = .center
+        attributes.displayDuration = .infinity
+
+        attributes.entranceAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .bottom,  spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.exitAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .top, spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0))))
+
+        attributes.entryInteraction = .absorbTouches
+        attributes.screenInteraction = .dismiss
+
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenBackground = .color(color: .gray)
+
+        attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+        attributes.statusBar = .light
+
+        let contentView = MessagePopupView(recipient, thumbString, sendClosure, cancelClosure)
+        SwiftEntryKit.display(entry: contentView, using: attributes, presentInsideKeyWindow: true)
+
+    }
     
-    func showTwoChoicesPopup() {
+    static func showTwoChoicesPopup(
+        icon:UIImage?,
+        title:String,
+        content:String,
+        okTitle:String?,
+        nokTitle:String?,
+        okClosure: (()->())?,
+        nokClosure: (()->())? )
+    {
+        var attributes: EKAttributes
         
+        attributes = .float
+        attributes.windowLevel = .normal
+        attributes.position = .center
+        attributes.displayDuration = .infinity
+        
+        attributes.entranceAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .bottom,  spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.exitAnimation = .init(translate: .init(duration: 0.65, anchorPosition: .top, spring: .init(damping: 1, initialVelocity: 0)))
+        attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0))))
+        
+        attributes.entryInteraction = .absorbTouches
+        attributes.screenInteraction = .dismiss
+        
+        attributes.entryBackground = .color(color: .white)
+        attributes.screenBackground = .color(color: .gray)
+        
+        attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
+        attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))
+        attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
+        attributes.statusBar = .light
+        
+        let contentView = TwoChoicesPopupView(icon: icon,
+                                              title: title,
+                                              content: content,
+                                              okTitle: okTitle,
+                                              nokTitle: nokTitle,
+                                              okClosure: okClosure,
+                                              nokClosure: nokClosure)
+        SwiftEntryKit.display(entry: contentView, using: attributes, presentInsideKeyWindow: true)
     }
     
     static func showInformPopup(with image:UIImage,_ titleText: String,_ descriptionText: String,_ buttonText:String,_ buttonAction:@escaping (()->())) {

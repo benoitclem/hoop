@@ -24,6 +24,6 @@ class hoopApiResponse<T:Decodable>: Decodable {
         
         code = try values.decode(String.self, forKey: .code)
         message = try values.decode(String.self, forKey: .message)
-        data = try values.decode(T.self, forKey: .data)
+        data = try? values.decode(T.self, forKey: .data)
     }
 }

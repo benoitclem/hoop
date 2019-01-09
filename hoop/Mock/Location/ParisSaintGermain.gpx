@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx xmlns="http://www.topografix.com/GPX/1/1" creator="GPSies http://www.gpsies.com - Paris-SaintGermain" version="1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <wpt lat="48.85311030" lon="2.336375710">
+    <ele>53.000000</ele>
+    <time>2010-01-01T00:00:00Z</time>
+  </wpt>
+  <wpt lat="48.85305000" lon="2.336340000">
+    <ele>54.000000</ele>
+    <time>2010-01-01T00:00:01Z</time>
+  </wpt>
+  <wpt lat="48.85264000" lon="2.338060000">
+    <ele>49.000000</ele>
+    <time>2010-01-01T00:00:31Z</time>
+  </wpt>
+  <wpt lat="48.85228000" lon="2.339500000">
+    <ele>46.000000</ele>
+    <time>2010-01-01T00:00:56Z</time>
+  </wpt>
+  <wpt lat="48.85208000" lon="2.340320000">
+    <ele>46.000000</ele>
+    <time>2010-01-01T00:01:11Z</time>
+  </wpt>
+  <wpt lat="48.85189000" lon="2.341160000">
+    <ele>45.000000</ele>
+    <time>2010-01-01T00:01:25Z</time>
+  </wpt>
+  <wpt lat="48.85154000" lon="2.342570000">
+    <ele>50.000000</ele>
+    <time>2010-01-01T00:01:50Z</time>
+  </wpt>
+  <wpt lat="48.85114000" lon="2.344220000">
+    <ele>44.000000</ele>
+    <time>2010-01-01T00:02:19Z</time>
+  </wpt>
+  <wpt lat="48.85077000" lon="2.345790000">
+    <ele>46.000000</ele>
+    <time>2010-01-01T00:02:46Z</time>
+  </wpt>
+  <wpt lat="48.85010000" lon="2.348510000">
+    <ele>41.000000</ele>
+    <time>2010-01-01T00:03:33Z</time>
+  </wpt>
+  <wpt lat="48.84961000" lon="2.350510000">
+    <ele>44.000000</ele>
+    <time>2010-01-01T00:04:08Z</time>
+  </wpt>
+  <wpt lat="48.84947000" lon="2.353850000">
+    <ele>46.000000</ele>
+    <time>2010-01-01T00:05:03Z</time>
+  </wpt>
+  <wpt lat="48.84941000" lon="2.355000000">
+    <ele>46.000000</ele>
+    <time>2010-01-01T00:05:22Z</time>
+  </wpt>
+  <wpt lat="48.84934000" lon="2.355350000">
+    <ele>41.000000</ele>
+    <time>2010-01-01T00:05:28Z</time>
+  </wpt>
+  <wpt lat="48.84930000" lon="2.356840000">
+    <ele>32.000000</ele>
+    <time>2010-01-01T00:05:52Z</time>
+  </wpt>
+</gpx>

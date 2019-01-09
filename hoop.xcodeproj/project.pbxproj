@@ -22,12 +22,22 @@
 		EB28B63921C3F57200CFF1EF /* message.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB28B63821C3F57200CFF1EF /* message.swift */; };
 		EB31DFCA21E4FDAC005D0530 /* hoopIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFC921E4FDAC005D0530 /* hoopIn.swift */; };
 		EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFCD21E51201005D0530 /* Timestamp.swift */; };
+		EB31DFD121E60C11005D0530 /* MessagePopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB31DFCF21E60C10005D0530 /* MessagePopupView.xib */; };
+		EB31DFD221E60C11005D0530 /* MessagePopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD021E60C10005D0530 /* MessagePopupView.swift */; };
+		EB31DFD421E60D29005D0530 /* TwoChoicesPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD321E60D29005D0530 /* TwoChoicesPopupView.swift */; };
+		EB31DFD621E60D52005D0530 /* TwoChoicesPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */; };
+		EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD721E61285005D0530 /* Object+ClassName.swift */; };
+		EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD821E61285005D0530 /* UIView+Nib.swift */; };
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
 		EB77871621D53BBF002CBA02 /* MoreCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
 		EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB77871821D53F75002CBA02 /* MoreCodable.framework in Resources */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
+		EB7F7FD321E63228003B375C /* RennesInsa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FCF21E63228003B375C /* RennesInsa.gpx */; };
+		EB7F7FD421E63228003B375C /* Boulogne.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD021E63228003B375C /* Boulogne.gpx */; };
+		EB7F7FD521E63229003B375C /* Poitiers.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD121E63228003B375C /* Poitiers.gpx */; };
+		EB7F7FD621E63229003B375C /* ParisSaintGermain.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD221E63228003B375C /* ParisSaintGermain.gpx */; };
 		EB862C7C21DE061C0051E3A7 /* HoopListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */; };
 		EB862C7E21DE075C0051E3A7 /* HoopListCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */; };
 		EB862C8221DE1C7D0051E3A7 /* faqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */; };
@@ -189,10 +199,20 @@
 		EB28B63821C3F57200CFF1EF /* message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = message.swift; path = Models/message.swift; sourceTree = "<group>"; };
 		EB31DFC921E4FDAC005D0530 /* hoopIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopIn.swift; path = Models/hoopIn.swift; sourceTree = "<group>"; };
 		EB31DFCD21E51201005D0530 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Timestamp.swift; path = Utils/Timestamp.swift; sourceTree = "<group>"; };
+		EB31DFCF21E60C10005D0530 /* MessagePopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessagePopupView.xib; sourceTree = "<group>"; };
+		EB31DFD021E60C10005D0530 /* MessagePopupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagePopupView.swift; sourceTree = "<group>"; };
+		EB31DFD321E60D29005D0530 /* TwoChoicesPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoChoicesPopupView.swift; sourceTree = "<group>"; };
+		EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoChoicesPopupView.xib; sourceTree = "<group>"; };
+		EB31DFD721E61285005D0530 /* Object+ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+ClassName.swift"; sourceTree = "<group>"; };
+		EB31DFD821E61285005D0530 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
 		EB77871421D53BA8002CBA02 /* MoreCodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoreCodable.framework; path = hoop/Frameworks/MoreCodable.framework; sourceTree = "<group>"; };
+		EB7F7FCF21E63228003B375C /* RennesInsa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RennesInsa.gpx; path = Mock/Location/RennesInsa.gpx; sourceTree = "<group>"; };
+		EB7F7FD021E63228003B375C /* Boulogne.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Boulogne.gpx; path = Mock/Location/Boulogne.gpx; sourceTree = "<group>"; };
+		EB7F7FD121E63228003B375C /* Poitiers.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Poitiers.gpx; path = Mock/Location/Poitiers.gpx; sourceTree = "<group>"; };
+		EB7F7FD221E63228003B375C /* ParisSaintGermain.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ParisSaintGermain.gpx; path = Mock/Location/ParisSaintGermain.gpx; sourceTree = "<group>"; };
 		EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoopListCheckCell.swift; path = FormCells/HoopListCheckCell.swift; sourceTree = "<group>"; };
 		EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HoopListCheckCell.xib; path = FormCells/HoopListCheckCell.xib; sourceTree = "<group>"; };
 		EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = faqEntry.swift; path = Models/faqEntry.swift; sourceTree = "<group>"; };
@@ -342,6 +362,7 @@
 		EB28B5F121C3B2A900CFF1EF /* hoop */ = {
 			isa = PBXGroup;
 			children = (
+				EB7F7FCD21E63210003B375C /* Mock */,
 				EB8F053221CD2A12003757EC /* Net */,
 				EB8F04C521CAE5CA003757EC /* Utils */,
 				EB8F046121CAB625003757EC /* Routing */,
@@ -359,6 +380,8 @@
 		EB28B61221C3B32900CFF1EF /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				EB31DFD721E61285005D0530 /* Object+ClassName.swift */,
+				EB31DFD821E61285005D0530 /* UIView+Nib.swift */,
 				EB28B61921C3B43300CFF1EF /* CGFloat+random.swift */,
 				EB28B61B21C3B45000CFF1EF /* UIColor+random.swift */,
 				EB28B62121C3B88B00CFF1EF /* DateFormatter+shortcuts.swift */,
@@ -465,8 +488,31 @@
 			isa = PBXGroup;
 			children = (
 				EB8F052421CBDEF8003757EC /* PopupProvider.swift */,
+				EB31DFD021E60C10005D0530 /* MessagePopupView.swift */,
+				EB31DFCF21E60C10005D0530 /* MessagePopupView.xib */,
+				EB31DFD321E60D29005D0530 /* TwoChoicesPopupView.swift */,
+				EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */,
 			);
 			path = Popups;
+			sourceTree = "<group>";
+		};
+		EB7F7FCD21E63210003B375C /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F7FCE21E6321A003B375C /* Location */,
+			);
+			name = Mock;
+			sourceTree = "<group>";
+		};
+		EB7F7FCE21E6321A003B375C /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F7FD021E63228003B375C /* Boulogne.gpx */,
+				EB7F7FD221E63228003B375C /* ParisSaintGermain.gpx */,
+				EB7F7FD121E63228003B375C /* Poitiers.gpx */,
+				EB7F7FCF21E63228003B375C /* RennesInsa.gpx */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 		EB8F046121CAB625003757EC /* Routing */ = {
@@ -664,6 +710,7 @@
 				EB8F04A321CAC62E003757EC /* Campton-ExtraBold.ttf in Resources */,
 				EB8F04AE21CAC62E003757EC /* Campton-ExtraBoldItalic.ttf in Resources */,
 				EB8F04E121CAE678003757EC /* HoopLabelCell.xib in Resources */,
+				EB7F7FD621E63229003B375C /* ParisSaintGermain.gpx in Resources */,
 				EB8F04E221CAE678003757EC /* HoopRangeCell.xib in Resources */,
 				EB8F049C21CAC62E003757EC /* Campton-Book.ttf in Resources */,
 				EB8F04AC21CAC62E003757EC /* Campton-Bold.ttf in Resources */,
@@ -672,10 +719,13 @@
 				EB8F04AD21CAC62E003757EC /* Campton-Thin.ttf in Resources */,
 				EB8F04DE21CAE678003757EC /* HoopTextViewCell.xib in Resources */,
 				EB862C7E21DE075C0051E3A7 /* HoopListCheckCell.xib in Resources */,
+				EB7F7FD321E63228003B375C /* RennesInsa.gpx in Resources */,
 				EB8F04A121CAC62E003757EC /* Campton-LightItalic.ttf in Resources */,
 				EB8F049F21CAC62E003757EC /* Campton-ExtraLight.ttf in Resources */,
+				EB7F7FD521E63229003B375C /* Poitiers.gpx in Resources */,
 				EBAEF3BD21DDE8190024CDF9 /* HoopDateCell.xib in Resources */,
 				EB8F04A521CAC62E003757EC /* Montserrat-Bold.ttf in Resources */,
+				EB7F7FD421E63228003B375C /* Boulogne.gpx in Resources */,
 				EB8F049D21CAC62E003757EC /* Montserrat-Regular.ttf in Resources */,
 				EB8F04A021CAC62E003757EC /* Campton-BoldItalic.ttf in Resources */,
 				EB8F04A421CAC62E003757EC /* Campton-ExtraLightItalic.ttf in Resources */,
@@ -684,10 +734,12 @@
 				EB8F047C21CAC1E0003757EC /* Localizable.strings in Resources */,
 				EB8F04AB21CAC62E003757EC /* Campton-BlackItalic.ttf in Resources */,
 				EB8F049E21CAC62E003757EC /* Campton-Light.ttf in Resources */,
+				EB31DFD621E60D52005D0530 /* TwoChoicesPopupView.xib in Resources */,
 				EB8F04A921CAC62E003757EC /* Campton-BookItalic.ttf in Resources */,
 				EB8F04DF21CAE678003757EC /* HoopSwitchCell.xib in Resources */,
 				EB8F04DA21CAE678003757EC /* CollectionViewCell.xib in Resources */,
 				EB8F049B21CAC62E003757EC /* Campton-ThinItalic.ttf in Resources */,
+				EB31DFD121E60C11005D0530 /* MessagePopupView.xib in Resources */,
 				EB8F04A721CAC62E003757EC /* Campton-Medium.ttf in Resources */,
 				EB8F04A821CAC62E003757EC /* Campton-MediumItalic.ttf in Resources */,
 				EB8F04A621CAC62E003757EC /* KittenSlantTrial.ttf in Resources */,
@@ -742,6 +794,7 @@
 				EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */,
 				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,
+				EB31DFD221E60C11005D0530 /* MessagePopupView.swift in Sources */,
 				EB8F04B521CAE330003757EC /* ChatViewController.swift in Sources */,
 				EB9B5C1C21CFD2A4000C8008 /* CirclesOverlay.swift in Sources */,
 				EB28B62021C3B4B600CFF1EF /* hoop.swift in Sources */,
@@ -750,6 +803,7 @@
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */,
 				EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */,
+				EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */,
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
@@ -757,7 +811,9 @@
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
+				EB31DFD421E60D29005D0530 /* TwoChoicesPopupView.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
+				EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */,
 				EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */,
 				EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */,
 				EB31DFCA21E4FDAC005D0530 /* hoopIn.swift in Sources */,

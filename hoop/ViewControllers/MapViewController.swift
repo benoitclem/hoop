@@ -32,7 +32,7 @@ class MapViewController: UIViewController {
     
     var currentHoopIds: [Int] = [Int]()
     var currentHoops: [hoop] = [hoop]()
-    var lastHoopsTimestamp: TimeInterval = Timestamp - 6000
+    var lastHoopsContentTimestamp: TimeInterval = Timestamp - 6000
     
     var currentHoopsAreaOverlay: CirclesOverlay? = nil
     
@@ -83,6 +83,18 @@ class MapViewController: UIViewController {
         setupUserInterface()
         setupLocation()
         setupMapKit()
+    }
+    
+    func goToSettings(){
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+            return
+        }
+        
+        if UIApplication.shared.canOpenURL(settingsUrl) {
+            UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                print("Settings opened: \(success)") // Prints true
+            })
+        }
     }
 
 }
@@ -137,6 +149,9 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func setupLocation() {
+        // Ask user permissio nto use location
+        self.locationManager.requestAlwaysAuthorization()
+        
         // Tell locationManager that we receive the location updates
         self.locationManager.delegate = self
         
@@ -156,16 +171,13 @@ extension MapViewController: CLLocationManagerDelegate {
         self.locationManager.startUpdatingLocation()
     }
 
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//        print(locations.last ?? "no location")
-//    }
     func checkUpdateType(_ currentLocation: CLLocation) -> (network: Bool,content: Bool) {
         var doHoopNetWorkUpdate = false
         var doHoopContentUpdate = false
-        if let nOptlastlocation = lastLocation {
-            print("Reasons for hoop update - ", nOptlastlocation.distance(from: currentLocation), (Timestamp - lastHoopNetworkTimestamp), (Timestamp - lastHoopsTimestamp), returnFromBackground)
-            doHoopNetWorkUpdate = (((nOptlastlocation.distance(from: currentLocation) > 400.0) && ((Timestamp - self.lastHoopNetworkTimestamp) > 5000)) || returnFromBackground )
-            doHoopContentUpdate = (((Timestamp - self.lastHoopsTimestamp) > 5000) || returnFromBackground)
+        if let nOptLastLocation = lastLocation {
+            print("Reasons for hoop update - ", nOptLastLocation.distance(from: currentLocation), (Timestamp - lastHoopNetworkTimestamp), (Timestamp - lastHoopsContentTimestamp), returnFromBackground)
+            doHoopNetWorkUpdate = (((nOptLastLocation.distance(from: currentLocation) > 400.0) && ((Timestamp - self.lastHoopNetworkTimestamp) > 5000)) || returnFromBackground )
+            doHoopContentUpdate = (((Timestamp - self.lastHoopsContentTimestamp) > 5000) || returnFromBackground)
         } else {
             print("Reasons for hoop update - no location")
             doHoopNetWorkUpdate = true
@@ -186,7 +198,7 @@ extension MapViewController: CLLocationManagerDelegate {
         let currentSpeed = currentLocation.speed
         
         // If speed goes at more that 20 kmh do nothing
-        if (currentSpeed < (20/3.6)){
+        if (currentSpeed > (20/3.6)){
             //PopupProvider.showInformPopup()
             self.removeCurrentHoopsArea()
             self.removeSelectedHoop()
@@ -195,7 +207,7 @@ extension MapViewController: CLLocationManagerDelegate {
                 // retrieve the running state of app
                 let state = UIApplication.shared.applicationState
                 
-                if (state != .background) {
+                if (state == .background) {
                     locationDidUpdateBackground(with: currentLocation.coordinate)
                 } else {
                     let results = checkUpdateType(currentLocation)
@@ -204,6 +216,7 @@ extension MapViewController: CLLocationManagerDelegate {
                     } else if(results.content) {
                         locationDidUpdateForegroundNoNet(with: currentLocation.coordinate)
                     }
+                    returnFromBackground = false
                 }
                 // Tell server where we are
                 
@@ -224,142 +237,66 @@ extension MapViewController: CLLocationManagerDelegate {
             }
         }
         
-        // When accuracy il not goot, basically do nothing
-        if(currentLocation.horizontalAccuracy < 250) {
-            //if (currentSpeed < (20/3.6)){
-
-            let state = UIApplication.shared.applicationState
-            // Tell server where are we
-            self.setHoopsIn(forUserCoordinate: currentLocation)
-            
-            // When in foreground retrive the hoops and the profiles
-            if (state != .background) {
-                // Get the points
-                // Check for lasthoopUpdate invalidity
-                if (self.lastHoopsUpdated == nil) {
-                    self.lastHoopsUpdated = Timestamp - 6000 // Set a value that trigger an update
-                    self.lastHoopContentUpdated = Timestamp - 6000
-                }
-                // If the location does not exist or we return from background or time>Xm && dist>Ys do the update
-                var doHoopNetUpdate = false
-                var doHoopContentNetUpdate = false
-                if(self.getHoopLocation != nil) {
-                    print("Reasons for hoop update - ", self.getHoopLocation.distance(from: currentLocation), (Timestamp - self.lastHoopsUpdated), (Timestamp - self.lastHoopContentUpdated), ReturnFromBackground)
-                    doHoopNetUpdate = (((self.getHoopLocation.distance(from: currentLocation) > 400.0) && ((Timestamp - self.lastHoopsUpdated) > 5000)) || ReturnFromBackground )
-                    doHoopContentNetUpdate = (((Timestamp - self.lastHoopContentUpdated) > 5000) || ReturnFromBackground)
-                } else {
-                    print("Reasons for hoop update - no location")
-                    doHoopNetUpdate = true
-                }
-                //if((self.getHoopLocation == nil) || (self.getHoopLocation.distance(from: currentLocation) > 400.0) || self.ReturnFromBackground || (Timestamp - self.lastHoopsUpdated) > 5000) {
-                
-                if(doHoopNetUpdate) {
-                    self.lastHoopsUpdated = Timestamp
-                    self.lastHoopContentUpdated = Timestamp
-                    //print("Go Gethoops")
-                    self.getHoops(forUserCoordinate: currentLocation, with: { success in
-                        // We got the new hoops update content
-                        if(success) {
-                            self.updateExistingHoops()
-                        }
-                    })
-                    // See in which condition we recenter the mapview on user loc
-                    self.mapFocusOnUser(withAnimation: (self.getHoopLocation == nil) )
-                    self.ReturnFromBackground = false
-                } else {
-                    if(doHoopContentNetUpdate) {
-                        // Tell why we do a hoop Update
-                        self.lastHoopContentUpdated = Timestamp
-                        self.updateExistingHoops()
-                    }
-                }
-            }
-            
-        }
-        
         //print(self.hm)
     }
     
-    /*
-    // Need to be disabled when passing in background mode
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        //print(newHeading)
-        if(self.userLocationAnnotationView != nil) {
-            self.headingAngle = (CGFloat(newHeading.magneticHeading) - CGFloat(90) ) * CGFloat.pi / 180.0
-            self.pitchAngle = CGFloat(self.mapView.camera.pitch) * CGFloat.pi / 180.0
-            
-            let z:CGFloat = 1350 // Magic perspective number
-            
-            var t = CATransform3DIdentity;
-            t.m34 = -1.0/(z);
-            t = CATransform3DRotate(t, headingAngle, 0.0, 0.0, 1.0)
-            self.userLocationAnnotationView.layer.sublayers?[0].transform = t
-            
-            var t2 = CATransform3DIdentity;
-            t2.m34 = -1.0/(z);
-            t2 = CATransform3DRotate(t2, pitchAngle, 1.0, 0.0, 0)
-            self.userLocationAnnotationView.layer.transform = t2
-        }
-    }
+
+//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+//        //print("locationManager failed")
+//        // At first startup when user did not still gave the permission,
+//        // this will fail So do not send message
+//        if UserDefaults.standard.bool(forKey: "firstLocationManagerFail") {
+//            switch(CLLocationManager.authorizationStatus()) {
+//            case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
+//                //PopupProvider.showErrorNote("Erreur de geolocalisation")
+//                break
+//            default:
+//                print("location is fine")
+//                break
+//            }
+//        } else {
+//            print("this is first fail")
+//            UserDefaults.standard.set(true, forKey: "firstLocationManagerFail")
+//        }
+//    }
  
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        //print("locationManager failed")
-        // At first startup when user did not still gave the permission,
-        // this will fail So do not send message
-        if UserDefaults.standard.bool(forKey: "firstLocationManagerFail") {
-            switch(CLLocationManager.authorizationStatus()) {
-            case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
-                self.showNoLocationPanelButton(withAnimation: true)
-                
-                /*let alertController = UIAlertController (title: "Pour utiliser l'application hoop nous nécessitons d'acceder à votre position", message: "Allez aux paramètres?", preferredStyle: .alert)
-                 
-                 let settingsAction = UIAlertAction(title: "Paramètres", style: .default) { (_) -> Void in
-                 guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
-                 return
-                 }
-                 
-                 if UIApplication.shared.canOpenURL(settingsUrl) {
-                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                 print("Settings opened: \(success)") // Prints true
-                 })
-                 }
-                 }
-                 alertController.addAction(settingsAction)
-                 
-                 self.present(alertController, animated: true) {
-                 print("completed")
-                 }*/
-                break
-            default:
-                self.hideNoLocationPanelButton(withAnimation: true)
-                //print("location is fine")
-                break
-            }
-            
-        } else {
-            print("this is first fail")
-            UserDefaults.standard.set(true, forKey: "firstLocationManagerFail")
-        }
-    }
-    
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if(status == .authorizedWhenInUse) {
-            let alertController = UIAlertController(title: "Hoop ne peux pas te présenter tous les profils qui t'entourent 😢", message: "Si la géolocalisation n'est pas \'Toujours\' active dans les réglages de l'application, tu ne profiteras pas de Hoop au maximum. Et ne t'inquiète pas nous avons bien bossé pour être gentil avec ta batterie. 😁", preferredStyle: .alert)
-            
-            let cancelAction = UIAlertAction(title: "Annuler", style: .cancel)
-            alertController.addAction(cancelAction)
-            
-            let autoriseAction = UIAlertAction(title: "Autoriser", style: .default) { action in
-                self.goToSettings()
-            }
-            alertController.addAction(autoriseAction)
-            
-            self.present(alertController, animated: true)
+        switch(status) {
+        case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
+            showBadLocationPopup()
+        default:
+            print("ok then")
         }
     }
-    */
+
+}
+
+// Where all the popup messages are called
+extension MapViewController {
+    func showBadLocationPopup() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                            title: "Hoop ne peux pas te présenter tous les profils qui t'entourent 😢",
+                                            content: "Si la géolocalisation n'est pas \'Toujours\' active dans les réglages de l'application, tu ne profiteras pas de Hoop au maximum. Et ne t'inquiète pas nous avons bien bossé pour être gentil avec ta batterie. 😁",
+                                            okTitle: "Activate",
+                                            nokTitle: "Cancel",
+                                            okClosure: {
+                                                self.goToSettings()
+                                            },
+                                            nokClosure: {
+                                                print("do nothing")
+                                            })
+    }
+    
+    func showNoHoopPopup() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                          title: "Désolé",
+                                          content: "Hoop est encore jeune et malheureusement ta zone n'est pas encore couverte par l'application, contacte la Team Hoop pour nous faire une demande :). Plus il y aura de demande dans ton secteur et plus il y a de chance que ça arrive vite ;)",
+                                          okTitle: "ok",
+                                          nokTitle: nil,
+                                          okClosure: nil,
+                                          nokClosure: nil)
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -463,39 +400,69 @@ extension MapViewController: MKMapViewDelegate {
 // The calls to net stack
 extension MapViewController {
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
-        HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
+        let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
+        
+        promise.whenFulfilled { ids in
+            print("got content")
+            print("content")
+        }
+        
+        promise.whenRejected { error in
+            // remove loading indicator
+            print("got error")
+            print(error)
+        }
     }
     
     func locationDidUpdateForegroundNet(with coordinate:CLLocationCoordinate2D) {
+        self.lastHoopNetworkTimestamp = Timestamp
+        self.lastHoopsContentTimestamp = Timestamp
+        
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
         
         promise.then { ids -> Future<[hoop]> in
             self.currentHoopIds = ids
+            
             return HoopNetworkApi.sharedInstance.getHoopInfo(byLatLong: coordinate)
         }.then { hoops -> Future<[String:[profile]]> in
             self.currentHoopNetwork = hoops
+            
             return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
         }.whenFulfilled { content in
-                
+            print("got content")
+            print("content")
         }
         
         promise.whenRejected { error in
-            
+            // remove loading indicator
+            print("got error")
+            print(error)
+            switch (error as NSError).code {
+            case HoopNetworkApi.API_ERROR_NO_IDS:
+                self.showNoHoopPopup()
+            default:
+                break
+            }
         }
     }
     
     func locationDidUpdateForegroundNoNet(with coordinate:CLLocationCoordinate2D) {
+        self.lastHoopsContentTimestamp = Timestamp
+        
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
         
         promise.then { ids -> Future<[String:[profile]]> in
-                self.currentHoopIds = ids
-                return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
+            self.currentHoopIds = ids
+            return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
         }.whenFulfilled { content in
-                
+            print("got content")
+            print("content")
         }
         
         promise.whenRejected { error in
-            
+            // remove loading indicator
+            print("got error")
+            print(error)
         }
     }
 }
