@@ -333,6 +333,9 @@ extension HoopNetworkApi {
         let promise: Future<hoopApiResponse<hoopIn>> = self.request("getLovestopIn", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude)])
         return promise.then { response -> Future<[Int]> in
             let promise = Promise<[Int]>()
+            if (AppDelegate.me?.id == nil) {
+                AppDelegate.me?.id = response.data?.client_id
+            }
             if let ids = response.data?.hoop_ids {
                 promise.fulfill(ids)
             } else {
@@ -362,6 +365,20 @@ extension HoopNetworkApi {
         let promise: Future<hoopApiResponse<[String:[profile]]>> = self.request("getLovestopContent", and: ["lovestop_id":strIds])
         return  promise.then { response -> Future<[String:[profile]]> in
             let promise = Promise<[String:[profile]]>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    func postHoopDevice(withDeviceId deviceId:String) -> Future<String> {
+        let promise: Future<hoopApiResponse<String>> = self.post("getLovestopContent", and: ["deviceId":self.deviceToken!,"deviceUuid":""], andProgress: nil)
+        return promise.then { response -> Future<String> in
+            let promise = Promise<String>()
             if let data = response.data {
                 promise.fulfill(data)
             } else {

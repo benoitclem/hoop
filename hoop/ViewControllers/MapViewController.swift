@@ -39,6 +39,10 @@ class MapViewController: UIViewController {
     var currentSelectedHoop: hoop? = nil
     var currentHoopSelectedOverlay: MKCircle? = nil
     
+    var currentHoopsContent: [String:[profile]]? = nil
+    var currentActiveProfiles = [profile]()
+    var currentInactivesProfiles = [profile]()
+    
     let profilePictures: [String] = ["aicha","iris","paula","clement","rachel","samie","sophie"]
     var selectedProfile: String?
     
@@ -240,30 +244,12 @@ extension MapViewController: CLLocationManagerDelegate {
         //print(self.hm)
     }
     
-
-//    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-//        //print("locationManager failed")
-//        // At first startup when user did not still gave the permission,
-//        // this will fail So do not send message
-//        if UserDefaults.standard.bool(forKey: "firstLocationManagerFail") {
-//            switch(CLLocationManager.authorizationStatus()) {
-//            case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
-//                //PopupProvider.showErrorNote("Erreur de geolocalisation")
-//                break
-//            default:
-//                print("location is fine")
-//                break
-//            }
-//        } else {
-//            print("this is first fail")
-//            UserDefaults.standard.set(true, forKey: "firstLocationManagerFail")
-//        }
-//    }
- 
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("==============")
+        print(status)
+        print("==============")
         switch(status) {
-        case .notDetermined, .restricted, .denied, .authorizedWhenInUse:
+        case .restricted, .denied, .authorizedWhenInUse:
             showBadLocationPopup()
         default:
             print("ok then")
@@ -309,12 +295,6 @@ extension MapViewController: MKMapViewDelegate {
         self.mapView.delegate = self
         // Here We define the real content view of the map
         self.mapView.layoutMargins = UIEdgeInsets(top: 50, left: 0.0, bottom: 400.0, right: 0.0)
-        
-//        let annotation = MKPointAnnotation()
-//        annotation.coordinate = CLLocationCoordinate2D(latitude: 48.866667, longitude: 2.333333)
-//        self.mapView.addAnnotation(annotation)
-//        self.mapFocus(at: CLLocationCoordinate2D(latitude: 48.866667, longitude: 2.333333), withAnimation: true)
-
     }
     
     // Focus stuffs
@@ -349,31 +329,31 @@ extension MapViewController: MKMapViewDelegate {
     // Overlays
     
     func addCurrentHoopsArea(with circles: [Circle]) {
-        self.currentHoopsAreaOverlay = CirclesOverlay(withiCircles: circles, color: .red)
-        self.mapView.addOverlay(self.currentHoopsAreaOverlay!)
+        currentHoopsAreaOverlay = CirclesOverlay(withiCircles: circles, color: .red)
+        self.mapView.addOverlay(currentHoopsAreaOverlay!)
     }
     
     func removeCurrentHoopsArea() {
-        if let hoopAreaOverlay = self.currentHoopsAreaOverlay {
+        if let hoopAreaOverlay = currentHoopsAreaOverlay {
             self.mapView.removeOverlay(hoopAreaOverlay)
-            self.currentHoopsAreaOverlay = nil
+            currentHoopsAreaOverlay = nil
         }
     }
     
     func addCurrentSelectedHoop() {
-        if let selectedHoop = self.currentSelectedHoop {
+        if let selectedHoop = currentSelectedHoop {
             if let lat = selectedHoop.latitude, let lon = selectedHoop.longitude {
                 let coordinates = CLLocationCoordinate2DMake(lat, lon)
-                self.currentHoopSelectedOverlay = MKCircle(center: coordinates, radius: Double(selectedHoop.radius ?? 700))
-                self.mapView.addOverlay(self.currentHoopSelectedOverlay!)
+                currentHoopSelectedOverlay = MKCircle(center: coordinates, radius: Double(selectedHoop.radius ?? 700))
+                self.mapView.addOverlay(currentHoopSelectedOverlay!)
             }
         }
     }
     
     func removeSelectedHoop() {
-        if let selectedHoopOverlay = self.currentHoopSelectedOverlay {
+        if let selectedHoopOverlay = currentHoopSelectedOverlay {
             self.mapView.removeOverlay(selectedHoopOverlay)
-            self.currentHoopSelectedOverlay = nil
+            currentHoopSelectedOverlay = nil
         }
     }
     
@@ -383,7 +363,7 @@ extension MapViewController: MKMapViewDelegate {
         self.removeSelectedHoop()
         // get the current active Stops
         var circles = [Circle]()
-        for hoop in self.currentHoops {
+        for hoop in currentHoops {
             if let hoopRadius = hoop.radius {
                 if let lat = hoop.latitude, let lon = hoop.longitude {
                     let coordinates = CLLocationCoordinate2DMake(lat, lon)
@@ -395,23 +375,80 @@ extension MapViewController: MKMapViewDelegate {
         addCurrentSelectedHoop()
     }
     
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        if overlay is CirclesOverlay {
+            // Our nice au custom area
+            return CirclesOverlayRenderer(withCircleOverlay: overlay as! CirclesOverlay)
+        } else {
+            // Basic circle
+            let circleRenderer = MKCircleRenderer(overlay: overlay)
+            circleRenderer.fillColor = UIColor.red.withAlphaComponent(0.2)
+            return circleRenderer
+        }
+        
+    }
+    
 }
 
 // The calls to net stack
 extension MapViewController {
+    
+    func computeCurrentHoops() {
+        self.currentHoops = currentHoopNetwork.filter { hoop in
+            if let id = hoop.id {
+                return self.currentHoopIds.contains(id)
+            } else {
+                return false
+            }
+        }
+    }
+    
+    func computeCurrentProfiles() -> [profile] {
+        var exhaustiveCurrentProfiles = [profile]()
+        // Create a list of current profiles which contains their actual hoop ids
+        if let hoopContent = currentHoopsContent{
+            for (hoopId,profiles) in hoopContent {
+                if let strHoopId = Int(hoopId) {
+                    for profile in profiles {
+                        if profile.activeInHoop == 1 {
+                            if let foundProfile = exhaustiveCurrentProfiles.first(where: {$0.id == profile.id}) {
+                                // Profile exist in current profiles
+                                foundProfile.current_hoop_ids.append(strHoopId)
+                            } else {
+                                // Profile does not exist so add it
+                                profile.current_hoop_ids.append(strHoopId)
+                                exhaustiveCurrentProfiles.append(profile)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return exhaustiveCurrentProfiles
+    }
+    
+    func updateDisplayableCurrentProfiles(exCurrentProfiles: [profile]) {
+        // Deal with the appending
+        for profile in exCurrentProfiles {
+            if let existing = currentActiveProfiles.first(where: {$0.id == profile.id}) {
+                if !profile.current_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
+                    if let randHoopId = profile.current_hoop_ids.randomElement() {
+                        profile.current_hoop_id = randHoopId
+                    }
+                }
+            } else {
+                // le profile n'est pas dans la liste de profile actifs
+                currentActiveProfiles.append(profile)
+                if let randHoopId = profile.current_hoop_ids.randomElement() {
+                    profile.current_hoop_id = randHoopId
+                }
+            }
+        }
+    }
+    
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
-        
-        promise.whenFulfilled { ids in
-            print("got content")
-            print("content")
-        }
-        
-        promise.whenRejected { error in
-            // remove loading indicator
-            print("got error")
-            print(error)
-        }
+        promise.whenFulfilled { _ in }
     }
     
     func locationDidUpdateForegroundNet(with coordinate:CLLocationCoordinate2D) {
@@ -422,23 +459,29 @@ extension MapViewController {
         
         promise.then { ids -> Future<[hoop]> in
             self.currentHoopIds = ids
-            
             return HoopNetworkApi.sharedInstance.getHoopInfo(byLatLong: coordinate)
         }.then { hoops -> Future<[String:[profile]]> in
             self.currentHoopNetwork = hoops
-            
+            self.computeCurrentHoops()
+            self.updateCurrentHoopArea()
+            self.focusOnUser(withAnimation: true)
             return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
-        }.whenFulfilled { content in
+        }.whenFulfilled(on: .main) { content in
             print("got content")
             print("content")
+            self.currentHoopsContent = content
+            var exhaustiveCurrentProfiles = self.computeCurrentProfiles()
+            
+            // Choose one
         }
         
-        promise.whenRejected { error in
+        promise.whenRejected(on: .main) { error in
             // remove loading indicator
             print("got error")
             print(error)
             switch (error as NSError).code {
             case HoopNetworkApi.API_ERROR_NO_IDS:
+                self.locationManager.stopUpdatingLocation()
                 self.showNoHoopPopup()
             default:
                 break
@@ -454,15 +497,25 @@ extension MapViewController {
         promise.then { ids -> Future<[String:[profile]]> in
             self.currentHoopIds = ids
             return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
-        }.whenFulfilled { content in
+        }.whenFulfilled(on: .main) { content in
             print("got content")
             print("content")
+            self.computeCurrentHoops()
+            self.updateCurrentHoopArea()
+            self.focusOnUser(withAnimation: true)
         }
         
-        promise.whenRejected { error in
+        promise.whenRejected(on: .main) { error in
             // remove loading indicator
             print("got error")
             print(error)
+            switch (error as NSError).code {
+            case HoopNetworkApi.API_ERROR_NO_IDS:
+                self.locationManager.stopUpdatingLocation()
+                self.showNoHoopPopup()
+            default:
+                break
+            }
         }
     }
 }

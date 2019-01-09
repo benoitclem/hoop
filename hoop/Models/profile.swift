@@ -33,7 +33,8 @@ class profile: Decodable, Encodable {
     var reached_map: Bool?
     var saw_tutorial: Bool?
     var email: String?
-    var current_hoop_ids: [Int]?
+    var current_hoop_id: Int?
+    var current_hoop_ids = [Int]()
     
     var age: Int? {
         get {
@@ -167,7 +168,7 @@ class profile: Decodable, Encodable {
             saw_tutorial = try? container.decode(Bool.self, forKey: .saw_tutorial)
         }
         if container.contains(.current_hoop_ids) {
-            current_hoop_ids = try? container.decode([Int].self, forKey: .current_hoop_ids)
+            current_hoop_ids = try! container.decode([Int].self, forKey: .current_hoop_ids)
         }
     }
     

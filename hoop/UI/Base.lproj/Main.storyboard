@@ -430,6 +430,7 @@
                                             <constraint firstAttribute="width" constant="35" id="5GG-Jm-Rhk"/>
                                             <constraint firstAttribute="height" constant="35" id="I3S-Vj-ws7"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                         <state key="normal" image="Chat"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROm-TR-NH0" userLabel="ProfileButton">
@@ -438,6 +439,7 @@
                                             <constraint firstAttribute="width" constant="35" id="jAy-l9-nby"/>
                                             <constraint firstAttribute="height" constant="35" id="trp-3y-ESV"/>
                                         </constraints>
+                                        <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                                         <state key="normal" image="Profile"/>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd3-sr-QF0">
@@ -451,7 +453,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="ROm-TR-NH0" firstAttribute="top" secondItem="640-35-e2Z" secondAttribute="top" constant="8" id="FQb-aH-wau"/>
                                     <constraint firstAttribute="trailing" secondItem="TJH-nD-My1" secondAttribute="trailing" constant="8" id="Geq-h5-Kv3"/>
@@ -462,7 +464,7 @@
                                     <constraint firstItem="bd3-sr-QF0" firstAttribute="centerX" secondItem="640-35-e2Z" secondAttribute="centerX" id="dbW-H8-S4P"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NC-RG-abR" customClass="UITopBottomGradientView" customModule="hoop" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3NC-RG-abR">
                                 <rect key="frame" x="0.0" y="89" width="414" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ct-pV-hWY">
