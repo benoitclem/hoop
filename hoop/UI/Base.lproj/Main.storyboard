@@ -544,7 +544,7 @@
                         <outlet property="hoopBackground" destination="rVf-Zs-COc" id="gN5-93-agE"/>
                         <outlet property="hoopNameLabel" destination="8ct-pV-hWY" id="7yf-xd-bEF"/>
                         <outlet property="mapView" destination="wjd-2r-Imj" id="Ykv-Ek-Hlx"/>
-                        <outlet property="profiles" destination="W85-nB-Y8z" id="WYB-MD-Geb"/>
+                        <outlet property="profilesCollectionView" destination="W85-nB-Y8z" id="1PU-hR-ehk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XnR-C1-Yf7" sceneMemberID="firstResponder"/>

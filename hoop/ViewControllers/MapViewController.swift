@@ -11,14 +11,17 @@ import MapKit
 import CoreLocation
 import Hero
 import Futures
+import AlamofireImage
 
 class MapViewController: UIViewController {
     
     @IBOutlet weak var hoopBackground: UIView!
     @IBOutlet weak var mapView: MKMapView!
-    @IBOutlet weak var profiles: UICollectionView!
+    @IBOutlet weak var profilesCollectionView: UICollectionView!
     @IBOutlet weak var etHoopButton: UIButton!
     @IBOutlet weak var hoopNameLabel: UILabel!
+    
+    var updateContentTimer:Timer!
     
     var returnFromBackground: Bool = false
     
@@ -60,6 +63,15 @@ class MapViewController: UIViewController {
         etHoopButton.setTitle("Bonjour", for: .normal)
         hoopNameLabel.text = "Autour du marché Saint-Germain"
     }
+    
+    override func viewDidAppear(_ animated:Bool) {
+        self.updateContentTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.contentTimerDidFire), userInfo: nil, repeats: true)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.updateContentTimer.invalidate()
+    }
+    
     
     func viewDidEnterForeground(notification: Notification) {
         
@@ -114,7 +126,7 @@ extension MapViewController: UICollectionViewDelegate {
 
 extension MapViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return profilePictures.count
+        return currentProfiles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -125,9 +137,22 @@ extension MapViewController: UICollectionViewDataSource {
         //let profilCartouche = cell.viewWithTag(3)!
         
         // Here try the localization stuffs
-        profilName.text = "\(profilePictures[indexPath.row]) 27"
-        profilImage.image = UIImage(imageLiteralResourceName: profilePictures[indexPath.row])
-        profilImage.hero.id = profilePictures[indexPath.row]
+        let displayedProfile = currentProfiles[indexPath.row]
+        
+        var finalName = ""
+        
+        if displayedProfile.id != 1 {
+            if let age = displayedProfile.age, let name = displayedProfile.name {
+                finalName = "\(name) \(age)"
+            }
+        }
+
+        if let srcUrl = displayedProfile.pictures_urls.first {
+            profilImage.af_setImage(withURL: srcUrl)
+        }
+            
+        profilName.text = finalName
+        profilImage.hero.id = finalName
         //profilCartouche.hero.id = "\(profilePictures[indexPath.row])cartouche"
         
         return cell
@@ -152,26 +177,32 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func setupLocation() {
-        // Ask user permissio nto use location
-        self.locationManager.requestAlwaysAuthorization()
+        if let age = AppDelegate.me?.age {
+            if age >= 18 {
+                // Ask user permissio nto use location
+                self.locationManager.requestAlwaysAuthorization()
+                
+                // Tell locationManager that we receive the location updates
+                self.locationManager.delegate = self
+                
+                // Mandatory to background modes
+                self.locationManager.allowsBackgroundLocationUpdates = true
+                self.locationManager.pausesLocationUpdatesAutomatically = true
+                self.locationManager.activityType = .fitness
+                
+                //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                self.locationManager.desiredAccuracy = MapViewController.HIGH_REQUESTED_ACCURACY
+                //self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+                
+                // @ start - Every 40 meters we receive a location update,
+                // later if the speed increase put the distance filter to other value
+                self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
+                
+                self.locationManager.startUpdatingLocation()
+                return
+            }
+        }
         
-        // Tell locationManager that we receive the location updates
-        self.locationManager.delegate = self
-        
-        // Mandatory to background modes
-        self.locationManager.allowsBackgroundLocationUpdates = true
-        self.locationManager.pausesLocationUpdatesAutomatically = true
-        self.locationManager.activityType = .fitness
-        
-        //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.desiredAccuracy = MapViewController.HIGH_REQUESTED_ACCURACY
-        //self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        
-        // @ start - Every 40 meters we receive a location update,
-        // later if the speed increase put the distance filter to other value
-        self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
-        
-        self.locationManager.startUpdatingLocation()
     }
 
     func checkUpdateType(_ currentLocation: CLLocation) -> (network: Bool,content: Bool) {
@@ -259,6 +290,17 @@ extension MapViewController: CLLocationManagerDelegate {
 
 // Where all the popup messages are called
 extension MapViewController {
+    
+    func showWrongAgePopup() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                          title: "Désolé",
+                                          content: "Tu n'as malheureusement pas encore 18 ans et c'est l'âge nécessaire pour utiliser l'application.",
+                                          okTitle: "Ok",
+                                          nokTitle: nil,
+                                          okClosure: nil,
+                                          nokClosure: nil)
+    }
+    
     func showBadLocationPopup() {
         PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
                                             title: "Hoop ne peux pas te présenter tous les profils qui t'entourent 😢",
@@ -437,10 +479,12 @@ extension MapViewController {
         return exhaustiveCurrentProfiles
     }
     
-    func updateDisplayableCurrentProfiles(_ newCurrentProfiles: [profile]) -> (toRemove: [Int], toAdd: [Int]) {
+    func updateDisplayableCurrentProfiles() {
         var idsToRemove = [Int]()
         var idsToKeep = [Int]()
         var idsToAdd = [Int]()
+        // Compute the new incoming current profiles
+        var newCurrentProfiles = self.computeCurrentProfiles()
         // Deal with the deletion
         for (index,profile) in currentProfiles.enumerated() {
             // the id is not in the new profile
@@ -516,7 +560,19 @@ extension MapViewController {
                 }
             }
         }
-        return (idsToRemove,idsToAdd)
+        // Do the real work
+        var removingIndexesPath = [IndexPath]()
+        for (_,v) in idsToRemove.enumerated(){
+            removingIndexesPath.append(IndexPath(row: v, section: 0))
+        }
+        var addingIndexesPath = [IndexPath]()
+        for (_,v) in idsToAdd.enumerated(){
+            addingIndexesPath.append(IndexPath(row: v, section: 0))
+        }
+        self.profilesCollectionView.performBatchUpdates({
+            self.profilesCollectionView.deleteItems(at: removingIndexesPath)
+            self.profilesCollectionView.insertItems(at: addingIndexesPath)
+        }, completion: nil)
     }
     
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
@@ -540,14 +596,8 @@ extension MapViewController {
             self.focusOnUser(withAnimation: true)
             return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
         }.whenFulfilled(on: .main) { content in
-            print("got content")
-            print("content")
             self.currentHoopsContent = content
-            var exhaustiveCurrentProfiles = self.computeCurrentProfiles()
-            let ids = self.updateDisplayableCurrentProfiles(exhaustiveCurrentProfiles)
-            print(ids)
-            print(self.currentProfiles.map({ "#\($0.id!) \($0.name!) \($0.current_displayed_status!)"}))
-            // Choose one
+            self.updateDisplayableCurrentProfiles()
         }
         
         promise.whenRejected(on: .main) { error in
@@ -575,9 +625,11 @@ extension MapViewController {
         }.whenFulfilled(on: .main) { content in
             print("got content")
             print("content")
+            self.currentHoopsContent = content
             self.computeCurrentHoops()
             self.updateCurrentHoopArea()
             self.focusOnUser(withAnimation: true)
+            self.updateDisplayableCurrentProfiles()
         }
         
         promise.whenRejected(on: .main) { error in
@@ -591,6 +643,14 @@ extension MapViewController {
             default:
                 break
             }
+        }
+    }
+    
+    @objc func contentTimerDidFire() {
+        // ??? self.lastHoopsContentTimestamp = Timestamp
+        HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds).whenFulfilled(on: .main) { content in
+            self.currentHoopsContent = content
+            self.updateDisplayableCurrentProfiles()
         }
     }
 }
