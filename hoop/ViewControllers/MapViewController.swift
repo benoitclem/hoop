@@ -40,8 +40,7 @@ class MapViewController: UIViewController {
     var currentHoopSelectedOverlay: MKCircle? = nil
     
     var currentHoopsContent: [String:[profile]]? = nil
-    var currentActiveProfiles = [profile]()
-    var currentInactivesProfiles = [profile]()
+    var currentProfiles = [profile]()
     
     let profilePictures: [String] = ["aicha","iris","paula","clement","rachel","samie","sophie"]
     var selectedProfile: String?
@@ -410,40 +409,114 @@ extension MapViewController {
             for (hoopId,profiles) in hoopContent {
                 if let strHoopId = Int(hoopId) {
                     for profile in profiles {
-                        if profile.activeInHoop == 1 {
-                            if let foundProfile = exhaustiveCurrentProfiles.first(where: {$0.id == profile.id}) {
-                                // Profile exist in current profiles
-                                foundProfile.current_hoop_ids.append(strHoopId)
+                        if let foundProfile = exhaustiveCurrentProfiles.first(where: {$0.id == profile.id}) {
+                            // Profile exist in current profiles
+                            if profile.activeInHoop == 1 {
+                                foundProfile.current_active_hoop_ids.append(strHoopId)
                             } else {
-                                // Profile does not exist so add it
-                                profile.current_hoop_ids.append(strHoopId)
-                                exhaustiveCurrentProfiles.append(profile)
+                                foundProfile.current_inactive_hoop_ids.append(strHoopId)
                             }
+                        } else {
+                            // Profile does not exist so add it
+                            if profile.activeInHoop == 1 {
+                                profile.current_active_hoop_ids.append(strHoopId)
+                            } else {
+                                profile.current_inactive_hoop_ids.append(strHoopId)
+                            }
+                            exhaustiveCurrentProfiles.append(profile)
                         }
                     }
                 }
             }
         }
+        // Tell if the profile is active or inactive in the list
+        exhaustiveCurrentProfiles.forEach({$0.current_displayed_status = $0.current_active_hoop_ids.count != 0 })
+        // Sort them by active inactive
+        exhaustiveCurrentProfiles.sort(by: { $0.current_displayed_status && !$1.current_displayed_status })
+        // Return the list
         return exhaustiveCurrentProfiles
     }
     
-    func updateDisplayableCurrentProfiles(exCurrentProfiles: [profile]) {
+    func updateDisplayableCurrentProfiles(_ newCurrentProfiles: [profile]) -> (toRemove: [Int], toAdd: [Int]) {
+        var idsToRemove = [Int]()
+        var idsToKeep = [Int]()
+        var idsToAdd = [Int]()
+        // Deal with the deletion
+        for (index,profile) in currentProfiles.enumerated() {
+            // the id is not in the new profile
+            if let existingProfile = newCurrentProfiles.first(where: { $0.id == profile.id }) {
+                // If the profile does exist in the newCurrentProfile
+                if existingProfile.current_displayed_status != profile.current_displayed_status{
+                    // If the profile changed in status remove it as well
+                    idsToRemove.append(index)
+                } else {
+                    // Simpler to use
+                    idsToKeep.append(index)
+                }
+            } else {
+                // The profile does not exist in newCurrentProfile so we need a deletion
+                idsToRemove.append(index)
+            }
+        }
+        // Do the deletion
+        let idsToKeepIndexSet = IndexSet(idsToKeep)
+        // Make a temporary (don't know if its necessary)
+        let intermediateCurrentProfiles = idsToKeepIndexSet.map { currentProfiles[$0] }
+        // Replace the currentProfile
+        currentProfiles = intermediateCurrentProfiles
+        // Do the model update
         // Deal with the appending
-        for profile in exCurrentProfiles {
-            if let existing = currentActiveProfiles.first(where: {$0.id == profile.id}) {
-                if !profile.current_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
-                    if let randHoopId = profile.current_hoop_ids.randomElement() {
-                        profile.current_hoop_id = randHoopId
+        for profile in newCurrentProfiles {
+            // je cherche le profil dans les currentActive
+            if let existing = currentProfiles.first(where: {$0.id == profile.id}) {
+                if existing.current_displayed_status {
+                    // Je vérifie si l'id de l'existant fait partie des actifs
+                    if !profile.current_active_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
+                        // Si non je recherche
+                        if let randHoopId = profile.current_active_hoop_ids.randomElement() {
+                            profile.current_hoop_id = randHoopId
+                        }
+                    }
+                } else {
+                    // Je vérifie si l'id de l'existant fait partie des inactifs
+                    if !profile.current_inactive_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
+                        // Si non je recherche
+                        if let randHoopId = profile.current_inactive_hoop_ids.randomElement() {
+                            profile.current_hoop_id = randHoopId
+                        }
                     }
                 }
             } else {
-                // le profile n'est pas dans la liste de profile actifs
-                currentActiveProfiles.append(profile)
-                if let randHoopId = profile.current_hoop_ids.randomElement() {
-                    profile.current_hoop_id = randHoopId
+                // le profile n'est pas dans la liste de profile
+                // Compute where to insert the profile
+                var indexToInsert = 0
+                if profile.current_displayed_status {
+                    if currentProfiles.count != 0 {
+                        if let foundIndex = currentProfiles.firstIndex(where: { !$0.current_displayed_status }) {
+                            // if we found a transition from active to inactive
+                            indexToInsert = foundIndex
+                        } else {
+                            // Otherwise it the end of the list
+                            indexToInsert = currentProfiles.count
+                        }
+                    }
+                } else {
+                    indexToInsert = currentProfiles.count
+                }
+                idsToAdd.append(indexToInsert)
+                currentProfiles.insert(profile, at: indexToInsert)
+                if profile.current_displayed_status {
+                    if let randHoopId = profile.current_active_hoop_ids.randomElement() {
+                        profile.current_hoop_id = randHoopId
+                    }
+                } else {
+                    if let randHoopId = profile.current_inactive_hoop_ids.randomElement() {
+                        profile.current_hoop_id = randHoopId
+                    }
                 }
             }
         }
+        return (idsToRemove,idsToAdd)
     }
     
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
@@ -471,7 +544,9 @@ extension MapViewController {
             print("content")
             self.currentHoopsContent = content
             var exhaustiveCurrentProfiles = self.computeCurrentProfiles()
-            
+            let ids = self.updateDisplayableCurrentProfiles(exhaustiveCurrentProfiles)
+            print(ids)
+            print(self.currentProfiles.map({ "#\($0.id!) \($0.name!) \($0.current_displayed_status!)"}))
             // Choose one
         }
         

@@ -34,7 +34,10 @@ class profile: Decodable, Encodable {
     var saw_tutorial: Bool?
     var email: String?
     var current_hoop_id: Int?
-    var current_hoop_ids = [Int]()
+    var current_displayed_status: Bool!
+    var current_active_hoop_ids = [Int]()
+    var current_inactive_hoop_ids = [Int]()
+    
     
     var age: Int? {
         get {
@@ -45,7 +48,7 @@ class profile: Decodable, Encodable {
             }
         }
     }
-    
+
     enum CodingKeys : String, CodingKey {
         case id
         case name = "nickname"
@@ -71,7 +74,6 @@ class profile: Decodable, Encodable {
         case sharing_code
         case reached_map
         case saw_tutorial
-        case current_hoop_ids
     }
     
     required init(from decoder: Decoder) throws {
@@ -167,9 +169,6 @@ class profile: Decodable, Encodable {
         if container.contains(.saw_tutorial) {
             saw_tutorial = try? container.decode(Bool.self, forKey: .saw_tutorial)
         }
-        if container.contains(.current_hoop_ids) {
-            current_hoop_ids = try! container.decode([Int].self, forKey: .current_hoop_ids)
-        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -192,8 +191,9 @@ class profile: Decodable, Encodable {
         try container.encode(sharing_code, forKey: .sharing_code)
         try container.encode(reached_map, forKey: .reached_map)
         try container.encode(saw_tutorial, forKey: .saw_tutorial)
-        try container.encode(current_hoop_ids, forKey: .current_hoop_ids)
     }
+    
+
 }
 
 extension profile {
