@@ -301,7 +301,7 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wjd-2r-Imj">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W85-nB-Y8z">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="W85-nB-Y8z">
                                 <rect key="frame" x="0.0" y="462" width="414" height="400"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -321,11 +321,14 @@
                                             <rect key="frame" x="0.0" y="0.0" width="326" height="297"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aN9-kF-J8L">
-                                                    <rect key="frame" x="0.0" y="0.0" width="326" height="297"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aN9-kF-J8L">
+                                                    <rect key="frame" x="8" y="0.0" width="310" height="297"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="25"/>
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
@@ -340,19 +343,19 @@
                                                 </label>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="TrD-na-Vtt" firstAttribute="leading" secondItem="qJI-7E-IWy" secondAttribute="leadingMargin" constant="8" id="Thj-UE-R9d"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="TrD-na-Vtt" secondAttribute="trailing" constant="8" id="VnB-hn-ZKk"/>
-                                            <constraint firstItem="aN9-kF-J8L" firstAttribute="leading" secondItem="qJI-7E-IWy" secondAttribute="leading" id="gWI-Xm-37A"/>
-                                            <constraint firstAttribute="trailing" secondItem="aN9-kF-J8L" secondAttribute="trailing" id="h14-6m-e6H"/>
+                                            <constraint firstItem="aN9-kF-J8L" firstAttribute="leading" secondItem="qJI-7E-IWy" secondAttribute="leading" constant="8" id="gWI-Xm-37A"/>
+                                            <constraint firstAttribute="trailing" secondItem="aN9-kF-J8L" secondAttribute="trailing" constant="8" id="h14-6m-e6H"/>
                                             <constraint firstAttribute="bottom" secondItem="aN9-kF-J8L" secondAttribute="bottom" id="i9e-dA-48T"/>
                                             <constraint firstItem="TrD-na-Vtt" firstAttribute="top" secondItem="qJI-7E-IWy" secondAttribute="top" constant="8" id="pyw-w6-HkJ"/>
                                             <constraint firstItem="aN9-kF-J8L" firstAttribute="top" secondItem="qJI-7E-IWy" secondAttribute="top" id="yb9-hk-NqY"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="25"/>
+                                                <real key="value" value="0.0"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="0.0"/>
@@ -544,6 +547,7 @@
                         <outlet property="hoopBackground" destination="rVf-Zs-COc" id="gN5-93-agE"/>
                         <outlet property="hoopNameLabel" destination="8ct-pV-hWY" id="7yf-xd-bEF"/>
                         <outlet property="mapView" destination="wjd-2r-Imj" id="Ykv-Ek-Hlx"/>
+                        <outlet property="profileCollectionViewLayout" destination="iZs-hc-2HT" id="tOh-gr-dPF"/>
                         <outlet property="profilesCollectionView" destination="W85-nB-Y8z" id="1PU-hR-ehk"/>
                     </connections>
                 </viewController>

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "568822509.080303"
+            timestampString = "568826434.195756"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "374"
-            endingLineNumber = "374"
+            startingLineNumber = "445"
+            endingLineNumber = "445"
             landmarkName = "addCurrentHoopsArea(with:)"
             landmarkType = "7">
          </BreakpointContent>

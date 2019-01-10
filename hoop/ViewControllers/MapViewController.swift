@@ -21,6 +21,10 @@ class MapViewController: UIViewController {
     @IBOutlet weak var etHoopButton: UIButton!
     @IBOutlet weak var hoopNameLabel: UILabel!
     
+    @IBOutlet weak var profileCollectionViewLayout: UICollectionViewFlowLayout!
+    
+    static let WIDTH_PROFILE_INSET = CGFloat(32.0)
+    
     var updateContentTimer:Timer!
     
     var returnFromBackground: Bool = false
@@ -48,6 +52,8 @@ class MapViewController: UIViewController {
     let profilePictures: [String] = ["aicha","iris","paula","clement","rachel","samie","sophie"]
     var selectedProfile: String?
     
+    private var indexOfCellBeforeDragging = 0
+    
     // /!\ becarefull the LOW_ mean poor accurate + less frequent location updates
     
     static let HIGH_DISTANCE_FILTER = 40.0
@@ -72,6 +78,12 @@ class MapViewController: UIViewController {
         self.updateContentTimer.invalidate()
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        configureCollectionViewLayoutItemSize()
+    }
+    
     
     func viewDidEnterForeground(notification: Notification) {
         
@@ -80,6 +92,9 @@ class MapViewController: UIViewController {
         
         self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        
+        // Trigger a full reload
+        locationDidUpdateForegroundNet(with: self.currentLocation.coordinate)
     }
     
     func viewDidEnterBackground(notification: Notification) {
@@ -159,14 +174,72 @@ extension MapViewController: UICollectionViewDataSource {
     }
 }
 
-extension MapViewController: UICollectionViewDelegateFlowLayout {
+extension MapViewController {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.size.width-64, height: collectionView.frame.size.height-16)
+    private func configureCollectionViewLayoutItemSize() {
+        let inset: CGFloat = MapViewController.WIDTH_PROFILE_INSET // This inset calculation is some magic so the next and the previous cells will peek from the sides. Don't worry about it
+        profileCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: inset/2.0, right: inset)
+        
+        profileCollectionViewLayout.itemSize = CGSize(width: profileCollectionViewLayout.collectionView!.frame.size.width - inset * 2, height: profileCollectionViewLayout.collectionView!.frame.size.height - inset/2.0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 32.0, bottom: 16.0, right: 32.0)
+}
+
+extension MapViewController: UIScrollViewDelegate {
+    
+    private func indexOfMajorCell() -> Int {
+        let itemWidth = profileCollectionViewLayout.itemSize.width
+        let proportionalOffset = profileCollectionViewLayout.collectionView!.contentOffset.x / itemWidth
+        let index = Int(round(proportionalOffset))
+        let safeIndex = max(0, min(currentProfiles.count - 1, index))
+        return safeIndex
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        indexOfCellBeforeDragging = indexOfMajorCell()
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        // Stop scrollView sliding:
+        targetContentOffset.pointee = scrollView.contentOffset
+        
+        // calculate where scrollView should snap to:
+        let indexOfMajorCell = self.indexOfMajorCell()
+        
+        // calculate conditions:
+        let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
+        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < currentProfiles.count && velocity.x > swipeVelocityThreshold
+        let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
+        let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
+        let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
+        
+        if didUseSwipeToSkipCell {
+            
+            let snapToIndex = indexOfCellBeforeDragging + (hasEnoughVelocityToSlideToTheNextCell ? 1 : -1)
+            let toValue = profileCollectionViewLayout.itemSize.width * CGFloat(snapToIndex)
+            
+            // Damping equal 1 => no oscillations => decay animation:
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: velocity.x, options: .allowUserInteraction, animations: {
+                scrollView.contentOffset = CGPoint(x: toValue, y: 0)
+                scrollView.layoutIfNeeded()
+            }, completion: nil)
+            
+        } else {
+            // This is a much better way to scroll to a cell:
+            let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
+            profileCollectionViewLayout.collectionView!.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let selectedIndex = self.indexOfMajorCell()
+        let selectedprofile = currentProfiles[selectedIndex]
+        if let id = selectedprofile.current_hoop_id {
+            currentSelectedHoop = currentHoopNetwork.first(where: { $0.id == id})
+            if currentSelectedHoop != nil {
+                self.updateCurrentHoopArea()
+            }
+        }
     }
 }
 
@@ -174,6 +247,7 @@ extension MapViewController: CLLocationManagerDelegate {
 
     func setupUserInterface() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.profileCollectionViewLayout.minimumLineSpacing = 0
     }
     
     func setupLocation() {
@@ -275,9 +349,6 @@ extension MapViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        print("==============")
-        print(status)
-        print("==============")
         switch(status) {
         case .restricted, .denied, .authorizedWhenInUse:
             showBadLocationPopup()
