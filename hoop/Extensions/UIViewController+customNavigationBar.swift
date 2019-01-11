@@ -12,6 +12,7 @@ extension UIViewController {
     func setupHoopNavigationBar(_ title: String,
                 leftTitle lTitle:String?, leftSelector lSelector: Selector?,
                 rightTitle rTitle:String?, rightSelector rSelector: Selector?) {
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.title = title
         self.navigationItem.hidesBackButton = true
         self.navigationController?.navigationBar.titleTextAttributes =

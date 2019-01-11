@@ -16,6 +16,8 @@
 
 "faq_vc_title" = "FAQ";
 
-"done" = "Done";
+"record" = "Done";
+
+"end" = "Terminer";
 
 "back" = "Return";

@@ -11,31 +11,62 @@ import Hero
 
 class ProfileViewController: UIViewController {
 
+    @IBOutlet weak var profileScrollView: UIScrollView!
     @IBOutlet weak var hoopBackground: UIView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profilepicturePager: UIPageControl!
     @IBOutlet weak var profileDescription: UITextView!
     @IBOutlet weak var etHoopButton: UIButton!
     @IBOutlet weak var dismissButton: UIButton!
-    @IBOutlet weak var cartoucheView: UIView!
+    @IBOutlet weak var profilePictureCollectionView: UICollectionView!
     
-    @objc var profileId: String?
-    @objc var imageheroId: String?
+    
+    @objc var profileId: String!
+    
+    var profile: profile!
     
     var panGR: UIPanGestureRecognizer!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let hid = imageheroId {
-            cartoucheView.hero.id = hid+"cartouche"
+        // Go get the profile
+        if let profile = MapViewController.currentProfiles.first(where: { $0.id == Int(profileId) }) {
+            
+            self.profile = profile
+            
+            if let fullTitle = self.profile.fullTitle {
+                profilePictureCollectionView.hero.id = fullTitle
+                profileName.text = fullTitle
+            } else if self.profile.id == 1 {
+                profilePictureCollectionView.hero.id = "th"
+                profileName.text = "Team Hoop"
+            }
+            
+            if var description = self.profile.description {
+                if description.contains("&*/<>/*&") {
+                    let descriptionArray = description.components(separatedBy: "&*/<>/*&")
+                    if let me = AppDelegate.me {
+                        description = descriptionArray[(me.gender == 1) ? 0 : 1]
+                    }
+                }
+                profileDescription.text = description
+            }
+            
+            profilepicturePager.numberOfPages = self.profile.pictures_urls.count
+            profilepicturePager.currentPage = 0
+            
+            etHoopButton.setTitle("Bonjour", for: .normal)
+            dismissButton.setTitle("X", for: .normal)
+            
+            profileScrollView.contentInset.bottom = 100.0
+            //profilepicturePager.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            
+//            panGR = UIPanGestureRecognizer(target: self,
+//                                           action: #selector(handlePan(gestureRecognizer:)))
+            //view.addGestureRecognizer(panGR)
         }
-        profileName.text = "Seraphine 27"
-        profilepicturePager.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
         
-        panGR = UIPanGestureRecognizer(target: self,
-                                       action: #selector(handlePan(gestureRecognizer:)))
-        view.addGestureRecognizer(panGR)
     }
     
     @IBAction func dismissView(_ sender: Any) {
@@ -69,17 +100,18 @@ extension ProfileViewController {
 
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return self.profile.pictures_urls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         // Retrieve the object composing the cell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profilePictureIdent", for: indexPath)
+        
         let profilImage = cell.viewWithTag(2) as! UIImageView
-        if let heroId = self.imageheroId {
-            profilImage.hero.id = heroId
-            profilImage.image = UIImage(imageLiteralResourceName: heroId)
-        }
+        
+        let srcUrl = self.profile.pictures_urls[indexPath.row]
+        profilImage.af_setImage(withURL: srcUrl)
+
         // Here try the localization stuffs
         
         return cell

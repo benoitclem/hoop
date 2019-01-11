@@ -47,12 +47,11 @@ class MapViewController: UIViewController {
     var currentHoopSelectedOverlay: MKCircle? = nil
     
     var currentHoopsContent: [String:[profile]]? = nil
-    var currentProfiles = [profile]()
-    
-    let profilePictures: [String] = ["aicha","iris","paula","clement","rachel","samie","sophie"]
-    var selectedProfile: String?
+    static var currentProfiles = [profile]()
+    var currentSelectedProfile: profile? = nil
     
     private var indexOfCellBeforeDragging = 0
+    private var startDragContentOffset = CGFloat(0.0)
     
     // /!\ becarefull the LOW_ mean poor accurate + less frequent location updates
     
@@ -71,6 +70,7 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated:Bool) {
+        setupNavigationController()
         self.updateContentTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.contentTimerDidFire), userInfo: nil, repeats: true)
     }
     
@@ -106,7 +106,10 @@ class MapViewController: UIViewController {
     }
     
     func checkup() {
-        
+        if let me = AppDelegate.me {
+            me.reached_map = true
+            me.save()
+        }
     }
     
     func setup() {
@@ -126,22 +129,32 @@ class MapViewController: UIViewController {
             })
         }
     }
-
+    
+    @IBAction func goToProfile(_ sender: Any) {
+        if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters",storyboardName: "Main") {
+            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+        }
+    }
+    
+    @IBAction func goToConversations(_ sender: Any) {
+        
+    }
 }
 
 extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedProfile = profilePictures[indexPath.row]
-        if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/1?imageheroId=\(selectedProfile!)",storyboardName: "Main") {
-            self.present(vc as! UIViewController, animated: true)
+        
+        if let currentSelectedId = currentSelectedProfile?.id {
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
+                self.present(vc as! UIViewController, animated: true)
+            }
         }
-        //performSegue(withIdentifier: "toProfile", sender: nil)
     }
 }
 
 extension MapViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return currentProfiles.count
+        return MapViewController.currentProfiles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -152,13 +165,13 @@ extension MapViewController: UICollectionViewDataSource {
         //let profilCartouche = cell.viewWithTag(3)!
         
         // Here try the localization stuffs
-        let displayedProfile = currentProfiles[indexPath.row]
+        let displayedProfile = MapViewController.currentProfiles[indexPath.row]
         
         var finalName = ""
         
         if displayedProfile.id != 1 {
-            if let age = displayedProfile.age, let name = displayedProfile.name {
-                finalName = "\(name) \(age)"
+            if let fullTitle = displayedProfile.fullTitle {
+                finalName = fullTitle
             }
         }
 
@@ -167,7 +180,11 @@ extension MapViewController: UICollectionViewDataSource {
         }
             
         profilName.text = finalName
-        profilImage.hero.id = finalName
+        if displayedProfile.id == 1 {
+            profilImage.hero.id = "th"
+        } else {
+            profilImage.hero.id = finalName
+        }
         //profilCartouche.hero.id = "\(profilePictures[indexPath.row])cartouche"
         
         return cell
@@ -191,12 +208,17 @@ extension MapViewController: UIScrollViewDelegate {
         let itemWidth = profileCollectionViewLayout.itemSize.width
         let proportionalOffset = profileCollectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min(currentProfiles.count - 1, index))
+        let safeIndex = max(0, min(MapViewController.currentProfiles.count - 1, index))
         return safeIndex
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         indexOfCellBeforeDragging = indexOfMajorCell()
+        startDragContentOffset = profileCollectionViewLayout.collectionView!.contentOffset.x
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        // i may put the button visual change here
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -208,7 +230,7 @@ extension MapViewController: UIScrollViewDelegate {
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < currentProfiles.count && velocity.x > swipeVelocityThreshold
+        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < MapViewController.currentProfiles.count && velocity.x > swipeVelocityThreshold
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
         let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
@@ -232,12 +254,17 @@ extension MapViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        selectedDispayedCell()
+    }
+    
+    func selectedDispayedCell() {
         let selectedIndex = self.indexOfMajorCell()
-        let selectedprofile = currentProfiles[selectedIndex]
-        if let id = selectedprofile.current_hoop_id {
+        currentSelectedProfile = MapViewController.currentProfiles[selectedIndex]
+        if let id = currentSelectedProfile?.current_hoop_id {
             currentSelectedHoop = currentHoopNetwork.first(where: { $0.id == id})
             if currentSelectedHoop != nil {
                 self.updateCurrentHoopArea()
+                self.focusOnHoop(withHoop: currentSelectedHoop!)
             }
         }
     }
@@ -246,8 +273,12 @@ extension MapViewController: UIScrollViewDelegate {
 extension MapViewController: CLLocationManagerDelegate {
 
     func setupUserInterface() {
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        setupNavigationController()
         self.profileCollectionViewLayout.minimumLineSpacing = 0
+    }
+    
+    func setupNavigationController() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     func setupLocation() {
@@ -411,12 +442,12 @@ extension MapViewController: MKMapViewDelegate {
     
     // Focus stuffs
     
-    func focusOnHoop(withId id:Int) {
+    func focusOnHoop(withHoop hoop:hoop) {
         // Spoof location for the moment
-        let latitude: CLLocationDegrees = 4.2
-        let longitude: CLLocationDegrees = 20.2
-        let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
-        self.mapFocus(at: coordinates, withAnimation: true)
+        if let latitude:CLLocationDegrees = hoop.latitude,  let longitude: CLLocationDegrees = hoop.longitude {
+            let coordinates = CLLocationCoordinate2DMake(latitude, longitude)
+            self.mapFocus(at: coordinates, withAnimation: true)
+        }
     }
     
     func focusOnUser(withAnimation animated: Bool) {
@@ -557,7 +588,7 @@ extension MapViewController {
         // Compute the new incoming current profiles
         var newCurrentProfiles = self.computeCurrentProfiles()
         // Deal with the deletion
-        for (index,profile) in currentProfiles.enumerated() {
+        for (index,profile) in MapViewController.currentProfiles.enumerated() {
             // the id is not in the new profile
             if let existingProfile = newCurrentProfiles.first(where: { $0.id == profile.id }) {
                 // If the profile does exist in the newCurrentProfile
@@ -576,14 +607,14 @@ extension MapViewController {
         // Do the deletion
         let idsToKeepIndexSet = IndexSet(idsToKeep)
         // Make a temporary (don't know if its necessary)
-        let intermediateCurrentProfiles = idsToKeepIndexSet.map { currentProfiles[$0] }
+        let intermediateCurrentProfiles = idsToKeepIndexSet.map { MapViewController.currentProfiles[$0] }
         // Replace the currentProfile
-        currentProfiles = intermediateCurrentProfiles
+        MapViewController.currentProfiles = intermediateCurrentProfiles
         // Do the model update
         // Deal with the appending
         for profile in newCurrentProfiles {
             // je cherche le profil dans les currentActive
-            if let existing = currentProfiles.first(where: {$0.id == profile.id}) {
+            if let existing = MapViewController.currentProfiles.first(where: {$0.id == profile.id}) {
                 if existing.current_displayed_status {
                     // Je vérifie si l'id de l'existant fait partie des actifs
                     if !profile.current_active_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
@@ -606,20 +637,20 @@ extension MapViewController {
                 // Compute where to insert the profile
                 var indexToInsert = 0
                 if profile.current_displayed_status {
-                    if currentProfiles.count != 0 {
-                        if let foundIndex = currentProfiles.firstIndex(where: { !$0.current_displayed_status }) {
+                    if MapViewController.currentProfiles.count != 0 {
+                        if let foundIndex = MapViewController.currentProfiles.firstIndex(where: { !$0.current_displayed_status }) {
                             // if we found a transition from active to inactive
                             indexToInsert = foundIndex
                         } else {
                             // Otherwise it the end of the list
-                            indexToInsert = currentProfiles.count
+                            indexToInsert = MapViewController.currentProfiles.count
                         }
                     }
                 } else {
-                    indexToInsert = currentProfiles.count
+                    indexToInsert = MapViewController.currentProfiles.count
                 }
                 idsToAdd.append(indexToInsert)
-                currentProfiles.insert(profile, at: indexToInsert)
+                MapViewController.currentProfiles.insert(profile, at: indexToInsert)
                 if profile.current_displayed_status {
                     if let randHoopId = profile.current_active_hoop_ids.randomElement() {
                         profile.current_hoop_id = randHoopId
@@ -644,14 +675,21 @@ extension MapViewController {
             self.profilesCollectionView.deleteItems(at: removingIndexesPath)
             self.profilesCollectionView.insertItems(at: addingIndexesPath)
         }, completion: nil)
+        // Do selection of one element due to reloading
+        selectedDispayedCell()
     }
     
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
+        print("go do background")
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
-        promise.whenFulfilled { _ in }
+        promise.whenFulfilled { _ in
+            self.lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
+        }
     }
     
     func locationDidUpdateForegroundNet(with coordinate:CLLocationCoordinate2D) {
+        print("go do foreground W/net")
+        
         self.lastHoopNetworkTimestamp = Timestamp
         self.lastHoopsContentTimestamp = Timestamp
         
@@ -669,6 +707,7 @@ extension MapViewController {
         }.whenFulfilled(on: .main) { content in
             self.currentHoopsContent = content
             self.updateDisplayableCurrentProfiles()
+            self.lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         }
         
         promise.whenRejected(on: .main) { error in
@@ -686,6 +725,7 @@ extension MapViewController {
     }
     
     func locationDidUpdateForegroundNoNet(with coordinate:CLLocationCoordinate2D) {
+        print("go do foreground Wo/net")
         self.lastHoopsContentTimestamp = Timestamp
         
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
@@ -694,13 +734,12 @@ extension MapViewController {
             self.currentHoopIds = ids
             return HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds)
         }.whenFulfilled(on: .main) { content in
-            print("got content")
-            print("content")
             self.currentHoopsContent = content
             self.computeCurrentHoops()
             self.updateCurrentHoopArea()
             self.focusOnUser(withAnimation: true)
             self.updateDisplayableCurrentProfiles()
+            self.lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
         }
         
         promise.whenRejected(on: .main) { error in
@@ -721,7 +760,10 @@ extension MapViewController {
         // ??? self.lastHoopsContentTimestamp = Timestamp
         HoopNetworkApi.sharedInstance.getHoopContent(withIds: self.currentHoopIds).whenFulfilled(on: .main) { content in
             self.currentHoopsContent = content
+            self.computeCurrentHoops()
+            self.updateCurrentHoopArea()
             self.updateDisplayableCurrentProfiles()
         }
     }
+
 }

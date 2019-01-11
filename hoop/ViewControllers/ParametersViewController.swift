@@ -24,7 +24,7 @@ class ParametersViewController: FormViewController {
     static let TAG_I_WANT_FEMALE = "me_iWantFemale"
     static let TAG_I_WANT_AGERANGE = "me_iWantAgeRange"
     
-    let me: profile? = Defaults().get(for: .me)
+    let me: profile? = AppDelegate.me
     var firstTimer: Bool = true
     
     override func viewDidLoad() {
@@ -37,12 +37,13 @@ class ParametersViewController: FormViewController {
         let vcTitle = "parameter_vc_title".localized()
         var leftTitle: String? = "back".localized()
         var leftSelector: Selector? = #selector(ParametersViewController.leftTarget(sender:))
-        let rightTitle = "done".localized()
+        var rightTitle = "record".localized()
         let rightSelector = #selector(ParametersViewController.rightTarget(sender:))
         
         if (firstTimer) {
             leftTitle = nil
             leftSelector = nil
+            rightTitle = "end".localized()
         }
         
         self.setupHoopNavigationBar(vcTitle,
@@ -259,19 +260,20 @@ class ParametersViewController: FormViewController {
     
     @objc func leftTarget( sender: UIBarButtonItem) {
         print("cancel")
-        if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
-            self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
-        }
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func rightTarget( sender: UIBarButtonItem) {
         print("done")
 
-        if(true) {
-        //if (validateAndSave()) {
+        // Will need to record stuffs here
+        
+        if(firstTimer) {
             if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
                 self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
             }
+        } else {
+            self.navigationController?.popViewController(animated: true)
         }
 
         /*

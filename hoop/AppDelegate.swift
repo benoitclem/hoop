@@ -139,6 +139,8 @@ extension AppDelegate{
             showTutorial()
         case .parameters:
             showParameters()
+        case .map:
+            showMap()
         default:
             showLogin()
         }

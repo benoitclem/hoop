@@ -41,14 +41,24 @@ class profile: Decodable, Encodable {
     
     var age: Int? {
         get {
-            if let bday = dob {
-                return bday.age()
+            if let lDob = dob {
+                return lDob.age()
             } else {
                 return nil
             }
         }
     }
 
+    var fullTitle: String? {
+        get {
+            if let lAge = age, let lName = name {
+                return "\(lName) \(lAge)"
+            } else {
+                return nil
+            }
+        }
+    }
+    
     enum CodingKeys : String, CodingKey {
         case id
         case name = "nickname"
