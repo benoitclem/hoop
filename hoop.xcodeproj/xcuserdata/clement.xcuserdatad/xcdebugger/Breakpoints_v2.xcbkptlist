@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569171988.7111011"
+            timestampString = "569180427.228982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "476"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ParametersViewController.swift"
-            timestampString = "569171988.711522"
+            timestampString = "569180427.2293479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569171988.712207"
+            timestampString = "569180427.230038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569171988.7122819"
+            timestampString = "569180427.2301151"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ProfileViewController.swift"
-            timestampString = "569171988.712401"
+            timestampString = "569180427.2301821"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ParametersViewController.swift"
-            timestampString = "569171988.712648"
+            timestampString = "569180427.230383"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "107"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/UI/FormCells/ImageCollectionViewCell.swift"
-            timestampString = "569171988.7129641"
+            timestampString = "569180427.230737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "293"
@@ -118,17 +118,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/Net/HoopNetworkApi.swift"
+            timestampString = "569180427.23125"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "398"
+            endingLineNumber = "398"
+            landmarkName = "postHoopProfile(withData:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/Net/HoopNetworkApi.swift"
+            timestampString = "569180427.231306"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "post(_:and:andProgress:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ParametersViewController.swift"
-            timestampString = "569172013.047063"
+            timestampString = "569180540.359054"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "299"
-            endingLineNumber = "299"
-            landmarkName = "validateAndSave()"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
+            landmarkName = "validateSaveUpload(callback:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "hoop.ParametersViewController.validateSaveUpload(callback: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "569180540.5822051"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "296"
+                  endingLineNumber = "296"
+                  offsetFromSymbolStart = "7404">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #4 (Swift.Bool) -&gt; () in hoop.ParametersViewController.validateSaveUpload(callback: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "hoop"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/clement/Work/iOS/hoop/hoop/ViewControllers/ParametersViewController.swift"
+                  timestampString = "569180540.584571"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "297"
+                  endingLineNumber = "297"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

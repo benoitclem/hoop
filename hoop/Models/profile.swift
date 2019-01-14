@@ -234,7 +234,7 @@ class profile: Decodable, Encodable {
 
 extension profile {
     
-    func getProfilePicturesForUpload() -> [String:Any?]{
+    func getProfilePicturesForUpload() -> [String:Any]{
         var data = [String:Any]()
         for i in 0...4 {
             if (i < self.pictures_images.count) {
@@ -256,7 +256,7 @@ extension profile {
         return data
     }
     
-    func getProfileDataForUpload() -> [String:Any?] {
+    func getProfileDataForUpload() -> [String:Any] {
         var data = [String:Any]()
         if let email = self.email {
             data["email"] = email
@@ -268,16 +268,19 @@ extension profile {
             data["description"] = desc
         }
         if let sexOri = self.sexualOrientation {
-            data["sexualorientation_id"] = sexOri
+            data["sexualorientation_id"] = String(sexOri)
         }
         if let age_min = self.age_min {
-            data["age_min"] = age_min
+            data["age_min"] = String(age_min)
         }
         if let age_max = self.age_max {
-            data["age_max"] = age_max
+            data["age_max"] = String(age_max)
         }
         if let birth = self.age_yyyymmdd {
             data["birthday"] = birth
+        }
+        if let gender = self.gender {
+            data["gender_id"] = String(gender)
         }
         return data
     }

@@ -114,6 +114,8 @@ class HoopNetworkApi: AlamofireWrapper {
                 multipartFormData: { multipartFormData in
                     for (key,arg) in mutableArguments {
                         // Add image
+                        print(key)
+                        print(arg)
                         if (arg is Data) {
                             multipartFormData.append(arg as! Data, withName: key, fileName: key + ".png", mimeType: "image/png")
                         } else if (arg is String) {
@@ -389,12 +391,12 @@ extension HoopNetworkApi {
         }
     }
     
-    func postHoopProfile(withData data:[String:Any]) -> Future<String> {
-        let promise: Future<hoopApiResponse<String>> = self.post("setClientInfo", and: data, andProgress: nil)
-        return promise.then { response -> Future<String> in
-            let promise = Promise<String>()
-            if let data = response.data {
-                promise.fulfill(data)
+    func postHoopProfile(withData data:[String:Any]) -> Future<Bool> {
+        let promise: Future<hoopApiResponse<profile>> = self.post("setClientInfo", and: data, andProgress: nil)
+        return promise.then { response -> Future<Bool> in
+            let promise = Promise<Bool>()
+            if let updatedProfile = response.data {
+                promise.fulfill(true)
             } else {
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
                 promise.reject(error)
