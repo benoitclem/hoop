@@ -18,6 +18,8 @@ class ParametersViewController: FormViewController {
     static let TAG_I_WANT_AGERANGE = "me_iWantAgeRange"
     
     let me: profile? = AppDelegate.me
+    var picturesGotModified: Bool = false
+    var profileGotModified: Bool = false
     var firstTimer: Bool = true
     
     override func viewDidLoad() {
@@ -54,6 +56,7 @@ class ParametersViewController: FormViewController {
             <<< ImageCollectionViewRow() { row in
                 row.tag = ParametersViewController.TAG_IMAGES
                 row.value = [UIImage]()
+                row.delegate = self
                 if let images = self.me?.pictures_images {
                     for image in images {
                         row.value?.append(image)
@@ -61,6 +64,7 @@ class ParametersViewController: FormViewController {
                 }
             }.onChange { row in
                 print("got changes")
+                self.picturesGotModified = true
                 print(row.value)
             }
         
@@ -89,6 +93,8 @@ class ParametersViewController: FormViewController {
                 row.tag = ParametersViewController.TAG_DESCRIPTION
                 row.content = me?.description
                 row.placeholder = "write something here"
+            }.onChange{ _ in
+                self.profileGotModified = true
             }
         
         
@@ -99,11 +105,15 @@ class ParametersViewController: FormViewController {
                 row.tag = ParametersViewController.TAG_I_WANT_FEMALE
                 row.labelText = "Femme"
                 row.value = ((self.me?.sexualOrientation ?? 0b10) & 0b10) == 2
+            }.onChange{ _ in
+                    self.profileGotModified = true
             }
             <<< HoopSwitchRow() { row in
                 row.tag = ParametersViewController.TAG_I_WANT_MALE
                 row.labelText = "Homme"
                 row.value = ((self.me?.sexualOrientation ?? 0b01) & 0b01) == 1
+            }.onChange{ _ in
+                    self.profileGotModified = true
             }
             <<< HoopRangeRow() { row in
                 row.tag = ParametersViewController.TAG_I_WANT_AGERANGE
@@ -113,6 +123,8 @@ class ParametersViewController: FormViewController {
                 } else {
                     row.value = Range(min: 18,low: 18,upp: 55,max: 55)
                 }
+            }.onChange{ _ in
+                self.profileGotModified = true
             }
             
         if (!firstTimer) {
@@ -148,6 +160,7 @@ class ParametersViewController: FormViewController {
                         print(row.labelText)
                         
                 }
+            
             form +++ Section("mention légales")
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()
@@ -217,45 +230,45 @@ class ParametersViewController: FormViewController {
         print("done")
 
         // Will need to record stuffs here
-        validateAndSave()
-        
-        if(firstTimer) {
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
-                self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
+        if (validateAndSave()) {
+            if(firstTimer) {
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
+                }
+            } else {
+                self.navigationController?.popViewController(animated: true)
             }
-        } else {
-            self.navigationController?.popViewController(animated: true)
         }
-
-        /*
-        */
     }
     
     func validateAndSave() -> Bool {
         let formValues = form.values()
         print(formValues)
-        
-        // ===========
-        // Checks
+
+        // ============
+        // Checks & Record part
         
         let images = formValues[ParametersViewController.TAG_IMAGES]
         if images != nil {
             if (images as! [UIImage]).count == 0 {
-                PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "il faut une image minimum", "ok", {print("action")})
+                PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Une photo de toi est necessaire.", "ok", {print("action")})
                 return false
             }
         } else {
             PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "il faut une image minimum", "ok", {print("action")})
             return false
         }
-        
-        // ============
-        // Record part
-        
         me?.pictures_images = images as! [UIImage]
+        
         // Here i can retrieve and downcast
         if let female = formValues[ParametersViewController.TAG_I_WANT_FEMALE] as! Bool?, let male = formValues[ParametersViewController.TAG_I_WANT_MALE] as! Bool? {
-            me?.sexualOrientation = (female ? 2 : 0) + (male ? 1 : 0)
+            let orientation = (female ? 2 : 0) + (male ? 1 : 0)
+            if orientation != 0 {
+                me?.sexualOrientation = orientation
+            } else {
+                PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Un choix de genre est necessaire, tu peux choisir l'un ou l'autre ou les deux.", "ok", {print("action")})
+                return false
+            }
         }
         
         if let description = formValues[ParametersViewController.TAG_DESCRIPTION] as! String? {
@@ -270,7 +283,23 @@ class ParametersViewController: FormViewController {
         me?.save()
         
         // =============
-        // Optional upload Part
+        if self.profileGotModified || self.picturesGotModified {
+            var data = [String:Any?]()
+            // Optional upload Part
+            if self.profileGotModified {
+                if let profileData = me?.getProfileDataForUpload() {
+                    data += profileData
+                }
+            }
+            if self.picturesGotModified {
+                if let profilePictureData = me?.getProfilePicturesForUpload() {
+                    data += profilePictureData
+                }
+            }
+            print(data)
+        }
+        
+        //HoopNetworkApi.sharedInstance.postHoopProfile(withData: <#T##[String : Any]#>)
         
         return true
     }
@@ -288,6 +317,13 @@ class ParametersViewController: FormViewController {
 
 }
 
-
-
+extension ParametersViewController: DisplayPictureSourceProtocol {
+    func showViewController(_ vc: UIViewController) {
+        self.present(vc, animated: true, completion: nil)
+    }
+    
+    func dismissViewController() {
+        self.dismiss(animated: true, completion: nil)
+    }
+}
 

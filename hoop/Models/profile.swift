@@ -61,6 +61,18 @@ class profile: Decodable, Encodable {
         }
     }
     
+    var age_yyyymmdd: String? {
+        get {
+            if let lDob = dob {
+                let df = DateFormatter.init()
+                df.dateFormat = "yyyy-MM-dd"
+                return df.string(from: lDob)
+            } else {
+                return nil
+            }
+        }
+    }
+    
     enum CodingKeys : String, CodingKey {
         case id
         case name = "nickname"
@@ -217,11 +229,59 @@ class profile: Decodable, Encodable {
         try container.encode(reached_map, forKey: .reached_map)
         try container.encode(saw_tutorial, forKey: .saw_tutorial)
     }
-    
 
 }
 
 extension profile {
+    
+    func getProfilePicturesForUpload() -> [String:Any?]{
+        var data = [String:Any]()
+        for i in 0...4 {
+            if (i < self.pictures_images.count) {
+                // Set the profiles images
+                if(i == 0) {
+                    data["profile_picture"] = self.pictures_images[i]
+                } else {
+                    data["profile_picture\(i+1)"] = self.pictures_images[i]
+                }
+            } else {
+                // Reset the profiles images
+                if(i == 0){
+                    data["remove_profile_picture"] = "1"
+                } else {
+                    data["remove_profile_picture\(i+1)"] = "1"
+                }
+            }
+        }
+        return data
+    }
+    
+    func getProfileDataForUpload() -> [String:Any?] {
+        var data = [String:Any]()
+        if let email = self.email {
+            data["email"] = email
+        }
+        if let nick = self.name {
+            data["nickname"] = nick
+        }
+        if let desc = self.description {
+            data["description"] = desc
+        }
+        if let sexOri = self.sexualOrientation {
+            data["sexualorientation_id"] = sexOri
+        }
+        if let age_min = self.age_min {
+            data["age_min"] = age_min
+        }
+        if let age_max = self.age_max {
+            data["age_max"] = age_max
+        }
+        if let birth = self.age_yyyymmdd {
+            data["birthday"] = birth
+        }
+        return data
+    }
+    
     func save() {
         let defaults = Defaults()
         defaults.set(self, for: .me)

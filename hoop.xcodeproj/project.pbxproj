@@ -38,6 +38,8 @@
 		EB7F7FD421E63228003B375C /* Boulogne.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD021E63228003B375C /* Boulogne.gpx */; };
 		EB7F7FD521E63229003B375C /* Poitiers.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD121E63228003B375C /* Poitiers.gpx */; };
 		EB7F7FD621E63229003B375C /* ParisSaintGermain.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD221E63228003B375C /* ParisSaintGermain.gpx */; };
+		EB7F7FD821EC9D81003B375C /* ImageManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FD721EC9D81003B375C /* ImageManipulator.swift */; };
+		EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */; };
 		EB862C7C21DE061C0051E3A7 /* HoopListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */; };
 		EB862C7E21DE075C0051E3A7 /* HoopListCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */; };
 		EB862C8221DE1C7D0051E3A7 /* faqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */; };
@@ -213,6 +215,8 @@
 		EB7F7FD021E63228003B375C /* Boulogne.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Boulogne.gpx; path = Mock/Location/Boulogne.gpx; sourceTree = "<group>"; };
 		EB7F7FD121E63228003B375C /* Poitiers.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Poitiers.gpx; path = Mock/Location/Poitiers.gpx; sourceTree = "<group>"; };
 		EB7F7FD221E63228003B375C /* ParisSaintGermain.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = ParisSaintGermain.gpx; path = Mock/Location/ParisSaintGermain.gpx; sourceTree = "<group>"; };
+		EB7F7FD721EC9D81003B375C /* ImageManipulator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageManipulator.swift; path = Utils/ImageManipulator.swift; sourceTree = "<group>"; };
+		EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionnary+Plus.swift"; sourceTree = "<group>"; };
 		EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoopListCheckCell.swift; path = FormCells/HoopListCheckCell.swift; sourceTree = "<group>"; };
 		EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HoopListCheckCell.xib; path = FormCells/HoopListCheckCell.xib; sourceTree = "<group>"; };
 		EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = faqEntry.swift; path = Models/faqEntry.swift; sourceTree = "<group>"; };
@@ -396,6 +400,7 @@
 				EBAEF3AF21DD18ED0024CDF9 /* UIButton+actionClosure.swift */,
 				EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */,
 				EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */,
+				EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -568,6 +573,7 @@
 				EB8F04FF21CBB52E003757EC /* FacebookHandler.swift */,
 				EB8F050121CBB7FB003757EC /* AccountKitHandler.swift */,
 				EB31DFCD21E51201005D0530 /* Timestamp.swift */,
+				EB7F7FD721EC9D81003B375C /* ImageManipulator.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -769,6 +775,7 @@
 				EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */,
 				EB862C8621DE5F130051E3A7 /* fbPictures.swift in Sources */,
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
+				EB7F7FD821EC9D81003B375C /* ImageManipulator.swift in Sources */,
 				EB8F047321CAB9C9003757EC /* WebViewController.swift in Sources */,
 				EB8F052521CBDEF8003757EC /* PopupProvider.swift in Sources */,
 				EBAEF3B721DD2C260024CDF9 /* UINavigationController+replaceRoot.swift in Sources */,
@@ -805,6 +812,7 @@
 				EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */,
 				EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */,
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
+				EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */,
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */,

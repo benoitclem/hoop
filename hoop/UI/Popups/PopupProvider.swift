@@ -185,7 +185,10 @@ class PopupProvider {
         let contentView = EKNotificationMessageView(with: notificationMessage)
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
-        
+    
+
+    
+    
 }
 
 

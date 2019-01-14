@@ -97,6 +97,10 @@
 	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d&apos;étoffer ton profil.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Nous avons besoin d’accéder à ton appareil photo si tu souhaites prendre de nouvelles photos pour ton profil.</string>
 	<key>hoopNetworkConfig</key>
 	<dict>
 		<key>baseUrl</key>

@@ -42,7 +42,7 @@ class DisplayCell: UICollectionViewCell {
     }
 }
 
-public class ImageCollectionViewCell: Cell<[UIImage]>, CellType, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+public class ImageCollectionViewCell: Cell<[UIImage]>, CellType, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var displayCollectionView: UICollectionView!
     @IBOutlet weak var pickerCollectionView: UICollectionView!
@@ -206,9 +206,7 @@ public class ImageCollectionViewCell: Cell<[UIImage]>, CellType, UICollectionVie
                 deleteImage(at: control.tag)
             } else {
                 print("add new images")
-                if let newImg = UIImage(named:"paula") {
-                    appendImage(image: newImg)
-                }
+                (row as! ImageCollectionViewRow).showPictureSourceDialog(self)
             }
         }
     }
@@ -240,13 +238,80 @@ public class ImageCollectionViewCell: Cell<[UIImage]>, CellType, UICollectionVie
             displayPageControl.numberOfPages += 1
         }
     }
+    
+    // ============ PICKER
+    public func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //print(info)
+        if var pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            // If the edited version exists pick it
+            if let pickedEditedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+                pickedImage = pickedEditedImage
+            }
+            // print(info)
+            //let fixedImage = pickedImage.fixedOrientation()
+            print(pickedImage.size)
+            var ratio = 1500 / max(pickedImage.size.width,pickedImage.size.height)
+            print(ratio)
+            if (ratio > 1.0) {
+                ratio = 1.0
+            }
+            let resizedImage = ImageManipulator.imageWithImage(pickedImage,withScale: ratio)!
+            // Add the image to the datasource
+            appendImage(image: resizedImage)
+            // Dismiss the picker
+            (row as! ImageCollectionViewRow).delegate?.dismissViewController()
+        }
+    }
+    
+//    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+//        dismiss(animated: true, completion: nil)
+//    }
 }
 
 // The custom Row also has the cell: CustomCell and its correspond value
 public final class ImageCollectionViewRow: Row<ImageCollectionViewCell>, RowType {
+    
+    var delegate: DisplayPictureSourceProtocol?
+    
     required public init(tag: String?) {
         super.init(tag: tag)
         // We set the cellProvider to load the .xib corresponding to our cell
         cellProvider = CellProvider<ImageCollectionViewCell>(nibName: "CollectionViewCell")
+    }
+}
+
+public protocol DisplayPictureSourceProtocol {
+    func showViewController(_ vc: UIViewController)
+    func dismissViewController()
+}
+
+extension ImageCollectionViewRow {
+    
+    func showPictureSourceDialog(_ pickerDelegate: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.allowsEditing = true
+        imagePicker.delegate = pickerDelegate
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Annuler", style: .cancel)
+        alertController.addAction(cancelAction)
+        
+        let LibrairieAction = UIAlertAction(title: "Choisir une photo", style: .`default`) { action in
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .photoLibrary
+            self.delegate?.showViewController(imagePicker)
+        }
+        alertController.addAction(LibrairieAction)
+        
+        let CameraAction = UIAlertAction(title: "Prendre une photo", style: .`default`) { action in
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .camera
+            imagePicker.cameraDevice = .front
+            self.delegate?.showViewController(imagePicker)
+        }
+        alertController.addAction(CameraAction)
+        
+        delegate?.showViewController(alertController)
     }
 }
