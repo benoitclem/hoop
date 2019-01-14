@@ -18,6 +18,8 @@ class profile: Decodable, Encodable {
     var name: String?
     var dob: Date?
     var gender: Int?
+    var age_min: Int?
+    var age_max: Int?
     var description: String?
     var thumb: URL?
     var pictures_urls = [URL]()
@@ -65,6 +67,8 @@ class profile: Decodable, Encodable {
         case dobStr = "birthday"
         case dob
         case gender = "gender_id"
+        case age_min
+        case age_max
         case description
         case email
         case thumb = "profile_picture_thumb"
@@ -112,6 +116,15 @@ class profile: Decodable, Encodable {
         }
         if container.contains(.email){
             email = try? container.decode(String.self, forKey: .email)
+        }
+        if container.contains(.age_min){
+            age_min = try? container.decode(Int.self, forKey: .age_min)
+        }
+        if container.contains(.age_max){
+            age_max = try? container.decode(Int.self, forKey: .age_max)
+        }
+        if container.contains(.gender){
+            gender = try? container.decode(Int.self, forKey: .gender)
         }
         if container.contains(.gender){
             gender = try? container.decode(Int.self, forKey: .gender)
@@ -187,6 +200,8 @@ class profile: Decodable, Encodable {
         try container.encode(name, forKey: .name)
         try container.encode(dob, forKey: .dob)
         try container.encode(email, forKey: .email)
+        try container.encode(age_min, forKey: .age_min)
+        try container.encode(age_max, forKey: .age_max)
         try container.encode(gender, forKey: .gender)
         try container.encode(description, forKey: .description)
         try container.encode(thumb, forKey: .thumb)

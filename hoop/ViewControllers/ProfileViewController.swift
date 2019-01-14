@@ -58,6 +58,7 @@ class ProfileViewController: UIViewController {
             
             etHoopButton.setTitle("Bonjour", for: .normal)
             dismissButton.setTitle("X", for: .normal)
+            dismissButton.hero.modifiers = [.fade, .translate(x:+100, y:0)]
             
             profileScrollView.contentInset.bottom = 100.0
             //profilepicturePager.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)

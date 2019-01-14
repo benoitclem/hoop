@@ -12,14 +12,7 @@ import Eureka
 class ParametersViewController: FormViewController {
     
     static let TAG_IMAGES = "me_images"
-    static let TAG_NAME = "me_name"
-    static let TAG_NAME_EDIT = "me_name_edit"
-    static let TAG_AGE = "me_age"
-    static let TAG_AGE_EDIT = "me_age_edit"
-    static let TAG_EMAIL_EDIT = "me_email_edit"
     static let TAG_DESCRIPTION = "me_description"
-    static let TAG_I_AM_MALE = "me_iAmMale"
-    static let TAG_I_AM_FEMALE = "me_iAmFemale"
     static let TAG_I_WANT_MALE = "me_iWantMale"
     static let TAG_I_WANT_FEMALE = "me_iWantFemale"
     static let TAG_I_WANT_AGERANGE = "me_iWantAgeRange"
@@ -74,7 +67,6 @@ class ParametersViewController: FormViewController {
         // [SECTION] Prénom Age
         form +++ Section("Informations")
             <<< HoopLabelRow() { row in
-                row.tag = ParametersViewController.TAG_NAME
                 row.hidden = Condition.function([], { _ in
                     return self.me?.name == nil
                 })
@@ -82,16 +74,7 @@ class ParametersViewController: FormViewController {
                     row.title = name
                 }
             }
-            <<< HoopTextViewRow() { row in
-                row.tag = ParametersViewController.TAG_NAME_EDIT
-                row.hidden = Condition.function([], { _ in
-                    return self.me?.name != nil
-                })
-                row.content = ""
-                row.placeholder = "nom"
-            }
             <<< HoopLabelRow() { row in
-                row.tag = ParametersViewController.TAG_AGE
                 row.hidden = Condition.function([], { _ in
                     return self.me?.age == nil
                 })
@@ -99,73 +82,40 @@ class ParametersViewController: FormViewController {
                     row.title = String(age)
                 }
             }
-            <<< HoopDateRow() { row in
-                row.tag = ParametersViewController.TAG_AGE_EDIT
-                row.hidden = Condition.function([], { _ in
-                    return self.me?.age != nil
-                })
-                row.labelText = "Date de naissance"
-                row.dateFormatter = DateFormatter.ddMMMyyyy
-                let calendar: NSCalendar! = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian)
-                row.maximumDate = calendar.date(byAdding: .year, value: -18, to: Date.init())
-            }
-            <<< EmailRow() { row in
-                row.tag = ParametersViewController.TAG_EMAIL_EDIT
-                row.add(ruleSet:emailRules)
-                row.hidden = Condition.function([], { _ in
-                    return self.me?.email != nil
-                })
-                row.title = "email"
-            }
 
         // [SECTION] A propos de moi
         form +++ Section("À propos de moi")
             <<< HoopTextViewRow() { row in
                 row.tag = ParametersViewController.TAG_DESCRIPTION
-                row.value = ""
+                row.content = me?.description
                 row.placeholder = "write something here"
             }
         
-        // [SECTION] Je suis
-        var iAmMaleVal:Bool? = nil
-        var iAmFemaleVal:Bool? = nil
-        if let gender = self.me?.gender{
-            iAmMaleVal = gender == 1
-            iAmFemaleVal = gender == 2
-        }
-
-        form +++ SelectableSection<HoopListCheckRow>("Je suis", selectionType: .singleSelection(enableDeselection: false))
-            <<< HoopListCheckRow() { row in
-                row.tag = ParametersViewController.TAG_I_AM_MALE
-                row.labelText = "Homme"
-                row.selectableValue = false
-                row.value = iAmMaleVal
-            }
-            <<< HoopListCheckRow() { row in
-                row.tag = ParametersViewController.TAG_I_AM_FEMALE
-                row.labelText = "Femme"
-                row.selectableValue = false
-                row.value = iAmFemaleVal
-            }
+        
         
         // [SECTION] Je souhaite rencontrer
-        form +++ Section("Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer, Je souhaite rencontrer,")
-            <<< SwitchRow() { row in
-                row.tag = ParametersViewController.TAG_I_WANT_MALE
-                row.title = "Homme"
-            }
+        form +++ Section("Je souhaite rencontrer")
             <<< HoopSwitchRow() { row in
                 row.tag = ParametersViewController.TAG_I_WANT_FEMALE
                 row.labelText = "Femme"
-                row.value = true
+                row.value = ((self.me?.sexualOrientation ?? 0b10) & 0b10) == 2
+            }
+            <<< HoopSwitchRow() { row in
+                row.tag = ParametersViewController.TAG_I_WANT_MALE
+                row.labelText = "Homme"
+                row.value = ((self.me?.sexualOrientation ?? 0b01) & 0b01) == 1
             }
             <<< HoopRangeRow() { row in
                 row.tag = ParametersViewController.TAG_I_WANT_AGERANGE
                 row.labelText = "Tranche d'age"
-                row.value = Range(min: 18,low: 18,upp: 55,max: 55)
+                if let min = self.me?.age_min, let max = self.me?.age_max {
+                    row.value = Range(min: 18,low: Double(min),upp: Double(max),max: 55)
+                } else {
+                    row.value = Range(min: 18,low: 18,upp: 55,max: 55)
+                }
             }
             
-        if (firstTimer) {
+        if (!firstTimer) {
             form +++ Section()
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()
@@ -267,6 +217,7 @@ class ParametersViewController: FormViewController {
         print("done")
 
         // Will need to record stuffs here
+        validateAndSave()
         
         if(firstTimer) {
             if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
@@ -282,9 +233,11 @@ class ParametersViewController: FormViewController {
     
     func validateAndSave() -> Bool {
         let formValues = form.values()
-        // print(formValues)
+        print(formValues)
         
+        // ===========
         // Checks
+        
         let images = formValues[ParametersViewController.TAG_IMAGES]
         if images != nil {
             if (images as! [UIImage]).count == 0 {
@@ -296,55 +249,27 @@ class ParametersViewController: FormViewController {
             return false
         }
         
-        let name = self.me?.name
-        let name_edit = formValues[ParametersViewController.TAG_NAME_EDIT] as! String?
-        if (name == nil) && (name_edit == nil) {
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre nom", "ok", {print("action")})
-            return false
-        }
-        
-        let age = self.me?.age
-        let age_edit = formValues[ParametersViewController.TAG_AGE_EDIT] as! Date?
-        if (age == nil) && (age_edit == nil) {
-            //
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre age", "ok", {print("action")})
-            return false
-        }
-        
-        let email = self.me?.email
-        let email_edit = formValues[ParametersViewController.TAG_EMAIL_EDIT] as! String?
-        if (email == nil) && (email_edit == nil) {
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre email", "ok", {print("action")})
-            return false
-        }
-        
-        let gender = self.me?.gender
-        let iAmMale = formValues[ParametersViewController.TAG_I_AM_MALE]
-        let iAmFemale = formValues[ParametersViewController.TAG_I_AM_FEMALE]
-        if (gender == nil) && (iAmMale == nil) && (iAmFemale == nil) {
-            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Veuillez remplir votre sexe", "ok", {print("action")})
-            return false
-        }
-        
-        
+        // ============
         // Record part
+        
         me?.pictures_images = images as! [UIImage]
-        
-        if name == nil {
-            me?.name = name_edit
+        // Here i can retrieve and downcast
+        if let female = formValues[ParametersViewController.TAG_I_WANT_FEMALE] as! Bool?, let male = formValues[ParametersViewController.TAG_I_WANT_MALE] as! Bool? {
+            me?.sexualOrientation = (female ? 2 : 0) + (male ? 1 : 0)
         }
         
-        if age == nil {
-            me?.dob = age_edit
+        if let description = formValues[ParametersViewController.TAG_DESCRIPTION] as! String? {
+            me?.description = description
         }
         
-        if email == nil {
-            me?.email = email_edit
+        if let ageRange = formValues[ParametersViewController.TAG_I_WANT_AGERANGE] as! Range? {
+            me?.age_min = Int(ageRange.low)
+            me?.age_max = Int(ageRange.upp)
         }
         
-        if gender == nil {
-        }
+        me?.save()
         
+        // =============
         // Optional upload Part
         
         return true
