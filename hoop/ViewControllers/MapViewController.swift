@@ -163,7 +163,9 @@ extension MapViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileThumbIdent", for: indexPath)
         let profilName = cell.viewWithTag(1) as! UILabel
         let profilImage = cell.viewWithTag(2) as! UIImageView
-        //let profilCartouche = cell.viewWithTag(3)!
+        let profilAction = cell.viewWithTag(3) as! UIButton
+        
+        profilAction.addTarget(self, action: #selector(MapViewController.triggerBlockUser(_:)), for: .touchUpInside)
         
         // Here try the localization stuffs
         let displayedProfile = MapViewController.currentProfiles[indexPath.row]
@@ -174,6 +176,9 @@ extension MapViewController: UICollectionViewDataSource {
             if let fullTitle = displayedProfile.fullTitle {
                 finalName = fullTitle
             }
+            profilAction.isHidden = false
+        } else {
+            profilAction.isHidden = true
         }
 
         if let srcUrl = displayedProfile.pictures_urls.first {
@@ -273,6 +278,9 @@ extension MapViewController: UIScrollViewDelegate {
         if let id = currentSelectedProfile?.current_hoop_id {
             currentSelectedHoop = currentHoopNetwork.first(where: { $0.id == id})
             if currentSelectedHoop != nil {
+                if let name = currentSelectedHoop?.name {
+                    self.hoopNameLabel.text = "autour de " + name
+                }
                 self.updateCurrentHoopArea()
                 self.focusOnHoop(withHoop: currentSelectedHoop!)
             }
@@ -315,6 +323,8 @@ extension MapViewController: CLLocationManagerDelegate {
                 
                 self.locationManager.startUpdatingLocation()
                 return
+            } else {
+                showWrongAgePopup()
             }
         }
         
@@ -435,6 +445,18 @@ extension MapViewController {
                                           nokTitle: nil,
                                           okClosure: nil,
                                           nokClosure: nil)
+    }
+    
+    func showBlockUserPopup(_ user: String) -> Future<Bool> {
+        let promise = Promise<Bool>()
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                          title: "Signaler et bloquer",
+                                          content: "Souhaites tu signaler et bloquer \(user), cet utilisateur ne te sera plus présenté.",
+                                          okTitle: "continuer",
+                                          nokTitle: "annuler",
+                                          okClosure: {  promise.fulfill(true) },
+                                          nokClosure: { promise.fulfill(false) })
+        return promise.future
     }
 }
 
@@ -762,6 +784,16 @@ extension MapViewController {
                 self.showNoHoopPopup()
             default:
                 break
+            }
+        }
+    }
+    
+    @objc func triggerBlockUser(_ sender:UIButton) {
+        if let name = currentSelectedProfile?.name, let id = currentSelectedProfile?.id {
+            showBlockUserPopup(name).then { report in
+                if report {
+                    HoopNetworkApi.sharedInstance.postReportClient(byId: id)
+                }
             }
         }
     }

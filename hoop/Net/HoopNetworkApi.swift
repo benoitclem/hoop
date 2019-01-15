@@ -29,6 +29,8 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_NO_PROFILE: Int = -10
     static let API_ERROR_NO_IDS: Int = -11
     static let API_ERROR_TOKEN_MISSING: Int = -12
+    static let API_ERROR_BLOCKING_ERROR: Int = -13
+    static let API_ERROR_BLOCKING_UNKNOWN_ERROR: Int = -14
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -426,6 +428,29 @@ extension HoopNetworkApi {
             } else {
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
                 promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
+    func postReportClient(byId reportId:Int) -> Future<Bool>  {
+        let promise: Future<hoopApiResponse<String>> = self.post("setClientInfo", and: ["dest":String(reportId)], andProgress: nil)
+        return promise.then { response -> Future<Bool> in
+            let promise = Promise<Bool>()
+            if let resultString = response.data {
+                switch resultString {
+                case "client_blocked":
+                    promise.fulfill(true)
+                case "client_unBlocked":
+                    promise.fulfill(false)
+                case "client_block_ko":
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_BLOCKING_ERROR, userInfo: ["desc":"wrong id(\(reportId)"])
+                    promise.reject(error)
+                default:
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_BLOCKING_UNKNOWN_ERROR, userInfo: ["desc":"unknwon blocking error"])
+                    promise.reject(error)
+                }
+                
             }
             return promise.future
         }

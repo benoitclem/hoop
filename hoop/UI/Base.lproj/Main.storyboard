@@ -335,8 +335,17 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GPn-7Q-3zZ">
+                                                    <rect key="frame" x="269" y="8.5" width="34" height="33"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="34" id="DxR-Xi-JhX"/>
+                                                        <constraint firstAttribute="height" constant="33" id="ZfX-Og-fT5"/>
+                                                    </constraints>
+                                                    <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                                    <state key="normal" image="dots"/>
+                                                </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrD-na-Vtt">
-                                                    <rect key="frame" x="24" y="8" width="278" height="34"/>
+                                                    <rect key="frame" x="24" y="8" width="237" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="34" id="TmE-Dl-7RJ"/>
                                                     </constraints>
@@ -348,11 +357,13 @@
                                         </view>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
+                                            <constraint firstItem="GPn-7Q-3zZ" firstAttribute="leading" secondItem="TrD-na-Vtt" secondAttribute="trailing" constant="8" id="JNj-SR-P9b"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="GPn-7Q-3zZ" secondAttribute="trailing" constant="15" id="LYX-MC-Zr3"/>
                                             <constraint firstItem="TrD-na-Vtt" firstAttribute="leading" secondItem="qJI-7E-IWy" secondAttribute="leadingMargin" constant="16" id="Thj-UE-R9d"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="TrD-na-Vtt" secondAttribute="trailing" constant="16" id="VnB-hn-ZKk"/>
                                             <constraint firstItem="aN9-kF-J8L" firstAttribute="leading" secondItem="qJI-7E-IWy" secondAttribute="leading" constant="8" id="gWI-Xm-37A"/>
                                             <constraint firstAttribute="trailing" secondItem="aN9-kF-J8L" secondAttribute="trailing" constant="8" id="h14-6m-e6H"/>
                                             <constraint firstAttribute="bottom" secondItem="aN9-kF-J8L" secondAttribute="bottom" id="i9e-dA-48T"/>
+                                            <constraint firstItem="GPn-7Q-3zZ" firstAttribute="top" secondItem="qJI-7E-IWy" secondAttribute="top" constant="8.5" id="ieF-2J-C5v"/>
                                             <constraint firstItem="TrD-na-Vtt" firstAttribute="top" secondItem="qJI-7E-IWy" secondAttribute="top" constant="8" id="pyw-w6-HkJ"/>
                                             <constraint firstItem="aN9-kF-J8L" firstAttribute="top" secondItem="qJI-7E-IWy" secondAttribute="top" id="yb9-hk-NqY"/>
                                         </constraints>
@@ -1150,5 +1161,6 @@
         <image name="Chat" width="34" height="33"/>
         <image name="Profile" width="33" height="33"/>
         <image name="backChevron" width="13" height="22"/>
+        <image name="dots" width="31" height="33"/>
     </resources>
 </document>
