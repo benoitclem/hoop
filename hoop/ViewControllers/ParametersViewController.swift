@@ -293,11 +293,15 @@ class ParametersViewController: FormViewController {
                     data += profilePictureData
                 }
             }
-            HoopNetworkApi.sharedInstance.postHoopProfile(withData: data).whenFulfilled(on: .main) { done in
+            let promise = HoopNetworkApi.sharedInstance.postHoopProfile(withData: data)
+            promise.whenFulfilled(on: .main) { done in
                 if done {
                     print("update ok")
                     callback(true)
                 }
+            }
+            promise.whenRejected(on: .main) { error in
+                PopupProvider.showErrorNote(error.localizedDescription)
             }
         }
         

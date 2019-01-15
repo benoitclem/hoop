@@ -114,8 +114,6 @@ class HoopNetworkApi: AlamofireWrapper {
                 multipartFormData: { multipartFormData in
                     for (key,arg) in mutableArguments {
                         // Add image
-                        print(key)
-                        print(arg)
                         if (arg is Data) {
                             multipartFormData.append(arg as! Data, withName: key, fileName: key + ".png", mimeType: "image/png")
                         } else if (arg is String) {

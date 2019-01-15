@@ -240,9 +240,9 @@ extension profile {
             if (i < self.pictures_images.count) {
                 // Set the profiles images
                 if(i == 0) {
-                    data["profile_picture"] = self.pictures_images[i]
+                    data["profile_picture"] = self.pictures_images[i].pngData()
                 } else {
-                    data["profile_picture\(i+1)"] = self.pictures_images[i]
+                    data["profile_picture\(i+1)"] = self.pictures_images[i].pngData()
                 }
             } else {
                 // Reset the profiles images
