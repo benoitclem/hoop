@@ -143,10 +143,11 @@ class MapViewController: UIViewController {
 
 extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let currentSelectedId = currentSelectedProfile?.id {
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
-                self.present(vc as! UIViewController, animated: true)
+        if let currentSelectedId = currentSelectedProfile?.id, let active = currentSelectedProfile?.activeInHoop{
+            if active != 0 {
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
+                    self.present(vc as! UIViewController, animated: true)
+                }
             }
         }
     }
@@ -191,6 +192,7 @@ extension MapViewController: UICollectionViewDataSource {
     }
 }
 
+// CollectionView Layout
 extension MapViewController {
     
     private func configureCollectionViewLayoutItemSize() {
@@ -245,7 +247,6 @@ extension MapViewController: UIScrollViewDelegate {
                 scrollView.contentOffset = CGPoint(x: toValue, y: 0)
                 scrollView.layoutIfNeeded()
             }, completion: nil)
-            
         } else {
             // This is a much better way to scroll to a cell:
             let indexPath = IndexPath(row: indexOfMajorCell, section: 0)
@@ -254,12 +255,21 @@ extension MapViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        selectedDispayedCell()
+        onSelectedDispayedCell()
     }
     
-    func selectedDispayedCell() {
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        onSelectedDispayedCell()
+    }
+    
+    func onSelectedDispayedCell() {
         let selectedIndex = self.indexOfMajorCell()
         currentSelectedProfile = MapViewController.currentProfiles[selectedIndex]
+        // Here Customize the button name
+        if let name = currentSelectedProfile?.name {
+            etHoopButton.setTitle(name, for: .normal)
+        }
+        // Here Customize the map an UI
         if let id = currentSelectedProfile?.current_hoop_id {
             currentSelectedHoop = currentHoopNetwork.first(where: { $0.id == id})
             if currentSelectedHoop != nil {
@@ -676,11 +686,11 @@ extension MapViewController {
             self.profilesCollectionView.insertItems(at: addingIndexesPath)
         }, completion: nil)
         // Do selection of one element due to reloading
-        selectedDispayedCell()
+        onSelectedDispayedCell()
     }
     
     func locationDidUpdateBackground(with coordinate:CLLocationCoordinate2D) {
-        print("go do background")
+        print("[LOC] go do background")
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)
         promise.whenFulfilled { _ in
             self.lastLocation = CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -688,7 +698,7 @@ extension MapViewController {
     }
     
     func locationDidUpdateForegroundNet(with coordinate:CLLocationCoordinate2D) {
-        print("go do foreground W/net")
+        print("[LOC] go do foreground W/net")
         
         self.lastHoopNetworkTimestamp = Timestamp
         self.lastHoopsContentTimestamp = Timestamp
@@ -698,7 +708,7 @@ extension MapViewController {
         promise.then { ids -> Future<[hoop]> in
             self.currentHoopIds = ids
             return HoopNetworkApi.sharedInstance.getHoopInfo(byLatLong: coordinate)
-        }.then { hoops -> Future<[String:[profile]]> in
+        }.then(on: .main) { hoops -> Future<[String:[profile]]> in
             self.currentHoopNetwork = hoops
             self.computeCurrentHoops()
             self.updateCurrentHoopArea()
@@ -725,7 +735,7 @@ extension MapViewController {
     }
     
     func locationDidUpdateForegroundNoNet(with coordinate:CLLocationCoordinate2D) {
-        print("go do foreground Wo/net")
+        print("[LOC] go do foreground Wo/net")
         self.lastHoopsContentTimestamp = Timestamp
         
         let promise = HoopNetworkApi.sharedInstance.getHoopIn(byLatLong: coordinate)

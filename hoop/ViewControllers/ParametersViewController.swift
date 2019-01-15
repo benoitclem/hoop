@@ -31,14 +31,20 @@ class ParametersViewController: FormViewController {
         
         let vcTitle = "parameter_vc_title".localized()
         var leftTitle: String? = "back".localized()
-        var leftSelector: Selector? = #selector(ParametersViewController.leftTarget(sender:))
-        var rightTitle = "record".localized()
-        let rightSelector = #selector(ParametersViewController.rightTarget(sender:))
+        var leftSelector: Selector? = #selector(ParametersViewController.endViewController(sender:))
+        var rightTitle: String? = "end".localized()
+        var rightSelector: Selector? = #selector(ParametersViewController.endViewController(sender:))
         
+        // Comfigure viewController for firsttimer
         if (firstTimer) {
+            // Force the profile to be uploaded at first time
+            picturesGotModified = true
+            profileGotModified = true
             leftTitle = nil
             leftSelector = nil
-            rightTitle = "end".localized()
+        } else {
+            rightTitle = nil
+            rightSelector = nil
         }
         
         self.setupHoopNavigationBar(vcTitle,
@@ -221,14 +227,7 @@ class ParametersViewController: FormViewController {
         }
     }
     
-    @objc func leftTarget( sender: UIBarButtonItem) {
-        print("cancel")
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    @objc func rightTarget( sender: UIBarButtonItem) {
-        print("done")
-
+    @objc func endViewController( sender: UIBarButtonItem) {
         // Will need to record stuffs here
         validateSaveUpload { result in
             if(self.firstTimer) {
@@ -242,8 +241,8 @@ class ParametersViewController: FormViewController {
     }
     
     func validateSaveUpload(callback: @escaping (Bool) -> Void){
+        // Retrieve the values from form
         let formValues = form.values()
-        print(formValues)
 
         // ============
         // Checks & Record part
