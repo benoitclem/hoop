@@ -82,7 +82,7 @@ class LoginViewController: VideoSplashViewController {
         let future = FacebookHandler.connect(with: fbPermissions, from: self).then { info -> Future<fbme> in
             return FacebookHandler.getMyProfile()
         }.then { fbProfile -> Future<profile> in
-            return HoopNetworkApi.sharedInstance.signUp(with: fbProfile)
+            return HoopNetworkApi.sharedInstance.signUpFb(with: fbProfile)
         }.then { me -> Future<[URL]> in
             return FacebookHandler.getMyProfilePictures(fromAlbum: me.fb_profile_alb_id)
         }.then { urls -> Future<Bool> in
@@ -135,11 +135,51 @@ class LoginViewController: VideoSplashViewController {
         let accountKit = AKFAccountKit(responseType: .accessToken)
         let vc: AKFViewController = accountKit.viewControllerForPhoneLogin(with: nil, state: inputState) as! AKFViewController
         vc.setTheme(theme)
-        //vc.defaultCountryCode = "FR"
-        //let vc: AKFViewController = _accountKit!.viewControllerForEmailLoginWithEmail(nil, state: inputState) as! AKFViewController
-        self.prepareLoginViewController(loginViewController: vc)
+        vc.delegate = self
         self.present(vc as! UIViewController, animated: true, completion: nil)
     }
     
+    
+}
+
+
+extension LoginViewController: AKFViewControllerDelegate {
+    
+    func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
+
+        let future = HoopNetworkApi.sharedInstance.signupAK(with: accessToken.accountID)
+        
+        future.whenFulfilled(on: .main) { done in
+            // TODO: Go to map / parameters / tunnel
+            if let _ = AppDelegate.me?.reached_map {
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                
+                }
+            } else {
+                let name =  AppDelegate.me?.name
+                let age = AppDelegate.me?.age
+                let email = AppDelegate.me?.email
+                let gender = AppDelegate.me?.gender
+                if name == nil || age == nil || email == nil || gender == nil {
+                    if let vc = try? Router.shared.matchControllerFromStoryboard("/inputName", storyboardName: "Main") {
+                        self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                    }
+                } else {
+                    if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
+                        self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                    }
+                }
+            }
+
+        }
+       
+        future.whenRejected(on: .main) { error in
+            var message = "error occured"
+            PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "erreur", message, "button") {
+                print("action")
+            }
+        }
+    }
     
 }

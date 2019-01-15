@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ParametersViewController.swift"
-            timestampString = "569241316.4566621"
+            timestampString = "569252365.636999"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "50"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569241316.4574161"
+            timestampString = "569252365.637067"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569241316.45766"
+            timestampString = "569252365.637444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ProfileViewController.swift"
-            timestampString = "569241316.4577399"
+            timestampString = "569245439.181399"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/ParametersViewController.swift"
-            timestampString = "569241316.457948"
+            timestampString = "569252365.6377701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "113"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/UI/FormCells/ImageCollectionViewCell.swift"
-            timestampString = "569241316.458317"
+            timestampString = "569245439.181689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "293"
@@ -106,12 +106,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/Net/HoopNetworkApi.swift"
-            timestampString = "569241316.458539"
+            timestampString = "569245439.181896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "396"
-            endingLineNumber = "396"
-            landmarkName = "postHoopProfile(withData:)"
+            startingLineNumber = "424"
+            endingLineNumber = "424"
+            landmarkName = "getHoopContent(withIds:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -122,13 +122,61 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "hoop/ViewControllers/MapViewController.swift"
-            timestampString = "569241316.458755"
+            timestampString = "569252365.6378959"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "404"
             endingLineNumber = "404"
             landmarkName = "MapViewController"
             landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/ViewControllers/LoginViewController.swift"
+            timestampString = "569252365.6381609"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "viewController(_:didCompleteLoginWith:state:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/ViewControllers/TunnelViewControllers/InputEmailViewController.swift"
+            timestampString = "569252365.638211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "didReceiveMemoryWarning()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "hoop/ViewControllers/MapViewController.swift"
+            timestampString = "569252365.638255"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "295"
+            endingLineNumber = "295"
+            landmarkName = "setupLocation()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -42,6 +42,12 @@
 		EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */; };
 		EB7F7FDE21EDF142003B375C /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F7FDC21EDF124003B375C /* AccountKit.framework */; };
 		EB7F7FDF21EDF142003B375C /* AccountKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F7FDC21EDF124003B375C /* AccountKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB7F7FE521EE0590003B375C /* InputGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE121EE0590003B375C /* InputGenderViewController.swift */; };
+		EB7F7FE621EE0590003B375C /* InputEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE221EE0590003B375C /* InputEmailViewController.swift */; };
+		EB7F7FE721EE0590003B375C /* InputAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE321EE0590003B375C /* InputAgeViewController.swift */; };
+		EB7F7FE821EE0590003B375C /* InputNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE421EE0590003B375C /* InputNameViewController.swift */; };
+		EB7F7FEA21EE0C66003B375C /* String+Trim.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE921EE0C66003B375C /* String+Trim.swift */; };
+		EB7F7FEC21EE0C85003B375C /* String+Capitalize.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FEB21EE0C85003B375C /* String+Capitalize.swift */; };
 		EB862C7C21DE061C0051E3A7 /* HoopListCheckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */; };
 		EB862C7E21DE075C0051E3A7 /* HoopListCheckCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */; };
 		EB862C8221DE1C7D0051E3A7 /* faqEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */; };
@@ -222,6 +228,12 @@
 		EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionnary+Plus.swift"; sourceTree = "<group>"; };
 		EB7F7FDB21EDC536003B375C /* hoop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hoop.entitlements; sourceTree = "<group>"; };
 		EB7F7FDC21EDF124003B375C /* AccountKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AccountKit.framework; path = hoop/Frameworks/AccountKit.framework; sourceTree = "<group>"; };
+		EB7F7FE121EE0590003B375C /* InputGenderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputGenderViewController.swift; path = TunnelViewControllers/InputGenderViewController.swift; sourceTree = "<group>"; };
+		EB7F7FE221EE0590003B375C /* InputEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputEmailViewController.swift; path = TunnelViewControllers/InputEmailViewController.swift; sourceTree = "<group>"; };
+		EB7F7FE321EE0590003B375C /* InputAgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputAgeViewController.swift; path = TunnelViewControllers/InputAgeViewController.swift; sourceTree = "<group>"; };
+		EB7F7FE421EE0590003B375C /* InputNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputNameViewController.swift; path = TunnelViewControllers/InputNameViewController.swift; sourceTree = "<group>"; };
+		EB7F7FE921EE0C66003B375C /* String+Trim.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Trim.swift"; sourceTree = "<group>"; };
+		EB7F7FEB21EE0C85003B375C /* String+Capitalize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Capitalize.swift"; sourceTree = "<group>"; };
 		EB862C7B21DE061C0051E3A7 /* HoopListCheckCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HoopListCheckCell.swift; path = FormCells/HoopListCheckCell.swift; sourceTree = "<group>"; };
 		EB862C7D21DE075C0051E3A7 /* HoopListCheckCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = HoopListCheckCell.xib; path = FormCells/HoopListCheckCell.xib; sourceTree = "<group>"; };
 		EB862C8121DE1C7D0051E3A7 /* faqEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = faqEntry.swift; path = Models/faqEntry.swift; sourceTree = "<group>"; };
@@ -397,6 +409,7 @@
 				EB28B61B21C3B45000CFF1EF /* UIColor+random.swift */,
 				EB28B62121C3B88B00CFF1EF /* DateFormatter+shortcuts.swift */,
 				EB8F048021CAC2B4003757EC /* String+localization.swift */,
+				EB7F7FE921EE0C66003B375C /* String+Trim.swift */,
 				EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */,
 				EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */,
 				EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */,
@@ -408,6 +421,7 @@
 				EBAEF3B621DD2C260024CDF9 /* UINavigationController+replaceRoot.swift */,
 				EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */,
 				EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */,
+				EB7F7FEB21EE0C85003B375C /* String+Capitalize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -432,6 +446,7 @@
 		EB28B61521C3B37500CFF1EF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EB7F7FE021EE0577003B375C /* TunnelViewControllers */,
 				EB8F046421CAB6F3003757EC /* LoginViewController.swift */,
 				EB8F046621CAB779003757EC /* InfoTunnelViewController.swift */,
 				EB8F046A21CAB7D8003757EC /* TutorialViewController.swift */,
@@ -526,6 +541,17 @@
 				EB7F7FCF21E63228003B375C /* RennesInsa.gpx */,
 			);
 			name = Location;
+			sourceTree = "<group>";
+		};
+		EB7F7FE021EE0577003B375C /* TunnelViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EB7F7FE421EE0590003B375C /* InputNameViewController.swift */,
+				EB7F7FE321EE0590003B375C /* InputAgeViewController.swift */,
+				EB7F7FE121EE0590003B375C /* InputGenderViewController.swift */,
+				EB7F7FE221EE0590003B375C /* InputEmailViewController.swift */,
+			);
+			name = TunnelViewControllers;
 			sourceTree = "<group>";
 		};
 		EB8F046121CAB625003757EC /* Routing */ = {
@@ -784,6 +810,8 @@
 			files = (
 				EB28B63521C3F27F00CFF1EF /* conversation.swift in Sources */,
 				EB8F04C721CAE5D6003757EC /* UIGradientView.swift in Sources */,
+				EB7F7FEC21EE0C85003B375C /* String+Capitalize.swift in Sources */,
+				EB7F7FEA21EE0C66003B375C /* String+Trim.swift in Sources */,
 				EB862C8621DE5F130051E3A7 /* fbPictures.swift in Sources */,
 				EB8F04E321CAE678003757EC /* HoopLabelCell.swift in Sources */,
 				EB7F7FD821EC9D81003B375C /* ImageManipulator.swift in Sources */,
@@ -801,13 +829,17 @@
 				EB28B61C21C3B45000CFF1EF /* UIColor+random.swift in Sources */,
 				EB862C8221DE1C7D0051E3A7 /* faqEntry.swift in Sources */,
 				EB8F054821CD31C2003757EC /* AlamofireWrapper.swift in Sources */,
+				EB7F7FE721EE0590003B375C /* InputAgeViewController.swift in Sources */,
+				EB7F7FE621EE0590003B375C /* InputEmailViewController.swift in Sources */,
 				EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */,
 				EB8F053421CD2A3E003757EC /* HoopNetworkApi.swift in Sources */,
 				EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */,
 				EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,
+				EB7F7FE521EE0590003B375C /* InputGenderViewController.swift in Sources */,
 				EB8F04DB21CAE678003757EC /* HoopSwitchCell.swift in Sources */,
 				EBAEF3AA21DCD1EE0024CDF9 /* Defaults.swift in Sources */,
+				EB7F7FE821EE0590003B375C /* InputNameViewController.swift in Sources */,
 				EBAEF3AE21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift in Sources */,
 				EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */,
 				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,

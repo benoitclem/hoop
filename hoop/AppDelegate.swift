@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     enum ScreenToShow: String {
         case login = "login"
         case parameters = "parameters"
-        case tutorial = "tutorial"
+        case tunnel = "tunnel"
         case map = "map"
     }
 
@@ -85,7 +85,10 @@ extension AppDelegate {
     
     func setupRouting() {
         let router = Router.shared
-        router.map("/tutorial", controllerClass: TutorialViewController.self)
+        router.map("/inputAge", controllerClass: InputAgeViewController.self)
+        router.map("/inputEmail", controllerClass: InputEmailViewController.self)
+        router.map("/inputName", controllerClass: InputNameViewController.self)
+        router.map("/inputGender", controllerClass: InputGenderViewController.self)
         router.map("/parameters", controllerClass: ParametersViewController.self)
         router.map("/faq", controllerClass: FaqViewController.self)
         router.map("/web/:target", controllerClass: WebViewController.self)
@@ -110,10 +113,10 @@ extension AppDelegate {
             if let _ = me.token {
                 if let _ = me.reached_map {
                     return .map
-                } else if let _ = me.saw_tutorial {
+                } else if let _ = me.name, let _ = me.email, let _ = me.dob,let _ = me.gender {
                     return .parameters
                 } else {
-                    return .tutorial
+                    return .tunnel
                 }
             } else {
                 return .login
@@ -135,8 +138,8 @@ extension AppDelegate{
         switch toShow {
         case .login:
             showLogin()
-        case .tutorial:
-            showTutorial()
+        case .tunnel:
+            showTunnel()
         case .parameters:
             showParameters()
         case .map:
@@ -162,8 +165,8 @@ extension AppDelegate{
         showInNavigationViewController(paramsController!)
     }
     
-    func showTutorial() {
-        let tutoController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "TutorialViewController") as? TutorialViewController
+    func showTunnel() {
+        let tutoController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InputNameViewController") as? InputNameViewController
         showInNavigationViewController(tutoController!)
     }
     

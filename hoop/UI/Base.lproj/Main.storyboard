@@ -16,6 +16,9 @@
         <array key="Campton-Medium.ttf">
             <string>Campton-Medium</string>
         </array>
+        <array key="Campton-SemiBold.ttf">
+            <string>Campton-SemiBold</string>
+        </array>
         <array key="KittenSlantTrial.ttf">
             <string>KittenSlant</string>
         </array>
@@ -162,7 +165,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fv-Rf-f93">
-                                <rect key="frame" x="16" y="789.5" width="382" height="40"/>
+                                <rect key="frame" x="16" y="792" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="oxK-Tv-6JW"/>
@@ -201,31 +204,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Connecte-toi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwA-ne-H73">
-                                <rect key="frame" x="16" y="669" width="382" height="23.5"/>
+                                <rect key="frame" x="16" y="680" width="382" height="20"/>
                                 <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m7J-6Y-aIA">
-                                <rect key="frame" x="16" y="700.5" width="382" height="16.5"/>
+                                <rect key="frame" x="16" y="708" width="382" height="14"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="qui ne sera JAMAIS visible sur l'app" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNz-Cy-tdA">
-                                <rect key="frame" x="16" y="829.5" width="382" height="16.5"/>
+                                <rect key="frame" x="16" y="832" width="382" height="14"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ne ne publierons jamais sur ton compte" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cgh-n1-Z7r">
-                                <rect key="frame" x="16" y="765" width="382" height="16.5"/>
+                                <rect key="frame" x="16" y="770" width="382" height="14"/>
                                 <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="12"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wjB-hC-GZA">
-                                <rect key="frame" x="16" y="725" width="382" height="40"/>
+                                <rect key="frame" x="16" y="730" width="382" height="40"/>
                                 <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MTc-wt-xSz"/>
@@ -453,7 +456,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bd3-sr-QF0">
-                                        <rect key="frame" x="157" y="5" width="100" height="42.5"/>
+                                        <rect key="frame" x="157" y="5" width="100" height="33"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="QAs-C3-8uG"/>
@@ -740,9 +743,412 @@
             </objects>
             <point key="canvasLocation" x="2492.753623188406" y="718.52678571428567"/>
         </scene>
+        <!--Input Name View Controller-->
+        <scene sceneID="WFz-hD-v0U">
+            <objects>
+                <viewController storyboardIdentifier="InputNameViewController" id="Fr6-HT-hLl" customClass="InputNameViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Vt-yt-s1U">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IC3-8F-4N5">
+                                <rect key="frame" x="114.5" y="44" width="185" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="VFt-Xr-94y"/>
+                                    <constraint firstAttribute="width" constant="185" id="Z58-dJ-q1T"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KittenSlant" family="Kitten Slant" pointSize="48"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MDn-Jq-RIa">
+                                <rect key="frame" x="153.5" y="355" width="100" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="5OE-sY-Zau"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <state key="normal" title="Continuer">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueAction:" destination="Fr6-HT-hLl" eventType="touchUpInside" id="yno-VO-IF1"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="puU-rp-v3m">
+                                <rect key="frame" x="112" y="324" width="190" height="1"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="190" id="by0-Db-0RP"/>
+                                    <constraint firstAttribute="height" constant="1" id="gwu-us-Nmi"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="prénom" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qsg-Rb-zAX">
+                                <rect key="frame" x="112" y="300" width="190" height="24"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="nickname"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="je m'appelle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgz-CQ-Bsf">
+                                <rect key="frame" x="147" y="263" width="120" height="29"/>
+                                <fontDescription key="fontDescription" name="Campton-SemiBold" family="Campton" pointSize="21"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="le nom qui apparaitra dans mon profil" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ZU-dt-JV9">
+                                <rect key="frame" x="117" y="333" width="180" height="14"/>
+                                <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="10"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="puU-rp-v3m" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" id="3op-7N-Hph"/>
+                            <constraint firstItem="Sgz-CQ-Bsf" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" id="7gJ-Pb-gjR"/>
+                            <constraint firstItem="MDn-Jq-RIa" firstAttribute="centerY" secondItem="5Vt-yt-s1U" secondAttribute="centerY" constant="-75" id="HB4-Za-ud4"/>
+                            <constraint firstItem="IC3-8F-4N5" firstAttribute="top" secondItem="gYB-K0-f6L" secondAttribute="top" id="Sjr-cA-h4K"/>
+                            <constraint firstItem="5ZU-dt-JV9" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" id="Uh0-I5-4Bj"/>
+                            <constraint firstItem="qsg-Rb-zAX" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" id="cDj-fM-zEl"/>
+                            <constraint firstItem="qsg-Rb-zAX" firstAttribute="top" secondItem="Sgz-CQ-Bsf" secondAttribute="bottom" constant="8" id="cEN-So-7DZ"/>
+                            <constraint firstItem="5ZU-dt-JV9" firstAttribute="top" secondItem="puU-rp-v3m" secondAttribute="bottom" constant="8" id="dGU-81-EwH"/>
+                            <constraint firstItem="qsg-Rb-zAX" firstAttribute="width" secondItem="puU-rp-v3m" secondAttribute="width" id="fwv-BP-bii"/>
+                            <constraint firstItem="MDn-Jq-RIa" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" constant="-3.5" id="gCO-oQ-ThA"/>
+                            <constraint firstItem="IC3-8F-4N5" firstAttribute="centerX" secondItem="gYB-K0-f6L" secondAttribute="centerX" id="hiB-TQ-qdz"/>
+                            <constraint firstItem="puU-rp-v3m" firstAttribute="top" secondItem="qsg-Rb-zAX" secondAttribute="bottom" id="kdE-7L-pTz"/>
+                            <constraint firstItem="MDn-Jq-RIa" firstAttribute="top" secondItem="5ZU-dt-JV9" secondAttribute="bottom" constant="8" id="x4R-VF-ChS"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gYB-K0-f6L"/>
+                    </view>
+                    <connections>
+                        <outlet property="continuebutton" destination="MDn-Jq-RIa" id="FLC-gi-LsZ"/>
+                        <outlet property="prenomTextfield" destination="qsg-Rb-zAX" id="RWm-W8-hlg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jQt-6j-zWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-254" y="-1535"/>
+        </scene>
+        <!--Input Age View Controller-->
+        <scene sceneID="lCo-OU-q9V">
+            <objects>
+                <viewController storyboardIdentifier="InputAgeViewController" id="tVq-56-tde" customClass="InputAgeViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Kwv-xW-N7g">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Edh-tm-pcu">
+                                <rect key="frame" x="114.5" y="44" width="185" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="0XH-gg-wmY"/>
+                                    <constraint firstAttribute="height" constant="51" id="j0C-oy-trF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KittenSlant" family="Kitten Slant" pointSize="48"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y80-bR-qr0">
+                                <rect key="frame" x="20" y="53" width="25" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="G2c-Ks-tk5"/>
+                                    <constraint firstAttribute="width" constant="25" id="dhc-TK-9Ly"/>
+                                </constraints>
+                                <state key="normal" image="backChevron"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="tVq-56-tde" eventType="touchUpInside" id="6Pe-i8-8Nm"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aJi-LX-LXd">
+                                <rect key="frame" x="112" y="324" width="190" height="1"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="jP5-IU-xaM"/>
+                                    <constraint firstAttribute="width" constant="190" id="nW7-Zv-AJA"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="date de naissance" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5dT-iY-nt9">
+                                <rect key="frame" x="112" y="300" width="190" height="24"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Je suis né le" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1c-Nt-hJ7">
+                                <rect key="frame" x="146" y="263" width="122" height="29"/>
+                                <fontDescription key="fontDescription" name="Campton-SemiBold" family="Campton" pointSize="21"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="l'age qui apparaitra dans mon profil" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nv5-c9-Son">
+                                <rect key="frame" x="122" y="333" width="170" height="14"/>
+                                <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="10"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yuk-T0-6z3">
+                                <rect key="frame" x="157" y="355" width="100" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="7rf-A4-i9s"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="Continuer">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueAction:" destination="tVq-56-tde" eventType="touchUpInside" id="Fbc-FL-rN8"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Edh-tm-pcu" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="7Sz-F5-a5G"/>
+                            <constraint firstItem="H1c-Nt-hJ7" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="H35-5Y-hRD"/>
+                            <constraint firstItem="Y80-bR-qr0" firstAttribute="top" secondItem="tQ2-cR-zP3" secondAttribute="top" constant="9" id="Hi2-HF-Iqy"/>
+                            <constraint firstItem="5dT-iY-nt9" firstAttribute="top" secondItem="H1c-Nt-hJ7" secondAttribute="bottom" constant="8" id="Je4-6Q-Ns7"/>
+                            <constraint firstItem="Yuk-T0-6z3" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="Spc-Zi-fnq"/>
+                            <constraint firstItem="Yuk-T0-6z3" firstAttribute="top" secondItem="Nv5-c9-Son" secondAttribute="bottom" constant="8" id="TwB-zv-oMW"/>
+                            <constraint firstItem="Edh-tm-pcu" firstAttribute="top" secondItem="tQ2-cR-zP3" secondAttribute="top" id="USL-59-c1n"/>
+                            <constraint firstItem="5dT-iY-nt9" firstAttribute="width" secondItem="aJi-LX-LXd" secondAttribute="width" id="Xmd-CW-FEL"/>
+                            <constraint firstItem="aJi-LX-LXd" firstAttribute="top" secondItem="5dT-iY-nt9" secondAttribute="bottom" id="XpH-Lo-aVo"/>
+                            <constraint firstItem="Nv5-c9-Son" firstAttribute="top" secondItem="aJi-LX-LXd" secondAttribute="bottom" constant="8" id="dfc-hy-cLc"/>
+                            <constraint firstItem="Yuk-T0-6z3" firstAttribute="centerY" secondItem="Kwv-xW-N7g" secondAttribute="centerY" constant="-75" id="hCg-vy-xOC"/>
+                            <constraint firstItem="aJi-LX-LXd" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="jEd-Ne-2Aa"/>
+                            <constraint firstItem="Y80-bR-qr0" firstAttribute="leading" secondItem="Kwv-xW-N7g" secondAttribute="leadingMargin" id="oKe-ta-3Wq"/>
+                            <constraint firstItem="5dT-iY-nt9" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="ycA-Za-gQw"/>
+                            <constraint firstItem="Nv5-c9-Son" firstAttribute="centerX" secondItem="tQ2-cR-zP3" secondAttribute="centerX" id="zre-UA-rBT"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="tQ2-cR-zP3"/>
+                    </view>
+                    <connections>
+                        <outlet property="bDayTextField" destination="5dT-iY-nt9" id="M95-ps-1YH"/>
+                        <outlet property="continueButton" destination="Yuk-T0-6z3" id="eTh-Kv-MbL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="s0o-YB-WL5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="445" y="-1536"/>
+        </scene>
+        <!--Input Gender View Controller-->
+        <scene sceneID="9OJ-U9-Odb">
+            <objects>
+                <viewController storyboardIdentifier="InputGenderViewController" id="LkF-vI-5p7" customClass="InputGenderViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iDP-LE-z42">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bh5-Ms-BAW">
+                                <rect key="frame" x="114.5" y="44" width="185" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="1JS-Ta-Ri1"/>
+                                    <constraint firstAttribute="height" constant="51" id="MTo-Oa-r1H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KittenSlant" family="Kitten Slant" pointSize="48"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEo-ab-t6W">
+                                <rect key="frame" x="20" y="53" width="25" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="VtW-EH-I6N"/>
+                                    <constraint firstAttribute="height" constant="32" id="ky0-ol-vkq"/>
+                                </constraints>
+                                <state key="normal" image="backChevron"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="LkF-vI-5p7" eventType="touchUpInside" id="bz7-Ti-5au"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5JU-pM-5YD">
+                                <rect key="frame" x="157" y="355" width="100" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="I2Z-H7-Lpk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="Continuer">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="continueAction:" destination="LkF-vI-5p7" eventType="touchUpInside" id="BdF-0g-dWY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tj3-Nx-INA">
+                                <rect key="frame" x="112" y="267" width="190" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="190" id="eoW-de-SvB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="une femme">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="femmeAction:" destination="LkF-vI-5p7" eventType="touchUpInside" id="4a3-8Y-8YI"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="waG-Ps-iHC">
+                                <rect key="frame" x="112" y="311" width="190" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="190" id="E0p-8X-CQs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="un homme">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="hommeAction:" destination="LkF-vI-5p7" eventType="touchUpInside" id="Uhn-1F-nNh"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="je suis" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFO-LF-BZt">
+                                <rect key="frame" x="175.5" y="230" width="63" height="29"/>
+                                <fontDescription key="fontDescription" name="Campton-SemiBold" family="Campton" pointSize="21"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="tj3-Nx-INA" firstAttribute="top" secondItem="dFO-LF-BZt" secondAttribute="bottom" constant="8" id="4AA-UJ-NsW"/>
+                            <constraint firstItem="waG-Ps-iHC" firstAttribute="centerX" secondItem="dPZ-Pa-nAl" secondAttribute="centerX" id="4hK-cD-PiH"/>
+                            <constraint firstItem="bh5-Ms-BAW" firstAttribute="centerX" secondItem="dPZ-Pa-nAl" secondAttribute="centerX" id="7Bf-PC-lfb"/>
+                            <constraint firstItem="zEo-ab-t6W" firstAttribute="leading" secondItem="iDP-LE-z42" secondAttribute="leadingMargin" id="ASG-lc-BXm"/>
+                            <constraint firstItem="bh5-Ms-BAW" firstAttribute="top" secondItem="dPZ-Pa-nAl" secondAttribute="top" id="Klm-nC-jjh"/>
+                            <constraint firstItem="zEo-ab-t6W" firstAttribute="top" secondItem="dPZ-Pa-nAl" secondAttribute="top" constant="9" id="PA1-rY-qjt"/>
+                            <constraint firstItem="5JU-pM-5YD" firstAttribute="top" secondItem="waG-Ps-iHC" secondAttribute="bottom" constant="8" id="dbU-sM-Nku"/>
+                            <constraint firstItem="5JU-pM-5YD" firstAttribute="centerY" secondItem="iDP-LE-z42" secondAttribute="centerY" constant="-75" id="f5y-f5-hAW"/>
+                            <constraint firstItem="dFO-LF-BZt" firstAttribute="centerX" secondItem="dPZ-Pa-nAl" secondAttribute="centerX" id="gPQ-du-rKY"/>
+                            <constraint firstItem="tj3-Nx-INA" firstAttribute="centerX" secondItem="dPZ-Pa-nAl" secondAttribute="centerX" id="gjl-0n-ehD"/>
+                            <constraint firstItem="5JU-pM-5YD" firstAttribute="centerX" secondItem="dPZ-Pa-nAl" secondAttribute="centerX" id="qvX-65-sg5"/>
+                            <constraint firstItem="waG-Ps-iHC" firstAttribute="top" secondItem="tj3-Nx-INA" secondAttribute="bottom" constant="8" id="zNX-zW-pU5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dPZ-Pa-nAl"/>
+                    </view>
+                    <connections>
+                        <outlet property="continueButton" destination="5JU-pM-5YD" id="P3X-QW-7dU"/>
+                        <outlet property="femme" destination="tj3-Nx-INA" id="X7u-ZP-GF4"/>
+                        <outlet property="homme" destination="waG-Ps-iHC" id="Nyt-bW-i6a"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Skq-qo-XRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1174" y="-1535"/>
+        </scene>
+        <!--Input Email View Controller-->
+        <scene sceneID="C2A-r5-kd7">
+            <objects>
+                <viewController storyboardIdentifier="InputEmailViewController" id="YIq-B2-9wn" customClass="InputEmailViewController" customModule="hoop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mr6-58-lHA">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoop" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HfG-N7-ec2">
+                                <rect key="frame" x="114.5" y="44" width="185" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="185" id="F82-R7-Vlf"/>
+                                    <constraint firstAttribute="height" constant="51" id="JaX-Wd-75A"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="KittenSlant" family="Kitten Slant" pointSize="48"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Jw-dK-dIR">
+                                <rect key="frame" x="20" y="53" width="25" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="Pcf-Cd-WFz"/>
+                                    <constraint firstAttribute="width" constant="25" id="SYf-5l-3BH"/>
+                                </constraints>
+                                <state key="normal" image="backChevron"/>
+                                <connections>
+                                    <action selector="dismissAction:" destination="YIq-B2-9wn" eventType="touchUpInside" id="zOd-TR-SqR"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-43-xt4">
+                                <rect key="frame" x="112" y="310" width="190" height="1"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="S6b-7g-RXy"/>
+                                    <constraint firstAttribute="width" constant="190" id="nRU-VV-ooW"/>
+                                </constraints>
+                            </view>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email" textAlignment="center" adjustsFontForContentSizeCategory="YES" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="hYQ-uL-AWt">
+                                <rect key="frame" x="112" y="286" width="190" height="24"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mon email est" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AUm-zY-nzO">
+                                <rect key="frame" x="136" y="249" width="142" height="29"/>
+                                <fontDescription key="fontDescription" name="Campton-SemiBold" family="Campton" pointSize="21"/>
+                                <color key="textColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="qui te permettra de récupérer ton compte" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vih-Zl-87l">
+                                <rect key="frame" x="107.5" y="333" width="199" height="14"/>
+                                <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="10"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZO1-2u-Zf2">
+                                <rect key="frame" x="157" y="355" width="100" height="36"/>
+                                <color key="backgroundColor" red="0.70196078429999997" green="0.1176470588" blue="0.070588235289999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="TiS-WR-qZa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Campton-Medium" family="Campton" pointSize="17"/>
+                                <inset key="titleEdgeInsets" minX="6" minY="0.0" maxX="6" maxY="0.0"/>
+                                <state key="normal" title="Terminer">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="finishAction:" destination="YIq-B2-9wn" eventType="touchUpInside" id="ysK-TF-glH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="que l'on ne donnera jamais à personne et" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VbK-Tu-wZB">
+                                <rect key="frame" x="109" y="319" width="196" height="14"/>
+                                <fontDescription key="fontDescription" name="Campton-Light" family="Campton" pointSize="10"/>
+                                <color key="textColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="vih-Zl-87l" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="6ij-5r-xQg"/>
+                            <constraint firstItem="HfG-N7-ec2" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="84E-5R-piC"/>
+                            <constraint firstItem="hYQ-uL-AWt" firstAttribute="width" secondItem="7bi-43-xt4" secondAttribute="width" id="9gA-0F-hEL"/>
+                            <constraint firstItem="9Jw-dK-dIR" firstAttribute="leading" secondItem="mr6-58-lHA" secondAttribute="leadingMargin" id="E0Y-G7-QZJ"/>
+                            <constraint firstItem="7bi-43-xt4" firstAttribute="top" secondItem="hYQ-uL-AWt" secondAttribute="bottom" id="Gzo-QR-tVX"/>
+                            <constraint firstItem="VbK-Tu-wZB" firstAttribute="centerX" secondItem="mr6-58-lHA" secondAttribute="centerX" id="Jqw-G1-HLe"/>
+                            <constraint firstItem="VbK-Tu-wZB" firstAttribute="top" secondItem="7bi-43-xt4" secondAttribute="bottom" constant="8" id="SP6-dW-cuh"/>
+                            <constraint firstItem="9Jw-dK-dIR" firstAttribute="top" secondItem="uIN-1b-riP" secondAttribute="top" constant="9" id="WxZ-Wp-GIl"/>
+                            <constraint firstItem="7bi-43-xt4" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="bSd-wO-sa2"/>
+                            <constraint firstItem="hYQ-uL-AWt" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="f3W-Ba-iMA"/>
+                            <constraint firstItem="vih-Zl-87l" firstAttribute="top" secondItem="VbK-Tu-wZB" secondAttribute="bottom" id="fbf-z0-2u6"/>
+                            <constraint firstItem="HfG-N7-ec2" firstAttribute="top" secondItem="uIN-1b-riP" secondAttribute="top" id="l50-c0-CaW"/>
+                            <constraint firstItem="AUm-zY-nzO" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="pPx-JN-0KW"/>
+                            <constraint firstItem="ZO1-2u-Zf2" firstAttribute="centerX" secondItem="uIN-1b-riP" secondAttribute="centerX" id="rzN-yl-dga"/>
+                            <constraint firstItem="hYQ-uL-AWt" firstAttribute="top" secondItem="AUm-zY-nzO" secondAttribute="bottom" constant="8" id="wqL-Uo-9F0"/>
+                            <constraint firstItem="ZO1-2u-Zf2" firstAttribute="top" secondItem="vih-Zl-87l" secondAttribute="bottom" constant="8" id="wzl-5e-cn6"/>
+                            <constraint firstItem="ZO1-2u-Zf2" firstAttribute="centerY" secondItem="mr6-58-lHA" secondAttribute="centerY" constant="-75" id="y6I-X0-zwM"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uIN-1b-riP"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="hYQ-uL-AWt" id="nWd-XF-51u"/>
+                        <outlet property="finishButton" destination="ZO1-2u-Zf2" id="jcZ-zC-Jah"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="764-mm-mIu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1872" y="-1534"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Chat" width="34" height="33"/>
         <image name="Profile" width="33" height="33"/>
+        <image name="backChevron" width="13" height="22"/>
     </resources>
 </document>

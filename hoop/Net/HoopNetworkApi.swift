@@ -28,6 +28,7 @@ class HoopNetworkApi: AlamofireWrapper {
     static let API_ERROR_MISSING_URL: Int = -9
     static let API_ERROR_NO_PROFILE: Int = -10
     static let API_ERROR_NO_IDS: Int = -11
+    static let API_ERROR_TOKEN_MISSING: Int = -12
     
     // The singleton
     static let sharedInstance = HoopNetworkApi()
@@ -217,7 +218,30 @@ class HoopNetworkApi: AlamofireWrapper {
 
 extension HoopNetworkApi {
     
-    func signUp(with facebookData: fbme) -> Future<profile> {
+    // The signup for account kit
+    func signupAK(with akToken: String) -> Future<profile> {
+        let akData: [String:Any] = ["fb_id":akToken]
+        let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: akData, andProgress: nil)
+        return promise.then { response -> Future<profile> in
+            let promise =  Promise<profile>()
+            if let me = response.data {
+                // Save the token and the me data
+                if let token = me.token {
+                    HoopNetworkApi.appToken = token
+                    AppDelegate.me = me
+                    me.save()
+                    promise.fulfill(me)
+                } else {
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
+                    promise.reject(error)
+                }
+            }
+            return promise.future
+        }
+    }
+    
+    // The signup for facebook login
+    func signUpFb(with facebookData: fbme) -> Future<profile> {
         let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: facebookData.signUpData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
@@ -235,12 +259,13 @@ extension HoopNetworkApi {
                     // Save the token and the me data
                     if let token = me.token {
                         HoopNetworkApi.appToken = token
+                        AppDelegate.me = me
+                        me.save()
+                        promise.fulfill(me)
+                    } else {
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
+                        promise.reject(error)
                     }
-                    
-                    AppDelegate.me = me
-                    me.save()
-                    
-                    promise.fulfill(me)
                 } else {
                     let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
                     promise.reject(error)
@@ -249,6 +274,8 @@ extension HoopNetworkApi {
             return promise.future
         }
     }
+    
+
     
     // This should be working but not
     func getFaq2() -> Future<[faqEntry]> {

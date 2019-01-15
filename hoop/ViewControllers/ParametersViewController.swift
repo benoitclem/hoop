@@ -232,7 +232,7 @@ class ParametersViewController: FormViewController {
         validateSaveUpload { updateDone in
             if(self.firstTimer) {
                 if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
-                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
                 }
             } else {
                 self.navigationController?.popViewController(animated: true)
@@ -251,9 +251,11 @@ class ParametersViewController: FormViewController {
         if images != nil {
             if (images as! [UIImage]).count == 0 {
                 PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Une photo de toi est necessaire.", "ok", {print("action")})
+                return
             }
         } else {
             PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "il faut une image minimum", "ok", {print("action")})
+            return
         }
         me?.pictures_images = images as! [UIImage]
         
@@ -264,6 +266,7 @@ class ParametersViewController: FormViewController {
                 me?.sexualOrientation = orientation
             } else {
                 PopupProvider.showInformPopup(with: UIImage(named: "sadscreen")!, "Informations manquantes", "Un choix de genre est necessaire, tu peux choisir l'un ou l'autre ou les deux.", "ok", {print("action")})
+                return
             }
         }
         
