@@ -229,7 +229,7 @@ class ParametersViewController: FormViewController {
     
     @objc func endViewController( sender: UIBarButtonItem) {
         // Will need to record stuffs here
-        validateSaveUpload { result in
+        validateSaveUpload { updateDone in
             if(self.firstTimer) {
                 if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
                     self.navigationController?.replaceRootViewControllerBy(vc: vc as! MapViewController)
@@ -302,6 +302,8 @@ class ParametersViewController: FormViewController {
             promise.whenRejected(on: .main) { error in
                 PopupProvider.showErrorNote(error.localizedDescription)
             }
+        } else {
+            callback(false)
         }
         
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Futures
+import AccountKit
 import FacebookCore
 import FacebookLogin
 import SwiftyJSON
@@ -89,7 +90,8 @@ class LoginViewController: VideoSplashViewController {
         }
         
         future.whenFulfilled(on: .main) { done in
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+            // TODO: Go to map
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
                 self.present(vc as! UIViewController, animated: true)
             }
         }
@@ -114,40 +116,30 @@ class LoginViewController: VideoSplashViewController {
     }
     
     @IBAction func doAccountKitLogin(_ sender: Any) {
-        
+
+        let inputState = NSUUID().uuidString
+        let theme:AKFTheme = AKFTheme.default()
+        theme.headerBackgroundColor = UIColor.hoopGreenColor
+        theme.headerTextColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        theme.iconColor = UIColor(red: 0.325, green: 0.557, blue: 1, alpha: 1)
+        theme.inputTextColor = UIColor(white: 0.4, alpha: 1.0)
+        theme.inputBackgroundColor = UIColor.hoopGreenColor.withAlphaComponent(0.2)
+        theme.inputBorderColor = UIColor.clear
+        theme.statusBarStyle = .lightContent
+        theme.textColor = UIColor(white: 0.3, alpha: 1.0)
+        theme.titleColor = UIColor(red: 0.247, green: 0.247, blue: 0.247, alpha: 1)
+        theme.buttonBackgroundColor = UIColor.hoopGreenColor
+        theme.buttonBorderColor = UIColor.clear
+        theme.buttonDisabledBackgroundColor = UIColor.hoopGreenColor.withAlphaComponent(0.2)
+        theme.buttonDisabledBorderColor = UIColor.clear
+        let accountKit = AKFAccountKit(responseType: .accessToken)
+        let vc: AKFViewController = accountKit.viewControllerForPhoneLogin(with: nil, state: inputState) as! AKFViewController
+        vc.setTheme(theme)
+        //vc.defaultCountryCode = "FR"
+        //let vc: AKFViewController = _accountKit!.viewControllerForEmailLoginWithEmail(nil, state: inputState) as! AKFViewController
+        self.prepareLoginViewController(loginViewController: vc)
+        self.present(vc as! UIViewController, animated: true, completion: nil)
     }
     
-//    @IBAction func loginButtonClicked() {
-//        let login = FBSDKLoginManager.init()
-//        login.logIn(withReadPermissions: self.permissions, from: self, handler: { result, error in
-//            if error != nil {
-//                self.showError(with: "Erreur", and: "Un problème est survenu durant le login, peux-tu verifier ta connection internet et recommencer l'operation")
-//            } else if((result?.isCancelled)!) {
-//                self.stopAnimating()
-//                login.logOut()
-//                // self.showError(with: "Permissions", and: "Il nous est necessaire de connaitre quelques informations pour que tu puisses poursuivre l'aventure hoop. On recommence?")
-//
-//            } else {
-//                self.startAnimating()
-//                // Look if user gave us the use of all permissions
-//                if(FacebookHandler.allPermissionGranted()) {
-//                    // Do the sync
-//                    let _ = FacebookHandler.synchronizeFacebookBaseParameters(completionHandler: {_ in
-//                        let infos = FacebookHandler.getFacebookInfos()
-//                        // Gather all needed information for the hoop signup,
-//                        self.hoopSignIn(with: infos)
-//                    }, errorHandler: {_ in
-//                        self.stopAnimating()
-//                        login.logOut()
-//                        self.showError(with: "Erreur", and: "Un problème est survenu durant le login, peux-tu verifier ta connection internet et recommencer l'operation")
-//                    })
-//                } else {
-//                    self.stopAnimating()
-//                    FBSDKLoginManager().logOut()
-//                    self.showError(with: "Permissions", and: "Il nous est necessaire de connaitre quelques informations pour que tu puisses poursuivre l'aventure hoop. On recommence?")
-//                }
-//            }
-//        })
-//    }
     
 }

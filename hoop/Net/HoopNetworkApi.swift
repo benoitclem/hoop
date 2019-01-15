@@ -236,6 +236,7 @@ extension HoopNetworkApi {
                     if let token = me.token {
                         HoopNetworkApi.appToken = token
                     }
+                    
                     AppDelegate.me = me
                     me.save()
                     
