@@ -37,7 +37,6 @@ class HoopNetworkApi: AlamofireWrapper {
     
     // Store connection infos
     static var appToken: String?
-    var deviceToken: String?
     
     private init(){
         print("init hoopNetApi")
@@ -360,8 +359,8 @@ extension HoopNetworkApi {
 extension HoopNetworkApi {
     
     func getHoopIn(byLatLong coordinates:CLLocationCoordinate2D) -> Future<[Int]> {
-        let promise: Future<hoopApiResponse<hoopIn>> = self.request("getLovestopIn", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude)])
-        return promise.then { response -> Future<[Int]> in
+        let future: Future<hoopApiResponse<hoopIn>> = self.request("getLovestopIn", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude)])
+        return future.then { response -> Future<[Int]> in
             let promise = Promise<[Int]>()
             if (AppDelegate.me?.id == nil) {
                 AppDelegate.me?.id = response.data?.client_id
@@ -377,8 +376,8 @@ extension HoopNetworkApi {
     }
     
     func getHoopInfo(byLatLong coordinates:CLLocationCoordinate2D) -> Future<[hoop]> {
-        let promise: Future<hoopApiResponse<[hoop]>> = self.request("getLovestopInfoByLatLong", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude), "margin":"0.02"])
-        return promise.then { response -> Future<[hoop]> in
+        let future: Future<hoopApiResponse<[hoop]>> = self.request("getLovestopInfoByLatLong", and: ["lat": String(coordinates.latitude),"long":String(coordinates.longitude), "margin":"0.02"])
+        return future.then { response -> Future<[hoop]> in
             let promise = Promise<[hoop]>()
             if let data = response.data {
                 promise.fulfill(data)
@@ -392,8 +391,8 @@ extension HoopNetworkApi {
     
     func getHoopContent(withIds ids:[Int]) -> Future<[String:[profile]]> {
         let strIds = ids.map { String($0) }.joined(separator: ",")
-        let promise: Future<hoopApiResponse<[String:[profile]]>> = self.request("getLovestopContent", and: ["lovestop_id":strIds])
-        return  promise.then { response -> Future<[String:[profile]]> in
+        let future: Future<hoopApiResponse<[String:[profile]]>> = self.request("getLovestopContent", and: ["lovestop_id":strIds])
+        return  future.then { response -> Future<[String:[profile]]> in
             let promise = Promise<[String:[profile]]>()
             if let data = response.data {
                 promise.fulfill(data)
@@ -405,23 +404,26 @@ extension HoopNetworkApi {
         }
     }
     
-    func postHoopDevice(withDeviceId deviceId:String) -> Future<String> {
-        let promise: Future<hoopApiResponse<String>> = self.post("postDevice", and: ["deviceId":self.deviceToken!,"deviceUuid":""], andProgress: nil)
-        return promise.then { response -> Future<String> in
-            let promise = Promise<String>()
-            if let data = response.data {
-                promise.fulfill(data)
-            } else {
-                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
-                promise.reject(error)
+    func postDevice(withDeviceId deviceId:String) -> Future<Bool> {
+        let future: Future<hoopApiResponse<String>> = self.post("postDevice", and: ["deviceId":self.deviceToken!,"deviceUuid":""], andProgress: nil)
+        return future.then { response -> Future<Bool> in
+            let promise = Promise<Bool>()
+            if let resultString = response.data {
+                if resultString == "device_updated" {
+                    promise.fulfill(true)
+                } else {
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_BLOCKING_UNKNOWN_ERROR, userInfo: ["desc":"unknwon blocking error"])
+                    promise.reject(error)
+                }
+                
             }
             return promise.future
         }
     }
     
     func postHoopProfile(withData data:[String:Any]) -> Future<Bool> {
-        let promise: Future<hoopApiResponse<profile>> = self.post("setClientInfo", and: data, andProgress: nil)
-        return promise.then { response -> Future<Bool> in
+        let future: Future<hoopApiResponse<profile>> = self.post("setClientInfo", and: data, andProgress: nil)
+        return future.then { response -> Future<Bool> in
             let promise = Promise<Bool>()
             if let updatedProfile = response.data {
                 promise.fulfill(true)
@@ -434,8 +436,8 @@ extension HoopNetworkApi {
     }
     
     func postReportClient(byId reportId:Int) -> Future<Bool>  {
-        let promise: Future<hoopApiResponse<String>> = self.post("setClientInfo", and: ["dest":String(reportId)], andProgress: nil)
-        return promise.then { response -> Future<Bool> in
+        let future: Future<hoopApiResponse<String>> = self.post("postBlockClient", and: ["blockId":String(reportId)], andProgress: nil)
+        return future.then { response -> Future<Bool> in
             let promise = Promise<Bool>()
             if let resultString = response.data {
                 switch resultString {

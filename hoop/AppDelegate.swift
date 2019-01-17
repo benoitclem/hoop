@@ -8,6 +8,7 @@
 
 import UIKit
 import FacebookCore
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // App Setup
         setupRouting()
         setupFacebook(with: application, and:launchOptions)
-        setupAccountKit()
+        setupNotification(with: application)
+        setupBackgroundFetch(with: application)
         
         // Data persistence management
         setupData()
@@ -69,6 +71,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
 }
 
+// Notification
+
+extension AppDelegate {
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        Defaults().set(deviceTokenString, for: .deviceToken)
+        // USe in case apple server took a lot of time to respond, it probably mean that we passed the map viewdidload - where the update is done, so we do it here
+        if(HoopNetworkApi.appToken != nil) {
+            let _ = HoopNetworkApi.sharedInstance.postDevice(withDeviceId: deviceTokenString)
+        }
+    }
+    
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+//
+//        // Remove notification badge
+//        //print(userInfo)
+//        let aps = userInfo[AnyHashable("aps")] as! [String:Any]
+//        let badge = aps["badge"] as! Int
+//
+//        // Increase the new message count
+//        //let nMsg = UserDefaults.standard.integer(forKey: "newMessages")
+//        UserDefaults.standard.set(badge, forKey: "newMessages")
+//        application.applicationIconBadgeNumber = badge
+//
+//        // Notify the other listening page that we received a notif
+//        if (application.applicationState == .active) {
+//            NotificationCenter.default.post(name: NSNotification.Name("didReceiveNotification"), object: userInfo)
+//        } else if( application.applicationState == .inactive) {
+//            var infoCpy = userInfo
+//            infoCpy[AnyHashable("back")] = 1
+//            self.notifProxy.notifData = infoCpy
+//        }
+//    }
+}
+
 // Setups
 
 extension AppDelegate {
@@ -98,16 +135,23 @@ extension AppDelegate {
         router.map("/chat/:profileId", controllerClass: ChatViewController.self)
     }
     
+    func setupNotification(with application: UIApplication) {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options:[.badge, .alert, .sound]) { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        application.registerForRemoteNotifications()
+    }
+    
     func setupFacebook(with application: UIApplication,and launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
         // Facebook Init Stuffs
     }
     
-    func setupAccountKit() {
-        // AccountKit Init Stuffs
+    func setupBackgroundFetch(with application: UIApplication) {
+        application.setMinimumBackgroundFetchInterval(5*60)
+        //application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
     }
-}
 
-extension AppDelegate {
     func selectFirstViewController() -> ScreenToShow{
         if let me = AppDelegate.me {
             if let _ = me.token {
@@ -125,11 +169,6 @@ extension AppDelegate {
             return .login
         }
     }
-}
-
-// routing calls
-
-extension AppDelegate{
     
     func showFirstViewController(_ toShow:ScreenToShow) {
         #if DEBUG
@@ -177,3 +216,4 @@ extension AppDelegate{
     }
     
 }
+

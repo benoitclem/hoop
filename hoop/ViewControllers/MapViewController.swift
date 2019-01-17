@@ -53,6 +53,8 @@ class MapViewController: UIViewController {
     private var indexOfCellBeforeDragging = 0
     private var startDragContentOffset = CGFloat(0.0)
     
+    var blockedUsers = [Int]()
+    
     // /!\ becarefull the LOW_ mean poor accurate + less frequent location updates
     
     static let HIGH_DISTANCE_FILTER = 40.0
@@ -113,6 +115,7 @@ class MapViewController: UIViewController {
     }
     
     func setup() {
+        setupUserDefaults()
         setupUserInterface()
         setupLocation()
         setupMapKit()
@@ -172,13 +175,18 @@ extension MapViewController: UICollectionViewDataSource {
         
         var finalName = ""
         
-        if displayedProfile.id != 1 {
+        if displayedProfile.id == 1 {
+            profilAction.isHidden = true
+        } else if displayedProfile.activeInHoop! != 0 {
             if let fullTitle = displayedProfile.fullTitle {
                 finalName = fullTitle
             }
             profilAction.isHidden = false
         } else {
-            profilAction.isHidden = true
+            if let sinceTitle = displayedProfile.lastConnectionString {
+                finalName = sinceTitle
+            }
+            profilAction.isHidden = false
         }
 
         if let srcUrl = displayedProfile.pictures_urls.first {
@@ -289,6 +297,12 @@ extension MapViewController: UIScrollViewDelegate {
 }
 
 extension MapViewController: CLLocationManagerDelegate {
+    
+    func setupUserDefaults() {
+        if let b = Defaults().get(for: .blocked) {
+            blockedUsers = b
+        }
+    }
 
     func setupUserInterface() {
         setupNavigationController()
@@ -455,7 +469,7 @@ extension MapViewController {
                                           okTitle: "continuer",
                                           nokTitle: "annuler",
                                           okClosure: {  promise.fulfill(true) },
-                                          nokClosure: { promise.fulfill(false) })
+                                          nokClosure: nil )
         return promise.future
     }
 }
@@ -605,6 +619,8 @@ extension MapViewController {
                 }
             }
         }
+        // Filter out the blocked user (this avoid visual glitches)
+        exhaustiveCurrentProfiles = exhaustiveCurrentProfiles.filter({!blockedUsers.contains($0.id!)})
         // Tell if the profile is active or inactive in the list
         exhaustiveCurrentProfiles.forEach({$0.current_displayed_status = $0.current_active_hoop_ids.count != 0 })
         // Sort them by active inactive
@@ -790,11 +806,16 @@ extension MapViewController {
     
     @objc func triggerBlockUser(_ sender:UIButton) {
         if let name = currentSelectedProfile?.name, let id = currentSelectedProfile?.id {
-            showBlockUserPopup(name).then { report in
-                if report {
-                    HoopNetworkApi.sharedInstance.postReportClient(byId: id)
-                }
+            let future = showBlockUserPopup(name).then { _ -> Future<Bool> in
+                // This is a visual deletion that is irevokable
+                self.blockedUsers.append(id)
+                Defaults().set(self.blockedUsers, for: .blocked)
+                return HoopNetworkApi.sharedInstance.postReportClient(byId: id)
             }
+            future.whenFulfilled(on: .main) { _ in
+                self.updateDisplayableCurrentProfiles()
+            }
+            // TODO: Trigger some visual effect when request is not fullfiled?
         }
     }
     

@@ -28,6 +28,7 @@
 		EB31DFD621E60D52005D0530 /* TwoChoicesPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */; };
 		EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD721E61285005D0530 /* Object+ClassName.swift */; };
 		EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD821E61285005D0530 /* UIView+Nib.swift */; };
+		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
@@ -216,6 +217,7 @@
 		EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoChoicesPopupView.xib; sourceTree = "<group>"; };
 		EB31DFD721E61285005D0530 /* Object+ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+ClassName.swift"; sourceTree = "<group>"; };
 		EB31DFD821E61285005D0530 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 				EBAF773B21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift */,
 				EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */,
 				EB7F7FEB21EE0C85003B375C /* String+Capitalize.swift */,
+				EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -841,6 +844,7 @@
 				EBAEF3AA21DCD1EE0024CDF9 /* Defaults.swift in Sources */,
 				EB7F7FE821EE0590003B375C /* InputNameViewController.swift in Sources */,
 				EBAEF3AE21DD0AEC0024CDF9 /* UIViewController+customNavigationBar.swift in Sources */,
+				EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */,
 				EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */,
 				EB8F04ED21CAEF18003757EC /* UIColor+colors.swift in Sources */,
 				EB28B5F321C3B2A900CFF1EF /* AppDelegate.swift in Sources */,

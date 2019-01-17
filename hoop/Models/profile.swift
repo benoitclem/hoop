@@ -8,10 +8,6 @@
 
 import UIKit
 
-extension DefaultsKey {
-    static let me = Key<profile>("meKey")
-}
-
 class profile: Decodable, Encodable {
     // Common profile
     var id: Int?
@@ -67,6 +63,53 @@ class profile: Decodable, Encodable {
                 let df = DateFormatter.init()
                 df.dateFormat = "yyyy-MM-dd"
                 return df.string(from: lDob)
+            } else {
+                return nil
+            }
+        }
+    }
+    
+    var lastConnectionString: String? {
+        get {
+            if let lastConnection = hoopLastConnection {
+                var nUnit: Int!
+                var tUnit: String!
+                let diff = abs(lastConnection.timeIntervalSinceNow)
+                if(diff > 24*3600) {
+                    // jours
+                    nUnit = Int(diff / (24 * 3600))
+                    if(nUnit >= 2) {
+                        tUnit = "jours"
+                    } else {
+                        tUnit = "jour"
+                    }
+                } else if (diff > 3600){
+                    // Hour
+                    nUnit = Int(diff / 3600)
+                    if(nUnit >= 2) {
+                        tUnit = "heures"
+                    } else {
+                        tUnit = "heure"
+                    }
+                } else if (diff > 60) {
+                    // min
+                    nUnit = Int(diff / 60)
+                    if(nUnit >= 2) {
+                        tUnit = "mins"
+                    } else {
+                        tUnit = "min"
+                    }
+                } else {
+                    // sec
+                    nUnit = Int(diff)
+                    if(nUnit >= 2) {
+                        tUnit = "secs"
+                    } else {
+                        tUnit = "sec"
+                    }
+                }
+                // Set Profile Info
+                return "Actif il y a \(nUnit!) \(tUnit!)"
             } else {
                 return nil
             }
