@@ -43,10 +43,6 @@ class HoopNetworkApi: AlamofireWrapper {
         super.init(with: "hoopNetworkConfig")
     }
     
-    func setDeviceToken(tokenString: String) {
-        self.deviceToken = tokenString
-    }
-    
     private func request<T>(_ method: String,and arguments: [String:String]) -> Future<hoopApiResponse<T>> {
         // Insert token if exists
         var mutableArguments = arguments
@@ -405,7 +401,7 @@ extension HoopNetworkApi {
     }
     
     func postDevice(withDeviceId deviceId:String) -> Future<Bool> {
-        let future: Future<hoopApiResponse<String>> = self.post("postDevice", and: ["deviceId":self.deviceToken!,"deviceUuid":""], andProgress: nil)
+        let future: Future<hoopApiResponse<String>> = self.post("postDevice", and: ["deviceId":deviceId,"deviceUuid":""], andProgress: nil)
         return future.then { response -> Future<Bool> in
             let promise = Promise<Bool>()
             if let resultString = response.data {

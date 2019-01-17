@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AccountKitClientToken</key>
+	<string>c6fe92c60dd3ae6e31c750872f60c2d2</string>
+	<key>AccountKitClientToken - prod</key>
+	<string>1ca090c0bd44e07714dce658c667fe45</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
+	<key>CFBundleDisplayName</key>
+	<string>Hoop</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -15,19 +21,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-	<key>CFBundleVersion</key>
-	<string>1</string>
-	<key>FacebookAppID</key>
-	<string>980312175433785</string>
-	<key>FacebookAppID - prod</key>
-	<string>978884298909906</string>
-	<key>AccountKitClientToken</key>
-	<string>c6fe92c60dd3ae6e31c750872f60c2d2</string>
-	<key>AccountKitClientToken - prod</key>
-	<string>1ca090c0bd44e07714dce658c667fe45</string>
-	<key>FacebookDisplayName</key>
-	<string>hoop</string>
+	<string>2.0</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -40,6 +34,14 @@
 			</array>
 		</dict>
 	</array>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>FacebookAppID</key>
+	<string>980312175433785</string>
+	<key>FacebookAppID - prod</key>
+	<string>978884298909906</string>
+	<key>FacebookDisplayName</key>
+	<string>hoop</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -49,6 +51,16 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Nous avons besoin d’accéder à ton appareil photo si tu souhaites prendre de nouvelles photos pour ton profil.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d'étoffer ton profil.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Campton-Black.ttf</string>
@@ -90,8 +102,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -100,16 +110,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d&apos;étoffer ton profil.</string>
-	<key>NSCameraUsageDescription</key>
-	<string>Nous avons besoin d’accéder à ton appareil photo si tu souhaites prendre de nouvelles photos pour ton profil.</string>
 	<key>hoopNetworkConfig</key>
 	<dict>
 		<key>baseUrl</key>

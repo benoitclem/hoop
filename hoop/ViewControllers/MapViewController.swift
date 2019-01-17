@@ -12,6 +12,7 @@ import CoreLocation
 import Hero
 import Futures
 import AlamofireImage
+import UserNotifications
 
 class MapViewController: UIViewController {
     
@@ -117,6 +118,7 @@ class MapViewController: UIViewController {
     func setup() {
         setupUserDefaults()
         setupUserInterface()
+        setupNotificationSystem()
         setupLocation()
         setupMapKit()
     }
@@ -311,6 +313,16 @@ extension MapViewController: CLLocationManagerDelegate {
     
     func setupNavigationController() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func setupNotificationSystem() {
+        let center = UNUserNotificationCenter.current()
+        // Request permission to display alerts and play sounds.
+        center.requestAuthorization(options: [.alert, .sound])
+        { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        UIApplication.shared.registerForRemoteNotifications()
     }
     
     func setupLocation() {
