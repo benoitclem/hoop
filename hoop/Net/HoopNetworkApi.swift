@@ -468,4 +468,17 @@ extension HoopNetworkApi {
         }
     }
     
+    func getRemainingConversations() -> Future<Int> {
+        let future: Future<hoopApiResponse<Int>> = self.request("getRemainingConversations", and: [:])
+        return future.then { response -> Future<Int> in
+            let promise = Promise<Int>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
 }

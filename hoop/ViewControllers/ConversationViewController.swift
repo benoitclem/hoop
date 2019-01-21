@@ -35,16 +35,24 @@ class ConversationViewController: UIViewController {
             cm = conversationManager()
             cm.save()
         }
-        // request new modifications
+        // Setup interface
         self.setupHoopNavigationBar("Conversations",
                                     leftTitle: "Retour", leftSelector: #selector(ConversationViewController.endViewController(sender:)),
                                     rightTitle: nil, rightSelector: nil)
+        // request remaining converstaions
+        HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(nConvs)", style: .done, target: self, action: nil)
+            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.hoopRedColor,
+                                                                            NSAttributedString.Key.font: UIFont.MainFontMedium(ofSize: 15.0)], for: .normal)
+        }
+        // request new modifications
         HoopNetworkApi.sharedInstance.getAllConversations().whenFulfilled(on: .main) { convs in
             print(convs)
             if let cm = self.cm {
                 if cm.update(withConversations: convs) {
                     self.conversationTableView.reloadData()
                 }
+                cm.save()
             }
         }
         // Do any additional setup after loading the view.
