@@ -28,7 +28,12 @@
 		EB31DFD621E60D52005D0530 /* TwoChoicesPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */; };
 		EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD721E61285005D0530 /* Object+ClassName.swift */; };
 		EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD821E61285005D0530 /* UIView+Nib.swift */; };
+		EB45ED5421F62EBB00597E77 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB45ED5321F62EBB00597E77 /* Kingfisher.framework */; };
+		EB45ED5621F62ECB00597E77 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB45ED5321F62EBB00597E77 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
+		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
+		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB72272421F22899008DF621 /* MapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72272321F22899008DF621 /* MapBoxViewController.swift */; };
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
@@ -173,9 +178,11 @@
 				EB8F051E21CBBEC8003757EC /* Futures.framework in Embed Frameworks */,
 				EB8F053E21CD2F04003757EC /* Alamofire.framework in Embed Frameworks */,
 				EB8F054621CD2F30003757EC /* QuickLayout.framework in Embed Frameworks */,
+				EB45ED5621F62ECB00597E77 /* Kingfisher.framework in Embed Frameworks */,
 				EB8F055E21CD6461003757EC /* FBSDKLoginKit.framework in Embed Frameworks */,
 				EB7F7FDF21EDF142003B375C /* AccountKit.framework in Embed Frameworks */,
 				EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */,
+				EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */,
 				EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */,
 				EB8F055221CD529E003757EC /* Bolts.framework in Embed Frameworks */,
 				EB8F054021CD2F04003757EC /* AlamofireImage.framework in Embed Frameworks */,
@@ -217,7 +224,10 @@
 		EB31DFD521E60D52005D0530 /* TwoChoicesPopupView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TwoChoicesPopupView.xib; sourceTree = "<group>"; };
 		EB31DFD721E61285005D0530 /* Object+ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+ClassName.swift"; sourceTree = "<group>"; };
 		EB31DFD821E61285005D0530 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		EB45ED5321F62EBB00597E77 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = hoop/Frameworks/Kingfisher.framework; sourceTree = "<group>"; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
+		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
+		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
@@ -338,9 +348,11 @@
 				EB8F051421CBBEBF003757EC /* RSKPlaceholderTextView.framework in Frameworks */,
 				EB8F051221CBBEBF003757EC /* Futures.framework in Frameworks */,
 				EB8F054121CD2F04003757EC /* SwiftyJSON.framework in Frameworks */,
+				EB45ED5421F62EBB00597E77 /* Kingfisher.framework in Frameworks */,
 				EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */,
 				EB7F7FDE21EDF142003B375C /* AccountKit.framework in Frameworks */,
 				EB8F055121CD529E003757EC /* Bolts.framework in Frameworks */,
+				EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */,
 				EB8F053D21CD2F04003757EC /* Alamofire.framework in Frameworks */,
 				EB8F052C21CBDF91003757EC /* SwiftEntryKit.framework in Frameworks */,
 				EB8F054521CD2F30003757EC /* QuickLayout.framework in Frameworks */,
@@ -460,6 +472,7 @@
 				EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */,
 				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
 				EB8F04B421CAE330003757EC /* ChatViewController.swift */,
+				EB72272321F22899008DF621 /* MapBoxViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -493,6 +506,8 @@
 		EB28B63121C3BFD000CFF1EF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB45ED5321F62EBB00597E77 /* Kingfisher.framework */,
+				EB72271F21F227D2008DF621 /* Mapbox.framework */,
 				EB7F7FDC21EDF124003B375C /* AccountKit.framework */,
 				EB77871421D53BA8002CBA02 /* MoreCodable.framework */,
 				EB8F055821CD645B003757EC /* FBSDKCoreKit.framework */,
@@ -863,6 +878,7 @@
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */,
+				EB72272421F22899008DF621 /* MapBoxViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,

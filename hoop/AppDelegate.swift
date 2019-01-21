@@ -33,10 +33,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Data persistence management
         setupData()
         
-        // First VC Selection
-        window = UIWindow(frame: UIScreen.main.bounds)
-        showFirstViewController(selectFirstViewController())
-        window?.makeKeyAndVisible()
+        let notificationOption = launchOptions?[.remoteNotification]
+        
+        if let notification = notificationOption as? [String: AnyObject] {
+            if let aps = notification["aps"] as? [String: AnyObject] {
+                handleNotificationFromInactiveApp(aps)
+                // Do some fancy stuff to run the app form the notification
+                // Basically goes to chatview
+            }
+            
+        } else {
+            // First VC Selection
+            window = UIWindow(frame: UIScreen.main.bounds)
+            showFirstViewController(selectFirstViewController())
+            window?.makeKeyAndVisible()
+        }
         
         // Alay respond true
         return true
@@ -90,22 +101,31 @@ extension AppDelegate {
         // Remove notification badge
         //print(userInfo)
         let aps = userInfo[AnyHashable("aps")] as! [String:Any]
+        handleNotificationFromActiveApp(aps)
+    }
+    
+    func handleNotificationFromInactiveApp(_ aps: [String: AnyObject]) {
+        
+    }
+    
+    func handleNotificationFromActiveApp(_ aps: [String:Any]) {
         let badge = aps["badge"] as! Int
-
+        
         // Increase the new message count
         //let nMsg = UserDefaults.standard.integer(forKey: "newMessages")
-        UserDefaults.standard.set(badge, forKey: "newMessages")
-        application.applicationIconBadgeNumber = badge
-
-        // Notify the other listening page that we received a notif
-        if (application.applicationState == .active) {
-            NotificationCenter.default.post(name: NSNotification.Name("didReceiveNotification"), object: userInfo)
-        } else if( application.applicationState == .inactive) {
-            var infoCpy = userInfo
-            infoCpy[AnyHashable("back")] = 1
-            self.notifProxy.notifData = infoCpy
-        }
+        // UserDefaults.standard.set(badge, forKey: "newMessages")
+        UIApplication.shared.applicationIconBadgeNumber = badge
+        
+//        // Notify the other listening page that we received a notif
+//        if (UIApplication.shared.applicationState == .active) {
+//            NotificationCenter.default.post(name: NSNotification.Name("didReceiveNotification"), object: userInfo)
+//        } else if( application.applicationState == .inactive) {
+//            var infoCpy = userInfo
+//            infoCpy[AnyHashable("back")] = 1
+//            //self.notifProxy.notifData = infoCpy
+//        }
     }
+        
 }
 
 // Setups
@@ -133,7 +153,7 @@ extension AppDelegate {
         router.map("/web/:target", controllerClass: WebViewController.self)
         router.map("/map", controllerClass: MapViewController.self)
         router.map("/profile/:profileId", controllerClass: ProfileViewController.self)
-        router.map("/conversation", controllerClass: ConversationViewController.self)
+        router.map("/conversations", controllerClass: ConversationViewController.self)
         router.map("/chat/:profileId", controllerClass: ChatViewController.self)
     }
     
@@ -182,31 +202,37 @@ extension AppDelegate {
         }
     }
     
-    func showInNavigationViewController(_ vc: UIViewController) {
-        let navigationController = UINavigationController(rootViewController: vc)
+    func showInNavigationViewController(_ vc: [UIViewController]) {
+        let navigationController = UINavigationController()
+        navigationController.setViewControllers(vc, animated: false)
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
     
     func showLogin() {
         let loginController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController
-        showInNavigationViewController(loginController!)
+        showInNavigationViewController([loginController!])
     }
     
     func showParameters() {
         let paramsController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ParametersViewController") as? ParametersViewController
-        showInNavigationViewController(paramsController!)
+        showInNavigationViewController([paramsController!])
     }
     
     func showTunnel() {
         let tutoController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "InputNameViewController") as? InputNameViewController
-        showInNavigationViewController(tutoController!)
+        showInNavigationViewController([tutoController!])
     }
     
     func showMap() {
         let mapController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as? MapViewController
-        showInNavigationViewController(mapController!)
+        showInNavigationViewController([mapController!])
         //window?.rootViewController = mapController!
+    }
+    
+    func showMapBox() {
+        let mapBoxController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapBoxViewController") as? MapBoxViewController
+        showInNavigationViewController([mapBoxController!])
     }
     
 }

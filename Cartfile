@@ -6,7 +6,9 @@ github "formbound/Futures"
 github "huri000/SwiftEntryKit" == 0.8.6
 github "Alamofire/Alamofire"
 github "Alamofire/AlamofireImage"
+github "onevcat/Kingfisher" ~> 5.0
 github "SwiftyJSON/SwiftyJSON"
 github "facebook/facebook-objc-sdk" == 4.38.0
 github "facebook/facebook-sdk-swift"
 github "tattn/MoreCodable"
+binary "https://www.mapbox.com/ios-sdk/Mapbox-iOS-SDK.json" ~> 4.7

@@ -12,4 +12,5 @@ extension DefaultsKey {
     static let me = Key<profile>("meKey")
     static let blocked = Key<[Int]>("blockedUser")
     static let deviceToken = Key<String>("deviceToken")
+    static let conversations = Key<conversationManager>("conversations")
 }

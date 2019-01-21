@@ -142,7 +142,9 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func goToConversations(_ sender: Any) {
-        
+        if let vc = try? Router.shared.matchControllerFromStoryboard("/conversations",storyboardName: "Main") {
+            self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+        }
     }
 }
 

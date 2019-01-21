@@ -7,24 +7,115 @@
 //
 
 import UIKit
+import Kingfisher
+
+
+class ConversationViewCell: UITableViewCell{
+    @IBOutlet weak var unreadIndicatorView: UIView!
+    @IBOutlet weak var profilePictureImageView: UIImageView!
+    @IBOutlet weak var profileNameLabel: UILabel!
+    @IBOutlet weak var profileLastMessageLabel: UILabel!
+    @IBOutlet weak var profileLastMessageTimeLabel: UILabel!
+}
+
 
 class ConversationViewController: UIViewController {
 
+    @IBOutlet weak var conversationTableView: UITableView!
+    
+    var me: profile? = AppDelegate.me
+    var cm: conversationManager! = conversationManager.get()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.conversationTableView.estimatedRowHeight = 44.0
+        self.conversationTableView.rowHeight = UITableView.automaticDimension
+        // If conversationManager does not exist create & save it
+        if cm == nil {
+            cm = conversationManager()
+            cm.save()
+        }
+        // request new modifications
+        self.setupHoopNavigationBar("Conversations",
+                                    leftTitle: "Retour", leftSelector: #selector(ConversationViewController.endViewController(sender:)),
+                                    rightTitle: nil, rightSelector: nil)
+        HoopNetworkApi.sharedInstance.getAllConversations().whenFulfilled(on: .main) { convs in
+            print(convs)
+            if let cm = self.cm {
+                if cm.update(withConversations: convs) {
+                    self.conversationTableView.reloadData()
+                }
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func endViewController( sender: UIBarButtonItem) {
+        // Will need to record stuffs here
+        self.navigationController?.popViewController(animated: true)
     }
-    */
 
 }
+
+extension ConversationViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 0) {
+            if let thConv = cm?.th_conversations {
+                return thConv.count != 0 ? thConv.count : 1
+            } else {
+                return 1
+            }
+        } else {
+            if let conv = cm?.conversations {
+                return conv.count
+            } else {
+                return 0
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var c = tableView.dequeueReusableCell(withIdentifier: "ConversationCell", for: indexPath) as! ConversationViewCell
+        if indexPath.section == 0 {
+            if let thConvs = cm?.th_conversations {
+                if thConvs.count != 0 {
+                    fillCell(withConversation: thConvs[indexPath.row], and: &c)
+                } else if let conv = cm?.user_th_conversation {
+                    fillCell(withConversation: conv, and: &c)
+                }
+            }
+            // Go look into the th conv
+        } else {
+            let index = indexPath.row
+            if let conv = cm?.conversations[index] {
+                fillCell(withConversation: conv, and: &c)
+            } 
+        }
+        return c
+    }
+    
+    func fillCell(withConversation conv:conversation, and cell: inout ConversationViewCell) {
+        // unread indicator
+        if (conv.expId != me?.id) && (conv.dateRead == nil) {
+            cell.unreadIndicatorView.isHidden = false
+            cell.unreadIndicatorView.backgroundColor = UIColor.hoopGreenColor
+        } else {
+            cell.unreadIndicatorView.isHidden = true
+        }
+        // profile image
+        if let profUrl = conv.profilePictureUrl {
+            cell.profilePictureImageView.kf.setImage(with: profUrl)
+        }
+        // text Content
+        cell.profileNameLabel.text = conv.nickname ?? "unknwon"
+        cell.profileLastMessageLabel.text = conv.lastMessage ?? "-"
+        cell.profileLastMessageTimeLabel.text = conv.when
+    }
+    
+}
+

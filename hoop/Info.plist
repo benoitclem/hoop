@@ -51,6 +51,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiYmVub2l0Y2xlbSIsImEiOiJjaXcyOWttZ3EwYWtzMnptZDRmMTE3b2ZuIn0.s0gqxIV7u5eGSLjr4Mh_qw</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Nous avons besoin d’accéder à ton appareil photo si tu souhaites prendre de nouvelles photos pour ton profil.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -60,7 +62,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d'étoffer ton profil.</string>
+	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d&apos;étoffer ton profil.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Campton-Black.ttf</string>
