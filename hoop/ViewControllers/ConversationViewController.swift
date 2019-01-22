@@ -30,6 +30,7 @@ class ConversationViewController: UIViewController {
         super.viewDidLoad()
         self.conversationTableView.estimatedRowHeight = 44.0
         self.conversationTableView.rowHeight = UITableView.automaticDimension
+        
         // If conversationManager does not exist create & save it
         if cm == nil {
             cm = conversationManager()
@@ -40,6 +41,22 @@ class ConversationViewController: UIViewController {
                                     leftTitle: "Retour", leftSelector: #selector(ConversationViewController.endViewController(sender:)),
                                     rightTitle: nil, rightSelector: nil)
         // request remaining converstaions
+        update()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.viewDidEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        // Do any additional setup after loading the view.
+    }
+    
+    @objc func viewDidEnterForeground(notification: Notification) {
+        update()
+    }
+    
+    @objc func endViewController( sender: UIBarButtonItem) {
+        // Will need to record stuffs here
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func update() {
         HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(nConvs)", style: .done, target: self, action: nil)
             self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.hoopRedColor,
@@ -55,12 +72,6 @@ class ConversationViewController: UIViewController {
                 cm.save()
             }
         }
-        // Do any additional setup after loading the view.
-    }
-    
-    @objc func endViewController( sender: UIBarButtonItem) {
-        // Will need to record stuffs here
-        self.navigationController?.popViewController(animated: true)
     }
 
 }
@@ -127,3 +138,16 @@ extension ConversationViewController: UITableViewDataSource {
     
 }
 
+extension ConversationViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            
+        } else {
+            let conv = cm.conversations[indexPath.row]
+            let profileId = conv.dstId != me?.id ? conv.dstId! : conv.expId!
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") {
+                self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+            }
+        }
+    }
+}

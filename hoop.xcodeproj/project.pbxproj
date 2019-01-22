@@ -30,6 +30,8 @@
 		EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB31DFD821E61285005D0530 /* UIView+Nib.swift */; };
 		EB45ED5421F62EBB00597E77 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB45ED5321F62EBB00597E77 /* Kingfisher.framework */; };
 		EB45ED5621F62ECB00597E77 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB45ED5321F62EBB00597E77 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EB45ED5A21F7651F00597E77 /* InputTextFieldBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */; };
+		EB45ED5B21F7651F00597E77 /* InputTextFieldBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
 		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -225,6 +227,8 @@
 		EB31DFD721E61285005D0530 /* Object+ClassName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+ClassName.swift"; sourceTree = "<group>"; };
 		EB31DFD821E61285005D0530 /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
 		EB45ED5321F62EBB00597E77 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = hoop/Frameworks/Kingfisher.framework; sourceTree = "<group>"; };
+		EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputTextFieldBar.xib; path = hoop/UI/Views/InputTextFieldBar.xib; sourceTree = SOURCE_ROOT; };
+		EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldBar.swift; path = hoop/UI/Views/InputTextFieldBar.swift; sourceTree = SOURCE_ROOT; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
 		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
@@ -480,6 +484,7 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EB45ED5721F764EB00597E77 /* Views */,
 				EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */,
 				EB76A82621CFFF1A00CC358D /* Popups */,
 				EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */,
@@ -528,6 +533,16 @@
 			);
 			name = Frameworks;
 			path = ..;
+			sourceTree = "<group>";
+		};
+		EB45ED5721F764EB00597E77 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */,
+				EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */,
+			);
+			name = Views;
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		EB76A82621CFFF1A00CC358D /* Popups */ = {
@@ -791,6 +806,7 @@
 				EB8F04A021CAC62E003757EC /* Campton-BoldItalic.ttf in Resources */,
 				EB8F04A421CAC62E003757EC /* Campton-ExtraLightItalic.ttf in Resources */,
 				EB8F04A221CAC62E003757EC /* Campton-SemiBoldItalic.ttf in Resources */,
+				EB45ED5A21F7651F00597E77 /* InputTextFieldBar.xib in Resources */,
 				EB8F04AA21CAC62E003757EC /* Campton-SemiBold.ttf in Resources */,
 				EB8F047C21CAC1E0003757EC /* Localizable.strings in Resources */,
 				EB8F04AB21CAC62E003757EC /* Campton-BlackItalic.ttf in Resources */,
@@ -872,6 +888,7 @@
 				EB28B63921C3F57200CFF1EF /* message.swift in Sources */,
 				EBAEF3B021DD18ED0024CDF9 /* UIButton+actionClosure.swift in Sources */,
 				EB31DFCE21E51201005D0530 /* Timestamp.swift in Sources */,
+				EB45ED5B21F7651F00597E77 /* InputTextFieldBar.swift in Sources */,
 				EB31DFD921E61285005D0530 /* Object+ClassName.swift in Sources */,
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
 				EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */,

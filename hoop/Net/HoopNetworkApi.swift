@@ -481,4 +481,19 @@ extension HoopNetworkApi {
             return promise.future
         }
     }
+    
+    // Need to take account of the local id
+    func getMessages(with dstId:String) -> Future<[message]> {
+        let future: Future<hoopApiResponse<[message]>> = self.request("getAllChat", and: ["dest":dstId])
+        return future.then { response -> Future<[message]> in
+            let promise = Promise<[message]>()
+            if let data = response.data {
+                promise.fulfill(data)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
 }
