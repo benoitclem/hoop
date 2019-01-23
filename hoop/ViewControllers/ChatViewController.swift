@@ -44,6 +44,14 @@ class ChatViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        // set header
+        let chv = ChatHeaderView()
+        chv.profileImageView.image = UIImage(named:"aicha")
+        chv.profileNameLabel.text = "Corine"
+        let touchedGesture = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.touchedProfileHeader(_:)))
+        self.navigationItem.titleView = chv
+        self.navigationController?.view.addGestureRecognizer(touchedGesture)
         
         // Retrive me coz we gonna need it
         me = AppDelegate.me
@@ -84,7 +92,8 @@ class ChatViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-       messageTableView.scrollIndicatorInsets.right = messageTableView.frame.width - 8.5
+        super.viewDidAppear(animated)
+        messageTableView.scrollIndicatorInsets.right = messageTableView.frame.width - 8.5
     }
     
     @objc func endViewController( sender: UIBarButtonItem) {
@@ -94,6 +103,14 @@ class ChatViewController: UIViewController {
     
     @objc func sendMessageAction(_ sender: UIButton) {
         sendMessage()
+    }
+    
+    @objc func touchedProfileHeader(_ sender: UIView) {
+        if let currentSelectedId = profileId {
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
+                self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+            }
+        }
     }
     
     

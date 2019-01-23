@@ -33,6 +33,8 @@
 		EB45ED5A21F7651F00597E77 /* InputTextFieldBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */; };
 		EB45ED5B21F7651F00597E77 /* InputTextFieldBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */; };
 		EB45ED5D21F87B8800597E77 /* UInt64+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5C21F87B8800597E77 /* UInt64+random.swift */; };
+		EB45ED5F21F8BC3B00597E77 /* ChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5E21F8BC3B00597E77 /* ChatHeaderView.swift */; };
+		EB45ED6121F8BC5A00597E77 /* ChatHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
 		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -231,6 +233,8 @@
 		EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputTextFieldBar.xib; path = hoop/UI/Views/InputTextFieldBar.xib; sourceTree = SOURCE_ROOT; };
 		EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldBar.swift; path = hoop/UI/Views/InputTextFieldBar.swift; sourceTree = SOURCE_ROOT; };
 		EB45ED5C21F87B8800597E77 /* UInt64+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt64+random.swift"; sourceTree = "<group>"; };
+		EB45ED5E21F8BC3B00597E77 /* ChatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatHeaderView.swift; path = hoop/UI/Views/ChatHeaderView.swift; sourceTree = SOURCE_ROOT; };
+		EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatHeaderView.xib; path = hoop/UI/Views/ChatHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
 		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
@@ -543,6 +547,8 @@
 			children = (
 				EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */,
 				EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */,
+				EB45ED5E21F8BC3B00597E77 /* ChatHeaderView.swift */,
+				EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */,
 			);
 			name = Views;
 			path = "New Group";
@@ -819,6 +825,7 @@
 				EB8F04DF21CAE678003757EC /* HoopSwitchCell.xib in Resources */,
 				EB8F04DA21CAE678003757EC /* CollectionViewCell.xib in Resources */,
 				EB8F049B21CAC62E003757EC /* Campton-ThinItalic.ttf in Resources */,
+				EB45ED6121F8BC5A00597E77 /* ChatHeaderView.xib in Resources */,
 				EB31DFD121E60C11005D0530 /* MessagePopupView.xib in Resources */,
 				EB8F04A721CAC62E003757EC /* Campton-Medium.ttf in Resources */,
 				EB8F04A821CAC62E003757EC /* Campton-MediumItalic.ttf in Resources */,
@@ -896,6 +903,7 @@
 				EB862C8421DE40420051E3A7 /* condition.swift in Sources */,
 				EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */,
 				EBAEF3B921DDE7D60024CDF9 /* HoopDateCell.swift in Sources */,
+				EB45ED5F21F8BC3B00597E77 /* ChatHeaderView.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */,
 				EB72272421F22899008DF621 /* MapBoxViewController.swift in Sources */,

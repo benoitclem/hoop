@@ -101,7 +101,11 @@ extension ProfileViewController {
 
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.profile.pictures_urls.count
+        if let profile = self.profile {
+            return profile.pictures_urls.count
+        } else {
+            return 0
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
