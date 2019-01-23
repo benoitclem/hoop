@@ -272,7 +272,17 @@ class profile: Decodable, Encodable {
         try container.encode(reached_map, forKey: .reached_map)
         try container.encode(saw_tutorial, forKey: .saw_tutorial)
     }
-
+    
+    func update(with profile:profile) {
+        age_min = profile.age_min
+        age_max = profile.age_max
+        description = profile.description
+        thumb = profile.thumb
+        pictures_urls = profile.pictures_urls
+        pictures_images = profile.pictures_images
+        sexualOrientation = profile.sexualOrientation
+        commonLikes = profile.commonLikes
+    }
 }
 
 extension profile {
@@ -337,4 +347,34 @@ extension profile {
         let defaults = Defaults()
         return defaults.get(for: .me)
     }
+}
+
+class profileManager: Codable {
+    var profiles = [profile]()
+    
+    func save() {
+        let defaults = Defaults()
+        defaults.set(self, for: .profiles)
+    }
+    
+    static func get() -> profileManager? {
+        let defaults = Defaults()
+        return defaults.get(for: .profiles)
+    }
+    
+    func update(withProfiles profiles: [profile]) {
+        for profile in profiles {
+            update(withProfile: profile)
+        }
+    }
+    
+    func update(withProfile profile: profile) {
+        if let index = profiles.index(where: { $0.id == profile.id}) {
+            let existingProfile = profiles[index]
+            existingProfile.update(with: profile)
+        } else {
+            profiles.append(profile)
+        }
+    }
+    
 }
