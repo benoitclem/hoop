@@ -496,4 +496,27 @@ extension HoopNetworkApi {
             return promise.future
         }
     }
+    
+    func postMessage(_ message:message) -> Future<Bool>? {
+        if let content = message.content, let did = message.dstId, let lid = message.locId {
+            let data: [String : Any] = ["content":content,"dest":String(did), "local_id":String(lid)]
+            let future: Future<hoopApiResponse<String>> = self.post("postChat", and: data, andProgress: nil)
+            return Optional(future.then { response -> Future<Bool> in
+                let promise = Promise<Bool>()
+                if let resultString = response.data {
+                    switch resultString {
+                    case "message_sent":
+                        promise.fulfill(true)
+                    default:
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_BLOCKING_UNKNOWN_ERROR, userInfo: ["desc":"unkwon sent error"])
+                        promise.reject(error)
+                    }
+                    
+                }
+                return promise.future
+            })
+        } else {
+            return nil
+        }
+    }
 }

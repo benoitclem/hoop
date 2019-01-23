@@ -32,6 +32,7 @@
 		EB45ED5621F62ECB00597E77 /* Kingfisher.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB45ED5321F62EBB00597E77 /* Kingfisher.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB45ED5A21F7651F00597E77 /* InputTextFieldBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */; };
 		EB45ED5B21F7651F00597E77 /* InputTextFieldBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */; };
+		EB45ED5D21F87B8800597E77 /* UInt64+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5C21F87B8800597E77 /* UInt64+random.swift */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
 		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -229,6 +230,7 @@
 		EB45ED5321F62EBB00597E77 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = hoop/Frameworks/Kingfisher.framework; sourceTree = "<group>"; };
 		EB45ED5821F7651F00597E77 /* InputTextFieldBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = InputTextFieldBar.xib; path = hoop/UI/Views/InputTextFieldBar.xib; sourceTree = SOURCE_ROOT; };
 		EB45ED5921F7651F00597E77 /* InputTextFieldBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InputTextFieldBar.swift; path = hoop/UI/Views/InputTextFieldBar.swift; sourceTree = SOURCE_ROOT; };
+		EB45ED5C21F87B8800597E77 /* UInt64+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt64+random.swift"; sourceTree = "<group>"; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
 		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
@@ -403,15 +405,15 @@
 			isa = PBXGroup;
 			children = (
 				EB7F7FDB21EDC536003B375C /* hoop.entitlements */,
-				EB7F7FCD21E63210003B375C /* Mock */,
+				EB28B61521C3B37500CFF1EF /* ViewControllers */,
+				EB28B61621C3B38E00CFF1EF /* UI */,
+				EB28B61321C3B36900CFF1EF /* Models */,
 				EB8F053221CD2A12003757EC /* Net */,
+				EB7F7FCD21E63210003B375C /* Mock */,
 				EB8F04C521CAE5CA003757EC /* Utils */,
 				EB8F046121CAB625003757EC /* Routing */,
-				EB28B63121C3BFD000CFF1EF /* Frameworks */,
-				EB28B61621C3B38E00CFF1EF /* UI */,
-				EB28B61521C3B37500CFF1EF /* ViewControllers */,
-				EB28B61321C3B36900CFF1EF /* Models */,
 				EB28B61221C3B32900CFF1EF /* Extensions */,
+				EB28B63121C3BFD000CFF1EF /* Frameworks */,
 				EB28B5F221C3B2A900CFF1EF /* AppDelegate.swift */,
 				EB28B5FE21C3B2AA00CFF1EF /* Info.plist */,
 			);
@@ -441,6 +443,7 @@
 				EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */,
 				EB7F7FEB21EE0C85003B375C /* String+Capitalize.swift */,
 				EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */,
+				EB45ED5C21F87B8800597E77 /* UInt64+random.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -484,8 +487,8 @@
 		EB28B61621C3B38E00CFF1EF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				EB45ED5721F764EB00597E77 /* Views */,
 				EB28B5F921C3B2AA00CFF1EF /* Assets.xcassets */,
+				EB45ED5721F764EB00597E77 /* Views */,
 				EB76A82621CFFF1A00CC358D /* Popups */,
 				EB8F04E621CAEB71003757EC /* loginVideoBackground.mp4 */,
 				EB9B5C1A21CFD273000C8008 /* Map */,
@@ -899,6 +902,7 @@
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
+				EB45ED5D21F87B8800597E77 /* UInt64+random.swift in Sources */,
 				EB31DFD421E60D29005D0530 /* TwoChoicesPopupView.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
 				EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */,

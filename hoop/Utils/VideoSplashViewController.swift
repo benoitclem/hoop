@@ -69,6 +69,15 @@ open class VideoSplashViewController: UIViewController {
         }
     }
     
+    override open func viewDidLoad() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default, options: .mixWithOthers)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error)
+        }
+    }
+    
     override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         moviePlayer.view.frame = videoFrame

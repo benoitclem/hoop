@@ -39,9 +39,13 @@ class conversation: Decodable, Encodable {
         }
     }
     
-    var chatKey: String? {
+    var finalExpId: Int {
         get {
-            return id != nil ? "\(id!)" : nil
+            var _finalExpId = expId!
+            if expId == AppDelegate.me?.id {
+                _finalExpId = dstId!
+            }
+            return _finalExpId
         }
     }
     
@@ -53,22 +57,26 @@ class conversation: Decodable, Encodable {
         case nickname
         case lastMessage = "last_message"
         case profilePictureUrl = "profile_picture"
-        case dateSent = "timestamp_sent"
-        case dateRead = "timestamp_read"
+        case dateSentStr = "timestamp_sent"
+        case dateReadStr = "timestamp_read"
+        case dateSent
+        case dateRead
     }
     
     
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        id = try container.decode(Int.self, forKey: .id)
-        nickname = try container.decode(String.self, forKey: .nickname)
-        expId = try container.decode(Int.self, forKey: .expId)
-        dstId = try container.decode(Int.self, forKey: .dstId)
-        lastMessage = try container.decode(String.self, forKey: .lastMessage)
-        profilePictureUrl  = try container.decode(URL.self, forKey: .profilePictureUrl)
-        if container.contains(.dateSent){
-            if let dateSentString = try? container.decode(String.self, forKey: .dateSent) {
+        id = try? container.decode(Int.self, forKey: .id)
+        nickname = try? container.decode(String.self, forKey: .nickname)
+        expId = try? container.decode(Int.self, forKey: .expId)
+        dstId = try? container.decode(Int.self, forKey: .dstId)
+        lastMessage = try? container.decode(String.self, forKey: .lastMessage)
+        profilePictureUrl  = try? container.decode(URL.self, forKey: .profilePictureUrl)
+        if container.contains(.dateSent) {
+            dateSent = try? container.decode(Date.self, forKey: .dateSent)
+        } else if container.contains(.dateSentStr){
+            if let dateSentString = try? container.decode(String.self, forKey: .dateSentStr) {
                 let lcformatter = DateFormatter.yyyyMMddHHmmss
                 if let date = lcformatter.date(from: dateSentString) {
                     dateSent = date
@@ -79,8 +87,10 @@ class conversation: Decodable, Encodable {
                 }
             }
         }
-        if container.contains(.dateRead){
-            if let dateReadString = try? container.decode(String.self, forKey: .dateSent) {
+        if container.contains(.dateRead) {
+            dateRead = try? container.decode(Date.self, forKey: .dateRead)
+        } else if container.contains(.dateReadStr){
+            if let dateReadString = try? container.decode(String.self, forKey: .dateReadStr) {
                 let lcformatter = DateFormatter.yyyyMMddHHmmss
                 if let date = lcformatter.date(from: dateReadString) {
                     dateRead = date
@@ -141,6 +151,7 @@ class conversation: Decodable, Encodable {
         UTHConv.expId = 1
         UTHConv.nickname = "Team Hoop"
         UTHConv.dateRead = Date()
+        UTHConv.dateSent = Date()
         UTHConv.lastMessage = "Communique avec la team"
         return UTHConv
     }
@@ -181,7 +192,7 @@ class conversationManager: Codable {
                         modified = true
                     }
                 } else {
-                    if let conv = mutableConversations.first(where: {$0.id! == userChat.id!}) {
+                    if let conv = mutableConversations.first(where: {$0.finalExpId == userChat.finalExpId}) {
                         let localModified = conv.update(with: userChat)
                         if !modified && localModified {
                             modified = true

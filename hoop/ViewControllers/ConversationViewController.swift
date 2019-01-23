@@ -36,6 +36,7 @@ class ConversationViewController: UIViewController {
             cm = conversationManager()
             cm.save()
         }
+        
         // Setup interface
         self.setupHoopNavigationBar("Conversations",
                                     leftTitle: "Retour", leftSelector: #selector(ConversationViewController.endViewController(sender:)),
@@ -57,11 +58,14 @@ class ConversationViewController: UIViewController {
     }
     
     func update() {
-        HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(nConvs)", style: .done, target: self, action: nil)
-            self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.hoopRedColor,
-                                                                            NSAttributedString.Key.font: UIFont.MainFontMedium(ofSize: 15.0)], for: .normal)
+        // Get remaining conversation for boyzzzz
+        if me?.gender == 1 {
+            HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "\(nConvs)", style: .done, target: self, action: nil)
+                self.navigationItem.rightBarButtonItem?.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.hoopRedColor, NSAttributedString.Key.font: UIFont.MainFontMedium(ofSize: 15.0)], for: .normal)
+            }
         }
+        
         // request new modifications
         HoopNetworkApi.sharedInstance.getAllConversations().whenFulfilled(on: .main) { convs in
             print(convs)
@@ -72,6 +76,7 @@ class ConversationViewController: UIViewController {
                 cm.save()
             }
         }
+            
     }
 
 }
@@ -140,14 +145,20 @@ extension ConversationViewController: UITableViewDataSource {
 
 extension ConversationViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // visually deselect the row
+        conversationTableView.deselectRow(at: indexPath, animated: true)
+        // Now segue to the right view
         if indexPath.section == 0 {
-            
+            let conv = cm.conversations[indexPath.row]
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/chat/1",storyboardName: "Main") {
+                self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+            }
         } else {
             let conv = cm.conversations[indexPath.row]
-            let profileId = conv.dstId != me?.id ? conv.dstId! : conv.expId!
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") {
+            if let vc = try? Router.shared.matchControllerFromStoryboard("/chat/\(conv.finalExpId)",storyboardName: "Main") {
                 self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
             }
         }
     }
+    
 }

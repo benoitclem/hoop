@@ -35,9 +35,10 @@ class ChatViewController: UIViewController {
     var me: profile?
     
     @objc var profileId: String!
+    
     var storageKey: String {
         get {
-            return "storageKey\(profileId)"
+            return "storageKey\(String(describing: profileId))"
         }
     }
     
@@ -55,10 +56,26 @@ class ChatViewController: UIViewController {
             mm.save()
         }
         
+        // Setup interface
+        self.setupHoopNavigationBar("Chat",
+                                    leftTitle: "Retour", leftSelector: #selector(ChatViewController.endViewController(sender:)),
+                                    rightTitle: nil, rightSelector: nil)
+        
+        // Deal by ourselves the inset due to navigationbar
+        messageTableView.contentInsetAdjustmentBehavior = .never
+        messageTableView.contentInset.bottom = 60.0
+        
+        // Congfigure Inset
+        // ???? IS THIE REALLY OK FOR CROSS DEVICE
+        messageTableView.contentInset.top = 51.5
+        messageTableView.scrollIndicatorInsets.top =  51.5
+        
+        
         // Configure message Taleview
         messageTableView.keyboardDismissMode = .interactive
         messageTableView.rowHeight = UITableView.automaticDimension
         messageTableView.estimatedRowHeight = 50.0
+        
         messageTableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi));
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardDidChangeFrame(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
@@ -66,11 +83,27 @@ class ChatViewController: UIViewController {
         update()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+       messageTableView.scrollIndicatorInsets.right = messageTableView.frame.width - 8.5
+    }
+    
+    @objc func endViewController( sender: UIBarButtonItem) {
+        // Will need to record stuffs here
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func sendMessageAction(_ sender: UIButton) {
+        sendMessage()
+    }
+    
+    
+    // ========= Input bar stuffs =========
+    
     lazy var inputContainerView: UIView = {
         // TODO: Here we could detect iphone X and set a soft safe area (pushing x to 20 reduce width by 40)
         inputTextBar = InputTextFieldBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 48.0))
         inputTextBar.SendButton.isEnabled = false
-        //inputTextBar.SendButton.addTarget(self, action: #selector(ChatViewController.SendMessageAction(_:)), for: .touchUpInside)
+        inputTextBar.SendButton.addTarget(self, action: #selector(ChatViewController.sendMessageAction(_:)), for: .touchUpInside)
         inputTextBar.TextView.delegate = self
         inputTextBar.TextView.text = ""
         inputTextBar.PlaceHolderLabel.text = "message"
@@ -84,15 +117,50 @@ class ChatViewController: UIViewController {
         }
     }
     
+    override var canBecomeFirstResponder: Bool {
+        get {
+            return true
+        }
+    }
+    
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(paste(_:)) {
+            return true
+        }
+        return false
+        //return [super canPerformAction:action withSender:sender];
+    }
+    
+    override func paste(_ sender: Any?) {
+        //        print(sender)
+    }
+    
+    func cleanInputBox() {
+        // Clean out the view
+        inputTextBar.TextView.text = ""
+        inputTextBar.SendButton.isEnabled = false
+        inputTextBar.PlaceHolderLabel.isHidden = false
+        inputTextBar.invalidateIntrinsicContentSize()
+    }
+    
+    // tableview utils
+    
     func scrollToBottom(_ animated: Bool = true) {
         if(mm.messages.count != 0){
             messageTableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: .top, animated: animated)
         }
     }
+
+}
+
+// Network calls
+extension ChatViewController {
     
+    // Need to be more specific with local id
     func update() {
         HoopNetworkApi.sharedInstance.getMessages(with: profileId).whenFulfilled(on: .main) { messages in
             let mods = self.mm.update(with: messages)
+            self.mm.save()
             if !mods.toInsert.isEmpty || !mods.toUpdate.isEmpty {
                 self.messageTableView.beginUpdates()
                 self.messageTableView.reloadRows(at: mods.toUpdate, with: .none)
@@ -102,6 +170,21 @@ class ChatViewController: UIViewController {
         }
     }
 
+    func sendMessage() {
+        if let content = self.inputTextBar.TextView.text, let pid = profileId, let did = Int(pid) {
+            let m = message(with: content, and: did)
+            if let p = HoopNetworkApi.sharedInstance.postMessage(m) {
+                p.whenFulfilled(on: .main) { _ in
+                    self.update()
+                }
+            }
+            mm?.messages.append(m)
+            mm?.save()
+            messageTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+            cleanInputBox()
+        }
+    }
+    
 }
 
 extension ChatViewController: UITableViewDataSource {

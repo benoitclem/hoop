@@ -27,6 +27,12 @@ class message: Codable {
         case dateRead = "timestamp_read"
     }
     
+    init(with message:String,and destIdent:Int) {
+        content = message
+        dstId = destIdent
+        locId = UInt64.random64()
+    }
+    
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
@@ -116,8 +122,10 @@ class messageManager: Codable {
                 messages.append(msg)
             }
             
-            for i in 0...nNewMsg-1 {
-                toInsert.append(IndexPath(item: i, section: 0))
+            if nNewMsg != 0 {
+                for i in 0...nNewMsg-1 {
+                    toInsert.append(IndexPath(item: i, section: 0))
+                }
             }
         }
         

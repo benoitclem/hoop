@@ -228,7 +228,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="lKz-9t-2v1" id="Q44-gb-8zT"/>
-                                    <outlet property="delegate" destination="lKz-9t-2v1" id="JjC-Rj-Nnb"/>
+                                    <outlet property="delegate" destination="lKz-9t-2v1" id="tNf-jt-PDf"/>
                                 </connections>
                             </tableView>
                         </subviews>
