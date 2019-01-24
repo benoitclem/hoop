@@ -27,47 +27,65 @@ class ProfileViewController: UIViewController {
     
     var panGR: UIPanGestureRecognizer!
     
+    var pm: profileManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Go get the profile
-        if let profile = MapViewController.currentProfiles.first(where: { $0.id == Int(profileId) }) {
-            
-            self.profile = profile
-            
-            if let fullTitle = self.profile.fullTitle {
-                profilePictureCollectionView.hero.id = fullTitle
-                profileName.text = fullTitle
-            } else if self.profile.id == 1 {
-                profilePictureCollectionView.hero.id = "th"
-                profileName.text = "Team Hoop"
-            }
-            
-            if var description = self.profile.description {
-                if description.contains("&*/<>/*&") {
-                    let descriptionArray = description.components(separatedBy: "&*/<>/*&")
-                    if let me = AppDelegate.me {
-                        description = descriptionArray[(me.gender == 1) ? 0 : 1]
-                    }
-                }
-                profileDescription.text = description
-            }
-            
-            profilepicturePager.numberOfPages = self.profile.pictures_urls.count
-            profilepicturePager.currentPage = 0
-            
-            etHoopButton.setTitle("Bonjour", for: .normal)
-            dismissButton.setTitle("X", for: .normal)
-            dismissButton.hero.modifiers = [.fade, .translate(x:+100, y:0)]
-            
-            profileScrollView.contentInset.bottom = 100.0
-            //profilepicturePager.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-            
-//            panGR = UIPanGestureRecognizer(target: self,
-//                                           action: #selector(handlePan(gestureRecognizer:)))
-            //view.addGestureRecognizer(panGR)
+        setupGeneralUI()
+        
+        pm = profileManager.get()
+        if pm == nil {
+            pm = profileManager()
+            pm.save()
         }
         
+        if let profile = pm.getProfile(with: Int(profileId)!) {
+            setupProfileUI(with: profile)
+        } else {
+            HoopNetworkApi.sharedInstance.getHoopProfile(with: Int(profileId)!).whenFulfilled(on: .main) { profile in
+                self.pm.update(withProfile: profile)
+                self.pm.save()
+                self.setupProfileUI(with: profile)
+                self.profilePictureCollectionView.reloadData()
+            }
+        }
+        
+        
+    }
+    
+    func setupGeneralUI() {
+        etHoopButton.setTitle("Bonjour", for: .normal)
+        dismissButton.setTitle("X", for: .normal)
+        dismissButton.hero.modifiers = [.fade, .translate(x:+100, y:0)]
+        profileScrollView.contentInset.bottom = 100.0
+    }
+    
+    func setupProfileUI(with profile: profile) {
+        self.profile = profile
+        
+        if let fullTitle = self.profile.fullTitle {
+            profilePictureCollectionView.hero.id = fullTitle
+            profileName.text = fullTitle
+        } else if self.profile.id == 1 {
+            profilePictureCollectionView.hero.id = "th"
+            profileName.text = "Team Hoop"
+        }
+        
+        if var description = self.profile.description {
+            if description.contains("&*/<>/*&") {
+                let descriptionArray = description.components(separatedBy: "&*/<>/*&")
+                if let me = AppDelegate.me {
+                    description = descriptionArray[(me.gender == 1) ? 0 : 1]
+                }
+            }
+            profileDescription.text = description
+        }  else {
+            profileDescription.text = "pas de description"
+        }
+        
+        profilepicturePager.numberOfPages = self.profile.pictures_urls.count
+        profilepicturePager.currentPage = 0
     }
     
     @IBAction func dismissView(_ sender: Any) {

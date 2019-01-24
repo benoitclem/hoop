@@ -736,7 +736,7 @@
                                 <subviews>
                                     <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5VA-sZ-LWz">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="500"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="500" id="Ds7-go-omt"/>
                                         </constraints>

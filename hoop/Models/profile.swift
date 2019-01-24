@@ -377,4 +377,8 @@ class profileManager: Codable {
         }
     }
     
+    func getProfile(with id: Int) -> profile?{
+        return profiles.first(where: { $0.id == id} )
+    }
+    
 }

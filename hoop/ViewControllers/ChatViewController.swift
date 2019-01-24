@@ -38,7 +38,7 @@ class ChatViewController: UIViewController {
     
     var storageKey: String {
         get {
-            return "storageKey\(String(describing: profileId))"
+            return "storageKey\(profileId!)"
         }
     }
     
@@ -50,8 +50,9 @@ class ChatViewController: UIViewController {
         chv.profileImageView.image = UIImage(named:"aicha")
         chv.profileNameLabel.text = "Corine"
         let touchedGesture = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.touchedProfileHeader(_:)))
+        chv.addGestureRecognizer(touchedGesture)
         self.navigationItem.titleView = chv
-        self.navigationController?.view.addGestureRecognizer(touchedGesture)
+        //self.navigationController?.view.addGestureRecognizer(touchedGesture)
         
         // Retrive me coz we gonna need it
         me = AppDelegate.me

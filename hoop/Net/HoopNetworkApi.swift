@@ -417,6 +417,20 @@ extension HoopNetworkApi {
         }
     }
     
+    func getHoopProfile(with id: Int) -> Future<profile>{
+        let future: Future<hoopApiResponse<[profile]>> = self.request("getClientInfo", and: ["id":String(id)])
+        return  future.then { response -> Future<profile> in
+            let promise = Promise<profile>()
+            if let data = response.data, let profile = data.first{
+                promise.fulfill(profile)
+            } else {
+                let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_NO_DATA, userInfo: ["desc":"could not extract key 'data' from incoming data"])
+                promise.reject(error)
+            }
+            return promise.future
+        }
+    }
+    
     func postHoopProfile(withData data:[String:Any]) -> Future<Bool> {
         let future: Future<hoopApiResponse<profile>> = self.post("setClientInfo", and: data, andProgress: nil)
         return future.then { response -> Future<Bool> in

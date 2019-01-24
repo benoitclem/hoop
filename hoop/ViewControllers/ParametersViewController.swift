@@ -224,6 +224,33 @@ class ParametersViewController: FormViewController {
                         //row.title = "action 1"
                         print(row.labelText)
                 }
+                
+            form +++ Section("developper")
+                <<< HoopLabelRow() { row in
+                    
+                    var style = HoopLabelRowStyle()
+                    row.labelText = "vider les caches"
+                    style.txtAlignement = NSTextAlignment.center
+                    row.labelStyle = style
+                    }.onCellSelection { cell, row in
+                        if let pm = profileManager.get() {
+                            pm.profiles.removeAll()
+                            pm.save()
+                        }
+                        
+                        if let cm = conversationManager.get() {
+                            for conv in cm.conversations {
+                                if let mm = messageManager.get(withKey: "storageKey\(conv.finalExpId)") {
+                                    mm.messages.removeAll()
+                                    mm.save()
+                                }
+                            }
+                            cm.conversations.removeAll()
+                            cm.th_conversations.removeAll()
+                            cm.save()
+                        }
+
+                }
         }
     }
     

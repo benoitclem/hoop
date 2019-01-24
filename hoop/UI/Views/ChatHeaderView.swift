@@ -15,6 +15,10 @@ class ChatHeaderView: UIView {
     var view: UIView!
     var requestedSize: CGRect!
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 150, height: 70)
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.requestedSize = frame
@@ -31,7 +35,7 @@ class ChatHeaderView: UIView {
         // Apply the requested frame size to thhe loaded nib
         view.frame = self.requestedSize
         self.autoresizingMask = .flexibleHeight;
-        self.profileImageView.layer.cornerRadius = 45.0/2
+        self.profileImageView.layer.cornerRadius = 20.0
         self.profileImageView.clipsToBounds = true
         addSubview(view)
     }

@@ -48,7 +48,7 @@ class MapViewController: UIViewController {
     var currentHoopSelectedOverlay: MKCircle? = nil
     
     var currentHoopsContent: [String:[profile]]? = nil
-    static var currentProfiles = [profile]()
+    var currentProfiles = [profile]()
     var currentSelectedProfile: profile? = nil
     
     private var indexOfCellBeforeDragging = 0
@@ -150,6 +150,7 @@ class MapViewController: UIViewController {
 
 extension MapViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected")
         if let currentSelectedId = currentSelectedProfile?.id, let active = currentSelectedProfile?.activeInHoop{
             if active != 0 {
                 if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
@@ -162,7 +163,7 @@ extension MapViewController: UICollectionViewDelegate {
 
 extension MapViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return MapViewController.currentProfiles.count
+        return currentProfiles.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -175,7 +176,7 @@ extension MapViewController: UICollectionViewDataSource {
         profilAction.addTarget(self, action: #selector(MapViewController.triggerBlockUser(_:)), for: .touchUpInside)
         
         // Here try the localization stuffs
-        let displayedProfile = MapViewController.currentProfiles[indexPath.row]
+        let displayedProfile = currentProfiles[indexPath.row]
         
         var finalName = ""
         
@@ -227,7 +228,7 @@ extension MapViewController: UIScrollViewDelegate {
         let itemWidth = profileCollectionViewLayout.itemSize.width
         let proportionalOffset = profileCollectionViewLayout.collectionView!.contentOffset.x / itemWidth
         let index = Int(round(proportionalOffset))
-        let safeIndex = max(0, min(MapViewController.currentProfiles.count - 1, index))
+        let safeIndex = max(0, min(currentProfiles.count - 1, index))
         return safeIndex
     }
     
@@ -249,7 +250,7 @@ extension MapViewController: UIScrollViewDelegate {
         
         // calculate conditions:
         let swipeVelocityThreshold: CGFloat = 0.5 // after some trail and error
-        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < MapViewController.currentProfiles.count && velocity.x > swipeVelocityThreshold
+        let hasEnoughVelocityToSlideToTheNextCell = indexOfCellBeforeDragging + 1 < currentProfiles.count && velocity.x > swipeVelocityThreshold
         let hasEnoughVelocityToSlideToThePreviousCell = indexOfCellBeforeDragging - 1 >= 0 && velocity.x < -swipeVelocityThreshold
         let majorCellIsTheCellBeforeDragging = indexOfMajorCell == indexOfCellBeforeDragging
         let didUseSwipeToSkipCell = majorCellIsTheCellBeforeDragging && (hasEnoughVelocityToSlideToTheNextCell || hasEnoughVelocityToSlideToThePreviousCell)
@@ -281,7 +282,7 @@ extension MapViewController: UIScrollViewDelegate {
     
     func onSelectedDispayedCell() {
         let selectedIndex = self.indexOfMajorCell()
-        currentSelectedProfile = MapViewController.currentProfiles[selectedIndex]
+        currentSelectedProfile = currentProfiles[selectedIndex]
         // Here Customize the button name
         if let name = currentSelectedProfile?.name {
             etHoopButton.setTitle(name, for: .normal)
@@ -650,7 +651,7 @@ extension MapViewController {
         // Compute the new incoming current profiles
         var newCurrentProfiles = self.computeCurrentProfiles()
         // Deal with the deletion
-        for (index,profile) in MapViewController.currentProfiles.enumerated() {
+        for (index,profile) in currentProfiles.enumerated() {
             // the id is not in the new profile
             if let existingProfile = newCurrentProfiles.first(where: { $0.id == profile.id }) {
                 // If the profile does exist in the newCurrentProfile
@@ -669,14 +670,14 @@ extension MapViewController {
         // Do the deletion
         let idsToKeepIndexSet = IndexSet(idsToKeep)
         // Make a temporary (don't know if its necessary)
-        let intermediateCurrentProfiles = idsToKeepIndexSet.map { MapViewController.currentProfiles[$0] }
+        let intermediateCurrentProfiles = idsToKeepIndexSet.map { currentProfiles[$0] }
         // Replace the currentProfile
-        MapViewController.currentProfiles = intermediateCurrentProfiles
+        currentProfiles = intermediateCurrentProfiles
         // Do the model update
         // Deal with the appending
         for profile in newCurrentProfiles {
             // je cherche le profil dans les currentActive
-            if let existing = MapViewController.currentProfiles.first(where: {$0.id == profile.id}) {
+            if let existing = currentProfiles.first(where: {$0.id == profile.id}) {
                 if existing.current_displayed_status {
                     // Je vérifie si l'id de l'existant fait partie des actifs
                     if !profile.current_active_hoop_ids.contains(where: {$0 == existing.current_hoop_id}){
@@ -699,20 +700,20 @@ extension MapViewController {
                 // Compute where to insert the profile
                 var indexToInsert = 0
                 if profile.current_displayed_status {
-                    if MapViewController.currentProfiles.count != 0 {
-                        if let foundIndex = MapViewController.currentProfiles.firstIndex(where: { !$0.current_displayed_status }) {
+                    if currentProfiles.count != 0 {
+                        if let foundIndex = currentProfiles.firstIndex(where: { !$0.current_displayed_status }) {
                             // if we found a transition from active to inactive
                             indexToInsert = foundIndex
                         } else {
                             // Otherwise it the end of the list
-                            indexToInsert = MapViewController.currentProfiles.count
+                            indexToInsert = currentProfiles.count
                         }
                     }
                 } else {
-                    indexToInsert = MapViewController.currentProfiles.count
+                    indexToInsert = currentProfiles.count
                 }
                 idsToAdd.append(indexToInsert)
-                MapViewController.currentProfiles.insert(profile, at: indexToInsert)
+                currentProfiles.insert(profile, at: indexToInsert)
                 if profile.current_displayed_status {
                     if let randHoopId = profile.current_active_hoop_ids.randomElement() {
                         profile.current_hoop_id = randHoopId
