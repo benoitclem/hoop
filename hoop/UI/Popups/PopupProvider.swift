@@ -90,7 +90,8 @@ class PopupProvider {
         attributes.positionConstraints.keyboardRelation = keyboardRelation
 
         attributes.entryBackground = .color(color: .white)
-        attributes.screenBackground = .color(color: .gray)
+        attributes.screenBackground = .color(color: UIColor.gray.withAlphaComponent(0.4))
+        
 
         attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))

@@ -515,16 +515,19 @@ extension MapViewController {
     
     func showEtHoopPopup(_ profile:profile) {
         if let me = AppDelegate.me {
-            if me.gender == 1 && me.n_remaining_conversations == 0 {
+            if me.gender == 1 && me.n_remaining_conversations == 0 && profile.id != 1 {
                 showNoRemainingConversationPopup()
                 return
             }
-            PopupProvider.showEtHoopPopup(recipient: profile.name ?? "No name", thumbUrl: profile.thumb ?? nil, sendClosure: { message in
-            print(message)
-                if me.gender == 1 {
-                    if let n  = me.n_remaining_conversations {
-                        me.n_remaining_conversations = n - 1
-                        me.save()
+            PopupProvider.showEtHoopPopup(recipient: profile.name ?? "No name", thumbUrl: profile.thumb ?? nil, sendClosure: { messageString in
+                print(messageString)
+                let msg = message(with: messageString, and: profile.id!)
+                HoopNetworkApi.sharedInstance.postMessage(msg)?.whenFulfilled{ _ in
+                    if me.gender == 1 {
+                        if let n  = me.n_remaining_conversations {
+                            me.n_remaining_conversations = n - 1
+                            me.save()
+                        }
                     }
                 }
             }, cancelClosure: nil)
@@ -692,7 +695,7 @@ extension MapViewController {
         var idsToKeep = [Int]()
         var idsToAdd = [Int]()
         // Compute the new incoming current profiles
-        var newCurrentProfiles = self.computeCurrentProfiles()
+        let newCurrentProfiles = self.computeCurrentProfiles()
         // Deal with the deletion
         for (index,profile) in currentProfiles.enumerated() {
             // the id is not in the new profile
@@ -766,6 +769,10 @@ extension MapViewController {
                         profile.current_hoop_id = randHoopId
                     }
                 }
+            }
+            // Update in profile manager if needed, this allow a form of caching
+            if let pm = profileManager.get() {
+                pm.update(withProfile: profile)
             }
         }
         // Do the real work
