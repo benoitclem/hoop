@@ -70,7 +70,7 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
-    static func showEtHoopPopup(recipient:String, thumbString:String, sendClosure: (()->())?, cancelClosure: (()->())? ) {
+    static func showEtHoopPopup(recipient:String, thumbUrl:URL?, sendClosure: ((_ message:String)->())?, cancelClosure: (()->())? ) {
         var attributes: EKAttributes
 
         attributes = .float
@@ -83,7 +83,11 @@ class PopupProvider {
         attributes.popBehavior = .animated(animation: .init(translate: .init(duration: 0.65, spring: .init(damping: 1, initialVelocity: 0))))
 
         attributes.entryInteraction = .absorbTouches
-        attributes.screenInteraction = .dismiss
+        //attributes.screenInteraction = .dismiss
+        
+        let offset = EKAttributes.PositionConstraints.KeyboardRelation.Offset(bottom: 10, screenEdgeResistance: 20)
+        let keyboardRelation = EKAttributes.PositionConstraints.KeyboardRelation.bind(offset: offset)
+        attributes.positionConstraints.keyboardRelation = keyboardRelation
 
         attributes.entryBackground = .color(color: .white)
         attributes.screenBackground = .color(color: .gray)
@@ -93,7 +97,7 @@ class PopupProvider {
         attributes.scroll = .enabled(swipeable: false, pullbackAnimation: .jolt)
         attributes.statusBar = .light
 
-        let contentView = MessagePopupView(recipient, thumbString, sendClosure, cancelClosure)
+        let contentView = MessagePopupView(recipient, thumbUrl, sendClosure, cancelClosure)
         SwiftEntryKit.display(entry: contentView, using: attributes, presentInsideKeyWindow: true)
 
     }

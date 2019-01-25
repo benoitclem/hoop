@@ -35,6 +35,7 @@ class profile: Decodable, Encodable {
     var current_displayed_status: Bool!
     var current_active_hoop_ids = [Int]()
     var current_inactive_hoop_ids = [Int]()
+    var n_remaining_conversations: Int?
     
     
     var age: Int? {
@@ -143,6 +144,7 @@ class profile: Decodable, Encodable {
         case sharing_code
         case reached_map
         case saw_tutorial
+        case n_remaining_conversations
     }
     
     required init(from decoder: Decoder) throws {
@@ -247,6 +249,9 @@ class profile: Decodable, Encodable {
         if container.contains(.saw_tutorial) {
             saw_tutorial = try? container.decode(Bool.self, forKey: .saw_tutorial)
         }
+        if container.contains(.n_remaining_conversations){
+            n_remaining_conversations = try? container.decode(Int.self, forKey: .n_remaining_conversations)
+        }
     }
     
     func encode(to encoder: Encoder) throws {
@@ -271,6 +276,7 @@ class profile: Decodable, Encodable {
         try container.encode(sharing_code, forKey: .sharing_code)
         try container.encode(reached_map, forKey: .reached_map)
         try container.encode(saw_tutorial, forKey: .saw_tutorial)
+        try container.encode(n_remaining_conversations, forKey: .n_remaining_conversations)
     }
     
     func update(with profile:profile) {

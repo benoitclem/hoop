@@ -35,6 +35,7 @@
 		EB45ED5D21F87B8800597E77 /* UInt64+random.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5C21F87B8800597E77 /* UInt64+random.swift */; };
 		EB45ED5F21F8BC3B00597E77 /* ChatHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED5E21F8BC3B00597E77 /* ChatHeaderView.swift */; };
 		EB45ED6121F8BC5A00597E77 /* ChatHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */; };
+		EB45ED6321FB12DB00597E77 /* UIColor+grayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6221FB12DB00597E77 /* UIColor+grayout.swift */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
 		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -235,6 +236,7 @@
 		EB45ED5C21F87B8800597E77 /* UInt64+random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UInt64+random.swift"; sourceTree = "<group>"; };
 		EB45ED5E21F8BC3B00597E77 /* ChatHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatHeaderView.swift; path = hoop/UI/Views/ChatHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatHeaderView.xib; path = hoop/UI/Views/ChatHeaderView.xib; sourceTree = SOURCE_ROOT; };
+		EB45ED6221FB12DB00597E77 /* UIColor+grayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+grayout.swift"; sourceTree = "<group>"; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
 		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
@@ -431,10 +433,11 @@
 				EB31DFD821E61285005D0530 /* UIView+Nib.swift */,
 				EB28B61921C3B43300CFF1EF /* CGFloat+random.swift */,
 				EB28B61B21C3B45000CFF1EF /* UIColor+random.swift */,
+				EB45ED6221FB12DB00597E77 /* UIColor+grayout.swift */,
+				EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */,
 				EB28B62121C3B88B00CFF1EF /* DateFormatter+shortcuts.swift */,
 				EB8F048021CAC2B4003757EC /* String+localization.swift */,
 				EB7F7FE921EE0C66003B375C /* String+Trim.swift */,
-				EB8F04EC21CAEF18003757EC /* UIColor+colors.swift */,
 				EB8F04EF21CBA55A003757EC /* UILabel+stylizable.swift */,
 				EB8F04F121CBA603003757EC /* UITapGestureRecognizer+tapInText.swift */,
 				EB8F052E21CBE122003757EC /* UIFont+main.swift */,
@@ -877,6 +880,7 @@
 				EB7F7FE621EE0590003B375C /* InputEmailViewController.swift in Sources */,
 				EB8F046721CAB779003757EC /* InfoTunnelViewController.swift in Sources */,
 				EB8F053421CD2A3E003757EC /* HoopNetworkApi.swift in Sources */,
+				EB45ED6321FB12DB00597E77 /* UIColor+grayout.swift in Sources */,
 				EB8F04DD21CAE678003757EC /* HoopTextViewCell.swift in Sources */,
 				EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */,
 				EB8F048121CAC2B4003757EC /* String+localization.swift in Sources */,

@@ -146,6 +146,13 @@ class MapViewController: UIViewController {
             self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
         }
     }
+    
+    @IBAction func triggerEtHoop(_ sender: Any) {
+        if let selectedProfile = currentSelectedProfile{
+            showEtHoopPopup(selectedProfile)
+        }
+    }
+    
 }
 
 extension MapViewController: UICollectionViewDelegate {
@@ -195,7 +202,7 @@ extension MapViewController: UICollectionViewDataSource {
         }
 
         if let srcUrl = displayedProfile.pictures_urls.first {
-            profilImage.af_setImage(withURL: srcUrl)
+            profilImage.kf.setImage(with: srcUrl)
         }
             
         profilName.text = finalName
@@ -312,8 +319,16 @@ extension MapViewController: CLLocationManagerDelegate {
     func setupUserInterface() {
         setupNavigationController()
         self.profileCollectionViewLayout.minimumLineSpacing = 0
+        if let me = AppDelegate.me {
+            if me.gender == 1 {
+                HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
+                    me.n_remaining_conversations = nConvs
+                    me.save()
+                }
+            }
+        }
     }
-    
+
     func setupNavigationController() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
@@ -476,6 +491,16 @@ extension MapViewController {
                                           nokClosure: nil)
     }
     
+    func showNoRemainingConversationPopup() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                          title: "Désolé",
+                                          content: "Tu n'as plus de conversation, demain est un autre jour et ca c'est cool",
+                                          okTitle: "ok",
+                                          nokTitle: nil,
+                                          okClosure: nil,
+                                          nokClosure: nil)
+    }
+    
     func showBlockUserPopup(_ user: String) -> Future<Bool> {
         let promise = Promise<Bool>()
         PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
@@ -486,6 +511,24 @@ extension MapViewController {
                                           okClosure: {  promise.fulfill(true) },
                                           nokClosure: nil )
         return promise.future
+    }
+    
+    func showEtHoopPopup(_ profile:profile) {
+        if let me = AppDelegate.me {
+            if me.gender == 1 && me.n_remaining_conversations == 0 {
+                showNoRemainingConversationPopup()
+                return
+            }
+            PopupProvider.showEtHoopPopup(recipient: profile.name ?? "No name", thumbUrl: profile.thumb ?? nil, sendClosure: { message in
+            print(message)
+                if me.gender == 1 {
+                    if let n  = me.n_remaining_conversations {
+                        me.n_remaining_conversations = n - 1
+                        me.save()
+                    }
+                }
+            }, cancelClosure: nil)
+        }
     }
 }
 
