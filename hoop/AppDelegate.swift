@@ -105,7 +105,11 @@ extension AppDelegate {
     }
     
     func handleNotificationFromInactiveApp(_ aps: [String: AnyObject]) {
-        
+        let profileId = 1 // fake it for the moment
+        if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController,
+            let mapVC = try? Router.shared.matchControllerFromStoryboard("/map",storyboardName: "Main") as! UIViewController {
+            showInNavigationViewController([mapVC,chatVC])
+        }
     }
     
     func handleNotificationFromActiveApp(_ aps: [String:Any]) {

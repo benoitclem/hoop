@@ -78,18 +78,16 @@ class MapViewController: UIViewController {
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        self.locationManager.distanceFilter = MapViewController.LOW_DISTANCE_FILTER
         self.updateContentTimer.invalidate()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
         configureCollectionViewLayoutItemSize()
     }
     
-    
     func viewDidEnterForeground(notification: Notification) {
-        
         returnFromBackground = true
         mapView.showsUserLocation = true
         
