@@ -14,7 +14,7 @@ import Futures
 import AlamofireImage
 import UserNotifications
 
-class MapViewController: UIViewController {
+class MapViewController: NotifiableUIViewController {
     
     @IBOutlet weak var hoopBackground: UIView!
     @IBOutlet weak var mapView: MKMapView!
@@ -72,22 +72,33 @@ class MapViewController: UIViewController {
         hoopNameLabel.text = "Autour du marché Saint-Germain"
     }
     
-    override func viewDidAppear(_ animated:Bool) {
-        setupNavigationController()
-        self.updateContentTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.contentTimerDidFire), userInfo: nil, repeats: true)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        self.locationManager.distanceFilter = MapViewController.LOW_DISTANCE_FILTER
-        self.updateContentTimer.invalidate()
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         configureCollectionViewLayoutItemSize()
     }
     
-    func viewDidEnterForeground(notification: Notification) {
+    override func viewDidAppear(_ animated:Bool) {
+        super.viewDidAppear(animated)
+        setupViewControllerForForeground()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        setupViewControllerForBackground()
+    }
+    
+    @objc override func viewDidEnterForeground(notification: Notification) {
+        super.viewDidEnterForeground(notification: notification)
+        setupViewControllerForForeground()
+    }
+    
+    @objc override func viewDidEnterBackground(notification: Notification) {
+        super.viewDidEnterForeground(notification: notification)
+        setupViewControllerForBackground()
+    }
+    
+    func setupViewControllerForForeground() {
+        setupNavigationController()
         returnFromBackground = true
         mapView.showsUserLocation = true
         
@@ -95,15 +106,23 @@ class MapViewController: UIViewController {
         self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
         
         // Trigger a full reload
-        locationDidUpdateForegroundNet(with: self.currentLocation.coordinate)
+        if self.currentLocation != nil {
+            locationDidUpdateForegroundNet(with: self.currentLocation.coordinate)
+        }
+        
+        self.updateContentTimer = Timer.scheduledTimer(timeInterval: 60, target: self, selector: #selector(self.contentTimerDidFire), userInfo: nil, repeats: true)
+
     }
     
-    func viewDidEnterBackground(notification: Notification) {
-        
+    func setupViewControllerForBackground() {
         self.mapView.showsUserLocation = false
-
         self.locationManager.distanceFilter = MapViewController.LOW_DISTANCE_FILTER
         self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        self.updateContentTimer.invalidate()
+    }
+    
+    override func didReceiveNotification(notification: Notification) {
+        print("Map View Did receive notif")
     }
     
     func checkup() {
@@ -119,6 +138,70 @@ class MapViewController: UIViewController {
         setupNotificationSystem()
         setupLocation()
         setupMapKit()
+    }
+    
+    func setupUserDefaults() {
+        if let b = Defaults().get(for: .blocked) {
+            blockedUsers = b
+        }
+    }
+    
+    func setupUserInterface() {
+        setupNavigationController()
+        self.profileCollectionViewLayout.minimumLineSpacing = 0
+        if let me = AppDelegate.me {
+            if me.gender == 1 {
+                    HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
+                    me.n_remaining_conversations = nConvs
+                    me.save()
+                }
+            }
+        }
+    }
+    
+    func setupNavigationController() {
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func setupNotificationSystem() {
+        let center = UNUserNotificationCenter.current()
+        // Request permission to display alerts and play sounds.
+        center.requestAuthorization(options: [.alert, .sound])
+        { (granted, error) in
+            // Enable or disable features based on authorization.
+        }
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func setupLocation() {
+        if let age = AppDelegate.me?.age {
+            if age >= 18 {
+                // Ask user permissio nto use location
+                self.locationManager.requestAlwaysAuthorization()
+                
+                // Tell locationManager that we receive the location updates
+                self.locationManager.delegate = self
+                
+                // Mandatory to background modes
+                self.locationManager.allowsBackgroundLocationUpdates = true
+                self.locationManager.pausesLocationUpdatesAutomatically = true
+                self.locationManager.activityType = .fitness
+                
+                //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+                self.locationManager.desiredAccuracy = MapViewController.HIGH_REQUESTED_ACCURACY
+                //self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+                
+                // @ start - Every 40 meters we receive a location update,
+                // later if the speed increase put the distance filter to other value
+                self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
+                
+                self.locationManager.startUpdatingLocation()
+                return
+            } else {
+                showWrongAgePopup()
+            }
+        }
+        
     }
     
     func goToSettings(){
@@ -307,70 +390,6 @@ extension MapViewController: UIScrollViewDelegate {
 }
 
 extension MapViewController: CLLocationManagerDelegate {
-    
-    func setupUserDefaults() {
-        if let b = Defaults().get(for: .blocked) {
-            blockedUsers = b
-        }
-    }
-
-    func setupUserInterface() {
-        setupNavigationController()
-        self.profileCollectionViewLayout.minimumLineSpacing = 0
-        if let me = AppDelegate.me {
-            if me.gender == 1 {
-                HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
-                    me.n_remaining_conversations = nConvs
-                    me.save()
-                }
-            }
-        }
-    }
-
-    func setupNavigationController() {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    func setupNotificationSystem() {
-        let center = UNUserNotificationCenter.current()
-        // Request permission to display alerts and play sounds.
-        center.requestAuthorization(options: [.alert, .sound])
-        { (granted, error) in
-            // Enable or disable features based on authorization.
-        }
-        UIApplication.shared.registerForRemoteNotifications()
-    }
-    
-    func setupLocation() {
-        if let age = AppDelegate.me?.age {
-            if age >= 18 {
-                // Ask user permissio nto use location
-                self.locationManager.requestAlwaysAuthorization()
-                
-                // Tell locationManager that we receive the location updates
-                self.locationManager.delegate = self
-                
-                // Mandatory to background modes
-                self.locationManager.allowsBackgroundLocationUpdates = true
-                self.locationManager.pausesLocationUpdatesAutomatically = true
-                self.locationManager.activityType = .fitness
-                
-                //self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-                self.locationManager.desiredAccuracy = MapViewController.HIGH_REQUESTED_ACCURACY
-                //self.locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-                
-                // @ start - Every 40 meters we receive a location update,
-                // later if the speed increase put the distance filter to other value
-                self.locationManager.distanceFilter = MapViewController.HIGH_DISTANCE_FILTER
-                
-                self.locationManager.startUpdatingLocation()
-                return
-            } else {
-                showWrongAgePopup()
-            }
-        }
-        
-    }
 
     func checkUpdateType(_ currentLocation: CLLocation) -> (network: Bool,content: Bool) {
         var doHoopNetWorkUpdate = false

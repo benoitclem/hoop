@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate {
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
         Defaults().set(deviceTokenString, for: .deviceToken)
         if(HoopNetworkApi.appToken != nil) {
             let _ = HoopNetworkApi.sharedInstance.postDevice(withDeviceId: deviceTokenString)
@@ -101,6 +102,7 @@ extension AppDelegate {
         // Remove notification badge
         //print(userInfo)
         let aps = userInfo[AnyHashable("aps")] as! [String:Any]
+        print(aps)
         handleNotificationFromActiveApp(aps)
     }
     
@@ -120,14 +122,14 @@ extension AppDelegate {
         // UserDefaults.standard.set(badge, forKey: "newMessages")
         UIApplication.shared.applicationIconBadgeNumber = badge
         
-//        // Notify the other listening page that we received a notif
-//        if (UIApplication.shared.applicationState == .active) {
-//            NotificationCenter.default.post(name: NSNotification.Name("didReceiveNotification"), object: userInfo)
-//        } else if( application.applicationState == .inactive) {
-//            var infoCpy = userInfo
+        // Notify the other listening page that we received a notif
+        if (UIApplication.shared.applicationState == .active) {
+            NotifiableUIViewController.postNotification(with: aps)
+        } else if(UIApplication.shared.applicationState == .inactive) {
+//            var infoCpy = aps
 //            infoCpy[AnyHashable("back")] = 1
 //            //self.notifProxy.notifData = infoCpy
-//        }
+        }
     }
         
 }
