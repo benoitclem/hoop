@@ -11,8 +11,8 @@ import MapKit
 import CoreLocation
 import Hero
 import Futures
-import AlamofireImage
 import UserNotifications
+import Kingfisher
 
 class MapViewController: NotifiableUIViewController {
     
@@ -123,6 +123,22 @@ class MapViewController: NotifiableUIViewController {
     
     override func didReceiveNotification(notification: Notification) {
         print("Map View Did receive notif")
+        let nData = notification.object as! notificationData
+        if let title = nData.title, let body = nData.body, let url = nData.atturl, let profileId = nData.clientId {
+            let downloader = ImageDownloader.default
+            downloader.downloadImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    PopupProvider.showMessageToast(with: title, body, "now", value.image, tapAction: {
+                        self.jumpToProfile(withId: profileId)
+                    })
+                case .failure(let _):
+                    PopupProvider.showMessageToast(with: title, body, "now", nil, tapAction: {
+                        self.jumpToProfile(withId: profileId)
+                    })
+                }
+            }
+        }
     }
     
     func checkup() {
@@ -213,6 +229,17 @@ class MapViewController: NotifiableUIViewController {
             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                 print("Settings opened: \(success)") // Prints true
             })
+        }
+    }
+    
+    func jumpToProfile(withId profileId: Int){
+        if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController,
+            let convVC = try? Router.shared.matchControllerFromStoryboard("/conversations",storyboardName: "Main") as! UIViewController {
+            if var vc = self.navigationController?.viewControllers {
+                vc.append(convVC)
+                vc.append(chatVC)
+                self.navigationController?.setViewControllers(vc, animated: true)
+            }
         }
     }
     

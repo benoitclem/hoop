@@ -37,6 +37,7 @@
 		EB45ED6121F8BC5A00597E77 /* ChatHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */; };
 		EB45ED6321FB12DB00597E77 /* UIColor+grayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6221FB12DB00597E77 /* UIColor+grayout.swift */; };
 		EB45ED6521FF20C400597E77 /* NotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6421FF20C400597E77 /* NotificationDispatcher.swift */; };
+		EB45ED6722005F8D00597E77 /* notificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6622005F8D00597E77 /* notificationData.swift */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
 		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
 		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -239,6 +240,7 @@
 		EB45ED6021F8BC5A00597E77 /* ChatHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatHeaderView.xib; path = hoop/UI/Views/ChatHeaderView.xib; sourceTree = SOURCE_ROOT; };
 		EB45ED6221FB12DB00597E77 /* UIColor+grayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+grayout.swift"; sourceTree = "<group>"; };
 		EB45ED6421FF20C400597E77 /* NotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationDispatcher.swift; path = Utils/NotificationDispatcher.swift; sourceTree = "<group>"; };
+		EB45ED6622005F8D00597E77 /* notificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = notificationData.swift; path = Models/notificationData.swift; sourceTree = "<group>"; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
 		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
 		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */,
 				EB28B61E21C3B4B600CFF1EF /* hoop.swift */,
 				EB31DFC921E4FDAC005D0530 /* hoopIn.swift */,
+				EB45ED6622005F8D00597E77 /* notificationData.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -920,6 +923,7 @@
 				EB45ED5D21F87B8800597E77 /* UInt64+random.swift in Sources */,
 				EB31DFD421E60D29005D0530 /* TwoChoicesPopupView.swift in Sources */,
 				EB8F046F21CAB8DE003757EC /* ConversationViewController.swift in Sources */,
+				EB45ED6722005F8D00597E77 /* notificationData.swift in Sources */,
 				EB31DFDA21E61285005D0530 /* UIView+Nib.swift in Sources */,
 				EBAEF3AC21DCE88A0024CDF9 /* Date+age.swift in Sources */,
 				EB8F050021CBB52E003757EC /* FacebookHandler.swift in Sources */,

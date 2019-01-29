@@ -98,12 +98,7 @@ extension AppDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-
-        // Remove notification badge
-        //print(userInfo)
-        let aps = userInfo[AnyHashable("aps")] as! [String:Any]
-        print(aps)
-        handleNotificationFromActiveApp(aps)
+        handleNotificationFromActiveApp(userInfo)
     }
     
     func handleNotificationFromInactiveApp(_ aps: [String: AnyObject]) {
@@ -114,17 +109,19 @@ extension AppDelegate {
         }
     }
     
-    func handleNotificationFromActiveApp(_ aps: [String:Any]) {
-        let badge = aps["badge"] as! Int
-        
+    func handleNotificationFromActiveApp(_ userInfo: [AnyHashable : Any]) {
+    
+        let nData = notificationData(with: userInfo)
         // Increase the new message count
         //let nMsg = UserDefaults.standard.integer(forKey: "newMessages")
         // UserDefaults.standard.set(badge, forKey: "newMessages")
-        UIApplication.shared.applicationIconBadgeNumber = badge
+        if let badge = nData.badge {
+            UIApplication.shared.applicationIconBadgeNumber = badge
+        }
         
         // Notify the other listening page that we received a notif
         if (UIApplication.shared.applicationState == .active) {
-            NotifiableUIViewController.postNotification(with: aps)
+            NotifiableUIViewController.postNotification(with: nData)
         } else if(UIApplication.shared.applicationState == .inactive) {
 //            var infoCpy = aps
 //            infoCpy[AnyHashable("back")] = 1

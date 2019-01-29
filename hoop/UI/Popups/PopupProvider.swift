@@ -166,11 +166,12 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
-    static func showMessageToast() {
+    static func showMessageToast(with title: String,_ description: String,_ whenString: String,_  thumb: UIImage?, tapAction: (()->())? ) {
         var attributes: EKAttributes
         
         // Fill the attribute structure
         attributes = .topToast
+        attributes.windowLevel = .normal
         attributes.hapticFeedbackType = .success
         attributes.entryBackground = .color(color: .blue)
         attributes.entranceAnimation = .translation
@@ -178,12 +179,15 @@ class PopupProvider {
         attributes.scroll = .edgeCrossingDisabled(swipeable: true)
         attributes.displayDuration = 4
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.5, radius: 10))
+        if let action = tapAction {
+            attributes.entryInteraction.customTapActions.append(action)
+        }
         
         // Fill up the toast
-        let title = EKProperty.LabelContent(text: "Sophie", style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
-        let description = EKProperty.LabelContent(text: "Salut on va manger un 🍲 ce midi", style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
-        let time = EKProperty.LabelContent(text: "09:00", style: .init(font:  UIFont.MainFontLight(ofSize: 12.0), color: .white))
-        let image = EKProperty.ImageContent.thumb(with: "sophie", edgeSize: 35)
+        let title = EKProperty.LabelContent(text: title, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let description = EKProperty.LabelContent(text: description, style: .init(font: UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let time = EKProperty.LabelContent(text: whenString, style: .init(font:  UIFont.MainFontLight(ofSize: 12.0), color: .white))
+        let image = EKProperty.ImageContent.thumb(with: thumb ?? UIImage(named:"thumb_placeholder")!, edgeSize: 35)
         let simpleMessage = EKSimpleMessage(image: image, title: title, description: description)
         let notificationMessage = EKNotificationMessage(simpleMessage: simpleMessage, auxiliary: time)
         

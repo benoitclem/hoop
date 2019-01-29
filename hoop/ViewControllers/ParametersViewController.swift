@@ -9,7 +9,7 @@
 import UIKit
 import Eureka
 
-class ParametersViewController: FormViewController {
+class ParametersViewController: NotifiableFormViewController {
     
     static let TAG_IMAGES = "me_images"
     static let TAG_DESCRIPTION = "me_description"
@@ -252,6 +252,12 @@ class ParametersViewController: FormViewController {
 
                 }
         }
+    }
+    
+    override func didReceiveNotification(notification: Notification) {
+        print("Map View Did receive notif")
+        //let nData = notification.object as! notificationData
+        
     }
     
     @objc func endViewController( sender: UIBarButtonItem) {
