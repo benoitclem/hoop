@@ -97,6 +97,10 @@ class ProfileViewController: NotifiableUIViewController {
         }
     }
     
+    @IBAction func etHoopAction(_ sender: Any) {
+        PopupProvider.showEtHoopPopup(profile: profile)
+    }
+    
     override func didReceiveNotification(notification: Notification) {
         print("Web View Did receive notif")
         let nData = notification.object as! notificationData

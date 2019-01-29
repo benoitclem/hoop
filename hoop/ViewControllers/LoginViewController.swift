@@ -92,7 +92,7 @@ class LoginViewController: VideoSplashViewController {
         future.whenFulfilled(on: .main) { done in
             // TODO: Go to map
             if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
-                self.present(vc as! UIViewController, animated: true)
+                self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
             }
         }
         

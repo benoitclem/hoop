@@ -835,6 +835,9 @@
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="string" keyPath="heroID" value="bonjour"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="etHoopAction:" destination="1Hv-qa-SDP" eventType="touchUpInside" id="Tix-Yg-iau"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rKD-t6-AD4">
                                 <rect key="frame" x="338" y="772" width="50" height="50"/>

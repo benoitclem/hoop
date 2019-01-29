@@ -9,6 +9,7 @@
 import UIKit
 import SwiftEntryKit
 import Kingfisher
+import Futures
 
 class PopupProvider {
     
@@ -92,7 +93,6 @@ class PopupProvider {
 
         attributes.entryBackground = .color(color: .white)
         attributes.screenBackground = .color(color: UIColor.gray.withAlphaComponent(0.4))
-        
 
         attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))
@@ -128,7 +128,7 @@ class PopupProvider {
         attributes.screenInteraction = .dismiss
         
         attributes.entryBackground = .color(color: .white)
-        attributes.screenBackground = .color(color: .gray)
+        attributes.screenBackground = .color(color: UIColor.gray.withAlphaComponent(0.4))
         
         attributes.border = .value(color: UIColor(white: 0.6, alpha: 1), width: 1)
         attributes.shadow = .active(with: .init(color: .black, opacity: 0.3, radius: 3))
@@ -154,6 +154,7 @@ class PopupProvider {
         attributes.displayDuration = .infinity
         attributes.popBehavior = .animated(animation: .translation)
         attributes.entryBackground = .color(color: .red)
+        attributes.screenBackground = .color(color: UIColor.gray.withAlphaComponent(0.4))
         attributes.statusBar = .light
         
         let image = EKProperty.ImageContent(image: image)
@@ -215,3 +216,38 @@ class PopupProvider {
 }
 
 
+
+// Where all the popup messages are called
+extension PopupProvider {
+
+    static func showNoRemainingConversationPopup() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
+                                          title: "Désolé",
+                                          content: "Tu n'as plus de conversation, demain est un autre jour et ca c'est cool",
+                                          okTitle: "ok",
+                                          nokTitle: nil,
+                                          okClosure: nil,
+                                          nokClosure: nil)
+    }
+    
+    static func showEtHoopPopup(profile:profile) {
+        if let me = AppDelegate.me {
+            if me.gender == 1 && me.n_remaining_conversations == 0 && profile.id != 1 {
+                PopupProvider.showNoRemainingConversationPopup()
+                return
+            }
+            PopupProvider.showEtHoopPopup(recipient: profile.name ?? "No name", thumbUrl: profile.thumb ?? nil, sendClosure: { messageString in
+                print(messageString)
+                let msg = message(with: messageString, and: profile.id!)
+                HoopNetworkApi.sharedInstance.postMessage(msg)?.whenFulfilled{ _ in
+                    if me.gender == 1 {
+                        if let n  = me.n_remaining_conversations {
+                            me.n_remaining_conversations = n - 1
+                            me.save()
+                        }
+                    }
+                }
+            }, cancelClosure: nil)
+        }
+    }
+}

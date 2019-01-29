@@ -245,7 +245,7 @@ class MapViewController: NotifiableUIViewController {
     
     @IBAction func triggerEtHoop(_ sender: Any) {
         if let selectedProfile = currentSelectedProfile{
-            showEtHoopPopup(selectedProfile)
+            PopupProvider.showEtHoopPopup(profile: selectedProfile)
         }
     }
     
@@ -524,47 +524,16 @@ extension MapViewController {
                                           nokClosure: nil)
     }
     
-    func showNoRemainingConversationPopup() {
-        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
-                                          title: "Désolé",
-                                          content: "Tu n'as plus de conversation, demain est un autre jour et ca c'est cool",
-                                          okTitle: "ok",
-                                          nokTitle: nil,
-                                          okClosure: nil,
-                                          nokClosure: nil)
-    }
-    
     func showBlockUserPopup(_ user: String) -> Future<Bool> {
         let promise = Promise<Bool>()
         PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen"),
                                           title: "Signaler et bloquer",
                                           content: "Souhaites tu signaler et bloquer \(user), cet utilisateur ne te sera plus présenté.",
-                                          okTitle: "continuer",
-                                          nokTitle: "annuler",
-                                          okClosure: {  promise.fulfill(true) },
-                                          nokClosure: nil )
+            okTitle: "continuer",
+            nokTitle: "annuler",
+            okClosure: {  promise.fulfill(true) },
+            nokClosure: nil )
         return promise.future
-    }
-    
-    func showEtHoopPopup(_ profile:profile) {
-        if let me = AppDelegate.me {
-            if me.gender == 1 && me.n_remaining_conversations == 0 && profile.id != 1 {
-                showNoRemainingConversationPopup()
-                return
-            }
-            PopupProvider.showEtHoopPopup(recipient: profile.name ?? "No name", thumbUrl: profile.thumb ?? nil, sendClosure: { messageString in
-                print(messageString)
-                let msg = message(with: messageString, and: profile.id!)
-                HoopNetworkApi.sharedInstance.postMessage(msg)?.whenFulfilled{ _ in
-                    if me.gender == 1 {
-                        if let n  = me.n_remaining_conversations {
-                            me.n_remaining_conversations = n - 1
-                            me.save()
-                        }
-                    }
-                }
-            }, cancelClosure: nil)
-        }
     }
 }
 
