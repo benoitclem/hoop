@@ -24,7 +24,7 @@ class RightConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var RetryWidthButtonConstraint: NSLayoutConstraint!
 }
 
-class ChatViewController: UIViewController {
+class ChatViewController: NotifiableUIViewController {
     
     @IBOutlet weak var messageTableView: UITableView!
     
@@ -89,13 +89,24 @@ class ChatViewController: UIViewController {
         messageTableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi));
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardDidChangeFrame(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-        
+    }
+    
+    @objc override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        messageTableView.scrollIndicatorInsets.right = messageTableView.frame.width - 8.5
         update()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        messageTableView.scrollIndicatorInsets.right = messageTableView.frame.width - 8.5
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        if let accessoryView = self.inputAccessoryView as? InputTextFieldBar {
+            accessoryView.TextView.resignFirstResponder()
+        }
+    }
+    
+    @objc override func viewDidEnterForeground(notification: Notification) {
+        super.viewDidEnterForeground(notification: notification)
+        update()
     }
     
     @objc func endViewController( sender: UIBarButtonItem) {
@@ -113,6 +124,13 @@ class ChatViewController: UIViewController {
                 self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
             }
         }
+    }
+    
+    // Notification stuffs
+    
+    override func didReceiveNotification(notification: Notification) {
+        print("Chat View Did receive notif")
+        update()
     }
     
     
