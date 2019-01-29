@@ -203,6 +203,8 @@ class conversationManager: Codable {
                     }
                 }
             }
+            // Apply sorting
+            mutableConversations.sort(by: { conv1, conv2 in return conv1.dateSent! > conv2.dateSent!})
             // Apply mods all in once
             conversations = mutableConversations
         }

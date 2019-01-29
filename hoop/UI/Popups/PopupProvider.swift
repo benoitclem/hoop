@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftEntryKit
+import Kingfisher
 
 class PopupProvider {
     
@@ -195,6 +196,19 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes)
     }
     
+    static func showMessageToast(with nData: notificationData, tapAction action: ((Int)->())?) {
+        if let title = nData.title, let body = nData.body, let url = nData.atturl, let profileId = nData.clientId {
+            let downloader = ImageDownloader.default
+            downloader.downloadImage(with: url) { result in
+                switch result {
+                case .success(let value):
+                    PopupProvider.showMessageToast(with: title, body, "now", value.image, tapAction: { action?(profileId) })
+                case .failure( _):
+                    PopupProvider.showMessageToast(with: title, body, "now", nil, tapAction: {action?(profileId)})
+                }
+            }
+        }
+    }
 
     
     

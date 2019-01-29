@@ -110,7 +110,14 @@ class messageManager: Codable {
         var nNewMsg = 0
         
         for msg in msgs {
-            if let index = messages.index(where: { $0.locId == msg.locId }) {
+            if let index = messages.index(where: { m in
+                if m.id == 0 {
+                    // mean new message
+                    return m.locId == msg.locId
+                } else {
+                    return m.id == msg.id
+                }
+            }) {
                 // Update specific row
                 let existingMessage = messages[index]
                 //print("updating",existingMessage)

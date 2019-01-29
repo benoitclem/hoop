@@ -9,7 +9,7 @@
 import UIKit
 import Hero
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: NotifiableUIViewController {
 
     @IBOutlet weak var profileScrollView: UIScrollView!
     @IBOutlet weak var hoopBackground: UIView!
@@ -57,6 +57,7 @@ class ProfileViewController: UIViewController {
     func setupGeneralUI() {
         etHoopButton.setTitle("Bonjour", for: .normal)
         dismissButton.setTitle("X", for: .normal)
+        hoopBackground.hero.modifiers = [.scale(1.0)]
         dismissButton.hero.modifiers = [.fade, .translate(x:+100, y:0)]
         profileScrollView.contentInset.bottom = 100.0
     }
@@ -89,18 +90,31 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func dismissView(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        if let nav = self.navigationController {
+            nav.popViewController(animated: true)
+        } else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func didReceiveNotification(notification: Notification) {
+        print("Web View Did receive notif")
+        let nData = notification.object as! notificationData
+        PopupProvider.showMessageToast(with: nData, tapAction: { profileId in
+            self.jumpToProfile(withId: profileId)
+        })
     }
-    */
+    
+    func jumpToProfile(withId profileId: Int){
+        if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController,
+            let convVC = try? Router.shared.matchControllerFromStoryboard("/conversations",storyboardName: "Main") as! UIViewController {
+            if var vcs = self.navigationController?.viewControllers {
+                vcs.append(convVC)
+                vcs.append(chatVC)
+                self.navigationController?.setViewControllers(vcs, animated: true)
+            }
+        }
+    }
 
 }
 

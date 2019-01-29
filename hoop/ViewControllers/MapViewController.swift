@@ -124,21 +124,9 @@ class MapViewController: NotifiableUIViewController {
     override func didReceiveNotification(notification: Notification) {
         print("Map View Did receive notif")
         let nData = notification.object as! notificationData
-        if let title = nData.title, let body = nData.body, let url = nData.atturl, let profileId = nData.clientId {
-            let downloader = ImageDownloader.default
-            downloader.downloadImage(with: url) { result in
-                switch result {
-                case .success(let value):
-                    PopupProvider.showMessageToast(with: title, body, "now", value.image, tapAction: {
-                        self.jumpToProfile(withId: profileId)
-                    })
-                case .failure(let _):
-                    PopupProvider.showMessageToast(with: title, body, "now", nil, tapAction: {
-                        self.jumpToProfile(withId: profileId)
-                    })
-                }
-            }
-        }
+        PopupProvider.showMessageToast(with: nData, tapAction: { profileId in
+            self.jumpToProfile(withId: profileId)
+        })
     }
     
     func checkup() {
@@ -235,10 +223,10 @@ class MapViewController: NotifiableUIViewController {
     func jumpToProfile(withId profileId: Int){
         if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController,
             let convVC = try? Router.shared.matchControllerFromStoryboard("/conversations",storyboardName: "Main") as! UIViewController {
-            if var vc = self.navigationController?.viewControllers {
-                vc.append(convVC)
-                vc.append(chatVC)
-                self.navigationController?.setViewControllers(vc, animated: true)
+            if var vcs = self.navigationController?.viewControllers {
+                vcs.append(convVC)
+                vcs.append(chatVC)
+                self.navigationController?.setViewControllers(vcs, animated: true)
             }
         }
     }
@@ -269,7 +257,8 @@ extension MapViewController: UICollectionViewDelegate {
         if let currentSelectedId = currentSelectedProfile?.id, let active = currentSelectedProfile?.activeInHoop{
             if active != 0 {
                 if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
-                    self.present(vc as! UIViewController, animated: true)
+                    self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
+                    //self.present(vc as! UIViewController, animated: true)
                 }
             }
         }

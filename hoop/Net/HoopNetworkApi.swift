@@ -497,8 +497,12 @@ extension HoopNetworkApi {
     }
     
     // Need to take account of the local id
-    func getMessages(with dstId:String) -> Future<[message]> {
-        let future: Future<hoopApiResponse<[message]>> = self.request("getAllChat", and: ["dest":dstId])
+    func getMessages(with dstId:String, lastLocalId localId: String?) -> Future<[message]> {
+        var data = ["dest":dstId]
+        if let lId = localId {
+            data["local_id"] = lId
+        }
+        let future: Future<hoopApiResponse<[message]>> = self.request("getAllChat", and: data)
         return future.then { response -> Future<[message]> in
             let promise = Promise<[message]>()
             if let data = response.data {
@@ -510,6 +514,48 @@ extension HoopNetworkApi {
             return promise.future
         }
     }
+    
+    func postRead(withId dstId:String) -> Future<Bool> {
+        let future: Future<hoopApiResponse<String>> = self.post("postReadChat", and: ["exp":dstId], andProgress: nil)
+        return future.then { response -> Future<Bool> in
+            let promise = Promise<Bool>()
+            if let resultString = response.data {
+                switch resultString {
+                case "message_read":
+                    promise.fulfill(true)
+                default:
+                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_BLOCKING_UNKNOWN_ERROR, userInfo: ["desc":"unkwon sent error"])
+                    promise.reject(error)
+                }
+                
+            }
+            return promise.future
+        }
+    }
+    
+//    func setReadChat(with dest: Int, asTeamHoop: Bool? = nil,and completion: @escaping (_ result: JSON?, NSError?) ->Void) {
+//        if(self.appToken != nil) {
+//            var data = ["token":self.appToken!,"exp":String(dest)]
+//            if(asTeamHoop != nil) {
+//                data["th_data"] = asTeamHoop! ? "1":"0"
+//            }
+//            //print(data)
+//            self.post(with: "postReadChat", and: data, withCompletion: { jsonData, error in
+//                if(error == nil) {
+//                    //print(jsonData)
+//                    if(jsonData?["code"].string != "ko") {
+//                        completion(jsonData?["data"],nil)
+//                        return
+//                    } else {
+//                        let errorMsg = jsonData?["message"].string
+//                        completion(nil,NSError(domain: "Api Error", code: 1, userInfo: ["info":errorMsg ?? "unknown" ]))
+//                        return
+//                    }
+//                }
+//                completion(nil,error)
+//            }, andProgress: nil)
+//        }
+//    }
     
     func postMessage(_ message:message) -> Future<Bool>? {
         if let content = message.content, let did = message.dstId, let lid = message.locId {

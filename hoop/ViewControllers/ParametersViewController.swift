@@ -257,7 +257,15 @@ class ParametersViewController: NotifiableFormViewController {
     override func didReceiveNotification(notification: Notification) {
         print("Map View Did receive notif")
         //let nData = notification.object as! notificationData
-        
+        let nData = notification.object as! notificationData
+        PopupProvider.showMessageToast(with: nData, tapAction: { profileId in
+            if self.profileGotModified || self.picturesGotModified {
+                PopupProvider.showTwoChoicesPopup(icon: UIImage(named:"sadscreen")!, title: "Attention", content: "Si tu continue vers la notification, tes modifications serons perdues", okTitle: "continuer", nokTitle: "annuler", okClosure: {
+                    self.jumpToProfile(withId: profileId)
+                }, nokClosure: nil)
+            } else {
+                self.jumpToProfile(withId: profileId)
+            }})
     }
     
     @objc func endViewController( sender: UIBarButtonItem) {
@@ -354,6 +362,17 @@ class ParametersViewController: NotifiableFormViewController {
         }
     }
 
+    func jumpToProfile(withId profileId: Int){
+        if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController,
+            let convVC = try? Router.shared.matchControllerFromStoryboard("/conversations",storyboardName: "Main") as! UIViewController {
+            if var vcs = self.navigationController?.viewControllers {
+                let _ = vcs.popLast()
+                vcs.append(convVC)
+                vcs.append(chatVC)
+                self.navigationController?.setViewControllers(vcs, animated: true)
+            }
+        }
+    }
 
 }
 

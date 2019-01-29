@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Futures
 
 class LeftConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var BubbleView: UIView!
@@ -176,7 +177,15 @@ extension ChatViewController {
     
     // Need to be more specific with local id
     func update() {
-        HoopNetworkApi.sharedInstance.getMessages(with: profileId).whenFulfilled(on: .main) { messages in
+        
+        var lastLocalIdStr: String? = nil
+        
+        if let lastLocalId = self.mm.messages.last?.locId {
+            lastLocalIdStr = String(lastLocalId)
+        }
+        
+        let future = HoopNetworkApi.sharedInstance.getMessages(with: profileId, lastLocalId: lastLocalIdStr)
+        future.then(on: .main) { messages -> Future<Bool> in
             let mods = self.mm.update(with: messages)
             self.mm.save()
             if !mods.toInsert.isEmpty || !mods.toUpdate.isEmpty {
@@ -185,7 +194,16 @@ extension ChatViewController {
                 self.messageTableView.insertRows(at: mods.toInsert, with:.top)
                 self.messageTableView.endUpdates()
             }
+            return HoopNetworkApi.sharedInstance.postRead(withId: self.profileId)
+        }.whenFulfilled { _ in
+            print("done post read chat")
         }
+        future.whenRejected(callback: { error in
+            print("got error or nothing to read")
+        })
+//        HoopNetworkApi.sharedInstance.getMessages(with: profileId, lastLocalId: lastLocalIdStr).then(on:.main) { messages -> Future<Bool> in
+//
+//
     }
 
     func sendMessage() {

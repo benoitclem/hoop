@@ -19,7 +19,7 @@ class ConversationViewCell: UITableViewCell{
 }
 
 
-class ConversationViewController: UIViewController {
+class ConversationViewController: NotifiableUIViewController {
 
     @IBOutlet weak var conversationTableView: UITableView!
     
@@ -41,14 +41,17 @@ class ConversationViewController: UIViewController {
         self.setupHoopNavigationBar("Conversations",
                                     leftTitle: "Retour", leftSelector: #selector(ConversationViewController.endViewController(sender:)),
                                     rightTitle: nil, rightSelector: nil)
-        // request remaining converstaions
-        update()
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(self.viewDidEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
-        // Do any additional setup after loading the view.
+
     }
     
-    @objc func viewDidEnterForeground(notification: Notification) {
+    @objc override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        // request remaining converstaions
+        update()
+    }
+    
+    @objc override func viewDidEnterForeground(notification: Notification) {
+        super.viewDidEnterForeground(notification: notification)
         update()
     }
     
@@ -77,6 +80,12 @@ class ConversationViewController: UIViewController {
             }
         }
             
+    }
+    
+    override func didReceiveNotification(notification: Notification) {
+        print("Conv View Did receive notif")
+        let nData = notification.object as! notificationData
+        update()
     }
 
 }
@@ -140,7 +149,6 @@ extension ConversationViewController: UITableViewDataSource {
         cell.profileLastMessageLabel.text = conv.lastMessage ?? "-"
         cell.profileLastMessageTimeLabel.text = conv.when
     }
-    
 }
 
 extension ConversationViewController: UITableViewDelegate {

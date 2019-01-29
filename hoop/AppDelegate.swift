@@ -208,6 +208,8 @@ extension AppDelegate {
     func showInNavigationViewController(_ vc: [UIViewController]) {
         let navigationController = UINavigationController()
         navigationController.setViewControllers(vc, animated: false)
+        navigationController.hero.isEnabled = true
+        navigationController.hero.navigationAnimationType = .none
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
