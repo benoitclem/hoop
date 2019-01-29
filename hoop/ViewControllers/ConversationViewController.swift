@@ -85,7 +85,16 @@ class ConversationViewController: NotifiableUIViewController {
     override func didReceiveNotification(notification: Notification) {
         print("Conv View Did receive notif")
         let nData = notification.object as! notificationData
+        PopupProvider.showMessageToast(with: nData, tapAction: { profileId in
+            self.jumpToProfile(withId: profileId)
+        })
         update()
+    }
+    
+    func jumpToProfile(withId profileId: Int){
+        if let chatVC = try? Router.shared.matchControllerFromStoryboard("/chat/\(profileId)",storyboardName: "Main") as! UIViewController{
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
     }
 
 }
