@@ -129,6 +129,7 @@ class LoginViewController: VideoSplashViewController {
                 if let vc = try? Router.shared.matchControllerFromStoryboard("/inputName", storyboardName: "Main") {
                     self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
                 }
+            }
         }
         
         future.whenRejected(on: .main) { error in
@@ -182,7 +183,7 @@ extension LoginViewController: AKFViewControllerDelegate {
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
 
-        let future = HoopNetworkApi.sharedInstance.signUpFoAK(with: accessToken.accountID)
+        let future = HoopNetworkApi.sharedInstance.signUpForAK(with: accessToken.accountID)
         
         future.whenFulfilled(on: .main) { done in
             // TODO: Go to map / parameters / tunnel
