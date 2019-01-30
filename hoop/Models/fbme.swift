@@ -26,6 +26,16 @@ class fbme: Decodable {
     var birthday: Date?
     var albums: Albums?
     
+    var fb_token: String? {
+        get {
+            if let token = AccessToken.current {
+                return token.authenticationToken
+            } else {
+                return nil
+            }
+        }
+    }
+    
     var age: Int? {
         get {
             if let bday = birthday {

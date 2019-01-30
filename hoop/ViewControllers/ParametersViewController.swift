@@ -8,6 +8,7 @@
 
 import UIKit
 import Eureka
+import AccountKit
 
 class ParametersViewController: NotifiableFormViewController {
     
@@ -211,8 +212,8 @@ class ParametersViewController: NotifiableFormViewController {
                     style.txtAlignement = NSTextAlignment.center
                     row.labelStyle = style
                 }.onCellSelection { cell, row in
-                        //row.title = "action 1"
-                        print(row.labelText)
+                    // Call the logout for the specific login method
+                    self.doLogout()
                 }
                 <<< HoopLabelRow() { row in
                     
@@ -278,6 +279,27 @@ class ParametersViewController: NotifiableFormViewController {
             } else {
                 self.navigationController?.popViewController(animated: true)
             }
+        }
+    }
+    
+    func doLogout() {
+        if let me = AppDelegate.me {
+            // kill the me token stuff and record
+
+            // check the token validity to know from where we came
+            if let _ = me.fb_token {
+                FacebookHandler.logout()
+            } else {
+                let  _accountKit = AKFAccountKit(responseType: .accessToken)
+                _accountKit.logOut()
+            }
+            // Clean the me
+            me.token = nil
+            me.fb_token = nil
+            me.ak_token = nil
+            me.save()
+            // Replace base view (this is quite violent but reset the app as it has been just launched)
+            (UIApplication.shared.delegate as! AppDelegate).showLogin()
         }
     }
     

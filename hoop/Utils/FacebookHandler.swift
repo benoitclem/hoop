@@ -53,6 +53,12 @@ class FacebookHandler: NSObject {
         return promise.future
     }
     
+    static func logout() {
+        // Do the facebook logout
+        let loginManager = LoginManager.init()
+        loginManager.logOut()
+    }
+    
     static func isFbConnected() -> Bool {
         // Update token here
         if let _ = AccessToken.current {

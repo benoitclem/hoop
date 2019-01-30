@@ -77,23 +77,58 @@ class LoginViewController: VideoSplashViewController {
         }
     }
     
+    enum ScreenToShow: String {
+        case parameters = "parameters"
+        case tunnel = "tunnel"
+        case map = "map"
+    }
+    
+    func returnFutureWith(_ screen:ScreenToShow) -> Future<ScreenToShow> {
+        let p = Promise<ScreenToShow>()
+        p.fulfill(screen)
+        return p.future
+    }
+    
     @IBAction func doFacebookLogin(_ sender: Any) {
         
         let future = FacebookHandler.connect(with: fbPermissions, from: self).then { info -> Future<fbme> in
             return FacebookHandler.getMyProfile()
         }.then { fbProfile -> Future<profile> in
-            return HoopNetworkApi.sharedInstance.signUpFb(with: fbProfile)
-        }.then { me -> Future<[URL]> in
-            return FacebookHandler.getMyProfilePictures(fromAlbum: me.fb_profile_alb_id)
-        }.then { urls -> Future<Bool> in
-            return  HoopNetworkApi.sharedInstance.getProfilePictures(fromUrls: urls)
+            return HoopNetworkApi.sharedInstance.signUpForFb(with: fbProfile)
+        }.then(on: .main){ me -> Future<ScreenToShow> in
+            
+            if me.pictures_images.count == 0 {
+                // Go get the images
+                return FacebookHandler.getMyProfilePictures(fromAlbum: me.fb_profile_alb_id).then { urls -> Future<Bool> in
+                    return  HoopNetworkApi.sharedInstance.getProfilePictures(fromUrls: urls)
+                }.then { done -> Future<ScreenToShow> in
+                    return self.returnFutureWith(.parameters)
+                }
+            } else {
+                if let _ =  me.reached_map {
+                    return self.returnFutureWith(.map)
+                } else {
+                    return self.returnFutureWith(.parameters)
+                }
+            }
         }
         
-        future.whenFulfilled(on: .main) { done in
-            // TODO: Go to map
-            if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
-                self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
-            }
+        // This future
+        future.whenFulfilled(on: .main) { screen in
+            switch screen {
+            case .map:
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/map", storyboardName: "Main") {
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                }
+            case .parameters:
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/parameters", storyboardName: "Main") {
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                }
+            // This is just to avoid the compiler to complain (this case never happen in fb connection)
+            case .tunnel:
+                if let vc = try? Router.shared.matchControllerFromStoryboard("/inputName", storyboardName: "Main") {
+                    self.navigationController?.replaceRootViewControllerBy(vc: vc as! UIViewController)
+                }
         }
         
         future.whenRejected(on: .main) { error in
@@ -147,7 +182,7 @@ extension LoginViewController: AKFViewControllerDelegate {
     
     func viewController(_ viewController: (UIViewController & AKFViewController)!, didCompleteLoginWith accessToken: AKFAccessToken!, state: String!) {
 
-        let future = HoopNetworkApi.sharedInstance.signupAK(with: accessToken.accountID)
+        let future = HoopNetworkApi.sharedInstance.signUpFoAK(with: accessToken.accountID)
         
         future.whenFulfilled(on: .main) { done in
             // TODO: Go to map / parameters / tunnel

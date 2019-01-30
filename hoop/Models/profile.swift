@@ -24,7 +24,9 @@ class profile: Decodable, Encodable {
     var activeInHoop: Int?
     var hoopLastConnection: Date?
     var commonLikes: [String]?
-    // Use for me profile
+    // Use for me profil
+    var ak_token: String?
+    var fb_token: String?
     var fb_profile_alb_id: String?
     var token: String?
     var sharing_code: String?
@@ -36,7 +38,6 @@ class profile: Decodable, Encodable {
     var current_active_hoop_ids = [Int]()
     var current_inactive_hoop_ids = [Int]()
     var n_remaining_conversations: Int?
-    
     
     var age: Int? {
         get {
@@ -139,6 +140,8 @@ class profile: Decodable, Encodable {
         case activeInHoop = "active_in_hoop"
         case hoopLastConnection = "timestamp_lastconnection"
         case commonLikes = "common_likes"
+        case ak_token
+        case fb_token
         case fb_profile_alb_id
         case token
         case sharing_code
@@ -237,6 +240,12 @@ class profile: Decodable, Encodable {
         if container.contains(.fb_profile_alb_id){
             fb_profile_alb_id = try? container.decode(String.self, forKey: .fb_profile_alb_id)
         }
+        if container.contains(.ak_token){
+            ak_token = try? container.decode(String.self, forKey: .ak_token)
+        }
+        if container.contains(.fb_token){
+            fb_token = try? container.decode(String.self, forKey: .fb_token)
+        }
         if container.contains(.token){
             token = try? container.decode(String.self, forKey: .token)
         }
@@ -272,6 +281,8 @@ class profile: Decodable, Encodable {
         try container.encode(hoopLastConnection, forKey: .hoopLastConnection)
         try container.encode(commonLikes, forKey: .commonLikes)
         try container.encode(fb_profile_alb_id, forKey: .fb_profile_alb_id)
+        try container.encode(ak_token, forKey: .ak_token)
+        try container.encode(fb_token, forKey: .fb_token)
         try container.encode(token, forKey: .token)
         try container.encode(sharing_code, forKey: .sharing_code)
         try container.encode(reached_map, forKey: .reached_map)

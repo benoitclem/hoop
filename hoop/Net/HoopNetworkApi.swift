@@ -216,21 +216,35 @@ class HoopNetworkApi: AlamofireWrapper {
 extension HoopNetworkApi {
     
     // The signup for account kit
-    func signupAK(with akToken: String) -> Future<profile> {
+    func signUpForAK(with akToken: String) -> Future<profile> {
         let akData: [String:Any] = ["fb_id":akToken]
         let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: akData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
             if let me = response.data {
-                // Save the token and the me data
-                if let token = me.token {
-                    HoopNetworkApi.appToken = token
-                    AppDelegate.me = me
-                    me.save()
-                    promise.fulfill(me)
+                if let recalledMe = AppDelegate.me {
+                    if let token = me.token {
+                        HoopNetworkApi.appToken = token
+                        recalledMe.ak_token = akToken
+                        recalledMe.token = token
+                        recalledMe.save()
+                        promise.fulfill(recalledMe)
+                    } else {
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
+                        promise.reject(error)
+                    }
                 } else {
-                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
-                    promise.reject(error)
+                    // Save the token and the me data
+                    if let token = me.token {
+                        HoopNetworkApi.appToken = token
+                        AppDelegate.me = me
+                        me.ak_token = akToken
+                        me.save()
+                        promise.fulfill(me)
+                    } else {
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
+                        promise.reject(error)
+                    }
                 }
             }
             return promise.future
@@ -238,34 +252,50 @@ extension HoopNetworkApi {
     }
     
     // The signup for facebook login
-    func signUpFb(with facebookData: fbme) -> Future<profile> {
+    func signUpForFb(with facebookData: fbme) -> Future<profile> {
         let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: facebookData.signUpData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
             if let me = response.data {
                 // if everything goes right transfer fbme infos to profile infos
                 // TODO: maybe the fbme should be recorded somewhere if
-                // all datas are not copied to profile
-                if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email, let fb_profile_album = facebookData.albums {
-                    me.name = name
-                    me.dob = dob
-                    me.gender = gender
-                    me.email = email
-                    me.fb_profile_alb_id = fb_profile_album.data.first(where: { $0.type == "profile"})?.id
-                    
-                    // Save the token and the me data
-                    if let token = me.token {
+                // all datas are not copied to profile, for the
+                if let recalledMe = AppDelegate.me {
+                    // We already came here in the past, recall the Me param and update missing token
+                    if let fb_token = facebookData.fb_token, let token = me.token {
                         HoopNetworkApi.appToken = token
-                        AppDelegate.me = me
-                        me.save()
-                        promise.fulfill(me)
+                        recalledMe.fb_token = fb_token
+                        recalledMe.token = token
+                        recalledMe.save()
+                        promise.fulfill(recalledMe)
                     } else {
                         let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
                         promise.reject(error)
                     }
                 } else {
-                    let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
-                    promise.reject(error)
+                    // This is the very first time we came here so
+                    if let name = facebookData.first_name, let dob = facebookData.birthday, let gender = facebookData.gender_id, let email = facebookData.email, let fb_profile_album = facebookData.albums, let fb_token = facebookData.fb_token {
+                        me.fb_token = fb_token
+                        me.name = name
+                        me.dob = dob
+                        me.gender = gender
+                        me.email = email
+                        me.fb_profile_alb_id = fb_profile_album.data.first(where: { $0.type == "profile"})?.id
+                        
+                        // Save the token and the me data
+                        if let token = me.token {
+                            HoopNetworkApi.appToken = token
+                            AppDelegate.me = me
+                            me.save()
+                            promise.fulfill(me)
+                        } else {
+                            let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_TOKEN_MISSING, userInfo: ["desc":"singup failed to propose token"])
+                            promise.reject(error)
+                        }
+                    } else {
+                        let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":"facebook data are erroneous"])
+                        promise.reject(error)
+                    }
                 }
             }
             return promise.future

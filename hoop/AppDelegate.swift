@@ -147,6 +147,7 @@ extension AppDelegate {
     
     func setupRouting() {
         let router = Router.shared
+        router.map("/login", controllerClass: LoginViewController.self)
         router.map("/inputAge", controllerClass: InputAgeViewController.self)
         router.map("/inputEmail", controllerClass: InputEmailViewController.self)
         router.map("/inputName", controllerClass: InputNameViewController.self)

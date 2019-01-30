@@ -33,6 +33,7 @@ class ChatViewController: NotifiableUIViewController {
     var inputTextBar: InputTextFieldBar!
     var heightAtIndexPath = NSMutableDictionary()
     var mm: messageManager!
+    var pm: profileManager!
     var me: profile?
     
     @objc var profileId: String!
@@ -47,13 +48,7 @@ class ChatViewController: NotifiableUIViewController {
         super.viewDidLoad()
 
         // set header
-        let chv = ChatHeaderView()
-        chv.profileImageView.image = UIImage(named:"aicha")
-        chv.profileNameLabel.text = "Corine"
-        let touchedGesture = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.touchedProfileHeader(_:)))
-        chv.addGestureRecognizer(touchedGesture)
-        self.navigationItem.titleView = chv
-        //self.navigationController?.view.addGestureRecognizer(touchedGesture)
+        setupHeader()
         
         // Retrive me coz we gonna need it
         me = AppDelegate.me
@@ -64,6 +59,22 @@ class ChatViewController: NotifiableUIViewController {
             mm = messageManager()
             mm.keyString = Key<messageManager>(storageKey)
             mm.save()
+        }
+        
+        pm = profileManager.get()
+        if pm == nil {
+            pm = profileManager()
+            pm.save()
+        }
+        
+        if let profile = pm.getProfile(with: Int(profileId)!) {
+            self.fillUpHeader(with: profile)
+        } else {
+            HoopNetworkApi.sharedInstance.getHoopProfile(with: Int(profileId)!).whenFulfilled(on: .main) { profile in
+                self.pm.update(withProfile: profile)
+                self.pm.save()
+                self.fillUpHeader(with: profile)
+            }
         }
         
         // Setup interface
@@ -89,6 +100,7 @@ class ChatViewController: NotifiableUIViewController {
         messageTableView.transform = CGAffineTransform(rotationAngle: -(CGFloat)(Double.pi));
         
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.keyboardDidChangeFrame(_:)), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        
     }
     
     @objc override func viewDidAppear(_ animated: Bool) {
@@ -99,9 +111,6 @@ class ChatViewController: NotifiableUIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        if let accessoryView = self.inputAccessoryView as? InputTextFieldBar {
-            accessoryView.TextView.resignFirstResponder()
-        }
     }
     
     @objc override func viewDidEnterForeground(notification: Notification) {
@@ -123,6 +132,23 @@ class ChatViewController: NotifiableUIViewController {
             if let vc = try? Router.shared.matchControllerFromStoryboard("/profile/\(currentSelectedId)",storyboardName: "Main") {
                 self.navigationController?.pushViewController(vc as! UIViewController, animated: true)
             }
+        }
+    }
+    
+    // UI
+    
+    func setupHeader(){
+        let chv = ChatHeaderView()
+        let touchedGesture = UITapGestureRecognizer(target: self, action: #selector(ChatViewController.touchedProfileHeader(_:)))
+        chv.addGestureRecognizer(touchedGesture)
+        self.navigationItem.titleView = chv
+    }
+    
+    func fillUpHeader(with profile: profile) {
+        if let thumb = profile.thumb, let name = profile.name {
+            let chv = self.navigationItem.titleView as! ChatHeaderView
+            chv.profileImageView.kf.setImage(with: thumb)
+            chv.profileNameLabel.text = name
         }
     }
     
