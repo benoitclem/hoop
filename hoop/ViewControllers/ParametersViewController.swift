@@ -223,7 +223,7 @@ class ParametersViewController: NotifiableFormViewController {
                     row.labelStyle = style
                 }.onCellSelection { cell, row in
                         //row.title = "action 1"
-                        print(row.labelText)
+                    self.doDeleteAccount()
                 }
                 
             form +++ Section("developper")
@@ -301,6 +301,14 @@ class ParametersViewController: NotifiableFormViewController {
             // Replace base view (this is quite violent but reset the app as it has been just launched)
             (UIApplication.shared.delegate as! AppDelegate).showLogin()
         }
+    }
+    
+    func doDeleteAccount() {
+        PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen")!, title: "Effacer compte", content: "Voulez vous vraiment effacer votre compte", okTitle: "Oui", nokTitle: "Annuler", okClosure: { self.doAskDialogTH() }, nokClosure: nil)
+    }
+    
+    func doAskDialogTH() {
+       PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen")!, title: "Effacer compte", content: "Tu vas quitter notre réseau. Tu nous manqueras! Si tu souhaites nous dire ce qui t'a déplu nous serions ravi de l'entendre :)", okTitle: "quitter", nokTitle: "Dialoguer avec la Team Hoop", okClosure: { self.doLogout() }, nokClosure: { self.jumpToProfile(withId: 1)})
     }
     
     func validateSaveUpload(callback: @escaping (Bool) -> Void){

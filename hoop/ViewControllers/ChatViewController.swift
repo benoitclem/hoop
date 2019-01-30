@@ -115,6 +115,9 @@ class ChatViewController: NotifiableUIViewController {
     
     @objc override func viewDidEnterForeground(notification: Notification) {
         super.viewDidEnterForeground(notification: notification)
+        self.setupHoopNavigationBar("Chat",
+                                    leftTitle: "Retour", leftSelector: #selector(ChatViewController.endViewController(sender:)),
+                                    rightTitle: nil, rightSelector: nil)
         update()
     }
     

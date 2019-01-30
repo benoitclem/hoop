@@ -145,6 +145,8 @@ class PopupProvider {
         SwiftEntryKit.display(entry: contentView, using: attributes, presentInsideKeyWindow: true)
     }
     
+    
+    
     static func showInformPopup(with image:UIImage,_ titleText: String,_ descriptionText: String,_ buttonText:String,_ buttonAction:@escaping (()->())) {
         var attributes: EKAttributes
         
