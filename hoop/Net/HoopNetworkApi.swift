@@ -217,6 +217,7 @@ extension HoopNetworkApi {
     
     // The signup for account kit
     func signUpForAK(with akToken: String) -> Future<profile> {
+        //let akData: [String:Any] = ["fb_id":akToken,"delete_account":0]
         let akData: [String:Any] = ["fb_id":akToken]
         let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: akData, andProgress: nil)
         return promise.then { response -> Future<profile> in
@@ -253,7 +254,9 @@ extension HoopNetworkApi {
     
     // The signup for facebook login
     func signUpForFb(with facebookData: fbme) -> Future<profile> {
-        let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: facebookData.signUpData, andProgress: nil)
+        var signupData = facebookData.signUpData
+        //signupData["delete_account"] = 0
+        let promise: Future<hoopApiResponse<profile>> = self.post("signUpClient", and: signupData, andProgress: nil)
         return promise.then { response -> Future<profile> in
             let promise =  Promise<profile>()
             if let me = response.data {

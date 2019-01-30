@@ -308,7 +308,10 @@ class ParametersViewController: NotifiableFormViewController {
     }
     
     func doAskDialogTH() {
-       PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen")!, title: "Effacer compte", content: "Tu vas quitter notre réseau. Tu nous manqueras! Si tu souhaites nous dire ce qui t'a déplu nous serions ravi de l'entendre :)", okTitle: "quitter", nokTitle: "Dialoguer avec la Team Hoop", okClosure: { self.doLogout() }, nokClosure: { self.jumpToProfile(withId: 1)})
+       PopupProvider.showTwoChoicesPopup(icon: UIImage(named: "sadscreen")!, title: "Effacer compte", content: "Tu vas quitter notre réseau. Tu nous manqueras! Si tu souhaites nous dire ce qui t'a déplu nous serions ravi de l'entendre :)", okTitle: "quitter", nokTitle: "Dialoguer avec la Team Hoop", okClosure: {
+            let _ = HoopNetworkApi.sharedInstance.postHoopProfile(withData: ["delete_account":"1"])
+            self.doLogout()
+       }, nokClosure: { self.jumpToProfile(withId: 1)})
     }
     
     func validateSaveUpload(callback: @escaping (Bool) -> Void){
