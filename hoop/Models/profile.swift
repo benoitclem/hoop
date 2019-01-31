@@ -132,10 +132,10 @@ class profile: Decodable, Encodable {
         case pictures_urls
         case pictures_images
         case picture1 = "profile_picture"
-        case picture2
-        case picture3
-        case picture4
-        case picture5
+        case picture2 = "profile_picture2"
+        case picture3 = "profile_picture3"
+        case picture4 = "profile_picture4"
+        case picture5 = "profile_picture5"
         case sexualOrientation = "sexualorientation_id"
         case activeInHoop = "active_in_hoop"
         case hoopLastConnection = "timestamp_lastconnection"

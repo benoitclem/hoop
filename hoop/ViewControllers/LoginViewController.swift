@@ -11,7 +11,7 @@ import Futures
 import AccountKit
 import FacebookCore
 import FacebookLogin
-import SwiftyJSON
+//import SwiftyJSON
 
 class LoginViewController: VideoSplashViewController {
     

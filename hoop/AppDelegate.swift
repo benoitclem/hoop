@@ -236,10 +236,5 @@ extension AppDelegate {
         //window?.rootViewController = mapController!
     }
     
-    func showMapBox() {
-        let mapBoxController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapBoxViewController") as? MapBoxViewController
-        showInNavigationViewController([mapBoxController!])
-    }
-    
 }
 

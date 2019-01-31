@@ -26,6 +26,7 @@ class FaqViewController: NotifiableFormViewController {
                 self.form +++ Section(entry.name ?? "")
                     <<< HoopTextViewRow() { row in
                         row.content = entry.content ?? ""
+                        row.isSelectable = false
                 }
             
             }

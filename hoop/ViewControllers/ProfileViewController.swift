@@ -41,8 +41,8 @@ class ProfileViewController: NotifiableUIViewController {
         }
         
         if let profile = pm.getProfile(with: Int(profileId)!) {
+            // Do both
             setupProfileUI(with: profile)
-        } else {
             HoopNetworkApi.sharedInstance.getHoopProfile(with: Int(profileId)!).whenFulfilled(on: .main) { profile in
                 self.pm.update(withProfile: profile)
                 self.pm.save()
@@ -151,7 +151,7 @@ extension ProfileViewController: UICollectionViewDataSource {
         let profilImage = cell.viewWithTag(2) as! UIImageView
         
         let srcUrl = self.profile.pictures_urls[indexPath.row]
-        profilImage.af_setImage(withURL: srcUrl)
+        profilImage.kf.setImage(with: srcUrl)
 
         // Here try the localization stuffs
         

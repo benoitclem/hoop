@@ -11,8 +11,9 @@ import Futures
 import UIKit
 import CoreLocation
 import Alamofire
-import AlamofireImage
-import SwiftyJSON
+//import AlamofireImage
+import Kingfisher
+//import SwiftyJSON
 
 class HoopNetworkApi: AlamofireWrapper {
     
@@ -55,7 +56,7 @@ class HoopNetworkApi: AlamofireWrapper {
             let fullUrl = "https://\(self.baseUrl!)/api/\(method)?\(self.urlEncode(mutableArguments))"
             Alamofire.request(fullUrl).responseData { response in
                 let decoder = JSONDecoder()
-                let result: Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
+                let result: Alamofire.Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
                 switch result {
                 case .success(let data):
                     if let code = data.code {
@@ -132,7 +133,7 @@ class HoopNetworkApi: AlamofireWrapper {
                         upload.responseData { response in
                             if let _ = response.result.value {
                                 let decoder = JSONDecoder()
-                                let result: Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
+                                let result: Alamofire.Result<hoopApiResponse<T>> = decoder.decodeResponse(from: response)
                                 switch result {
                                 case .success(let data):
                                     if let code = data.code {
@@ -173,12 +174,15 @@ class HoopNetworkApi: AlamofireWrapper {
         return promise.future
     }
     
+    
+    
     func getImage(fromUrl url: URL) -> Future<UIImage> {
         let imagePromise = Promise<UIImage>()
-        Alamofire.request(url.absoluteString).responseImage { response in
-            switch(response.result) {
-            case .success(let image):
-                imagePromise.fulfill(image)
+        let downloader = ImageDownloader.default
+        downloader.downloadImage(with: url) { result in
+            switch result {
+            case .success(let value):
+                imagePromise.fulfill(value.image)
             case .failure(let error):
                 let error = NSError(domain: "HoopNetworkApiError", code: HoopNetworkApi.API_ERROR_MISSING_DATA, userInfo: ["desc":error.localizedDescription])
                 imagePromise.reject(error)

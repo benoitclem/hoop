@@ -19,6 +19,7 @@ public class HoopTextViewCell: Cell<String>, CellType, UITextViewDelegate {
         height = { UITableView.automaticDimension }
         rowTextView.text = (row as! HoopTextViewRow).content
         rowTextView.placeholder = (row as! HoopTextViewRow).placeholder as NSString?
+        rowTextView.isSelectable = (row as! HoopTextViewRow).isSelectable as Bool
         rowTextView.delegate = self
     }
     
@@ -43,6 +44,7 @@ public final class HoopTextViewRow: Row<HoopTextViewCell>, RowType {
     
     public var content: String?
     public var placeholder: String?
+    public var isSelectable: Bool = true
     
     required public init(tag: String?) {
         super.init(tag: tag)

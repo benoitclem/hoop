@@ -35,7 +35,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>980312175433785</string>
 	<key>FacebookAppID - prod</key>
@@ -62,7 +62,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Peux-tu activer le service de localisation pour que nous puissions te présenter des profils aux alentours.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d&apos;étoffer ton profil.</string>
+	<string>Nous avons besoin d’accéder à ta bibliothèque de photos pour te permettre d'étoffer ton profil.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Campton-Black.ttf</string>

@@ -135,18 +135,18 @@ class ParametersViewController: NotifiableFormViewController {
             }
             
         if (!firstTimer) {
-            form +++ Section()
-                <<< HoopLabelRow() { row in
-                    var style = HoopLabelRowStyle()
-                    style.bgColor = .hoopGreenColor
-                    style.txtColor = UIColor.white
-                    style.txtAlignement = NSTextAlignment.center
-                    row.labelText = "partager"
-                    row.labelStyle = style
-                    }.onCellSelection { cell, row in
-                        //row.title = "action 1"
-                        print(self.form.values())
-                    }
+//            form +++ Section()
+//                <<< HoopLabelRow() { row in
+//                    var style = HoopLabelRowStyle()
+//                    style.bgColor = .hoopGreenColor
+//                    style.txtColor = UIColor.white
+//                    style.txtAlignement = NSTextAlignment.center
+//                    row.labelText = "partager"
+//                    row.labelStyle = style
+//                    }.onCellSelection { cell, row in
+//                        //row.title = "action 1"
+//                        print(self.form.values())
+//                    }
             form +++ Section()
                 <<< HoopLabelRow() { row in
                     var style = HoopLabelRowStyle()

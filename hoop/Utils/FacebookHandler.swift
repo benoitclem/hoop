@@ -11,7 +11,6 @@ import Foundation
 import FacebookCore
 import FacebookLogin
 import Futures
-import MoreCodable
 import SwiftyJSON
 
 class FacebookHandler: NSObject {

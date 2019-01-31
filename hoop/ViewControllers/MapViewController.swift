@@ -152,7 +152,8 @@ class MapViewController: NotifiableUIViewController {
     
     func setupUserInterface() {
         setupNavigationController()
-        self.profileCollectionViewLayout.minimumLineSpacing = 0
+        etHoopButton.isHidden = true
+        profileCollectionViewLayout.minimumLineSpacing = 0
         if let me = AppDelegate.me {
             if me.gender == 1 {
                     HoopNetworkApi.sharedInstance.getRemainingConversations().whenFulfilled(on: .main) { nConvs in
@@ -389,6 +390,7 @@ extension MapViewController: UIScrollViewDelegate {
         currentSelectedProfile = currentProfiles[selectedIndex]
         // Here Customize the button name
         if let name = currentSelectedProfile?.name {
+            etHoopButton.isHidden = false
             etHoopButton.setTitle(name, for: .normal)
         }
         // Here Customize the map an UI
@@ -773,8 +775,11 @@ extension MapViewController {
                 }
             }
             // Update in profile manager if needed, this allow a form of caching
-            if let pm = profileManager.get() {
-                pm.update(withProfile: profile)
+            // Only do that with active profiles, because they contains more data 
+            if profile.activeInHoop == 1 {
+                if let pm = profileManager.get() {
+                    pm.update(withProfile: profile)
+                }
             }
         }
         // Do the real work

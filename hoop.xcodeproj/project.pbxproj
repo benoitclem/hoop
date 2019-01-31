@@ -39,15 +39,9 @@
 		EB45ED6521FF20C400597E77 /* NotificationDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6421FF20C400597E77 /* NotificationDispatcher.swift */; };
 		EB45ED6722005F8D00597E77 /* notificationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB45ED6622005F8D00597E77 /* notificationData.swift */; };
 		EB72271E21F0D80F008DF621 /* Defaults+DefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */; };
-		EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; };
-		EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB72271F21F227D2008DF621 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EB72272421F22899008DF621 /* MapBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB72272321F22899008DF621 /* MapBoxViewController.swift */; };
 		EB77870D21D4DF73002CBA02 /* hoopApiResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */; };
 		EB77870F21D4DF92002CBA02 /* fbme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77870E21D4DF92002CBA02 /* fbme.swift */; };
 		EB77871121D4E180002CBA02 /* JSONDecoder+decodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */; };
-		EB77871621D53BBF002CBA02 /* MoreCodable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
-		EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EB77871821D53F75002CBA02 /* MoreCodable.framework in Resources */ = {isa = PBXBuildFile; fileRef = EB77871421D53BA8002CBA02 /* MoreCodable.framework */; };
 		EB7F7FD321E63228003B375C /* RennesInsa.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FCF21E63228003B375C /* RennesInsa.gpx */; };
 		EB7F7FD421E63228003B375C /* Boulogne.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD021E63228003B375C /* Boulogne.gpx */; };
 		EB7F7FD521E63229003B375C /* Poitiers.gpx in Resources */ = {isa = PBXBuildFile; fileRef = EB7F7FD121E63228003B375C /* Poitiers.gpx */; };
@@ -55,7 +49,6 @@
 		EB7F7FD821EC9D81003B375C /* ImageManipulator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FD721EC9D81003B375C /* ImageManipulator.swift */; };
 		EB7F7FDA21ECDF83003B375C /* Dictionnary+Plus.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FD921ECDF83003B375C /* Dictionnary+Plus.swift */; };
 		EB7F7FDE21EDF142003B375C /* AccountKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F7FDC21EDF124003B375C /* AccountKit.framework */; };
-		EB7F7FDF21EDF142003B375C /* AccountKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB7F7FDC21EDF124003B375C /* AccountKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB7F7FE521EE0590003B375C /* InputGenderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE121EE0590003B375C /* InputGenderViewController.swift */; };
 		EB7F7FE621EE0590003B375C /* InputEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE221EE0590003B375C /* InputEmailViewController.swift */; };
 		EB7F7FE721EE0590003B375C /* InputAgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB7F7FE321EE0590003B375C /* InputAgeViewController.swift */; };
@@ -137,8 +130,6 @@
 		EB8F053421CD2A3E003757EC /* HoopNetworkApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8F053321CD2A3E003757EC /* HoopNetworkApi.swift */; };
 		EB8F053D21CD2F04003757EC /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053621CD2EE5003757EC /* Alamofire.framework */; };
 		EB8F053E21CD2F04003757EC /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053621CD2EE5003757EC /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		EB8F053F21CD2F04003757EC /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053721CD2EE5003757EC /* AlamofireImage.framework */; };
-		EB8F054021CD2F04003757EC /* AlamofireImage.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053721CD2EE5003757EC /* AlamofireImage.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F054121CD2F04003757EC /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053521CD2EE5003757EC /* SwiftyJSON.framework */; };
 		EB8F054221CD2F04003757EC /* SwiftyJSON.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F053521CD2EE5003757EC /* SwiftyJSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EB8F054521CD2F30003757EC /* QuickLayout.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB8F054321CD2F2A003757EC /* QuickLayout.framework */; };
@@ -188,12 +179,8 @@
 				EB8F054621CD2F30003757EC /* QuickLayout.framework in Embed Frameworks */,
 				EB45ED5621F62ECB00597E77 /* Kingfisher.framework in Embed Frameworks */,
 				EB8F055E21CD6461003757EC /* FBSDKLoginKit.framework in Embed Frameworks */,
-				EB7F7FDF21EDF142003B375C /* AccountKit.framework in Embed Frameworks */,
 				EB8F052021CBBEC8003757EC /* Hero.framework in Embed Frameworks */,
-				EB72272221F227E0008DF621 /* Mapbox.framework in Embed Frameworks */,
-				EB77871721D53BBF002CBA02 /* MoreCodable.framework in Embed Frameworks */,
 				EB8F055221CD529E003757EC /* Bolts.framework in Embed Frameworks */,
-				EB8F054021CD2F04003757EC /* AlamofireImage.framework in Embed Frameworks */,
 				EB8F054221CD2F04003757EC /* SwiftyJSON.framework in Embed Frameworks */,
 				EB8F055C21CD6461003757EC /* FBSDKCoreKit.framework in Embed Frameworks */,
 				EB8F051821CBBEC8003757EC /* Eureka.framework in Embed Frameworks */,
@@ -242,12 +229,9 @@
 		EB45ED6421FF20C400597E77 /* NotificationDispatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationDispatcher.swift; path = Utils/NotificationDispatcher.swift; sourceTree = "<group>"; };
 		EB45ED6622005F8D00597E77 /* notificationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = notificationData.swift; path = Models/notificationData.swift; sourceTree = "<group>"; };
 		EB72271D21F0D80F008DF621 /* Defaults+DefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Defaults+DefaultsKey.swift"; sourceTree = "<group>"; };
-		EB72271F21F227D2008DF621 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = hoop/Frameworks/Mapbox.framework; sourceTree = "<group>"; };
-		EB72272321F22899008DF621 /* MapBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoxViewController.swift; sourceTree = "<group>"; };
 		EB77870C21D4DF73002CBA02 /* hoopApiResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = hoopApiResponse.swift; path = Models/hoopApiResponse.swift; sourceTree = "<group>"; };
 		EB77870E21D4DF92002CBA02 /* fbme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = fbme.swift; path = Models/fbme.swift; sourceTree = "<group>"; };
 		EB77871021D4E180002CBA02 /* JSONDecoder+decodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodable.swift"; sourceTree = "<group>"; };
-		EB77871421D53BA8002CBA02 /* MoreCodable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MoreCodable.framework; path = hoop/Frameworks/MoreCodable.framework; sourceTree = "<group>"; };
 		EB7F7FCF21E63228003B375C /* RennesInsa.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = RennesInsa.gpx; path = Mock/Location/RennesInsa.gpx; sourceTree = "<group>"; };
 		EB7F7FD021E63228003B375C /* Boulogne.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Boulogne.gpx; path = Mock/Location/Boulogne.gpx; sourceTree = "<group>"; };
 		EB7F7FD121E63228003B375C /* Poitiers.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Poitiers.gpx; path = Mock/Location/Poitiers.gpx; sourceTree = "<group>"; };
@@ -336,7 +320,6 @@
 		EB8F053321CD2A3E003757EC /* HoopNetworkApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HoopNetworkApi.swift; sourceTree = "<group>"; };
 		EB8F053521CD2EE5003757EC /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = hoop/Frameworks/SwiftyJSON.framework; sourceTree = "<group>"; };
 		EB8F053621CD2EE5003757EC /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = hoop/Frameworks/Alamofire.framework; sourceTree = "<group>"; };
-		EB8F053721CD2EE5003757EC /* AlamofireImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireImage.framework; path = hoop/Frameworks/AlamofireImage.framework; sourceTree = "<group>"; };
 		EB8F054321CD2F2A003757EC /* QuickLayout.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLayout.framework; path = hoop/Frameworks/QuickLayout.framework; sourceTree = "<group>"; };
 		EB8F054721CD31C2003757EC /* AlamofireWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireWrapper.swift; sourceTree = "<group>"; };
 		EB8F054B21CD5279003757EC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = hoop/Frameworks/Bolts.framework; sourceTree = "<group>"; };
@@ -368,7 +351,6 @@
 				EB8F051F21CBBEC8003757EC /* Hero.framework in Frameworks */,
 				EB7F7FDE21EDF142003B375C /* AccountKit.framework in Frameworks */,
 				EB8F055121CD529E003757EC /* Bolts.framework in Frameworks */,
-				EB72272121F227E0008DF621 /* Mapbox.framework in Frameworks */,
 				EB8F053D21CD2F04003757EC /* Alamofire.framework in Frameworks */,
 				EB8F052C21CBDF91003757EC /* SwiftEntryKit.framework in Frameworks */,
 				EB8F054521CD2F30003757EC /* QuickLayout.framework in Frameworks */,
@@ -376,8 +358,6 @@
 				EB8F055A21CD645B003757EC /* FBSDKCoreKit.framework in Frameworks */,
 				EB8F055521CD529E003757EC /* FacebookLogin.framework in Frameworks */,
 				EB8F055D21CD6461003757EC /* FBSDKLoginKit.framework in Frameworks */,
-				EB77871621D53BBF002CBA02 /* MoreCodable.framework in Frameworks */,
-				EB8F053F21CD2F04003757EC /* AlamofireImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -491,7 +471,6 @@
 				EB8F04B221CAE2E6003757EC /* ProfileViewController.swift */,
 				EB8F046E21CAB8DE003757EC /* ConversationViewController.swift */,
 				EB8F04B421CAE330003757EC /* ChatViewController.swift */,
-				EB72272321F22899008DF621 /* MapBoxViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -527,9 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				EB45ED5321F62EBB00597E77 /* Kingfisher.framework */,
-				EB72271F21F227D2008DF621 /* Mapbox.framework */,
 				EB7F7FDC21EDF124003B375C /* AccountKit.framework */,
-				EB77871421D53BA8002CBA02 /* MoreCodable.framework */,
 				EB8F055821CD645B003757EC /* FBSDKCoreKit.framework */,
 				EB8F055721CD645B003757EC /* FBSDKLoginKit.framework */,
 				EB8F054B21CD5279003757EC /* Bolts.framework */,
@@ -537,7 +514,6 @@
 				EB8F054C21CD5279003757EC /* FacebookLogin.framework */,
 				EB8F054321CD2F2A003757EC /* QuickLayout.framework */,
 				EB8F053621CD2EE5003757EC /* Alamofire.framework */,
-				EB8F053721CD2EE5003757EC /* AlamofireImage.framework */,
 				EB8F053521CD2EE5003757EC /* SwiftyJSON.framework */,
 				EB8F052621CBDF87003757EC /* SwiftEntryKit.framework */,
 				EB8F050C21CBBEBF003757EC /* Eureka.framework */,
@@ -721,6 +697,7 @@
 				EB28B5EC21C3B2A900CFF1EF /* Frameworks */,
 				EB28B5ED21C3B2A900CFF1EF /* Resources */,
 				EB8F052321CBBEC8003757EC /* Embed Frameworks */,
+				EB70165A2203481D008AACED /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -850,11 +827,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EB77871821D53F75002CBA02 /* MoreCodable.framework in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB70165A2203481D008AACED /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/hoop/Frameworks/AccountKit.framework",
+				"$(SRCROOT)/hoop/Frameworks/Alamofire.framework",
+				"$(SRCROOT)/hoop/Frameworks/Bolts.framework",
+				"$(SRCROOT)/hoop/Frameworks/Eureka.framework",
+				"$(SRCROOT)/hoop/Frameworks/FacebookCore.framework",
+				"$(SRCROOT)/hoop/Frameworks/FacebookLogin.framework",
+				"$(SRCROOT)/hoop/Frameworks/FBSDKCoreKit.framework",
+				"$(SRCROOT)/hoop/Frameworks/FBSDKLoginKit.framework",
+				"$(SRCROOT)/hoop/Frameworks/Futures.framework",
+				"$(SRCROOT)/hoop/Frameworks/Hero.framework",
+				"$(SRCROOT)/hoop/Frameworks/Kingfisher.framework",
+				"$(SRCROOT)/hoop/Frameworks/QuickLayout.framework",
+				"$(SRCROOT)/hoop/Frameworks/RSKPlaceholderTextView.framework",
+				"$(SRCROOT)/hoop/Frameworks/SwiftEntryKit.framework",
+				"$(SRCROOT)/hoop/Frameworks/SwiftyJSON.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n\nAPP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\n\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		EB28B5EB21C3B2A900CFF1EF /* Sources */ = {
@@ -916,7 +927,6 @@
 				EB45ED5F21F8BC3B00597E77 /* ChatHeaderView.swift in Sources */,
 				EB8F046B21CAB7D8003757EC /* TutorialViewController.swift in Sources */,
 				EBAF773C21E3937B00E75FD1 /* KeyedEncodingContainer+UIImage.swift in Sources */,
-				EB72272421F22899008DF621 /* MapBoxViewController.swift in Sources */,
 				EB8F046321CAB630003757EC /* SwiftRouter.swift in Sources */,
 				EB8F04EB21CAEE0A003757EC /* VideoSplashViewController.swift in Sources */,
 				EB8F04DC21CAE678003757EC /* HoopRangeCell.swift in Sources */,
